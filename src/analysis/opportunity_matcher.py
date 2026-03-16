@@ -232,9 +232,8 @@ Antwoord in het Nederlands. Wees direct en praktisch."""
 
     try:
         response = await client.messages.create(
-            model="claude-opus-4-6",
+            model="claude-haiku-4-5-20251001",
             max_tokens=300,
-            thinking={"type": "adaptive"},
             messages=[{"role": "user", "content": prompt}],
         )
         # Registreer token gebruik en controleer budget
@@ -362,9 +361,19 @@ def match_opportunities(
 
     # ── Phase 2: sequentiële Vinted search voor non-pallet listings ──
     # Eén request per keer met 3s pauze om Vinted bot-detectie (406) te vermijden.
+    # Zoek eerst de meest waardevolle kandidaten (hoogste koopprijs = grootste potentiële marge).
+    # De rest valt terug op categorie-trenddata — dat is nog steeds bruikbaar voor matching.
+    MAX_VINTED_SEARCHES = 25
+    searchable = [c for c in candidates if not c.is_pallet and c.buy_price > 0]
+    searchable.sort(key=lambda c: c.buy_price, reverse=True)
+    search_priority = {id(c): i < MAX_VINTED_SEARCHES for i, c in enumerate(searchable)}
+
     vinted_results: dict[int, Optional[Any]] = {}
     for cand in candidates:
         if cand.is_pallet or cand.buy_price == 0:
+            vinted_results[id(cand)] = None
+            continue
+        if not search_priority.get(id(cand), False):
             vinted_results[id(cand)] = None
             continue
         vinted_results[id(cand)] = search_vinted_for_product(cand.title, buy_price=cand.buy_price)
