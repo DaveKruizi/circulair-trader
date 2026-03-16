@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circulair Trader — Dagelijks Overzicht</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f4f5f7;
+            color: #1a1a2e;
+            line-height: 1.5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        header h1 { font-size: 1.5rem; font-weight: 700; }
+        header .subtitle { font-size: 0.85rem; opacity: 0.7; margin-top: 2px; }
+        header .timestamp { font-size: 0.8rem; opacity: 0.6; text-align: right; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+
+        /* Stats bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0f3460;
+        }
+
+        .stat-card .label {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Trend section */
+        .section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .trends-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .trend-chip {
+            background: white;
+            border-radius: 8px;
+            padding: 12px 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+            border-left: 3px solid #e94560;
+        }
+
+        .trend-chip .trend-name { font-weight: 600; font-size: 0.9rem; }
+        .trend-chip .trend-meta { font-size: 0.78rem; color: #666; margin-top: 4px; }
+
+        .demand-bar {
+            height: 4px;
+            border-radius: 2px;
+            background: #eee;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .demand-fill {
+            height: 100%;
+            border-radius: 2px;
+            background: linear-gradient(90deg, #f39c12, #e74c3c);
+            transition: width 0.3s;
+        }
+
+        /* Opportunities */
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 16px;
+        }
+
+        .opportunity-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .opportunity-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .card-image-placeholder {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #bbb;
+        }
+
+        .card-body { padding: 16px; }
+
+        .card-platform {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-summary {
+            font-size: 0.82rem;
+            color: #555;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .price-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .price-box {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 8px 10px;
+            text-align: center;
+        }
+
+        .price-box .price-label { font-size: 0.68rem; color: #888; text-transform: uppercase; }
+        .price-box .price-value { font-size: 1.1rem; font-weight: 700; margin-top: 2px; }
+        .price-box.buy .price-value { color: #e74c3c; }
+        .price-box.sell .price-value { color: #27ae60; }
+
+        .profit-row {
+            background: linear-gradient(135deg, #0f3460, #16213e);
+            color: white;
+            border-radius: 8px;
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .profit-row .profit-label { font-size: 0.78rem; opacity: 0.8; }
+        .profit-row .profit-value { font-size: 1.2rem; font-weight: 700; }
+        .profit-row .profit-pct { font-size: 0.75rem; opacity: 0.7; }
+
+        .risk-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .risk-badge {
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .risk-low { background: #d5f5e3; color: #1e8449; }
+        .risk-medium { background: #fef9e7; color: #9a7d0a; }
+        .risk-high { background: #fdedec; color: #922b21; }
+
+        .flags {
+            font-size: 0.75rem;
+            color: #c0392b;
+            margin-bottom: 8px;
+        }
+
+        .tips {
+            font-size: 0.78rem;
+            color: #555;
+            background: #f0f4ff;
+            border-radius: 6px;
+            padding: 8px 10px;
+            margin-bottom: 12px;
+        }
+
+        .tips::before { content: "💡 "; }
+
+        .card-footer {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 9px;
+            border: none;
+            border-radius: 7px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: opacity 0.15s;
+        }
+
+        .btn:hover { opacity: 0.85; }
+        .btn-primary { background: #e94560; color: white; }
+        .btn-secondary { background: #f0f4ff; color: #0f3460; }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .filter-label { font-size: 0.82rem; color: #666; }
+
+        .filter-btn {
+            padding: 6px 14px;
+            border: 1.5px solid #ddd;
+            border-radius: 20px;
+            background: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            border-color: #e94560;
+            color: #e94560;
+            background: #fff0f3;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #888;
+        }
+
+        .empty-state h3 { font-size: 1.1rem; margin-bottom: 8px; }
+        .empty-state p { font-size: 0.85rem; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .opportunities-grid { grid-template-columns: 1fr; }
+            header { flex-direction: column; gap: 8px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Circulair Trader</h1>
+            <div class="subtitle">Dagelijks opportunity overzicht</div>
+        </div>
+        <div class="timestamp">
+            Gegenereerd op: 16 Mar 2026, 17:08<br>
+            Volgende update: 17 Mar 2026, 07:00
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Stats bar -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="value">60</div>
+                <div class="label">Opportunities</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">€3913.00</div>
+                <div class="label">Beste winstmarge</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">€225.56</div>
+                <div class="label">Gem. netto winst</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">0</div>
+                <div class="label">Laag risico</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">6</div>
+                <div class="label">Bronnen gescand</div>
+            </div>
+        </div>
+
+        <!-- Vinted trends -->
+        
+        <div class="section-title">🔥 Vinted trends vandaag</div>
+        <div class="trends-grid">
+            
+            <div class="trend-chip">
+                <div class="trend-name">zonnebril</div>
+                <div class="trend-meta">
+                    Gem. €183 ·
+                    40 listings
+                </div>
+                <div class="demand-bar">
+                    <div class="demand-fill" style="width: 57%"></div>
+                </div>
+            </div>
+            
+            <div class="trend-chip">
+                <div class="trend-name">horloge vintage</div>
+                <div class="trend-meta">
+                    Gem. €39 ·
+                    20 listings
+                </div>
+                <div class="demand-bar">
+                    <div class="demand-fill" style="width: 57%"></div>
+                </div>
+            </div>
+            
+            <div class="trend-chip">
+                <div class="trend-name">vintage lamp</div>
+                <div class="trend-meta">
+                    Gem. €51 ·
+                    40 listings
+                </div>
+                <div class="demand-bar">
+                    <div class="demand-fill" style="width: 49%"></div>
+                </div>
+            </div>
+            
+            <div class="trend-chip">
+                <div class="trend-name">designer tas</div>
+                <div class="trend-meta">
+                    Gem. €134 ·
+                    40 listings
+                </div>
+                <div class="demand-bar">
+                    <div class="demand-fill" style="width: 34%"></div>
+                </div>
+            </div>
+            
+            <div class="trend-chip">
+                <div class="trend-name">lego vintage</div>
+                <div class="trend-meta">
+                    Gem. €44 ·
+                    40 listings
+                </div>
+                <div class="demand-bar">
+                    <div class="demand-fill" style="width: 28%"></div>
+                </div>
+            </div>
+            
+            <div class="trend-chip">
+                <div class="trend-name">vintage camera</div>
+                <div class="trend-meta">
+                    Gem. €62 ·
+                    40 listings
+                </div>
+                <div class="demand-bar">
+                    <div class="demand-fill" style="width: 27%"></div>
+                </div>
+            </div>
+            
+            <div class="trend-chip">
+                <div class="trend-name">vintage kleding</div>
+                <div class="trend-meta">
+                    Gem. €19 ·
+                    40 listings
+                </div>
+                <div class="demand-bar">
+                    <div class="demand-fill" style="width: 24%"></div>
+                </div>
+            </div>
+            
+            <div class="trend-chip">
+                <div class="trend-name">vintage sieraden</div>
+                <div class="trend-meta">
+                    Gem. €27 ·
+                    40 listings
+                </div>
+                <div class="demand-bar">
+                    <div class="demand-fill" style="width: 23%"></div>
+                </div>
+            </div>
+            
+        </div>
+        
+
+        <!-- Filters -->
+        <div class="filters">
+            <span class="filter-label">Filter:</span>
+            <button class="filter-btn active" onclick="filterCards('all', this)">Alles</button>
+            <button class="filter-btn" onclick="filterCards('low-risk', this)">Laag risico</button>
+            <button class="filter-btn" onclick="filterCards('marktplaats', this)">Marktplaats</button>
+            <button class="filter-btn" onclick="filterCards('troostwijk', this)">Troostwijk</button>
+            <button class="filter-btn" onclick="filterCards('stocklear', this)">Stocklear</button>
+            <button class="filter-btn" onclick="filterCards('merkandi', this)">Merkandi</button>
+        </div>
+
+        <!-- Opportunities -->
+        <div class="section-title">💼 Top opportunities — 16 March 2026</div>
+
+        
+        <div class="opportunities-grid" id="opportunities-grid">
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Ray-Ban zonnebril heren - Zo goed als nieuw</div>
+
+                    
+                    <div class="card-summary">Analyse niet beschikbaar.</div>
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€80.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€155.84</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€62.30</div>
+                        </div>
+                        <div class="profit-pct">40% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 6.8/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+                    <div class="tips">Gebruik heldere foto&#39;s en een goede beschrijving.</div>
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2377824793" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=zonnebril"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Rayban Chromance</div>
+
+                    
+                    <div class="card-summary">Analyse niet beschikbaar.</div>
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€175.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€437.50</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€234.88</div>
+                        </div>
+                        <div class="profit-pct">54% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 6.8/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+                    <div class="tips">Gebruik heldere foto&#39;s en een goede beschrijving.</div>
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2377666525" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=zonnebril"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Dita flight 006 gold</div>
+
+                    
+                    <div class="card-summary">Analyse niet beschikbaar.</div>
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€85.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€212.50</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€111.12</div>
+                        </div>
+                        <div class="profit-pct">52% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 6.8/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+                    <div class="tips">Gebruik heldere foto&#39;s en een goede beschrijving.</div>
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2377652637" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=zonnebril"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Nieuwe Teutonia IV Chronograph van Mühle Glashütte compleet</div>
+
+                    
+                    <div class="card-summary">Analyse niet beschikbaar.</div>
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€2850.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€7125.00</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€3913.00</div>
+                        </div>
+                        <div class="profit-pct">55% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 6.8/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+                    <div class="tips">Gebruik heldere foto&#39;s en een goede beschrijving.</div>
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2369764193" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=zonnebril"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Michael Kors Jet Set Travel Medium Dome Crossbody.</div>
+
+                    
+                    <div class="card-summary">Analyse niet beschikbaar.</div>
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€60.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€150.00</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€76.75</div>
+                        </div>
+                        <div class="profit-pct">51% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 6.8/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+                    <div class="tips">Gebruik heldere foto&#39;s en een goede beschrijving.</div>
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2377899644" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=zonnebril"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Breitling Chrono Avenger Titanium, complete set, papieren</div>
+
+                    
+                    <div class="card-summary">Analyse niet beschikbaar.</div>
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€2500.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€6250.00</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€3431.75</div>
+                        </div>
+                        <div class="profit-pct">55% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 6.7/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+                    <div class="tips">Gebruik heldere foto&#39;s en een goede beschrijving.</div>
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2375334377" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=horloge+vintage"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Favre Leuba Polshorloge - Staal</div>
+
+                    
+                    <div class="card-summary">Analyse niet beschikbaar.</div>
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€175.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€437.50</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€234.88</div>
+                        </div>
+                        <div class="profit-pct">54% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 6.7/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+                    <div class="tips">Gebruik heldere foto&#39;s en een goede beschrijving.</div>
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2329954741" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=horloge+vintage"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Te koop</div>
+
+                    
+                    <div class="card-summary">Analyse niet beschikbaar.</div>
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€75.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€187.50</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€97.38</div>
+                        </div>
+                        <div class="profit-pct">52% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 6.5/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+                    <div class="tips">Gebruik heldere foto&#39;s en een goede beschrijving.</div>
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2377172354" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=vintage+lamp"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Massive Space age UFO pendel- hanglamp heksenhoed</div>
+
+                    
+                    <div class="card-summary">Analyse niet beschikbaar.</div>
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€79.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€197.50</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€102.88</div>
+                        </div>
+                        <div class="profit-pct">52% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 6.5/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+                    <div class="tips">Gebruik heldere foto&#39;s en een goede beschrijving.</div>
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2376947045" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=vintage+lamp"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Space age retro-futurisme bureaulamp / tafellamp, jaren &#39;70</div>
+
+                    
+                    <div class="card-summary">Analyse niet beschikbaar.</div>
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€55.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€137.50</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€69.88</div>
+                        </div>
+                        <div class="profit-pct">51% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 6.5/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+                    <div class="tips">Gebruik heldere foto&#39;s en een goede beschrijving.</div>
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2375690034" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=vintage+lamp"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Mushroom – Oplaadbare Bauhaus Design Tafellamp Paddenstoel</div>
+
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€50.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€125.00</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€63.00</div>
+                        </div>
+                        <div class="profit-pct">50% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 6.5/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/a1509490862" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=vintage+lamp"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Stoere Bauhaus-stijl fabriekslamp, werklamp, bureaulamp</div>
+
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€65.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€162.50</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€83.62</div>
+                        </div>
+                        <div class="profit-pct">52% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 6.5/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2367465004" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=vintage+lamp"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Rolex Oyster Perpetual</div>
+
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€2000.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€5000.00</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€2744.25</div>
+                        </div>
+                        <div class="profit-pct">55% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 6.3/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+                    <div class="flags">
+                        ⚠️ Mogelijk schoonmaak of kleine reparatie nodig
+                    </div>
+                    
+
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2375362982" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=horloge+vintage"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Michael Kors designer tas incl. bijbehorende portemonnee</div>
+
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€50.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€114.20</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€52.74</div>
+                        </div>
+                        <div class="profit-pct">46% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 5.9/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2377942487" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=designer+tas"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Guess designer tas zwart/zilver</div>
+
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€10.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€114.20</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€92.74</div>
+                        </div>
+                        <div class="profit-pct">81% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 5.9/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2377940799" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=designer+tas"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Handtas</div>
+
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€110.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€275.00</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€145.50</div>
+                        </div>
+                        <div class="profit-pct">53% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 5.9/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2377882033" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=designer+tas"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Designer dozen LEEG</div>
+
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€50.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€114.20</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€52.74</div>
+                        </div>
+                        <div class="profit-pct">46% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 5.9/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2341488155" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=designer+tas"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Madala designer</div>
+
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€7.50</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€114.20</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€95.24</div>
+                        </div>
+                        <div class="profit-pct">83% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 5.9/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2340866847" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=designer+tas"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Nieuwe tas Milano Italy</div>
+
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€12.50</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€114.20</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€90.24</div>
+                        </div>
+                        <div class="profit-pct">79% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 5.9/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2361227176" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=designer+tas"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="opportunity-card"
+                 data-platform="marktplaats"
+                 data-risk="medium-risk">
+
+                
+                <div class="card-image-placeholder">📦</div>
+                
+
+                <div class="card-body">
+                    <div class="card-platform">marktplaats</div>
+                    <div class="card-title">Lotus Herenhorloge Goudkleurig met Blauwe Wijzerplaat</div>
+
+                    
+
+                    <div class="price-row">
+                        <div class="price-box buy">
+                            <div class="price-label">Inkoop</div>
+                            <div class="price-value">€40.00</div>
+                        </div>
+                        <div class="price-box sell">
+                            <div class="price-label">Vinted (est.)</div>
+                            <div class="price-value">€100.00</div>
+                        </div>
+                    </div>
+
+                    <div class="profit-row">
+                        <div>
+                            <div class="profit-label">Netto winst</div>
+                            <div class="profit-value">€49.25</div>
+                        </div>
+                        <div class="profit-pct">49% marge</div>
+                    </div>
+
+                    <div class="risk-row">
+                        <span>Risicoscore: 6.7/10</span>
+                        <span class="risk-badge risk-medium">
+                            Gemiddeld risico
+                        </span>
+                    </div>
+
+                    
+
+                    
+
+                    <div class="card-footer">
+                        <a href="https://link.marktplaats.nl/m2377892231" target="_blank" class="btn btn-primary">
+                            Bekijk aanbieding
+                        </a>
+                        <a href="https://www.vinted.nl/catalog?search_text=horloge+vintage"
+                           target="_blank" class="btn btn-secondary">
+                            Vinted trend
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+
+    </div>
+
+    <!-- Budget indicator -->
+    <div style="text-align:center; padding: 24px; color: #aaa; font-size: 0.75rem;">
+        API kosten deze maand: €0.00 van €10.0
+        (0.0% gebruikt)
+        
+    </div>
+
+    <script>
+        function filterCards(filter, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('.opportunity-card').forEach(card => {
+                if (filter === 'all') {
+                    card.style.display = '';
+                } else if (filter === 'low-risk') {
+                    card.style.display = card.dataset.risk === 'low-risk' ? '' : 'none';
+                } else {
+                    card.style.display = card.dataset.platform === filter ? '' : 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
