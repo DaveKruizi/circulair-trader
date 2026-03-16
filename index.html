@@ -298,6 +298,7 @@
         .price-box .price-value { font-size: 1.1rem; font-weight: 700; margin-top: 2px; }
         .price-box.buy .price-value { color: #e74c3c; }
         .price-box.sell .price-value { color: #27ae60; }
+        .price-value.price-unknown { color: #f57c00; font-style: italic; font-size: 0.95rem; }
 
         .profit-row {
             background: linear-gradient(135deg, #0f3460, #16213e);
@@ -614,7 +615,7 @@
         </div>
         <div style="display:flex;align-items:center;">
             <div class="timestamp">
-                Gegenereerd op: 16 Mar 2026, 20:49<br>
+                Gegenereerd op: 16 Mar 2026, 21:19<br>
                 Volgende update: 17 Mar 2026, 07:00
             </div>
             <a href="favorieten.html" class="nav-link">&#9733; Favorieten</a>
@@ -681,90 +682,90 @@
         <div class="trends-grid">
             
             <div class="trend-chip">
-                <div class="trend-name">babykleding</div>
+                <div class="trend-name">handtas</div>
                 <div class="trend-meta">
-                    Gem. &euro;11 &middot;
-                    30 listings
-                </div>
-                <div class="demand-bar">
-                    <div class="demand-fill" style="width: 32%"></div>
-                </div>
-            </div>
-            
-            <div class="trend-chip">
-                <div class="trend-name">kinderpuzzel</div>
-                <div class="trend-meta">
-                    Gem. &euro;9 &middot;
+                    Gem. &euro;47 &middot;
                     40 listings
                 </div>
                 <div class="demand-bar">
-                    <div class="demand-fill" style="width: 31%"></div>
+                    <div class="demand-fill" style="width: 78%"></div>
                 </div>
             </div>
             
             <div class="trend-chip">
-                <div class="trend-name">leesboeken kinderen</div>
+                <div class="trend-name">sportkleding</div>
                 <div class="trend-meta">
-                    Gem. &euro;10 &middot;
+                    Gem. &euro;21 &middot;
                     40 listings
                 </div>
                 <div class="demand-bar">
-                    <div class="demand-fill" style="width: 27%"></div>
+                    <div class="demand-fill" style="width: 57%"></div>
                 </div>
             </div>
             
             <div class="trend-chip">
-                <div class="trend-name">kinderboeken pakket</div>
+                <div class="trend-name">jurk</div>
                 <div class="trend-meta">
-                    Gem. &euro;15 &middot;
+                    Gem. &euro;23 &middot;
                     40 listings
                 </div>
                 <div class="demand-bar">
-                    <div class="demand-fill" style="width: 22%"></div>
+                    <div class="demand-fill" style="width: 54%"></div>
                 </div>
             </div>
             
             <div class="trend-chip">
-                <div class="trend-name">prentenboeken</div>
+                <div class="trend-name">winterjas dames</div>
                 <div class="trend-meta">
-                    Gem. &euro;8 &middot;
+                    Gem. &euro;56 &middot;
+                    40 listings
+                </div>
+                <div class="demand-bar">
+                    <div class="demand-fill" style="width: 48%"></div>
+                </div>
+            </div>
+            
+            <div class="trend-chip">
+                <div class="trend-name">herenkleding</div>
+                <div class="trend-meta">
+                    Gem. &euro;36 &middot;
                     20 listings
                 </div>
                 <div class="demand-bar">
-                    <div class="demand-fill" style="width: 21%"></div>
+                    <div class="demand-fill" style="width: 42%"></div>
                 </div>
             </div>
             
             <div class="trend-chip">
-                <div class="trend-name">kinderkleding</div>
+                <div class="trend-name">vintage kleding</div>
                 <div class="trend-meta">
-                    Gem. &euro;13 &middot;
+                    Gem. &euro;28 &middot;
+                    40 listings
+                </div>
+                <div class="demand-bar">
+                    <div class="demand-fill" style="width: 42%"></div>
+                </div>
+            </div>
+            
+            <div class="trend-chip">
+                <div class="trend-name">koptelefoon</div>
+                <div class="trend-meta">
+                    Gem. &euro;24 &middot;
                     20 listings
                 </div>
                 <div class="demand-bar">
-                    <div class="demand-fill" style="width: 20%"></div>
+                    <div class="demand-fill" style="width: 40%"></div>
                 </div>
             </div>
             
             <div class="trend-chip">
-                <div class="trend-name">kinderjas</div>
+                <div class="trend-name">dameskleding</div>
                 <div class="trend-meta">
-                    Gem. &euro;15 &middot;
-                    40 listings
+                    Gem. &euro;19 &middot;
+                    20 listings
                 </div>
                 <div class="demand-bar">
-                    <div class="demand-fill" style="width: 20%"></div>
-                </div>
-            </div>
-            
-            <div class="trend-chip">
-                <div class="trend-name">duplo</div>
-                <div class="trend-meta">
-                    Gem. &euro;30 &middot;
-                    40 listings
-                </div>
-                <div class="demand-bar">
-                    <div class="demand-fill" style="width: 18%"></div>
+                    <div class="demand-fill" style="width: 34%"></div>
                 </div>
             </div>
             
@@ -1038,7 +1039,7 @@
     const CHART_COLORS = ['#e94560', '#3498db', '#27ae60', '#f39c12', '#8e44ad'];
 
     function drawTrendChart() {
-        const raw = {"dates": ["2026-03-16"], "categories": {"Kinderkleding": {"demand_scores": [1.6], "avg_prices": [15.8], "terms": ["kinderkleding pakket", "kinderkleding", "kinderschoenen", "kinderjas", "babykleding"]}, "Speelgoed": {"demand_scores": [1.5], "avg_prices": [25.76], "terms": ["kinderpuzzel", "speelgoed lot", "playmobil", "duplo", "speelgoed"]}, "Kinderboeken": {"demand_scores": [1.8], "avg_prices": [10.48], "terms": ["leesboeken kinderen", "kinderboeken", "kinderboeken pakket", "prentenboeken"]}}};
+        const raw = {"dates": ["2026-03-16"], "categories": {"Tassen": {"demand_scores": [5.3], "avg_prices": [32.28], "terms": ["rugzak", "handtas"]}, "Sport": {"demand_scores": [3.6], "avg_prices": [30.2], "terms": ["sportkleding", "sportschoenen"]}, "Dameskleding": {"demand_scores": [2.9], "avg_prices": [23.8], "terms": ["h&m kleding", "dameskleding", "jurk", "winterjas dames", "zara"]}, "Herenkleding": {"demand_scores": [1.4], "avg_prices": [25.21], "terms": ["spijkerbroek heren", "herenkleding", "hoodie"]}, "Vintage": {"demand_scores": [3.1], "avg_prices": [41.41], "terms": ["retro kleding", "vintage kleding", "vintage jas"]}, "Elektronica": {"demand_scores": [3.2], "avg_prices": [68.72], "terms": ["koptelefoon", "tablet", "smartphone"]}, "Kinderkleding": {"demand_scores": [1.8], "avg_prices": [13.46], "terms": ["babykleding", "kinderkleding", "kinderschoenen"]}, "Schoenen": {"demand_scores": [0.9], "avg_prices": [47.29], "terms": ["sneakers", "adidas schoenen", "damesschoenen", "nike schoenen"]}, "Kinderboeken": {"demand_scores": [2.1], "avg_prices": [10.21], "terms": ["kinderboeken"]}, "Speelgoed": {"demand_scores": [1.1], "avg_prices": [24.38], "terms": ["playmobil", "speelgoed", "lego"]}}};
         if (!raw || !raw.dates || raw.dates.length < 2) return;
 
         const canvas = document.getElementById('trendChart');
