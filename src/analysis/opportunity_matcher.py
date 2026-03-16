@@ -318,8 +318,6 @@ def match_opportunities(
     if seen_deals is None:
         seen_deals = {}
 
-    import concurrent.futures
-
     # Build list of rejected patterns from feedback
     rejected_patterns = [fb.get("reason", "").lower() for fb in negative_feedback if fb.get("reason")]
 
@@ -362,22 +360,15 @@ def match_opportunities(
             is_pallet=is_pallet_listing(title, description),
         ))
 
-    # ── Phase 2: parallel Vinted search for non-pallet listings ──
-    # 3 workers, each sleeps 1.5s after their request → ~3x throughput
-    # with polite rate limiting (avg 1 request per 0.5s across workers).
-    def _vinted_search(cand: "_ListingData"):
-        # Skip Vinted search for pallets en listings met onbekende prijs —
-        # Vision analyse bepaalt hun waarde in de enrichment fase.
-        if cand.is_pallet or cand.buy_price == 0:
-            return cand, None
-        result = search_vinted_for_product(cand.title, buy_price=cand.buy_price)
-        time.sleep(1.5)
-        return cand, result
-
+    # ── Phase 2: sequentiële Vinted search voor non-pallet listings ──
+    # Eén request per keer met 3s pauze om Vinted bot-detectie (406) te vermijden.
     vinted_results: dict[int, Optional[Any]] = {}
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
-        for idx, (cand, trend) in enumerate(pool.map(_vinted_search, candidates)):
-            vinted_results[id(cand)] = trend
+    for cand in candidates:
+        if cand.is_pallet or cand.buy_price == 0:
+            vinted_results[id(cand)] = None
+            continue
+        vinted_results[id(cand)] = search_vinted_for_product(cand.title, buy_price=cand.buy_price)
+        time.sleep(3.0)
 
     # ── Phase 3: build Opportunity objects ────────────────────────
     opportunities: list[Opportunity] = []
