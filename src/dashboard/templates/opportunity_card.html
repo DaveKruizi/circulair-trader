@@ -29,7 +29,9 @@
 
         <div class="price-row">
             <div class="price-box buy">
-                <div class="price-label">Inkoop</div>
+                <div class="price-label">
+                    Inkoop{% if opp.price_negotiable %} <span class="negotiable-badge">biedprijs</span>{% endif %}
+                </div>
                 <div class="price-value">&euro;{{ "%.2f"|format(opp.buy_price) }}</div>
             </div>
             <div class="price-box sell">
@@ -37,6 +39,12 @@
                 <div class="price-value">&euro;{{ "%.2f"|format(opp.estimated_sell_price) }}</div>
             </div>
         </div>
+
+        {% if opp.price_negotiable %}
+        <div class="negotiable-notice">
+            &#128176; Biedprijs — werkelijke inkoopprijs is onderhandelbaar. Marge kan hoger uitvallen.
+        </div>
+        {% endif %}
 
         <div class="profit-row">
             <div>

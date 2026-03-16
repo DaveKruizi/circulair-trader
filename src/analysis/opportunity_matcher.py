@@ -69,6 +69,10 @@ class Opportunity:
     # "pallet-analyse" when derived from Vision pallet breakdown.
     price_source: str = "categorie"
 
+    # True when the buy price is a starting bid or asking price open to negotiation.
+    # The actual buy price may be lower, so real margin could be higher than shown.
+    price_negotiable: bool = False
+
     # Pallet / bulk lot analysis (None for single-product listings)
     pallet_analysis: Optional[PalletAnalysis] = None
 
@@ -328,6 +332,8 @@ def match_opportunities(
         days_listed = getattr(listing, "days_listed", None)
         platform = getattr(listing, "source", "onbekend")
         quantity = getattr(listing, "quantity_available", 1) or 1
+        price_type = getattr(listing, "price_type", "fixed")
+        price_negotiable = price_type in ("bidding", "see_description")
 
         if not title or buy_price <= 0:
             continue
@@ -426,6 +432,7 @@ def match_opportunities(
             is_viable=margin.is_viable,
             margin_reason=margin.reason,
             price_source=price_source,
+            price_negotiable=price_negotiable,
         )
         opportunities.append(opp)
 
