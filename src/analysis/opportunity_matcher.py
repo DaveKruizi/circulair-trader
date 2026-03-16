@@ -342,7 +342,7 @@ def match_opportunities(
     for listing in buying_listings:
         title = getattr(listing, "title", "")
         buy_price = getattr(listing, "price", 0) or getattr(listing, "current_bid", 0)
-        if not title or buy_price <= 0:
+        if not title or buy_price < 0:
             continue
         title_lower = title.lower()
         if any(pattern and pattern in title_lower for pattern in rejected_patterns):
@@ -366,7 +366,9 @@ def match_opportunities(
     # 3 workers, each sleeps 1.5s after their request → ~3x throughput
     # with polite rate limiting (avg 1 request per 0.5s across workers).
     def _vinted_search(cand: "_ListingData"):
-        if cand.is_pallet:
+        # Skip Vinted search for pallets en listings met onbekende prijs —
+        # Vision analyse bepaalt hun waarde in de enrichment fase.
+        if cand.is_pallet or cand.buy_price == 0:
             return cand, None
         result = search_vinted_for_product(cand.title, buy_price=cand.buy_price)
         time.sleep(1.5)
@@ -385,7 +387,15 @@ def match_opportunities(
         buy_price = cand.buy_price
         description = cand.description
 
-        if cand.is_pallet:
+        if buy_price == 0:
+            # Prijs onbekend (loginwall of "op aanvraag") — Vision analyse
+            # schat de verkoopwaarde op basis van foto + titel.
+            estimated_sell = 0.0
+            trend_name = "prijs-onbekend"
+            vinted_demand = 5.0
+            price_source = "prijs-onbekend"
+            margin = calculate_margin(0, 0)
+        elif cand.is_pallet:
             estimated_sell = buy_price  # placeholder — overschreven door Vision analyse
             trend_name = "pallet-analyse"
             vinted_demand = 5.0
@@ -495,7 +505,10 @@ async def _run_pallet_analyses(
     # is_pallet_listing checks both title and description — pass empty string as
     # description here since Opportunity only stores title. The full description
     # is passed to analyze_pallet via the listing's summary field if present.
-    pallet_opps = [o for o in opportunities if is_pallet_listing(o.title, o.summary)][:5]
+    pallet_opps = [
+        o for o in opportunities
+        if is_pallet_listing(o.title, o.summary) or o.buy_price == 0
+    ][:5]
 
     for opp in pallet_opps:
         try:
@@ -547,11 +560,20 @@ async def _verify_and_enrich(
     # Pallets without a completed analysis (no image, API error etc.) are kept —
     # they will show with the buy price as placeholder so the user can decide.
     def _keep(o: Opportunity) -> bool:
-        if not is_pallet_listing(o.title, o.summary):
-            return True  # niet een pallet — altijd behouden
+        is_pallet = is_pallet_listing(o.title, o.summary)
+        is_price_unknown = o.buy_price == 0
+
+        if not is_pallet and not is_price_unknown:
+            return True  # gewone listing met bekende prijs — altijd behouden
+
         if o.pallet_analysis is None:
-            return True  # nog niet geanalyseerd — tonen als "onbekend"
-        return o.is_viable  # geanalyseerd: alleen winstgevend
+            return True  # analyse niet gelukt (geen foto etc.) — tonen als placeholder
+
+        if is_price_unknown:
+            # Alleen tonen als Vision een verkoopwaarde heeft gevonden
+            return o.pallet_analysis.total_estimated_resale_value > 0
+
+        return o.is_viable  # pallet met bekende prijs: alleen winstgevend
 
     opportunities = [o for o in opportunities if _keep(o)]
 

@@ -32,15 +32,27 @@
                 <div class="price-label">
                     Inkoop{% if opp.price_negotiable %} <span class="negotiable-badge">biedprijs</span>{% endif %}
                 </div>
+                {% if opp.buy_price == 0 %}
+                <div class="price-value price-unknown">Onbekend</div>
+                {% else %}
                 <div class="price-value">&euro;{{ "%.2f"|format(opp.buy_price) }}</div>
+                {% endif %}
             </div>
             <div class="price-box sell">
                 <div class="price-label">Vinted (est.)</div>
+                {% if opp.estimated_sell_price == 0 %}
+                <div class="price-value price-unknown">Wordt geschat&hellip;</div>
+                {% else %}
                 <div class="price-value">&euro;{{ "%.2f"|format(opp.estimated_sell_price) }}</div>
+                {% endif %}
             </div>
         </div>
 
-        {% if opp.price_negotiable %}
+        {% if opp.buy_price == 0 %}
+        <div class="negotiable-notice" style="background:#fff3e0;color:#e65100;">
+            &#10067; Inkoopprijs onbekend — prijs opvragen via de link hieronder. Verkoopwaarde geschat door Vision analyse.
+        </div>
+        {% elif opp.price_negotiable %}
         <div class="negotiable-notice">
             &#128176; Biedprijs — werkelijke inkoopprijs is onderhandelbaar. Marge kan hoger uitvallen.
         </div>
@@ -49,9 +61,15 @@
         <div class="profit-row">
             <div>
                 <div class="profit-label">Netto winst{% if opp.quantity_available > 1 %} (per stuk){% endif %}</div>
+                {% if opp.buy_price == 0 %}
+                <div class="profit-value price-unknown">Afhankelijk van prijs</div>
+                {% else %}
                 <div class="profit-value">&euro;{{ "%.2f"|format(opp.net_profit) }}</div>
+                {% endif %}
             </div>
+            {% if opp.buy_price != 0 %}
             <div class="profit-pct">{{ "%.0f"|format(opp.margin_pct) }}% marge</div>
+            {% endif %}
         </div>
 
         {% if opp.quantity_available > 1 %}
