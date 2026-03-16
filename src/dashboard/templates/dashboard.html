@@ -463,6 +463,15 @@
 
     </div>
 
+    <!-- Budget indicator -->
+    <div style="text-align:center; padding: 24px; color: #aaa; font-size: 0.75rem;">
+        API kosten deze maand: €{{ "%.2f"|format(api_cost.cost_eur) }} van €{{ api_cost.budget_eur }}
+        ({{ api_cost.pct_used }}% gebruikt)
+        {% if api_cost.pct_used >= 80 %}
+        <span style="color:#e74c3c; font-weight:bold;"> — ⚠️ Budget bijna op!</span>
+        {% endif %}
+    </div>
+
     <script>
         function filterCards(filter, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));

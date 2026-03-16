@@ -15,6 +15,7 @@ from typing import Any, Optional
 import anthropic
 
 from src.config import ANTHROPIC_API_KEY, MIN_SELL_PRICE, MIN_NET_MARGIN
+from src.budget_guard import register_usage, BudgetExceededError
 from src.analysis.margin_calculator import calculate_margin, estimate_sell_price_from_trends
 from src.analysis.risk_scorer import score_opportunity, RiskScore
 
@@ -103,6 +104,11 @@ Antwoord in het Nederlands. Wees direct en praktisch."""
             thinking={"type": "adaptive"},
             messages=[{"role": "user", "content": prompt}],
         )
+        # Registreer token gebruik en controleer budget
+        register_usage(
+            input_tokens=response.usage.input_tokens,
+            output_tokens=response.usage.output_tokens,
+        )
         text = next(
             (b.text for b in response.content if b.type == "text"), ""
         )
@@ -110,6 +116,8 @@ Antwoord in het Nederlands. Wees direct en praktisch."""
         summary = lines[0] if lines else "Zie productdetails."
         tips = " ".join(lines[1:]) if len(lines) > 1 else "Gebruik heldere foto's en een goede beschrijving."
         return summary, tips
+    except BudgetExceededError:
+        raise  # Laat budget errors door — tool moet stoppen
     except Exception as e:
         print(f"[Claude] Error getting insight for '{title}': {e}")
         return "Analyse niet beschikbaar.", "Gebruik heldere foto's en een goede beschrijving."

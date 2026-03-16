@@ -12,6 +12,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
 from src.config import OUTPUT_DIR
+from src.budget_guard import get_current_cost
 
 
 TEMPLATE_DIR = Path(__file__).parent / "templates"
@@ -65,6 +66,7 @@ def generate_dashboard(
         generated_at=now.strftime("%d %b %Y, %H:%M"),
         next_update=next_run.strftime("%d %b %Y, %H:%M"),
         date_label=now.strftime("%d %B %Y"),
+        api_cost=get_current_cost(),
     )
 
     # Write output
