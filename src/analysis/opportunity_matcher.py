@@ -543,6 +543,18 @@ async def _verify_and_enrich(
     # Pallet analysis for bulk lot listings (Vision → contents breakdown)
     opportunities = await _run_pallet_analyses(opportunities, client)
 
+    # Filter out pallets that have been analysed but are not profitable.
+    # Pallets without a completed analysis (no image, API error etc.) are kept —
+    # they will show with the buy price as placeholder so the user can decide.
+    def _keep(o: Opportunity) -> bool:
+        if not is_pallet_listing(o.title, o.summary):
+            return True  # niet een pallet — altijd behouden
+        if o.pallet_analysis is None:
+            return True  # nog niet geanalyseerd — tonen als "onbekend"
+        return o.is_viable  # geanalyseerd: alleen winstgevend
+
+    opportunities = [o for o in opportunities if _keep(o)]
+
     # Re-sort after pallet analysis (resale value may have changed significantly)
     opportunities.sort(
         key=lambda o: (o.risk_score * 0.3 + min(o.net_profit, 50) * 0.4 + o.volume_bonus * 0.3),
