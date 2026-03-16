@@ -332,15 +332,28 @@ def match_opportunities(
         if any(pattern and pattern in title_lower for pattern in rejected_patterns):
             continue
 
-        # Find best matching Vinted trend
-        trend = _find_best_trend(title, description, vinted_trends)
-        trend_name = trend.search_term if trend else "algemeen"
-        vinted_demand = trend.demand_score if trend else 5.0
+        # Per-product Vinted search — exact price data for this specific item.
+        # Falls back to category trend matching if Vinted returns <3 results.
+        product_trend = search_vinted_for_product(title, buy_price=buy_price)
+        time.sleep(1.0)  # rate limit
 
-        # Estimate sell price
-        estimated_sell = estimate_sell_price_from_trends(
-            title, vinted_trends, buy_price=buy_price
-        )
+        if product_trend is not None:
+            estimated_sell = estimate_sell_price_from_listings(
+                product_trend.sample_listings, buy_price=buy_price
+            )
+            trend_name = product_trend.search_term
+            vinted_demand = product_trend.demand_score
+            price_source = "product-specifiek"
+        else:
+            # Fallback: pre-scraped category trends
+            trend = _find_best_trend(title, description, vinted_trends)
+            trend_name = trend.search_term if trend else "algemeen"
+            vinted_demand = trend.demand_score if trend else 5.0
+            estimated_sell = estimate_sell_price_from_trends(
+                title, vinted_trends, buy_price=buy_price
+            )
+            price_source = "categorie"
+
         if estimated_sell < MIN_SELL_PRICE:
             continue
 
@@ -391,6 +404,7 @@ def match_opportunities(
             days_listed=days_listed,
             is_viable=margin.is_viable,
             margin_reason=margin.reason,
+            price_source=price_source,
         )
         opportunities.append(opp)
 
@@ -409,63 +423,6 @@ def match_opportunities(
     return opportunities
 
 
-async def _refine_prices_with_product_search(
-    opportunities: list[Opportunity],
-) -> list[Opportunity]:
-    """
-    For each opportunity, try a product-specific Vinted search and update
-    the estimated sell price + margin if the search yields ≥3 results.
-
-    Runs in a thread pool to avoid blocking the event loop (vinted-scraper
-    is synchronous).  Rate-limited to 1 s between calls.
-    """
-    import concurrent.futures
-
-    def _search_one(opp: Opportunity):
-        result = search_vinted_for_product(opp.title, buy_price=opp.buy_price)
-        time.sleep(1.0)
-        return opp.deal_id, result
-
-    loop = asyncio.get_event_loop()
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
-        tasks = [
-            loop.run_in_executor(pool, _search_one, opp)
-            for opp in opportunities[:10]
-        ]
-        results = await asyncio.gather(*tasks, return_exceptions=True)
-
-    opp_map = {o.deal_id: o for o in opportunities}
-    for res in results:
-        if isinstance(res, Exception):
-            continue
-        deal_id, trend = res
-        if trend is None:
-            continue
-        opp = opp_map.get(deal_id)
-        if not opp:
-            continue
-
-        new_sell = estimate_sell_price_from_listings(
-            trend.sample_listings, buy_price=opp.buy_price
-        )
-        if new_sell < MIN_SELL_PRICE:
-            continue
-
-        new_margin = calculate_margin(opp.buy_price, new_sell)
-        if not new_margin.is_viable:
-            continue
-
-        opp.estimated_sell_price = new_sell
-        opp.net_profit = new_margin.net_profit
-        opp.margin_pct = new_margin.margin_pct
-        opp.vinted_commission = new_margin.vinted_commission
-        opp.matched_trend = trend.search_term
-        opp.price_source = "product-specifiek"
-        opp.margin_reason = new_margin.reason
-
-    return opportunities
-
-
 async def _verify_and_enrich(
     opportunities: list[Opportunity],
     vinted_trends: list,
@@ -473,15 +430,6 @@ async def _verify_and_enrich(
 ) -> list[Opportunity]:
     """Verify top matches with Vision, then enrich with Claude insights."""
     client = anthropic.AsyncAnthropic(api_key=ANTHROPIC_API_KEY)
-
-    # Refine prices using product-specific Vinted search before any further steps
-    opportunities = await _refine_prices_with_product_search(opportunities)
-
-    # Re-sort after price refinement (product-specific data may change rankings)
-    opportunities.sort(
-        key=lambda o: (o.risk_score * 0.3 + min(o.net_profit, 50) * 0.4 + o.volume_bonus * 0.3),
-        reverse=True,
-    )
 
     # Vision verification for top 5 opportunities with images
     to_verify = [o for o in opportunities[:10] if o.image_url][:5]

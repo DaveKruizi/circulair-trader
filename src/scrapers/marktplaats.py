@@ -2,9 +2,10 @@
 Marktplaats.nl scraper.
 
 Uses the `marktplaats` PyPI package.
-Searches for items matching Vinted trend categories at low prices.
+Focused on bulk/partij listings (quantity > 1) across all product categories.
 """
 
+import re
 import time
 from dataclasses import dataclass
 from typing import Optional
@@ -29,8 +30,81 @@ class MarktplaatsListing:
     image_url: str
     date_posted: str
     seller_name: str
+    quantity_available: int = 1
     days_listed: Optional[int] = None
     source: str = "marktplaats"
+
+
+# Broad search terms targeting bulk/partij listings across all categories.
+# Not limited to children's products — anything that comes in multiples is fair game.
+BULK_SEARCH_TERMS = [
+    "partij te koop",
+    "lot te koop",
+    "meerdere stuks",
+    "partij kleding",
+    "partij speelgoed",
+    "partij boeken",
+    "partij elektronica",
+    "partij huishouden",
+    "partij gereedschap",
+    "partij sportartikelen",
+    "partij accessoires",
+    "voorraad te koop",
+    "wholesale lot",
+    "bulk aanbieding",
+    "diverse items te koop",
+    "partij vintage",
+    "partij merkkleding",
+    "partij schoenen",
+    "partij keukengerei",
+]
+
+# Regex patterns to extract quantity from listing title + description
+_QUANTITY_PATTERNS = [
+    r'\b(\d+)\s*x\b',                  # "10x", "5 x"
+    r'\b(\d+)\s*stuks?\b',             # "5 stuks", "3 stuk"
+    r'\bpartij\s+van\s+(\d+)',          # "partij van 10"
+    r'\blot\s+van\s+(\d+)',             # "lot van 5"
+    r'\b(\d+)\s*exemplaren?\b',         # "3 exemplaren"
+    r'\b(\d+)\s*items?\b',              # "10 items"
+    r'\b(\d+)\s*st\.?\b',              # "5 st" / "5 st."
+    r'\b(\d+)\s*paar\b',               # "3 paar" (shoes etc.)
+    r'\b(\d+)\s*sets?\b',              # "4 sets"
+    r'\b(\d+)\s*dozen\b',              # "2 dozen"
+    r'\b(\d+)\s*pakken?\b',            # "6 pakken"
+]
+
+# Words that indicate a bulk listing even without a number
+_BULK_INDICATOR_WORDS = {
+    "partij", "lot", "bulk", "meerdere", "diverse", "assortiment",
+    "voorraad", "wholesale", "collectie", "bundel", "pakket",
+}
+
+
+def _detect_quantity(title: str, description: str) -> int:
+    """
+    Detect quantity from listing title and description.
+
+    Returns the detected quantity (≥1).  If no number found but bulk
+    indicator words are present, returns 2 as a conservative estimate.
+    """
+    text = f"{title} {description}".lower()
+
+    for pattern in _QUANTITY_PATTERNS:
+        m = re.search(pattern, text)
+        if m:
+            try:
+                qty = int(m.group(1))
+                if qty > 1:
+                    return qty
+            except (IndexError, ValueError):
+                continue
+
+    # No explicit number — check for bulk vocabulary
+    if any(word in text for word in _BULK_INDICATOR_WORDS):
+        return 2
+
+    return 1
 
 
 def _parse_listing(raw) -> Optional[MarktplaatsListing]:
@@ -39,7 +113,6 @@ def _parse_listing(raw) -> Optional[MarktplaatsListing]:
         price = float(raw.price or 0)
         price_type_raw = str(raw.price_type.value if hasattr(raw.price_type, 'value') else raw.price_type)
 
-        # Map price types
         if "FIXED" in price_type_raw.upper() or "FREE_TO_NEGOTIATE" in price_type_raw.upper():
             price_type = "fixed"
         elif "BID" in price_type_raw.upper() or "AUCTION" in price_type_raw.upper():
@@ -49,38 +122,44 @@ def _parse_listing(raw) -> Optional[MarktplaatsListing]:
         else:
             price_type = "fixed"
 
-        # Image
         image_url = ""
         if raw.first_image:
             image_url = str(getattr(raw.first_image, 'medium_url', '') or
                            getattr(raw.first_image, 'url', '') or '')
 
-        # Seller
         seller_name = ""
         if raw.seller:
             seller_name = str(getattr(raw.seller, 'name', '') or '')
 
-        # Location
         location_str = ""
         if raw.location:
             city = getattr(raw.location, 'city_name', '') or ''
             location_str = str(city)
 
-        # Date
         date_str = str(raw.date) if raw.date else ""
+        title = str(raw.title or "")
+        description = str(raw.description or "")[:500]
+
+        # Detect quantity from package-provided field first, then text
+        raw_qty = getattr(raw, 'quantity', None) or getattr(raw, 'amount', None)
+        if raw_qty and int(raw_qty) > 1:
+            quantity = int(raw_qty)
+        else:
+            quantity = _detect_quantity(title, description)
 
         return MarktplaatsListing(
             id=str(raw.id),
-            title=str(raw.title or ""),
+            title=title,
             price=price,
             price_type=price_type,
-            description=str(raw.description or "")[:500],
+            description=description,
             category=str(getattr(raw, 'category_id', '') or ""),
             location=location_str,
             url=str(raw.link or f"https://www.marktplaats.nl/v/{raw.id}"),
             image_url=image_url,
             date_posted=date_str,
             seller_name=seller_name,
+            quantity_available=quantity,
         )
     except Exception:
         return None
@@ -88,19 +167,22 @@ def _parse_listing(raw) -> Optional[MarktplaatsListing]:
 
 def scrape_marktplaats(
     search_terms: list[str],
-    max_price: float = 50.0,
+    max_price: float = 100.0,
     max_per_term: int = 20,
+    min_quantity: int = 1,
 ) -> list[MarktplaatsListing]:
     """
-    Search Marktplaats for items matching given terms under max_price.
+    Search Marktplaats for items matching given terms.
 
     Args:
-        search_terms: List of search terms to query.
-        max_price: Maximum price filter in euros.
-        max_per_term: Max results per search term.
+        search_terms:  List of search terms to query.
+        max_price:     Maximum price filter in euros.
+        max_per_term:  Max results per search term.
+        min_quantity:  Only return listings with detected quantity >= this value.
+                       Set to 2 to filter for bulk/partij listings only.
 
     Returns:
-        List of MarktplaatsListing objects.
+        List of MarktplaatsListing objects sorted by quantity descending.
     """
     if not _MARKTPLAATS_AVAILABLE:
         print("[Marktplaats] Package not installed. Run: pip install marktplaats")
@@ -126,6 +208,8 @@ def scrape_marktplaats(
                     continue
                 if listing.price_type == "fixed" and listing.price > max_price:
                     continue
+                if listing.quantity_available < min_quantity:
+                    continue
                 seen_ids.add(listing.id)
                 results.append(listing)
 
@@ -134,4 +218,6 @@ def scrape_marktplaats(
             print(f"[Marktplaats] Error scraping '{term}': {e}")
             continue
 
+    # Biggest lots first
+    results.sort(key=lambda l: l.quantity_available, reverse=True)
     return results
