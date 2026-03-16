@@ -222,7 +222,7 @@ def run_daily(dry_run: bool = False):
         # Bulk-first: zoekt op brede partij/lot termen, filtert op quantity >= 2.
         # Onafhankelijk van Vinted trends — alles wat in bulk aangeboden wordt is interessant.
         ("Marktplaats", lambda: scrape_marktplaats(
-            BULK_SEARCH_TERMS, max_price=150, min_quantity=2
+            BULK_SEARCH_TERMS, max_price=3000, min_quantity=2
         )),
         ("Troostwijk", lambda: scrape_troostwijk(max_current_bid=50)),
         ("Stocklear", scrape_stocklear),
