@@ -69,6 +69,47 @@
         <div class="tips">{{ opp.selling_tips }}</div>
         {% endif %}
 
+        {% if opp.pallet_analysis %}
+        <div class="pallet-breakdown">
+            <div class="pallet-header">
+                &#128230; Pallet inhoud
+                <span class="pallet-confidence">{{ "%.0f"|format(opp.pallet_analysis.confidence * 100) }}% zekerheid</span>
+            </div>
+            {% if opp.pallet_analysis.analysis_notes %}
+            <div class="pallet-notes">{{ opp.pallet_analysis.analysis_notes }}</div>
+            {% endif %}
+            <table class="pallet-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Aantal</th>
+                        <th>Staat</th>
+                        <th>Vinted prijs</th>
+                        <th>Potentie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in opp.pallet_analysis.items %}
+                    <tr>
+                        <td>{{ item.product_type }}</td>
+                        <td>{{ item.estimated_quantity }}x</td>
+                        <td>{{ item.condition }}</td>
+                        <td>{% if item.vinted_avg_price %}&euro;{{ "%.0f"|format(item.vinted_avg_price) }}{% else %}&mdash;{% endif %}</td>
+                        <td>{% if item.estimated_total_value %}&euro;{{ "%.0f"|format(item.estimated_total_value) }}{% else %}&mdash;{% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"><strong>Totaal geschatte omzet</strong></td>
+                        <td></td>
+                        <td><strong>&euro;{{ "%.0f"|format(opp.pallet_analysis.total_estimated_resale_value) }}</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        {% endif %}
+
         <!-- Feedback & Favorite buttons -->
         <div class="card-actions">
             <button class="action-btn thumbs-up"

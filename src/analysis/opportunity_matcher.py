@@ -21,6 +21,7 @@ from src.config import ANTHROPIC_API_KEY, MIN_SELL_PRICE, MIN_NET_MARGIN
 from src.budget_guard import register_usage, BudgetExceededError
 from src.analysis.margin_calculator import calculate_margin, estimate_sell_price_from_trends, estimate_sell_price_from_listings
 from src.scrapers.vinted import search_vinted_for_product
+from src.analysis.pallet_analyzer import analyze_pallet, is_pallet_listing, PalletAnalysis
 from src.analysis.risk_scorer import score_opportunity, RiskScore
 
 
@@ -64,8 +65,12 @@ class Opportunity:
     is_viable: bool = True
     margin_reason: str = ""
     # Price data origin: "product-specifiek" when based on exact Vinted search,
-    # "categorie" when falling back to pre-scraped trend data.
+    # "categorie" when falling back to pre-scraped trend data,
+    # "pallet-analyse" when derived from Vision pallet breakdown.
     price_source: str = "categorie"
+
+    # Pallet / bulk lot analysis (None for single-product listings)
+    pallet_analysis: Optional[PalletAnalysis] = None
 
 
 def _find_best_trend(title: str, description: str, trends: list) -> Optional[Any]:
@@ -391,7 +396,9 @@ def match_opportunities(
             risk_score=risk.total_score,
             risk_label=risk.label,
             risk_flags=risk.flags,
-            summary="Analyse wordt geladen...",
+            # Store description snippet in summary until Claude overwrites it.
+            # Used by pallet analyzer to understand listing contents.
+            summary=description[:300] if description else "Analyse wordt geladen...",
             selling_tips="",
             matched_trend=trend_name,
             shipping_cost=margin.shipping_cost,
@@ -423,6 +430,59 @@ def match_opportunities(
     return opportunities
 
 
+async def _run_pallet_analyses(
+    opportunities: list[Opportunity],
+    client: anthropic.AsyncAnthropic,
+) -> list[Opportunity]:
+    """
+    For listings identified as pallets/bulk lots, run Vision analysis to
+    identify contents and estimate total resale value.
+
+    The pallet stays ONE deal in the dashboard — PalletAnalysis is stored
+    as a breakdown field on the Opportunity, not split into separate deals.
+    The estimated_sell_price is updated to the total estimated resale value.
+    """
+    # Store description on Opportunity is not available, but title carries keywords.
+    # is_pallet_listing checks both title and description — pass empty string as
+    # description here since Opportunity only stores title. The full description
+    # is passed to analyze_pallet via the listing's summary field if present.
+    pallet_opps = [o for o in opportunities if is_pallet_listing(o.title, o.summary)][:5]
+
+    for opp in pallet_opps:
+        try:
+            analysis = await analyze_pallet(
+                client=client,
+                image_url=opp.image_url,
+                title=opp.title,
+                description=opp.summary,  # summary may contain description snippet
+                buy_price=opp.buy_price,
+            )
+            if analysis is None or not analysis.items:
+                continue
+
+            opp.pallet_analysis = analysis
+
+            # Update the sell price to total estimated resale value of the pallet
+            if analysis.total_estimated_resale_value > 0:
+                new_margin = calculate_margin(opp.buy_price, analysis.total_estimated_resale_value)
+                opp.estimated_sell_price = analysis.total_estimated_resale_value
+                opp.net_profit = new_margin.net_profit
+                opp.margin_pct = new_margin.margin_pct
+                opp.vinted_commission = new_margin.vinted_commission
+                opp.margin_reason = new_margin.reason
+                opp.is_viable = new_margin.is_viable
+                opp.price_source = "pallet-analyse"
+
+            print(f"[Pallet] '{opp.title[:50]}': {len(analysis.items)} producttypen, "
+                  f"€{analysis.total_estimated_resale_value:.0f} totale omzetpotentie")
+        except BudgetExceededError:
+            break
+        except Exception as e:
+            print(f"[Pallet] Analyse mislukt voor '{opp.title[:50]}': {e}")
+
+    return opportunities
+
+
 async def _verify_and_enrich(
     opportunities: list[Opportunity],
     vinted_trends: list,
@@ -430,6 +490,15 @@ async def _verify_and_enrich(
 ) -> list[Opportunity]:
     """Verify top matches with Vision, then enrich with Claude insights."""
     client = anthropic.AsyncAnthropic(api_key=ANTHROPIC_API_KEY)
+
+    # Pallet analysis for bulk lot listings (Vision → contents breakdown)
+    opportunities = await _run_pallet_analyses(opportunities, client)
+
+    # Re-sort after pallet analysis (resale value may have changed significantly)
+    opportunities.sort(
+        key=lambda o: (o.risk_score * 0.3 + min(o.net_profit, 50) * 0.4 + o.volume_bonus * 0.3),
+        reverse=True,
+    )
 
     # Vision verification for top 5 opportunities with images
     to_verify = [o for o in opportunities[:10] if o.image_url][:5]

@@ -21,8 +21,8 @@ from src.config import OUTPUT_DIR
 
 # Maximum kosten in euro's per maand
 # ($1 ≈ €0.92 — we gebruiken een kleine buffer)
-BUDGET_EUR = 10.0
-BUDGET_USD = BUDGET_EUR / 0.92  # ~$10.87
+BUDGET_EUR = 30.0
+BUDGET_USD = BUDGET_EUR / 0.92  # ~$32.61
 
 # Prijzen per token (Claude Opus 4.6)
 PRICE_INPUT_PER_TOKEN = 5.00 / 1_000_000    # $0.000005
