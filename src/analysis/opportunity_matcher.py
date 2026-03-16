@@ -363,7 +363,7 @@ def match_opportunities(
     # Eén request per keer met 3s pauze om Vinted bot-detectie (406) te vermijden.
     # Zoek eerst de meest waardevolle kandidaten (hoogste koopprijs = grootste potentiële marge).
     # De rest valt terug op categorie-trenddata — dat is nog steeds bruikbaar voor matching.
-    MAX_VINTED_SEARCHES = 25
+    MAX_VINTED_SEARCHES = 40
     searchable = [c for c in candidates if not c.is_pallet and c.buy_price > 0]
     searchable.sort(key=lambda c: c.buy_price, reverse=True)
     search_priority = {id(c): i < MAX_VINTED_SEARCHES for i, c in enumerate(searchable)}
