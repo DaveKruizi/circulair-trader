@@ -1,5 +1,8 @@
 name: Dagelijks Dashboard
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   # Elke dag om 07:00 Nederlandse tijd (06:00 UTC in winter, 05:00 UTC in zomer)
   schedule:
@@ -20,8 +23,6 @@ permissions:
 jobs:
   run-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Code ophalen
