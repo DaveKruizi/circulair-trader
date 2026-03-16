@@ -466,7 +466,7 @@ def match_opportunities(
             deal_id=deal_id,
             is_new=is_new,
             first_seen=seen_deals.get(deal_id, {}).get("first_seen", ""),
-            days_listed=days_listed,
+            days_listed=cand.days_listed,
             is_viable=margin.is_viable,
             margin_reason=margin.reason,
             price_source=price_source,

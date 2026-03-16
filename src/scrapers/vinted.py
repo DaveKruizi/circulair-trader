@@ -264,7 +264,7 @@ def search_vinted_for_product(
             )
         except Exception as e:
             err = str(e).lower()
-            if any(kw in err for kw in ("429", "rate", "too many", "blocked", "forbidden")):
+            if any(kw in err for kw in ("429", "rate", "too many", "blocked", "forbidden", "406")):
                 if attempt < 2:
                     print(f"[Vinted] Rate limited voor '{search_term}', wacht {backoff:.0f}s... (poging {attempt + 1}/3)")
                     time.sleep(backoff)
