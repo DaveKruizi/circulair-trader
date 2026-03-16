@@ -17,6 +17,7 @@ Cron example (runs at 07:00 every day):
 """
 
 import argparse
+import json
 import sys
 import time
 from datetime import datetime
@@ -25,6 +26,7 @@ from pathlib import Path
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+from src.config import OUTPUT_DIR, GITHUB_REPO, GITHUB_TOKEN
 from src.scrapers.vinted import scrape_vinted_trends
 from src.scrapers.marktplaats import scrape_marktplaats
 from src.scrapers.troostwijk import scrape_troostwijk
@@ -36,6 +38,152 @@ from src.analysis.opportunity_matcher import match_opportunities
 from src.dashboard.generator import generate_dashboard
 
 
+# ── Trend history ─────────────────────────────────────────────────
+TREND_HISTORY_FILE = Path(OUTPUT_DIR) / "trend_history.json"
+SEEN_DEALS_FILE = Path(OUTPUT_DIR) / "seen_deals.json"
+
+
+def _load_json(path: Path) -> dict:
+    if path.exists():
+        try:
+            return json.loads(path.read_text())
+        except Exception:
+            pass
+    return {}
+
+
+def _save_json(path: Path, data: dict):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+
+
+def _update_trend_history(trends: list) -> dict:
+    """Add today's trend data to history. Keep max 28 days."""
+    history = _load_json(TREND_HISTORY_FILE)
+    today = datetime.now().strftime("%Y-%m-%d")
+
+    history[today] = {}
+    for t in trends:
+        history[today][t.search_term] = {
+            "category": t.category,
+            "avg_price": t.avg_price,
+            "demand_score": t.demand_score,
+            "listing_count": t.listing_count,
+            "avg_favorites": t.avg_favorites,
+        }
+
+    # Keep only last 28 days
+    sorted_dates = sorted(history.keys(), reverse=True)[:28]
+    history = {d: history[d] for d in sorted_dates}
+
+    _save_json(TREND_HISTORY_FILE, history)
+    return history
+
+
+def _update_seen_deals(opportunities: list) -> dict:
+    """Track which deals we've seen before. Returns updated seen_deals dict."""
+    seen = _load_json(SEEN_DEALS_FILE)
+    today = datetime.now().strftime("%Y-%m-%d")
+
+    for opp in opportunities:
+        if opp.deal_id:
+            if opp.deal_id not in seen:
+                seen[opp.deal_id] = {
+                    "first_seen": today,
+                    "title": opp.title,
+                    "url": opp.buy_url,
+                    "price": opp.buy_price,
+                }
+            seen[opp.deal_id]["last_seen"] = today
+
+    # Clean up deals older than 30 days
+    cutoff = datetime.now()
+    cleaned = {}
+    for deal_id, info in seen.items():
+        last = info.get("last_seen", "")
+        try:
+            days_ago = (cutoff - datetime.strptime(last, "%Y-%m-%d")).days
+            if days_ago <= 30:
+                cleaned[deal_id] = info
+        except ValueError:
+            cleaned[deal_id] = info
+
+    _save_json(SEEN_DEALS_FILE, cleaned)
+    return cleaned
+
+
+# ── Feedback from GitHub Issues ───────────────────────────────────
+
+def _fetch_feedback_from_issues() -> list[dict]:
+    """Fetch negative feedback from GitHub Issues."""
+    if not GITHUB_TOKEN:
+        print("[Feedback] Geen GITHUB_TOKEN — feedback overslaan")
+        return []
+
+    try:
+        import httpx
+        resp = httpx.get(
+            f"https://api.github.com/repos/{GITHUB_REPO}/issues",
+            params={"labels": "feedback-negative", "state": "open", "per_page": 50},
+            headers={
+                "Authorization": f"token {GITHUB_TOKEN}",
+                "Accept": "application/vnd.github.v3+json",
+            },
+            timeout=10,
+        )
+        if resp.status_code != 200:
+            print(f"[Feedback] GitHub API error: {resp.status_code}")
+            return []
+
+        feedback = []
+        for issue in resp.json():
+            body = issue.get("body", "")
+            feedback.append({
+                "title": issue.get("title", ""),
+                "reason": body,
+                "issue_number": issue.get("number"),
+            })
+        print(f"[Feedback] {len(feedback)} negatieve feedback items opgehaald")
+        return feedback
+    except Exception as e:
+        print(f"[Feedback] Fout bij ophalen: {e}")
+        return []
+
+
+def _check_favorites_availability(favorites_issues: list[dict]):
+    """Check if favorited items are still available, update Issues if not."""
+    if not GITHUB_TOKEN:
+        return
+
+    try:
+        import httpx
+        client = httpx.Client(timeout=10)
+
+        for fav in favorites_issues:
+            url = fav.get("product_url", "")
+            if not url:
+                continue
+            try:
+                resp = client.head(url, follow_redirects=True)
+                if resp.status_code == 404:
+                    # Mark as uitverkocht
+                    issue_num = fav.get("issue_number")
+                    if issue_num:
+                        client.post(
+                            f"https://api.github.com/repos/{GITHUB_REPO}/issues/{issue_num}/labels",
+                            json={"labels": ["uitverkocht"]},
+                            headers={
+                                "Authorization": f"token {GITHUB_TOKEN}",
+                                "Accept": "application/vnd.github.v3+json",
+                            },
+                        )
+            except Exception:
+                continue
+        client.close()
+    except Exception as e:
+        print(f"[Favorieten] Fout bij beschikbaarheidscheck: {e}")
+
+
 def run_daily(dry_run: bool = False):
     """Execute the full daily research pipeline."""
     start = datetime.now()
@@ -43,8 +191,15 @@ def run_daily(dry_run: bool = False):
     print(f"Circulair Trader — Dagelijkse run gestart: {start.strftime('%Y-%m-%d %H:%M')}")
     print(f"{'='*60}\n")
 
+    # ── Load previous data ───────────────────────────────────────
+    seen_deals = _load_json(SEEN_DEALS_FILE)
+
+    # ── Fetch feedback from GitHub Issues ────────────────────────
+    print("💬 Feedback ophalen uit GitHub Issues...")
+    negative_feedback = _fetch_feedback_from_issues() if not dry_run else []
+
     # ── Step 1: Vinted trends ──────────────────────────────────────
-    print("📊 Stap 1/4: Vinted trends ophalen...")
+    print("\n📊 Stap 1/4: Vinted trends ophalen...")
     try:
         trends = scrape_vinted_trends(max_per_term=20)
         print(f"   ✓ {len(trends)} trend categorieën gevonden")
@@ -54,6 +209,10 @@ def run_daily(dry_run: bool = False):
         print(f"   ✗ Fout bij Vinted scraping: {e}")
         trends = []
 
+    # Save trend history
+    trend_history = _update_trend_history(trends)
+    print(f"   📈 Trendhistorie: {len(trend_history)} dagen opgeslagen")
+
     # ── Step 2: Buying platforms ───────────────────────────────────
     print("\n🔍 Stap 2/4: Inkoopplatforms scannen...")
     all_listings = []
@@ -61,7 +220,7 @@ def run_daily(dry_run: bool = False):
 
     # Search terms based on top trends
     search_terms = [t.search_term for t in trends[:5]] if trends else [
-        "vintage sieraden", "designer tas", "sneakers", "vintage kleding"
+        "kinderkleding", "speelgoed", "kinderboeken", "duplo"
     ]
 
     scrapers = [
@@ -91,6 +250,8 @@ def run_daily(dry_run: bool = False):
             buying_listings=all_listings,
             vinted_trends=trends,
             enrich_with_claude=(not dry_run),
+            negative_feedback=negative_feedback,
+            seen_deals=seen_deals,
         )
         print(f"   ✓ {len(opportunities)} viable opportunities gevonden")
         if opportunities:
@@ -102,6 +263,9 @@ def run_daily(dry_run: bool = False):
         traceback.print_exc()
         opportunities = []
 
+    # Update seen deals tracker
+    seen_deals = _update_seen_deals(opportunities)
+
     # ── Step 4: Dashboard ──────────────────────────────────────────
     print("\n📱 Stap 4/4: Dashboard genereren...")
     try:
@@ -109,6 +273,7 @@ def run_daily(dry_run: bool = False):
             opportunities=opportunities,
             trends=trends,
             sources_scanned=sources_scanned,
+            trend_history=trend_history,
         )
         print(f"   ✓ Dashboard opgeslagen: {dashboard_path}")
     except Exception as e:
@@ -122,7 +287,9 @@ def run_daily(dry_run: bool = False):
     print(f"Opportunities: {len(opportunities)}")
     if opportunities:
         viable = [o for o in opportunities if o.net_profit >= 10]
+        new_deals = [o for o in opportunities if o.is_new]
         print(f"Met >€10 winst: {len(viable)}")
+        print(f"Nieuwe deals: {len(new_deals)}")
     if dashboard_path:
         print(f"Dashboard: {dashboard_path}")
     print(f"{'='*60}\n")

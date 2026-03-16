@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: write  # Nodig voor GitHub Pages deployment
+  issues: write    # Nodig voor feedback verwerking
 
 jobs:
   run-and-deploy:
@@ -40,6 +41,8 @@ jobs:
         continue-on-error: true
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: "DaveKruizi/circulair-trader"
           MIN_SELL_PRICE: "15"
           MIN_NET_MARGIN: "8"
           VINTED_COMMISSION_PCT: "5"

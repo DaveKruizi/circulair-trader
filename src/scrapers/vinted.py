@@ -55,24 +55,25 @@ class VintedTrend:
 
 
 # Categories and search terms to monitor for resale potential.
-# Focus on small, non-fragile items with good margin potential.
+# Focus on kinderkleding, speelgoed en kinderboeken — hoog volume, makkelijk te verzenden.
 SEARCH_TARGETS = [
-    # Fashion & accessories (small, light, good margins)
-    {"term": "vintage sieraden", "category": "Sieraden"},
-    {"term": "designer tas", "category": "Tassen"},
-    {"term": "sneakers", "category": "Schoenen"},
-    {"term": "vintage kleding", "category": "Kleding"},
-    {"term": "zonnebril", "category": "Accessoires"},
-    {"term": "horloge vintage", "category": "Horloges"},
-    # Home & lifestyle (small items)
-    {"term": "vintage servies", "category": "Wonen"},
-    {"term": "vintage lamp", "category": "Wonen"},
-    # Electronics (small)
-    {"term": "vintage camera", "category": "Elektronica"},
-    {"term": "koptelefoon", "category": "Elektronica"},
-    # Collectibles
-    {"term": "vintage speelgoed", "category": "Speelgoed"},
-    {"term": "lego vintage", "category": "Speelgoed"},
+    # Kinderkleding
+    {"term": "kinderkleding", "category": "Kinderkleding"},
+    {"term": "babykleding", "category": "Kinderkleding"},
+    {"term": "kinderjas", "category": "Kinderkleding"},
+    {"term": "kinderschoenen", "category": "Kinderkleding"},
+    {"term": "kinderkleding pakket", "category": "Kinderkleding"},
+    # Speelgoed
+    {"term": "speelgoed", "category": "Speelgoed"},
+    {"term": "duplo", "category": "Speelgoed"},
+    {"term": "playmobil", "category": "Speelgoed"},
+    {"term": "kinderpuzzel", "category": "Speelgoed"},
+    {"term": "speelgoed lot", "category": "Speelgoed"},
+    # Kinderboeken
+    {"term": "kinderboeken", "category": "Kinderboeken"},
+    {"term": "prentenboeken", "category": "Kinderboeken"},
+    {"term": "leesboeken kinderen", "category": "Kinderboeken"},
+    {"term": "kinderboeken pakket", "category": "Kinderboeken"},
 ]
 
 

@@ -27,13 +27,15 @@
         header h1 { font-size: 1.5rem; font-weight: 700; }
         header .subtitle { font-size: 0.85rem; opacity: 0.7; margin-top: 2px; }
         header .timestamp { font-size: 0.8rem; opacity: 0.6; text-align: right; }
+        header .nav-link { color: #e94560; text-decoration: none; font-size: 0.85rem; margin-left: 16px; }
+        header .nav-link:hover { text-decoration: underline; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
 
         /* Stats bar */
         .stats-bar {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 12px;
             margin-bottom: 28px;
         }
@@ -60,7 +62,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* Trend section */
+        /* Section titles */
         .section-title {
             font-size: 1rem;
             font-weight: 600;
@@ -70,11 +72,57 @@
             letter-spacing: 0.5px;
         }
 
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 10px;
+            padding: 4px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: #666;
+        }
+
+        .tab-btn.active {
+            background: #0f3460;
+            color: white;
+        }
+
+        .tab-btn:hover:not(.active) { background: #f0f4ff; color: #0f3460; }
+
+        .tab-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            padding: 1px 7px;
+            font-size: 0.72rem;
+            margin-left: 4px;
+        }
+
+        .tab-btn:not(.active) .tab-badge { background: #eee; }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Trend section */
         .trends-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 10px;
-            margin-bottom: 32px;
+            margin-bottom: 16px;
         }
 
         .trend-chip {
@@ -103,7 +151,36 @@
             transition: width 0.3s;
         }
 
-        /* Opportunities */
+        /* Trend chart */
+        .trend-chart-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 28px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            font-size: 0.78rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        /* Opportunities grid */
         .opportunities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -116,11 +193,41 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             overflow: hidden;
             transition: transform 0.15s, box-shadow 0.15s;
+            position: relative;
         }
 
         .opportunity-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+
+        .opportunity-card.returning { border-left: 3px solid #3498db; }
+        .opportunity-card.new-deal { border-left: 3px solid #27ae60; }
+
+        .new-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: #27ae60;
+            color: white;
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            z-index: 2;
+        }
+
+        .volume-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #8e44ad;
+            color: white;
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            z-index: 2;
         }
 
         .card-image {
@@ -244,6 +351,37 @@
 
         .tips::before { content: "💡 "; }
 
+        /* Card action buttons */
+        .card-actions {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 7px;
+            border: 1.5px solid #eee;
+            border-radius: 7px;
+            background: white;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.15s;
+            text-align: center;
+        }
+
+        .action-btn:hover { background: #f8f9fa; }
+
+        .action-btn.thumbs-up:hover, .action-btn.thumbs-up.active {
+            border-color: #27ae60; background: #d5f5e3; color: #1e8449;
+        }
+        .action-btn.thumbs-down:hover, .action-btn.thumbs-down.active {
+            border-color: #e74c3c; background: #fdedec; color: #922b21;
+        }
+        .action-btn.favorite:hover, .action-btn.favorite.active {
+            border-color: #f39c12; background: #fef9e7; color: #9a7d0a;
+        }
+
         .card-footer {
             display: flex;
             gap: 8px;
@@ -303,10 +441,99 @@
         .empty-state h3 { font-size: 1.1rem; margin-bottom: 8px; }
         .empty-state p { font-size: 0.85rem; }
 
+        /* Feedback modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.open { display: flex; }
+
+        .modal {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            max-width: 440px;
+            width: 90%;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .modal h3 { font-size: 1.1rem; margin-bottom: 12px; }
+
+        .modal textarea {
+            width: 100%;
+            min-height: 80px;
+            border: 1.5px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+            margin-bottom: 12px;
+        }
+
+        .modal textarea:focus { outline: none; border-color: #e94560; }
+
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 7px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-btn.cancel { background: #f0f0f0; color: #666; }
+        .modal-btn.submit { background: #e94560; color: white; }
+
+        /* GitHub token setup banner */
+        .setup-banner {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+        }
+
+        .setup-banner a { color: #0f3460; font-weight: 600; }
+
+        .setup-banner input {
+            padding: 6px 10px;
+            border: 1.5px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            width: 300px;
+            margin: 8px 4px 0 0;
+        }
+
+        .setup-banner button {
+            padding: 6px 14px;
+            background: #0f3460;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
         /* Responsive */
         @media (max-width: 600px) {
             .opportunities-grid { grid-template-columns: 1fr; }
             header { flex-direction: column; gap: 8px; text-align: center; }
+            .tabs { flex-direction: column; }
+            .setup-banner input { width: 100%; }
         }
     </style>
 </head>
@@ -314,15 +541,26 @@
     <header>
         <div>
             <h1>Circulair Trader</h1>
-            <div class="subtitle">Dagelijks opportunity overzicht</div>
+            <div class="subtitle">Kinderkleding · Speelgoed · Kinderboeken</div>
         </div>
-        <div class="timestamp">
-            Gegenereerd op: {{ generated_at }}<br>
-            Volgende update: {{ next_update }}
+        <div style="display:flex;align-items:center;">
+            <div class="timestamp">
+                Gegenereerd op: {{ generated_at }}<br>
+                Volgende update: {{ next_update }}
+            </div>
+            <a href="favorieten.html" class="nav-link">&#9733; Favorieten</a>
         </div>
     </header>
 
     <div class="container">
+
+        <!-- GitHub token setup (hidden if already set) -->
+        <div class="setup-banner" id="token-setup" style="display:none;">
+            <strong>Feedback & Favorieten instellen:</strong> Om feedback te geven en favorieten op te slaan, heb je een
+            <a href="https://github.com/settings/tokens/new?scopes=public_repo&description=Circulair+Trader+Feedback" target="_blank">GitHub Personal Access Token</a> nodig (scope: public_repo).<br>
+            <input type="password" id="gh-token-input" placeholder="ghp_xxxxxxxxxxxx">
+            <button onclick="saveToken()">Opslaan</button>
+        </div>
 
         <!-- Stats bar -->
         <div class="stats-bar">
@@ -331,11 +569,15 @@
                 <div class="label">Opportunities</div>
             </div>
             <div class="stat-card">
-                <div class="value">€{{ stats.best_profit }}</div>
+                <div class="value">{{ stats.new_deals_count }}</div>
+                <div class="label">Nieuw vandaag</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">&euro;{{ stats.best_profit }}</div>
                 <div class="label">Beste winstmarge</div>
             </div>
             <div class="stat-card">
-                <div class="value">€{{ stats.avg_profit }}</div>
+                <div class="value">&euro;{{ stats.avg_profit }}</div>
                 <div class="label">Gem. netto winst</div>
             </div>
             <div class="stat-card">
@@ -348,15 +590,31 @@
             </div>
         </div>
 
-        <!-- Vinted trends -->
+        <!-- Tabs: Nieuw / Nog beschikbaar / Alles -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('all', this)">
+                Alles <span class="tab-badge">{{ stats.total_opportunities }}</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('new', this)">
+                Nieuw vandaag <span class="tab-badge">{{ stats.new_deals_count }}</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('returning', this)">
+                Nog beschikbaar <span class="tab-badge">{{ stats.returning_deals_count }}</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('favorites-tab', this)">
+                &#9733; Favorieten <span class="tab-badge" id="fav-count">0</span>
+            </button>
+        </div>
+
+        <!-- Vinted trends (laatste 4 weken) -->
         {% if trends %}
-        <div class="section-title">🔥 Vinted trends vandaag</div>
+        <div class="section-title">&#128293; Vinted trends (laatste 4 weken)</div>
         <div class="trends-grid">
             {% for trend in trends[:8] %}
             <div class="trend-chip">
                 <div class="trend-name">{{ trend.search_term }}</div>
                 <div class="trend-meta">
-                    Gem. €{{ "%.0f"|format(trend.avg_price) }} ·
+                    Gem. &euro;{{ "%.0f"|format(trend.avg_price) }} &middot;
                     {{ trend.listing_count }} listings
                 </div>
                 <div class="demand-bar">
@@ -364,6 +622,13 @@
                 </div>
             </div>
             {% endfor %}
+        </div>
+
+        <!-- Trend chart -->
+        <div class="trend-chart-container">
+            <div class="section-title" style="margin-bottom:16px;">&#128200; Trendontwikkeling</div>
+            <canvas id="trendChart" width="800" height="250" style="width:100%;height:250px;"></canvas>
+            <div class="chart-legend" id="chartLegend"></div>
         </div>
         {% endif %}
 
@@ -378,115 +643,368 @@
             <button class="filter-btn" onclick="filterCards('merkandi', this)">Merkandi</button>
         </div>
 
-        <!-- Opportunities -->
-        <div class="section-title">💼 Top opportunities — {{ date_label }}</div>
+        <!-- ALL opportunities tab -->
+        <div class="tab-content active" id="tab-all">
+            <div class="section-title">&#128188; Top opportunities &mdash; {{ date_label }}</div>
+            {% if opportunities %}
+            <div class="opportunities-grid" id="opportunities-grid">
+                {% for opp in opportunities %}
+                {% include "opportunity_card.html" %}
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <h3>Geen opportunities gevonden</h3>
+                <p>Er zijn vandaag geen items gevonden die voldoen aan je minimumcriteria.</p>
+            </div>
+            {% endif %}
+        </div>
 
-        {% if opportunities %}
-        <div class="opportunities-grid" id="opportunities-grid">
-            {% for opp in opportunities %}
-            <div class="opportunity-card"
-                 data-platform="{{ opp.source_platform }}"
-                 data-risk="{{ 'low-risk' if opp.risk_score >= 7.5 else 'medium-risk' }}">
+        <!-- NEW deals tab -->
+        <div class="tab-content" id="tab-new">
+            <div class="section-title">&#127381; Nieuwe deals vandaag</div>
+            {% if new_deals %}
+            <div class="opportunities-grid">
+                {% for opp in new_deals %}
+                {% include "opportunity_card.html" %}
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <h3>Geen nieuwe deals vandaag</h3>
+                <p>Alle gevonden deals waren al eerder zichtbaar.</p>
+            </div>
+            {% endif %}
+        </div>
 
-                {% if opp.image_url %}
-                <img class="card-image" src="{{ opp.image_url }}" alt="{{ opp.title }}" loading="lazy"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                <div class="card-image-placeholder" style="display:none">📦</div>
-                {% else %}
-                <div class="card-image-placeholder">📦</div>
-                {% endif %}
+        <!-- RETURNING deals tab -->
+        <div class="tab-content" id="tab-returning">
+            <div class="section-title">&#128230; Nog beschikbaar van eerdere dagen</div>
+            {% if returning_deals %}
+            <div class="opportunities-grid">
+                {% for opp in returning_deals %}
+                {% include "opportunity_card.html" %}
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <h3>Geen terugkerende deals</h3>
+                <p>Alle deals zijn nieuw vandaag.</p>
+            </div>
+            {% endif %}
+        </div>
 
-                <div class="card-body">
-                    <div class="card-platform">{{ opp.source_platform }}</div>
-                    <div class="card-title">{{ opp.title }}</div>
-
-                    {% if opp.summary and opp.summary != "Analyse wordt geladen..." %}
-                    <div class="card-summary">{{ opp.summary }}</div>
-                    {% endif %}
-
-                    <div class="price-row">
-                        <div class="price-box buy">
-                            <div class="price-label">Inkoop</div>
-                            <div class="price-value">€{{ "%.2f"|format(opp.buy_price) }}</div>
-                        </div>
-                        <div class="price-box sell">
-                            <div class="price-label">Vinted (est.)</div>
-                            <div class="price-value">€{{ "%.2f"|format(opp.estimated_sell_price) }}</div>
-                        </div>
-                    </div>
-
-                    <div class="profit-row">
-                        <div>
-                            <div class="profit-label">Netto winst</div>
-                            <div class="profit-value">€{{ "%.2f"|format(opp.net_profit) }}</div>
-                        </div>
-                        <div class="profit-pct">{{ "%.0f"|format(opp.margin_pct) }}% marge</div>
-                    </div>
-
-                    <div class="risk-row">
-                        <span>Risicoscore: {{ opp.risk_score }}/10</span>
-                        <span class="risk-badge {{ 'risk-low' if opp.risk_score >= 7.5 else ('risk-medium' if opp.risk_score >= 5.0 else 'risk-high') }}">
-                            {{ opp.risk_label }}
-                        </span>
-                    </div>
-
-                    {% if opp.risk_flags %}
-                    <div class="flags">
-                        ⚠️ {{ opp.risk_flags | join(" · ") }}
-                    </div>
-                    {% endif %}
-
-                    {% if opp.selling_tips %}
-                    <div class="tips">{{ opp.selling_tips }}</div>
-                    {% endif %}
-
-                    <div class="card-footer">
-                        <a href="{{ opp.buy_url }}" target="_blank" class="btn btn-primary">
-                            Bekijk aanbieding
-                        </a>
-                        <a href="https://www.vinted.nl/catalog?search_text={{ opp.matched_trend | urlencode }}"
-                           target="_blank" class="btn btn-secondary">
-                            Vinted trend
-                        </a>
-                    </div>
+        <!-- FAVORITES tab (loaded from GitHub Issues via JS) -->
+        <div class="tab-content" id="tab-favorites-tab">
+            <div class="section-title">&#9733; Mijn favorieten</div>
+            <div id="favorites-list" class="opportunities-grid">
+                <div class="empty-state">
+                    <h3>Laden...</h3>
+                    <p>Favorieten worden opgehaald uit GitHub Issues.</p>
                 </div>
             </div>
-            {% endfor %}
         </div>
-        {% else %}
-        <div class="empty-state">
-            <h3>Geen opportunities gevonden</h3>
-            <p>Er zijn vandaag geen items gevonden die voldoen aan je minimumcriteria.<br>
-               Probeer de filters aan te passen in de configuratie.</p>
-        </div>
-        {% endif %}
 
+    </div>
+
+    <!-- Feedback modal -->
+    <div class="modal-overlay" id="feedbackModal">
+        <div class="modal">
+            <h3>&#128078; Waarom is dit geen goede deal?</h3>
+            <textarea id="feedbackReason" placeholder="Bijv. 'Prijs te hoog voor dit merk', 'Niet populair bij mijn doelgroep', 'Verkeerde maat/variant'..."></textarea>
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeFeedbackModal()">Annuleren</button>
+                <button class="modal-btn submit" onclick="submitNegativeFeedback()">Versturen</button>
+            </div>
+        </div>
     </div>
 
     <!-- Budget indicator -->
     <div style="text-align:center; padding: 24px; color: #aaa; font-size: 0.75rem;">
-        API kosten deze maand: €{{ "%.2f"|format(api_cost.cost_eur) }} van €{{ api_cost.budget_eur }}
+        API kosten deze maand: &euro;{{ "%.2f"|format(api_cost.cost_eur) }} van &euro;{{ api_cost.budget_eur }}
         ({{ api_cost.pct_used }}% gebruikt)
         {% if api_cost.pct_used >= 80 %}
-        <span style="color:#e74c3c; font-weight:bold;"> — ⚠️ Budget bijna op!</span>
+        <span style="color:#e74c3c; font-weight:bold;"> &mdash; Budget bijna op!</span>
         {% endif %}
     </div>
 
     <script>
-        function filterCards(filter, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+    // ── Config ──────────────────────────────────────────────────
+    const GITHUB_REPO = '{{ github_repo }}';
+    const GITHUB_API = 'https://api.github.com';
 
-            document.querySelectorAll('.opportunity-card').forEach(card => {
-                if (filter === 'all') {
-                    card.style.display = '';
-                } else if (filter === 'low-risk') {
-                    card.style.display = card.dataset.risk === 'low-risk' ? '' : 'none';
-                } else {
-                    card.style.display = card.dataset.platform === filter ? '' : 'none';
-                }
-            });
+    // ── Token management ────────────────────────────────────────
+    function getToken() { return localStorage.getItem('gh_pat') || ''; }
+
+    function saveToken() {
+        const token = document.getElementById('gh-token-input').value.trim();
+        if (token) {
+            localStorage.setItem('gh_pat', token);
+            document.getElementById('token-setup').style.display = 'none';
+            loadFavorites();
         }
+    }
+
+    // Show setup banner if no token
+    if (!getToken()) {
+        document.getElementById('token-setup').style.display = 'block';
+    }
+
+    // ── Tab switching ───────────────────────────────────────────
+    function switchTab(tabId, btn) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + tabId).classList.add('active');
+    }
+
+    // ── Card filtering ──────────────────────────────────────────
+    function filterCards(filter, btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        document.querySelectorAll('.opportunity-card').forEach(card => {
+            if (filter === 'all') {
+                card.style.display = '';
+            } else if (filter === 'low-risk') {
+                card.style.display = card.dataset.risk === 'low-risk' ? '' : 'none';
+            } else {
+                card.style.display = card.dataset.platform === filter ? '' : 'none';
+            }
+        });
+    }
+
+    // ── GitHub Issues API helpers ────────────────────────────────
+    async function createIssue(title, body, labels) {
+        const token = getToken();
+        if (!token) {
+            document.getElementById('token-setup').style.display = 'block';
+            return null;
+        }
+        const resp = await fetch(`${GITHUB_API}/repos/${GITHUB_REPO}/issues`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `token ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ title, body, labels }),
+        });
+        if (!resp.ok) {
+            const err = await resp.text();
+            console.error('GitHub API error:', err);
+            if (resp.status === 401) {
+                localStorage.removeItem('gh_pat');
+                document.getElementById('token-setup').style.display = 'block';
+            }
+            return null;
+        }
+        return await resp.json();
+    }
+
+    // ── Feedback (thumbs up / thumbs down) ──────────────────────
+    let pendingFeedbackCard = null;
+
+    function giveFeedback(type, btn, title, url, price) {
+        if (type === 'up') {
+            btn.classList.add('active');
+            createIssue(
+                `[feedback] ${title}`,
+                `**Type:** Positief (goede deal)\n**Product:** ${title}\n**URL:** ${url}\n**Prijs:** €${price}`,
+                ['feedback-positive']
+            ).then(issue => {
+                if (issue) btn.textContent = '👍 Verstuurd';
+            });
+        } else {
+            pendingFeedbackCard = { title, url, price };
+            document.getElementById('feedbackModal').classList.add('open');
+        }
+    }
+
+    function closeFeedbackModal() {
+        document.getElementById('feedbackModal').classList.remove('open');
+        document.getElementById('feedbackReason').value = '';
+        pendingFeedbackCard = null;
+    }
+
+    function submitNegativeFeedback() {
+        const reason = document.getElementById('feedbackReason').value.trim();
+        if (!reason) return;
+
+        const card = pendingFeedbackCard;
+        createIssue(
+            `[feedback] ${card.title}`,
+            `**Type:** Negatief (niet relevant)\n**Product:** ${card.title}\n**URL:** ${card.url}\n**Prijs:** €${card.price}\n\n**Reden:**\n${reason}`,
+            ['feedback-negative']
+        ).then(issue => {
+            if (issue) {
+                closeFeedbackModal();
+            }
+        });
+    }
+
+    // ── Favorites ───────────────────────────────────────────────
+    function toggleFavorite(btn, title, url, price, imageUrl) {
+        if (btn.classList.contains('active')) return;
+        btn.classList.add('active');
+        btn.textContent = '★ Opgeslagen';
+
+        createIssue(
+            `[favoriet] ${title}`,
+            `**Product:** ${title}\n**URL:** ${url}\n**Prijs:** €${price}\n**Afbeelding:** ${imageUrl}\n**Datum:** ${new Date().toISOString().split('T')[0]}`,
+            ['favorite']
+        ).then(issue => {
+            if (issue) loadFavorites();
+        });
+    }
+
+    async function loadFavorites() {
+        const token = getToken();
+        if (!token) return;
+
+        try {
+            const resp = await fetch(
+                `${GITHUB_API}/repos/${GITHUB_REPO}/issues?labels=favorite&state=open&per_page=50`,
+                { headers: { 'Authorization': `token ${token}` } }
+            );
+            if (!resp.ok) return;
+            const issues = await resp.json();
+
+            const container = document.getElementById('favorites-list');
+            document.getElementById('fav-count').textContent = issues.length;
+
+            if (issues.length === 0) {
+                container.innerHTML = '<div class="empty-state"><h3>Geen favorieten</h3><p>Klik op ★ bij een deal om deze op te slaan.</p></div>';
+                return;
+            }
+
+            container.innerHTML = issues.map(issue => {
+                const body = issue.body || '';
+                const urlMatch = body.match(/\*\*URL:\*\*\s*(.+)/);
+                const priceMatch = body.match(/\*\*Prijs:\*\*\s*€?([\d.]+)/);
+                const imgMatch = body.match(/\*\*Afbeelding:\*\*\s*(.+)/);
+                const dateMatch = body.match(/\*\*Datum:\*\*\s*(.+)/);
+                const hasUitverkocht = issue.labels.some(l => l.name === 'uitverkocht');
+                const title = issue.title.replace('[favoriet] ', '');
+
+                return `
+                <div class="opportunity-card" style="${hasUitverkocht ? 'opacity:0.5;' : ''}">
+                    ${imgMatch ? `<img class="card-image" src="${imgMatch[1].trim()}" alt="${title}" loading="lazy" onerror="this.style.display='none'">` : '<div class="card-image-placeholder">📦</div>'}
+                    <div class="card-body">
+                        <div class="card-title">${title}</div>
+                        ${priceMatch ? `<div style="font-size:1.1rem;font-weight:700;color:#0f3460;margin-bottom:8px;">€${priceMatch[1]}</div>` : ''}
+                        ${dateMatch ? `<div style="font-size:0.78rem;color:#888;margin-bottom:8px;">Opgeslagen op ${dateMatch[1].trim()}</div>` : ''}
+                        ${hasUitverkocht ? '<div style="color:#e74c3c;font-weight:600;font-size:0.85rem;margin-bottom:8px;">Niet meer beschikbaar</div>' : ''}
+                        <div class="card-footer">
+                            ${urlMatch ? `<a href="${urlMatch[1].trim()}" target="_blank" class="btn btn-primary">${hasUitverkocht ? 'Link (verlopen)' : 'Bekijk aanbieding'}</a>` : ''}
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+        } catch (e) {
+            console.error('Error loading favorites:', e);
+        }
+    }
+
+    // Load favorites on page load
+    loadFavorites();
+
+    // ── Trend chart ─────────────────────────────────────────────
+    const CHART_COLORS = ['#e94560', '#3498db', '#27ae60', '#f39c12', '#8e44ad'];
+
+    function drawTrendChart() {
+        const raw = {{ trend_chart_data|safe }};
+        if (!raw || !raw.dates || raw.dates.length < 2) return;
+
+        const canvas = document.getElementById('trendChart');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const dpr = window.devicePixelRatio || 1;
+
+        canvas.width = canvas.offsetWidth * dpr;
+        canvas.height = 250 * dpr;
+        ctx.scale(dpr, dpr);
+
+        const W = canvas.offsetWidth;
+        const H = 250;
+        const pad = { top: 20, right: 20, bottom: 30, left: 40 };
+        const plotW = W - pad.left - pad.right;
+        const plotH = H - pad.top - pad.bottom;
+
+        // Find max demand score
+        let maxVal = 10;
+        const cats = Object.keys(raw.categories);
+
+        // Draw axes
+        ctx.strokeStyle = '#ddd';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(pad.left, pad.top);
+        ctx.lineTo(pad.left, H - pad.bottom);
+        ctx.lineTo(W - pad.right, H - pad.bottom);
+        ctx.stroke();
+
+        // Y axis labels
+        ctx.fillStyle = '#999';
+        ctx.font = '11px -apple-system, sans-serif';
+        ctx.textAlign = 'right';
+        for (let i = 0; i <= 10; i += 2) {
+            const y = pad.top + plotH - (i / maxVal * plotH);
+            ctx.fillText(i.toString(), pad.left - 6, y + 4);
+            ctx.strokeStyle = '#f0f0f0';
+            ctx.beginPath();
+            ctx.moveTo(pad.left, y);
+            ctx.lineTo(W - pad.right, y);
+            ctx.stroke();
+        }
+
+        // X axis labels (dates)
+        ctx.textAlign = 'center';
+        const step = Math.max(1, Math.floor(raw.dates.length / 6));
+        raw.dates.forEach((d, i) => {
+            if (i % step === 0 || i === raw.dates.length - 1) {
+                const x = pad.left + (i / (raw.dates.length - 1)) * plotW;
+                ctx.fillText(d.slice(5), x, H - pad.bottom + 16);
+            }
+        });
+
+        // Draw lines per category
+        const legend = document.getElementById('chartLegend');
+        legend.innerHTML = '';
+
+        cats.forEach((cat, ci) => {
+            const color = CHART_COLORS[ci % CHART_COLORS.length];
+            const scores = raw.categories[cat].demand_scores;
+
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2.5;
+            ctx.lineJoin = 'round';
+            ctx.beginPath();
+
+            scores.forEach((val, i) => {
+                const x = pad.left + (i / (scores.length - 1)) * plotW;
+                const y = pad.top + plotH - (val / maxVal * plotH);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+
+            // Draw dots
+            scores.forEach((val, i) => {
+                const x = pad.left + (i / (scores.length - 1)) * plotW;
+                const y = pad.top + plotH - (val / maxVal * plotH);
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(x, y, 3, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Legend
+            legend.innerHTML += `<div class="legend-item"><div class="legend-dot" style="background:${color}"></div>${cat}</div>`;
+        });
+    }
+
+    drawTrendChart();
+    window.addEventListener('resize', drawTrendChart);
     </script>
 </body>
 </html>

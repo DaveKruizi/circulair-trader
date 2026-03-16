@@ -9,10 +9,12 @@ summary and selling tips.
 """
 
 import asyncio
+import hashlib
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
 import anthropic
+import httpx
 
 from src.config import ANTHROPIC_API_KEY, MIN_SELL_PRICE, MIN_NET_MARGIN
 from src.budget_guard import register_usage, BudgetExceededError
@@ -46,6 +48,15 @@ class Opportunity:
     shipping_cost: float
     vinted_commission: float
 
+    # Volume (bulk)
+    quantity_available: int = 1
+    volume_bonus: float = 0.0
+
+    # Deal tracking
+    deal_id: str = ""
+    is_new: bool = True
+    first_seen: str = ""
+
     # Meta
     days_listed: Optional[int] = None
     is_viable: bool = True
@@ -69,6 +80,104 @@ def _find_best_trend(title: str, description: str, trends: list) -> Optional[Any
             best = trend
 
     return best if best_score > 0 else (trends[0] if trends else None)
+
+
+def _generate_deal_id(title: str, url: str) -> str:
+    """Generate a stable hash ID for a deal based on title + URL."""
+    raw = f"{title.lower().strip()}|{url.strip()}"
+    return hashlib.md5(raw.encode()).hexdigest()[:12]
+
+
+async def _verify_product_match_vision(
+    client: anthropic.AsyncAnthropic,
+    buy_image_url: str,
+    vinted_sample_urls: list[str],
+    product_title: str,
+) -> dict:
+    """
+    Use Claude Vision to verify if a buying listing matches Vinted samples.
+
+    Returns dict with 'is_match' (bool), 'confidence' (0-1), 'reason' (str).
+    """
+    if not buy_image_url or not vinted_sample_urls:
+        return {"is_match": True, "confidence": 0.5, "reason": "Geen afbeeldingen beschikbaar voor vergelijking"}
+
+    # Download images (max 3 Vinted samples)
+    image_contents = []
+    async with httpx.AsyncClient(timeout=10) as http:
+        # Buy image
+        try:
+            resp = await http.get(buy_image_url)
+            if resp.status_code == 200:
+                import base64
+                buy_b64 = base64.b64encode(resp.content).decode()
+                media_type = resp.headers.get("content-type", "image/jpeg")
+                image_contents.append({
+                    "type": "image",
+                    "source": {"type": "base64", "media_type": media_type, "data": buy_b64},
+                })
+        except Exception:
+            return {"is_match": True, "confidence": 0.5, "reason": "Kon inkoopafbeelding niet laden"}
+
+        # Vinted sample images (max 2)
+        for url in vinted_sample_urls[:2]:
+            try:
+                resp = await http.get(url)
+                if resp.status_code == 200:
+                    import base64
+                    sample_b64 = base64.b64encode(resp.content).decode()
+                    media_type = resp.headers.get("content-type", "image/jpeg")
+                    image_contents.append({
+                        "type": "image",
+                        "source": {"type": "base64", "media_type": media_type, "data": sample_b64},
+                    })
+            except Exception:
+                continue
+
+    if len(image_contents) < 2:
+        return {"is_match": True, "confidence": 0.5, "reason": "Te weinig afbeeldingen voor vergelijking"}
+
+    prompt_text = f"""Je bent een expert in tweedehands producten. Vergelijk de EERSTE afbeelding (inkoopproduct) met de overige afbeeldingen (Vinted referenties).
+
+Product titel: {product_title}
+
+Beoordeel:
+1. Is dit exact hetzelfde product (merk, model, variant)?
+2. Geef een confidence score van 0.0 tot 1.0
+3. Leg kort uit waarom wel/niet
+
+Antwoord ALLEEN in dit JSON formaat:
+{{"is_match": true/false, "confidence": 0.8, "reason": "korte uitleg"}}"""
+
+    image_contents.append({"type": "text", "text": prompt_text})
+
+    try:
+        response = await client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=200,
+            messages=[{"role": "user", "content": image_contents}],
+        )
+        register_usage(
+            input_tokens=response.usage.input_tokens,
+            output_tokens=response.usage.output_tokens,
+        )
+        text = next((b.text for b in response.content if b.type == "text"), "{}")
+        import json
+        # Extract JSON from response
+        text = text.strip()
+        if text.startswith("```"):
+            text = text.split("\n", 1)[1].rsplit("```", 1)[0]
+        result = json.loads(text)
+        return {
+            "is_match": result.get("is_match", True),
+            "confidence": float(result.get("confidence", 0.5)),
+            "reason": result.get("reason", ""),
+        }
+    except BudgetExceededError:
+        raise
+    except Exception as e:
+        print(f"[Vision] Error verifying match for '{product_title}': {e}")
+        return {"is_match": True, "confidence": 0.5, "reason": "Vision check mislukt"}
 
 
 async def _get_claude_insight(
@@ -164,6 +273,8 @@ def match_opportunities(
     buying_listings: list,
     vinted_trends: list,
     enrich_with_claude: bool = True,
+    negative_feedback: list[dict] = None,
+    seen_deals: dict = None,
 ) -> list[Opportunity]:
     """
     Match buying platform listings against Vinted trends and rank opportunities.
@@ -172,10 +283,20 @@ def match_opportunities(
         buying_listings: List of listing objects from any buying scraper.
         vinted_trends: List of VintedTrend objects.
         enrich_with_claude: Whether to call Claude API for summaries.
+        negative_feedback: List of negative feedback dicts from GitHub Issues.
+        seen_deals: Dict of previously seen deal IDs for tracking new vs returning.
 
     Returns:
-        List of Opportunity objects sorted by net_profit descending.
+        List of Opportunity objects sorted by combined score descending.
     """
+    if negative_feedback is None:
+        negative_feedback = []
+    if seen_deals is None:
+        seen_deals = {}
+
+    # Build list of rejected patterns from feedback
+    rejected_patterns = [fb.get("reason", "").lower() for fb in negative_feedback if fb.get("reason")]
+
     opportunities: list[Opportunity] = []
 
     for listing in buying_listings:
@@ -186,8 +307,14 @@ def match_opportunities(
         description = getattr(listing, "description", "")
         days_listed = getattr(listing, "days_listed", None)
         platform = getattr(listing, "source", "onbekend")
+        quantity = getattr(listing, "quantity_available", 1) or 1
 
         if not title or buy_price <= 0:
+            continue
+
+        # Skip items matching negative feedback patterns
+        title_lower = title.lower()
+        if any(pattern and pattern in title_lower for pattern in rejected_patterns):
             continue
 
         # Find best matching Vinted trend
@@ -217,6 +344,13 @@ def match_opportunities(
             margin_result=margin,
         )
 
+        # Volume bonus: reward bulk availability
+        volume_bonus = min(quantity, 10) * 1.5 if quantity > 1 else 0.0
+
+        # Deal ID and new/returning tracking
+        deal_id = _generate_deal_id(title, url)
+        is_new = deal_id not in seen_deals
+
         opp = Opportunity(
             source_platform=platform,
             title=title,
@@ -234,20 +368,71 @@ def match_opportunities(
             matched_trend=trend_name,
             shipping_cost=margin.shipping_cost,
             vinted_commission=margin.vinted_commission,
+            quantity_available=quantity,
+            volume_bonus=volume_bonus,
+            deal_id=deal_id,
+            is_new=is_new,
+            first_seen=seen_deals.get(deal_id, {}).get("first_seen", ""),
             days_listed=days_listed,
             is_viable=margin.is_viable,
             margin_reason=margin.reason,
         )
         opportunities.append(opp)
 
-    # Sort: risk_score * net_profit (balance risk and reward)
+    # Sort: balance risk, profit, and volume
     opportunities.sort(
-        key=lambda o: (o.risk_score * 0.4 + min(o.net_profit, 50) * 0.6),
+        key=lambda o: (o.risk_score * 0.3 + min(o.net_profit, 50) * 0.4 + o.volume_bonus * 0.3),
         reverse=True,
     )
 
-    # Enrich top results with Claude
-    if enrich_with_claude and opportunities:
-        opportunities = asyncio.run(_enrich_opportunities(opportunities))
+    # Vision verification for top 5 (if images available and Claude enabled)
+    if enrich_with_claude and opportunities and ANTHROPIC_API_KEY:
+        opportunities = asyncio.run(
+            _verify_and_enrich(opportunities, vinted_trends, negative_feedback)
+        )
 
+    return opportunities
+
+
+async def _verify_and_enrich(
+    opportunities: list[Opportunity],
+    vinted_trends: list,
+    negative_feedback: list[dict],
+) -> list[Opportunity]:
+    """Verify top matches with Vision, then enrich with Claude insights."""
+    client = anthropic.AsyncAnthropic(api_key=ANTHROPIC_API_KEY)
+
+    # Vision verification for top 5 opportunities with images
+    to_verify = [o for o in opportunities[:10] if o.image_url][:5]
+    # Build trend sample image map
+    trend_images = {}
+    for trend in vinted_trends:
+        if hasattr(trend, "sample_listings"):
+            urls = [s.photo_url for s in trend.sample_listings if s.photo_url]
+            if urls:
+                trend_images[trend.search_term] = urls
+
+    verified_ids = set()
+    for opp in to_verify:
+        sample_urls = trend_images.get(opp.matched_trend, [])
+        if not sample_urls:
+            continue
+        try:
+            result = await _verify_product_match_vision(
+                client, opp.image_url, sample_urls, opp.title
+            )
+            if not result["is_match"] and result["confidence"] >= 0.7:
+                opp.is_viable = False
+                opp.risk_flags.append(f"Vision: geen match ({result['reason']})")
+            verified_ids.add(opp.deal_id)
+        except BudgetExceededError:
+            break
+        except Exception:
+            continue
+
+    # Remove non-viable after vision check
+    opportunities = [o for o in opportunities if o.is_viable]
+
+    # Enrich with Claude insights
+    await _enrich_opportunities(opportunities)
     return opportunities

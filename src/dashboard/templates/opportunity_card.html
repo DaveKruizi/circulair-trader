@@ -1,0 +1,98 @@
+<div class="opportunity-card {{ 'new-deal' if opp.is_new else 'returning' }}"
+     data-platform="{{ opp.source_platform }}"
+     data-risk="{{ 'low-risk' if opp.risk_score >= 7.5 else 'medium-risk' }}"
+     data-deal-id="{{ opp.deal_id }}">
+
+    {% if opp.is_new %}
+    <span class="new-badge">NIEUW</span>
+    {% endif %}
+
+    {% if opp.quantity_available > 1 %}
+    <span class="volume-badge">{{ opp.quantity_available }}x beschikbaar</span>
+    {% endif %}
+
+    {% if opp.image_url %}
+    <img class="card-image" src="{{ opp.image_url }}" alt="{{ opp.title }}" loading="lazy"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-image-placeholder" style="display:none">&#128230;</div>
+    {% else %}
+    <div class="card-image-placeholder">&#128230;</div>
+    {% endif %}
+
+    <div class="card-body">
+        <div class="card-platform">{{ opp.source_platform }}</div>
+        <div class="card-title">{{ opp.title }}</div>
+
+        {% if opp.summary and opp.summary != "Analyse wordt geladen..." %}
+        <div class="card-summary">{{ opp.summary }}</div>
+        {% endif %}
+
+        <div class="price-row">
+            <div class="price-box buy">
+                <div class="price-label">Inkoop</div>
+                <div class="price-value">&euro;{{ "%.2f"|format(opp.buy_price) }}</div>
+            </div>
+            <div class="price-box sell">
+                <div class="price-label">Vinted (est.)</div>
+                <div class="price-value">&euro;{{ "%.2f"|format(opp.estimated_sell_price) }}</div>
+            </div>
+        </div>
+
+        <div class="profit-row">
+            <div>
+                <div class="profit-label">Netto winst{% if opp.quantity_available > 1 %} (per stuk){% endif %}</div>
+                <div class="profit-value">&euro;{{ "%.2f"|format(opp.net_profit) }}</div>
+            </div>
+            <div class="profit-pct">{{ "%.0f"|format(opp.margin_pct) }}% marge</div>
+        </div>
+
+        {% if opp.quantity_available > 1 %}
+        <div style="background:#f3e5f5;border-radius:6px;padding:8px 10px;margin-bottom:10px;font-size:0.82rem;color:#6a1b9a;">
+            &#128293; {{ opp.quantity_available }}x beschikbaar &mdash; potentieel &euro;{{ "%.2f"|format(opp.net_profit * opp.quantity_available) }} totale winst
+        </div>
+        {% endif %}
+
+        <div class="risk-row">
+            <span>Risicoscore: {{ opp.risk_score }}/10</span>
+            <span class="risk-badge {{ 'risk-low' if opp.risk_score >= 7.5 else ('risk-medium' if opp.risk_score >= 5.0 else 'risk-high') }}">
+                {{ opp.risk_label }}
+            </span>
+        </div>
+
+        {% if opp.risk_flags %}
+        <div class="flags">
+            &#9888;&#65039; {{ opp.risk_flags | join(" &middot; ") }}
+        </div>
+        {% endif %}
+
+        {% if opp.selling_tips %}
+        <div class="tips">{{ opp.selling_tips }}</div>
+        {% endif %}
+
+        <!-- Feedback & Favorite buttons -->
+        <div class="card-actions">
+            <button class="action-btn thumbs-up"
+                    onclick="giveFeedback('up', this, '{{ opp.title|e }}', '{{ opp.buy_url|e }}', '{{ "%.2f"|format(opp.buy_price) }}')">
+                &#128077; Goed
+            </button>
+            <button class="action-btn thumbs-down"
+                    onclick="giveFeedback('down', this, '{{ opp.title|e }}', '{{ opp.buy_url|e }}', '{{ "%.2f"|format(opp.buy_price) }}')">
+                &#128078; Niet goed
+            </button>
+            <button class="action-btn favorite"
+                    onclick="toggleFavorite(this, '{{ opp.title|e }}', '{{ opp.buy_url|e }}', '{{ "%.2f"|format(opp.buy_price) }}', '{{ opp.image_url|e }}')">
+                &#9733; Favoriet
+            </button>
+        </div>
+
+        <div class="card-footer">
+            <a href="{{ opp.buy_url }}" target="_blank" class="btn btn-primary">
+                Bekijk aanbieding
+            </a>
+            <a href="https://www.vinted.nl/catalog?search_text={{ opp.matched_trend | urlencode }}"
+               target="_blank" class="btn btn-secondary">
+                Vinted trend
+            </a>
+        </div>
+    </div>
+</div>
