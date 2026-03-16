@@ -197,6 +197,13 @@ def _clean_product_title(title: str) -> str:
     return " ".join(meaningful[:4])
 
 
+_vinted_blocked: bool = False  # circuit breaker: True als Vinted sessie-cookies weigert
+
+
+def _is_session_error(e: Exception) -> bool:
+    return "session cookie" in str(e).lower()
+
+
 def search_vinted_for_product(
     title: str,
     buy_price: float = 0,
@@ -236,6 +243,10 @@ def search_vinted_for_product(
     else:
         params["price_from"] = min_price
 
+    global _vinted_blocked
+    if _vinted_blocked:
+        return None
+
     backoff = 2.0
     for attempt in range(3):
         try:
@@ -263,6 +274,10 @@ def search_vinted_for_product(
                 )[:5],
             )
         except Exception as e:
+            if _is_session_error(e):
+                _vinted_blocked = True
+                print("[Vinted] Sessie-cookie niet beschikbaar — Vinted wordt overgeslagen.")
+                return None
             err = str(e).lower()
             if any(kw in err for kw in ("429", "rate", "too many", "blocked", "forbidden", "406")):
                 if attempt < 2:
@@ -303,6 +318,8 @@ def scrape_vinted_trends(
         all_listings: list[VintedListing] = []
 
         for domain in domains:
+            if _vinted_blocked:
+                break
             try:
                 scraper = VintedScraper(domain)
                 params = {
@@ -319,8 +336,15 @@ def scrape_vinted_trends(
                 # Polite rate limiting
                 time.sleep(1.5)
             except Exception as e:
+                if _is_session_error(e):
+                    _vinted_blocked = True
+                    print("[Vinted] Sessie-cookie niet beschikbaar — Vinted trends worden overgeslagen.")
+                    return trends
                 print(f"[Vinted] Error scraping '{term}' on {domain}: {e}")
                 continue
+
+        if _vinted_blocked:
+            break
 
         if not all_listings:
             continue
