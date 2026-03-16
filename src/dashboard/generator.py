@@ -79,5 +79,10 @@ def generate_dashboard(
     archive_file = output_path / f"dashboard_{now.strftime('%Y-%m-%d')}.html"
     archive_file.write_text(html, encoding="utf-8")
 
+    # .nojekyll is required for GitHub Pages to serve files without Jekyll processing
+    nojekyll = output_path / ".nojekyll"
+    if not nojekyll.exists():
+        nojekyll.touch()
+
     print(f"[Dashboard] Generated: {out_file}")
     return str(out_file)

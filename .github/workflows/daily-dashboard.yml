@@ -1,0 +1,50 @@
+name: Dagelijks Dashboard
+
+on:
+  # Elke dag om 07:00 Nederlandse tijd (06:00 UTC in winter, 05:00 UTC in zomer)
+  schedule:
+    - cron: '0 6 * * *'
+
+  # Ook handmatig te starten via GitHub → Actions → "Run workflow"
+  workflow_dispatch:
+
+permissions:
+  contents: write  # Nodig voor GitHub Pages deployment
+
+jobs:
+  run-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code ophalen
+        uses: actions/checkout@v4
+
+      - name: Python installeren
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Dependencies installeren
+        run: pip install -r requirements.txt
+
+      - name: Dashboard genereren
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MIN_SELL_PRICE: "15"
+          MIN_NET_MARGIN: "8"
+          VINTED_COMMISSION_PCT: "5"
+          SHIPPING_COST: "5"
+          MAX_BUY_PRICE: "50"
+          OUTPUT_DIR: "output"
+        run: python src/main.py
+
+      - name: Dashboard online zetten (GitHub Pages)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
+          keep_files: true    # Bewaar eerdere dashboards als archief
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Dashboard update ${{ github.run_id }}'
