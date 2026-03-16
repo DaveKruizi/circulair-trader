@@ -22,6 +22,63 @@ from typing import Optional
 from vinted_scraper import VintedScraper
 
 
+# ── Playwright-gebaseerde sessie-cookie fetch ─────────────────────────────────
+# Vinted blokkeert httpx-gebaseerde cookie fetches (bot-detectie op HTTP-niveau).
+# Playwright simuleert een echte browser en ontwijkt deze blokkade.
+# Cookie wordt één keer opgehaald en gecached voor de hele run.
+
+_session_cookies: dict[str, Optional[dict]] = {}  # domain → {"access_token_web": "..."}
+
+
+def _fetch_cookie_via_playwright(domain: str) -> Optional[dict]:
+    """Open de Vinted homepage in een headless browser en pak de access_token_web cookie."""
+    try:
+        from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
+    except ImportError:
+        print("[Vinted] Playwright niet beschikbaar — cookie fetch overgeslagen.")
+        return None
+
+    print(f"[Vinted] Sessie-cookie ophalen via Playwright voor {domain}...")
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            context = browser.new_context(
+                user_agent=(
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/122.0.0.0 Safari/537.36"
+                ),
+                locale="nl-NL",
+            )
+            page = context.new_page()
+            page.goto(domain, wait_until="domcontentloaded", timeout=20_000)
+            # Geef Vinted 3s om cookies te zetten na het laden
+            page.wait_for_timeout(3_000)
+            cookies = context.cookies()
+            browser.close()
+
+        for c in cookies:
+            if c["name"] == "access_token_web":
+                print("[Vinted] Sessie-cookie succesvol opgehaald via Playwright.")
+                return {"access_token_web": c["value"]}
+
+        print("[Vinted] access_token_web niet gevonden in Playwright cookies.")
+        return None
+    except PlaywrightTimeout:
+        print(f"[Vinted] Playwright timeout bij ophalen cookie voor {domain}.")
+        return None
+    except Exception as e:
+        print(f"[Vinted] Playwright cookie fetch mislukt: {e}")
+        return None
+
+
+def _get_session_cookie(domain: str) -> Optional[dict]:
+    """Geeft de gecachede cookie terug, of haalt hem op als hij nog niet bestaat."""
+    if domain not in _session_cookies:
+        _session_cookies[domain] = _fetch_cookie_via_playwright(domain)
+    return _session_cookies[domain]
+
+
 @dataclass
 class VintedListing:
     id: str
@@ -197,9 +254,6 @@ def _clean_product_title(title: str) -> str:
     return " ".join(meaningful[:4])
 
 
-_vinted_blocked: bool = False  # circuit breaker: True als Vinted sessie-cookies weigert
-
-
 def _is_session_error(e: Exception) -> bool:
     return "session cookie" in str(e).lower()
 
@@ -243,14 +297,14 @@ def search_vinted_for_product(
     else:
         params["price_from"] = min_price
 
-    global _vinted_blocked
-    if _vinted_blocked:
+    cookie = _get_session_cookie(domain)
+    if cookie is None:
         return None
 
     backoff = 2.0
     for attempt in range(3):
         try:
-            scraper = VintedScraper(domain)
+            scraper = VintedScraper(domain, session_cookie=cookie)
             raw_items = scraper.search(params)
             listings = [lst for item in (raw_items or []) if (lst := _parse_listing(item))]
 
@@ -275,9 +329,12 @@ def search_vinted_for_product(
             )
         except Exception as e:
             if _is_session_error(e):
-                _vinted_blocked = True
-                print("[Vinted] Sessie-cookie niet beschikbaar — Vinted wordt overgeslagen.")
-                return None
+                # Cookie verlopen — vernieuw via Playwright en probeer nog één keer
+                _session_cookies.pop(domain, None)
+                cookie = _get_session_cookie(domain)
+                if cookie is None:
+                    return None
+                continue
             err = str(e).lower()
             if any(kw in err for kw in ("429", "rate", "too many", "blocked", "forbidden", "406")):
                 if attempt < 2:
@@ -318,10 +375,11 @@ def scrape_vinted_trends(
         all_listings: list[VintedListing] = []
 
         for domain in domains:
-            if _vinted_blocked:
-                break
+            cookie = _get_session_cookie(domain)
+            if cookie is None:
+                continue
             try:
-                scraper = VintedScraper(domain)
+                scraper = VintedScraper(domain, session_cookie=cookie)
                 params = {
                     "search_text": term,
                     "price_from": min_price,
@@ -337,14 +395,12 @@ def scrape_vinted_trends(
                 time.sleep(1.5)
             except Exception as e:
                 if _is_session_error(e):
-                    _vinted_blocked = True
-                    print("[Vinted] Sessie-cookie niet beschikbaar — Vinted trends worden overgeslagen.")
-                    return trends
-                print(f"[Vinted] Error scraping '{term}' on {domain}: {e}")
+                    # Cookie verlopen — vernieuw en sla dit domein over voor deze term
+                    _session_cookies.pop(domain, None)
+                    print(f"[Vinted] Cookie verlopen voor {domain}, wordt vernieuwd bij volgende aanroep.")
+                else:
+                    print(f"[Vinted] Error scraping '{term}' on {domain}: {e}")
                 continue
-
-        if _vinted_blocked:
-            break
 
         if not all_listings:
             continue
