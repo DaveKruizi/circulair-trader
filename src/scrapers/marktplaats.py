@@ -35,29 +35,39 @@ class MarktplaatsListing:
     source: str = "marktplaats"
 
 
-# Broad search terms targeting bulk/partij listings across all categories.
-# Not limited to children's products — anything that comes in multiples is fair game.
-BULK_SEARCH_TERMS = [
-    "partij te koop",
-    "lot te koop",
-    "meerdere stuks",
+# Search terms for Marktplaats — mix van bulk/partij en losse winstgevende categorieën.
+# Breder dan alleen "partij X": ook losse items die op Vinted goed verkopen.
+SEARCH_TERMS = [
+    # ── Bulk/partij ───────────────────────────────────────────────
     "partij kleding",
     "partij speelgoed",
+    "partij schoenen",
     "partij boeken",
     "partij elektronica",
-    "partij huishouden",
-    "partij gereedschap",
     "partij sportartikelen",
-    "partij accessoires",
-    "voorraad te koop",
-    "wholesale lot",
-    "bulk aanbieding",
-    "diverse items te koop",
-    "partij vintage",
     "partij merkkleding",
-    "partij schoenen",
-    "partij keukengerei",
+    "partij vintage",
+    "pallet kleding",
+    "wholesale kleding",
+    "partij te koop",
+    "lot te koop",
+    # ── Losse populaire categorieën ───────────────────────────────
+    "lego",
+    "playmobil",
+    "kinderspeelgoed",
+    "merkschoenen",
+    "vintage kleding",
+    "designer tas",
+    "sportkleding",
+    "sneakers",
+    "kinderkleding",
+    "babykleding",
+    "elektronica",
+    "telefoon",
 ]
+
+# Legacy alias — used in mcp_server and other places that still reference BULK_SEARCH_TERMS
+BULK_SEARCH_TERMS = SEARCH_TERMS
 
 # Regex patterns to extract quantity from listing title + description
 _QUANTITY_PATTERNS = [

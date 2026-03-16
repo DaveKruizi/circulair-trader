@@ -55,25 +55,45 @@ class VintedTrend:
 
 
 # Categories and search terms to monitor for resale potential.
-# Focus on kinderkleding, speelgoed en kinderboeken — hoog volume, makkelijk te verzenden.
+# Breed spectrum: van kinderproducten tot merkkleding, sneakers en elektronica.
 SEARCH_TARGETS = [
-    # Kinderkleding
+    # ── Kinderproducten ───────────────────────────────────────────
     {"term": "kinderkleding", "category": "Kinderkleding"},
     {"term": "babykleding", "category": "Kinderkleding"},
-    {"term": "kinderjas", "category": "Kinderkleding"},
     {"term": "kinderschoenen", "category": "Kinderkleding"},
-    {"term": "kinderkleding pakket", "category": "Kinderkleding"},
-    # Speelgoed
     {"term": "speelgoed", "category": "Speelgoed"},
-    {"term": "duplo", "category": "Speelgoed"},
+    {"term": "lego", "category": "Speelgoed"},
     {"term": "playmobil", "category": "Speelgoed"},
-    {"term": "kinderpuzzel", "category": "Speelgoed"},
-    {"term": "speelgoed lot", "category": "Speelgoed"},
-    # Kinderboeken
     {"term": "kinderboeken", "category": "Kinderboeken"},
-    {"term": "prentenboeken", "category": "Kinderboeken"},
-    {"term": "leesboeken kinderen", "category": "Kinderboeken"},
-    {"term": "kinderboeken pakket", "category": "Kinderboeken"},
+    # ── Dameskleding ─────────────────────────────────────────────
+    {"term": "dameskleding", "category": "Dameskleding"},
+    {"term": "zara", "category": "Dameskleding"},
+    {"term": "h&m kleding", "category": "Dameskleding"},
+    {"term": "jurk", "category": "Dameskleding"},
+    {"term": "winterjas dames", "category": "Dameskleding"},
+    # ── Herenkleding ─────────────────────────────────────────────
+    {"term": "herenkleding", "category": "Herenkleding"},
+    {"term": "spijkerbroek heren", "category": "Herenkleding"},
+    {"term": "hoodie", "category": "Herenkleding"},
+    # ── Schoenen ─────────────────────────────────────────────────
+    {"term": "sneakers", "category": "Schoenen"},
+    {"term": "nike schoenen", "category": "Schoenen"},
+    {"term": "adidas schoenen", "category": "Schoenen"},
+    {"term": "damesschoenen", "category": "Schoenen"},
+    # ── Sportkledij ───────────────────────────────────────────────
+    {"term": "sportkleding", "category": "Sport"},
+    {"term": "sportschoenen", "category": "Sport"},
+    # ── Tassen & Accessoires ─────────────────────────────────────
+    {"term": "handtas", "category": "Tassen"},
+    {"term": "rugzak", "category": "Tassen"},
+    # ── Elektronica ───────────────────────────────────────────────
+    {"term": "smartphone", "category": "Elektronica"},
+    {"term": "koptelefoon", "category": "Elektronica"},
+    {"term": "tablet", "category": "Elektronica"},
+    # ── Vintage & Retro ───────────────────────────────────────────
+    {"term": "vintage kleding", "category": "Vintage"},
+    {"term": "vintage jas", "category": "Vintage"},
+    {"term": "retro kleding", "category": "Vintage"},
 ]
 
 

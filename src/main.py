@@ -28,7 +28,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.config import OUTPUT_DIR, GITHUB_REPO, GITHUB_TOKEN
 from src.scrapers.vinted import scrape_vinted_trends
-from src.scrapers.marktplaats import scrape_marktplaats, BULK_SEARCH_TERMS
+from src.scrapers.marktplaats import scrape_marktplaats, SEARCH_TERMS as MARKTPLAATS_SEARCH_TERMS
 from src.scrapers.troostwijk import scrape_troostwijk
 from src.scrapers.stocklear import scrape_stocklear
 from src.scrapers.merkandi import scrape_merkandi
@@ -222,7 +222,7 @@ def run_daily(dry_run: bool = False):
         # Bulk-first: zoekt op brede partij/lot termen, filtert op quantity >= 2.
         # Onafhankelijk van Vinted trends — alles wat in bulk aangeboden wordt is interessant.
         ("Marktplaats", lambda: scrape_marktplaats(
-            BULK_SEARCH_TERMS, max_price=3000, min_quantity=2
+            MARKTPLAATS_SEARCH_TERMS, max_price=3000, min_quantity=1
         )),
         ("Troostwijk", lambda: scrape_troostwijk(max_current_bid=3000)),
         ("Stocklear", scrape_stocklear),
