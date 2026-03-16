@@ -96,6 +96,13 @@ def calculate_margin(
     )
 
 
+def _median(values: list[float]) -> float:
+    """Return the median of a non-empty list of floats."""
+    s = sorted(values)
+    mid = len(s) // 2
+    return s[mid] if len(s) % 2 == 1 else (s[mid - 1] + s[mid]) / 2
+
+
 def estimate_sell_price_from_trends(
     item_title: str,
     vinted_trends: list,
@@ -105,36 +112,58 @@ def estimate_sell_price_from_trends(
     """
     Estimate Vinted sell price based on trend data.
 
-    Tries to match item title keywords against known trends.
-    Falls back to buy_price * fallback_multiplier.
+    Matching strategy:
+    1. Find best trend via keyword overlap (most specific match wins).
+    2. Use median price of sample_listings (high-favorite items) filtered to a
+       realistic price range relative to the buy price (1.5x – 5x).
+    3. Weight the result by the trend's demand_score (low demand → conservative).
+    4. Falls back to avg_price if no usable samples, then buy_price * multiplier.
 
     Args:
         item_title: Title of the item to sell.
         vinted_trends: List of VintedTrend objects.
         fallback_multiplier: Multiplier on buy price if no trend match.
-        buy_price: Buy price as fallback basis.
+        buy_price: Buy price used for price-range filtering and fallback.
 
     Returns:
         Estimated sell price in euros.
     """
     title_lower = item_title.lower()
+    title_words = set(title_lower.split())
 
     best_match = None
-    best_score = 0
+    best_score = 0.0
 
     for trend in vinted_trends:
-        # Simple keyword overlap score
-        trend_words = set(trend.search_term.lower().split())
-        title_words = set(title_lower.split())
-        overlap = len(trend_words & title_words)
-        if overlap > best_score:
-            best_score = overlap
+        words = trend.search_term.lower().split()
+        matched = sum(1 for w in words if w in title_words)
+        if not matched:
+            continue
+        # Specificity: a full single-word match ("duplo") beats a partial
+        # multi-word match ("kinderkleding pakket" with 1/2 words).
+        score = matched * (matched / len(words))
+        if score > best_score:
+            best_score = score
             best_match = trend
 
     if best_match and best_score > 0:
-        # Use the average Vinted price for this trend category
-        # Apply a small discount since we're estimating (conservative)
-        return round(best_match.avg_price * 0.85, 2)
+        samples = getattr(best_match, "sample_listings", [])
+        demand_score = getattr(best_match, "demand_score", 5.0)
+        # Confidence factor: low demand → more conservative (0.70 – 1.00)
+        confidence = 0.7 + (demand_score / 10) * 0.3
+
+        # Filter samples to a realistic price bracket relative to buy price
+        if buy_price > 0 and samples:
+            relevant = [s for s in samples if buy_price * 1.5 <= s.price <= buy_price * 5]
+        else:
+            relevant = list(samples)
+
+        if relevant:
+            median_price = _median([s.price for s in relevant])
+            return round(median_price * confidence, 2)
+
+        # No relevant samples — fall back to avg_price with confidence weight
+        return round(best_match.avg_price * confidence, 2)
 
     # No trend match — fall back to buy_price * multiplier
     if buy_price > 0:

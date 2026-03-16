@@ -64,17 +64,27 @@ class Opportunity:
 
 
 def _find_best_trend(title: str, description: str, trends: list) -> Optional[Any]:
-    """Find the most relevant Vinted trend for a given item."""
-    text = (title + " " + description).lower()
+    """Find the most relevant Vinted trend for a given item.
+
+    Scoring uses word overlap normalized by term length so that a complete
+    single-word match ('duplo') scores higher than a partial multi-word match
+    ('kinderkleding pakket' with 1 of 2 words).  A weak category-name fallback
+    is only used when no term-level match exists at all.
+    """
+    text_words = set((title + " " + description).lower().split())
     best = None
-    best_score = 0
+    best_score = 0.0
 
     for trend in trends:
         words = trend.search_term.lower().split()
-        score = sum(1 for w in words if w in text)
-        # Category name match also counts
-        if trend.category.lower() in text:
-            score += 2
+        matched = sum(1 for w in words if w in text_words)
+        if matched:
+            # Specificity: ratio of matched words to total words in term
+            score = matched * (matched / len(words))
+        else:
+            # Weak category-level fallback — only wins if nothing else matches
+            score = 0.5 if trend.category.lower() in " ".join(text_words) else 0
+
         if score > best_score:
             best_score = score
             best = trend
