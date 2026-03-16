@@ -10,6 +10,7 @@ summary and selling tips.
 
 import asyncio
 import hashlib
+import time
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
@@ -18,7 +19,8 @@ import httpx
 
 from src.config import ANTHROPIC_API_KEY, MIN_SELL_PRICE, MIN_NET_MARGIN
 from src.budget_guard import register_usage, BudgetExceededError
-from src.analysis.margin_calculator import calculate_margin, estimate_sell_price_from_trends
+from src.analysis.margin_calculator import calculate_margin, estimate_sell_price_from_trends, estimate_sell_price_from_listings
+from src.scrapers.vinted import search_vinted_for_product
 from src.analysis.risk_scorer import score_opportunity, RiskScore
 
 
@@ -61,6 +63,9 @@ class Opportunity:
     days_listed: Optional[int] = None
     is_viable: bool = True
     margin_reason: str = ""
+    # Price data origin: "product-specifiek" when based on exact Vinted search,
+    # "categorie" when falling back to pre-scraped trend data.
+    price_source: str = "categorie"
 
 
 def _find_best_trend(title: str, description: str, trends: list) -> Optional[Any]:
@@ -404,6 +409,63 @@ def match_opportunities(
     return opportunities
 
 
+async def _refine_prices_with_product_search(
+    opportunities: list[Opportunity],
+) -> list[Opportunity]:
+    """
+    For each opportunity, try a product-specific Vinted search and update
+    the estimated sell price + margin if the search yields ≥3 results.
+
+    Runs in a thread pool to avoid blocking the event loop (vinted-scraper
+    is synchronous).  Rate-limited to 1 s between calls.
+    """
+    import concurrent.futures
+
+    def _search_one(opp: Opportunity):
+        result = search_vinted_for_product(opp.title, buy_price=opp.buy_price)
+        time.sleep(1.0)
+        return opp.deal_id, result
+
+    loop = asyncio.get_event_loop()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+        tasks = [
+            loop.run_in_executor(pool, _search_one, opp)
+            for opp in opportunities[:10]
+        ]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+
+    opp_map = {o.deal_id: o for o in opportunities}
+    for res in results:
+        if isinstance(res, Exception):
+            continue
+        deal_id, trend = res
+        if trend is None:
+            continue
+        opp = opp_map.get(deal_id)
+        if not opp:
+            continue
+
+        new_sell = estimate_sell_price_from_listings(
+            trend.sample_listings, buy_price=opp.buy_price
+        )
+        if new_sell < MIN_SELL_PRICE:
+            continue
+
+        new_margin = calculate_margin(opp.buy_price, new_sell)
+        if not new_margin.is_viable:
+            continue
+
+        opp.estimated_sell_price = new_sell
+        opp.net_profit = new_margin.net_profit
+        opp.margin_pct = new_margin.margin_pct
+        opp.vinted_commission = new_margin.vinted_commission
+        opp.matched_trend = trend.search_term
+        opp.price_source = "product-specifiek"
+        opp.margin_reason = new_margin.reason
+
+    return opportunities
+
+
 async def _verify_and_enrich(
     opportunities: list[Opportunity],
     vinted_trends: list,
@@ -411,6 +473,15 @@ async def _verify_and_enrich(
 ) -> list[Opportunity]:
     """Verify top matches with Vision, then enrich with Claude insights."""
     client = anthropic.AsyncAnthropic(api_key=ANTHROPIC_API_KEY)
+
+    # Refine prices using product-specific Vinted search before any further steps
+    opportunities = await _refine_prices_with_product_search(opportunities)
+
+    # Re-sort after price refinement (product-specific data may change rankings)
+    opportunities.sort(
+        key=lambda o: (o.risk_score * 0.3 + min(o.net_profit, 50) * 0.4 + o.volume_bonus * 0.3),
+        reverse=True,
+    )
 
     # Vision verification for top 5 opportunities with images
     to_verify = [o for o in opportunities[:10] if o.image_url][:5]

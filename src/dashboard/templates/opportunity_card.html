@@ -89,9 +89,10 @@
             <a href="{{ opp.buy_url }}" target="_blank" class="btn btn-primary">
                 Bekijk aanbieding
             </a>
-            <a href="https://www.vinted.nl/catalog?search_text={{ opp.matched_trend | urlencode }}"
-               target="_blank" class="btn btn-secondary">
-                Vinted trend
+            <a href="https://www.vinted.nl/catalog?search_text={{ opp.title | urlencode }}"
+               target="_blank" class="btn btn-secondary"
+               title="Zoek '{{ opp.title }}' op Vinted{% if opp.price_source == 'product-specifiek' %} (prijs gebaseerd op exacte productzoekopdracht){% else %} (prijs gebaseerd op categorie-schatting){% endif %}">
+                Vinted{% if opp.price_source == 'product-specifiek' %} &#10003;{% endif %}
             </a>
         </div>
     </div>

@@ -124,6 +124,92 @@ def _compute_demand_score(listings: list[VintedListing]) -> float:
     return round(score, 1)
 
 
+# Dutch stop words to strip when building a product-specific search query
+_STOP_WORDS_NL = {
+    "en", "de", "het", "een", "van", "in", "op", "met", "voor", "aan", "te",
+    "er", "of", "om", "bij", "uit", "door", "over", "tot", "als", "zo", "ook",
+    "nog", "al", "is", "zijn", "was", "heeft", "hebben", "wordt", "worden",
+    "niet", "maar", "dat", "die", "dit", "den", "der", "des", "se", "zo",
+}
+
+
+def _clean_product_title(title: str) -> str:
+    """Strip stop words and punctuation; return up to 4 meaningful keywords."""
+    import re
+    words = re.sub(r"[^\w\s]", " ", title.lower()).split()
+    meaningful = [w for w in words if w not in _STOP_WORDS_NL and len(w) > 2]
+    return " ".join(meaningful[:4])
+
+
+def search_vinted_for_product(
+    title: str,
+    buy_price: float = 0,
+    domain: str = "https://www.vinted.nl",
+    max_results: int = 20,
+    min_price: float = 1.0,
+) -> Optional["VintedTrend"]:
+    """
+    Search Vinted for a *specific* product by its title.
+
+    Cleans the title to 2–4 keywords and queries Vinted directly so that
+    price data comes from real listings of the same product rather than a
+    generic category.
+
+    Args:
+        title:       Product title from the buying platform.
+        buy_price:   Known buy price; used to narrow the price filter.
+        domain:      Vinted domain to search (default: vinted.nl).
+        max_results: Max listings to retrieve.
+        min_price:   Hard floor on listing price.
+
+    Returns:
+        VintedTrend with real listing data, or None if fewer than 3 results.
+    """
+    search_term = _clean_product_title(title)
+    if not search_term:
+        return None
+
+    try:
+        scraper = VintedScraper(domain)
+        params: dict = {
+            "search_text": search_term,
+            "per_page": max_results,
+            "order": "newest_first",
+        }
+        if buy_price > 0:
+            # Widen enough to catch all realistic resale prices
+            params["price_from"] = max(min_price, buy_price * 0.8)
+            params["price_to"] = buy_price * 6
+        else:
+            params["price_from"] = min_price
+
+        raw_items = scraper.search(params)
+        listings = [lst for item in (raw_items or []) if (lst := _parse_listing(item))]
+
+        if len(listings) < 3:
+            return None
+
+        prices = [l.price for l in listings]
+        return VintedTrend(
+            category="product-specifiek",
+            search_term=search_term,
+            avg_price=round(sum(prices) / len(prices), 2),
+            min_price=round(min(prices), 2),
+            max_price=round(max(prices), 2),
+            listing_count=len(listings),
+            avg_favorites=round(
+                sum(l.favorites_count for l in listings) / len(listings), 1
+            ),
+            demand_score=_compute_demand_score(listings),
+            sample_listings=sorted(
+                listings, key=lambda l: l.favorites_count, reverse=True
+            )[:5],
+        )
+    except Exception as e:
+        print(f"[Vinted] Per-product search failed for '{search_term}': {e}")
+        return None
+
+
 def scrape_vinted_trends(
     domains: list[str] = None,
     max_per_term: int = 30,

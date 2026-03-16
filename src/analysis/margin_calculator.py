@@ -96,6 +96,41 @@ def calculate_margin(
     )
 
 
+def estimate_sell_price_from_listings(
+    listings: list,
+    buy_price: float = 0,
+) -> float:
+    """
+    Estimate Vinted sell price from *product-specific* search results.
+
+    Uses the median price of the most-favorited listings, filtered to a
+    realistic resale range relative to the buy price.
+
+    Args:
+        listings:  List of VintedListing objects from a per-product search.
+        buy_price: Used to filter out unrealistic price outliers.
+
+    Returns:
+        Estimated sell price in euros, or 0.0 if no usable listings.
+    """
+    if not listings:
+        return 0.0
+
+    if buy_price > 0:
+        relevant = [l for l in listings if buy_price * 1.5 <= l.price <= buy_price * 5]
+    else:
+        relevant = list(listings)
+
+    if not relevant:
+        relevant = list(listings)
+
+    top = sorted(relevant, key=lambda l: l.favorites_count, reverse=True)[:5]
+    prices = sorted(l.price for l in top)
+    mid = len(prices) // 2
+    median_price = prices[mid] if len(prices) % 2 == 1 else (prices[mid - 1] + prices[mid]) / 2
+    return round(median_price, 2)
+
+
 def _median(values: list[float]) -> float:
     """Return the median of a non-empty list of floats."""
     s = sorted(values)
