@@ -169,45 +169,55 @@ def search_vinted_for_product(
     if not search_term:
         return None
 
-    try:
-        scraper = VintedScraper(domain)
-        params: dict = {
-            "search_text": search_term,
-            "per_page": max_results,
-            "order": "newest_first",
-        }
-        if buy_price > 0:
-            # Widen enough to catch all realistic resale prices
-            params["price_from"] = max(min_price, buy_price * 0.8)
-            params["price_to"] = buy_price * 6
-        else:
-            params["price_from"] = min_price
+    params: dict = {
+        "search_text": search_term,
+        "per_page": max_results,
+        "order": "newest_first",
+    }
+    if buy_price > 0:
+        params["price_from"] = max(min_price, buy_price * 0.8)
+        params["price_to"] = buy_price * 6
+    else:
+        params["price_from"] = min_price
 
-        raw_items = scraper.search(params)
-        listings = [lst for item in (raw_items or []) if (lst := _parse_listing(item))]
+    backoff = 2.0
+    for attempt in range(3):
+        try:
+            scraper = VintedScraper(domain)
+            raw_items = scraper.search(params)
+            listings = [lst for item in (raw_items or []) if (lst := _parse_listing(item))]
 
-        if len(listings) < 3:
+            if len(listings) < 3:
+                return None
+
+            prices = [l.price for l in listings]
+            return VintedTrend(
+                category="product-specifiek",
+                search_term=search_term,
+                avg_price=round(sum(prices) / len(prices), 2),
+                min_price=round(min(prices), 2),
+                max_price=round(max(prices), 2),
+                listing_count=len(listings),
+                avg_favorites=round(
+                    sum(l.favorites_count for l in listings) / len(listings), 1
+                ),
+                demand_score=_compute_demand_score(listings),
+                sample_listings=sorted(
+                    listings, key=lambda l: l.favorites_count, reverse=True
+                )[:5],
+            )
+        except Exception as e:
+            err = str(e).lower()
+            if any(kw in err for kw in ("429", "rate", "too many", "blocked", "forbidden")):
+                if attempt < 2:
+                    print(f"[Vinted] Rate limited voor '{search_term}', wacht {backoff:.0f}s... (poging {attempt + 1}/3)")
+                    time.sleep(backoff)
+                    backoff *= 2
+                    continue
+            print(f"[Vinted] Per-product search mislukt voor '{search_term}': {e}")
             return None
 
-        prices = [l.price for l in listings]
-        return VintedTrend(
-            category="product-specifiek",
-            search_term=search_term,
-            avg_price=round(sum(prices) / len(prices), 2),
-            min_price=round(min(prices), 2),
-            max_price=round(max(prices), 2),
-            listing_count=len(listings),
-            avg_favorites=round(
-                sum(l.favorites_count for l in listings) / len(listings), 1
-            ),
-            demand_score=_compute_demand_score(listings),
-            sample_listings=sorted(
-                listings, key=lambda l: l.favorites_count, reverse=True
-            )[:5],
-        )
-    except Exception as e:
-        print(f"[Vinted] Per-product search failed for '{search_term}': {e}")
-        return None
+    return None
 
 
 def scrape_vinted_trends(

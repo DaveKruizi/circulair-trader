@@ -318,50 +318,81 @@ def match_opportunities(
     if seen_deals is None:
         seen_deals = {}
 
+    import concurrent.futures
+
     # Build list of rejected patterns from feedback
     rejected_patterns = [fb.get("reason", "").lower() for fb in negative_feedback if fb.get("reason")]
 
-    opportunities: list[Opportunity] = []
+    # ── Phase 1: extract and pre-filter all listings ──────────────
+    # Separate pallets (Vision later) from regular products (Vinted search now).
+    @dataclass
+    class _ListingData:
+        title: str
+        buy_price: float
+        url: str
+        image_url: str
+        description: str
+        days_listed: Any
+        platform: str
+        quantity: int
+        price_negotiable: bool
+        is_pallet: bool
 
+    candidates: list[_ListingData] = []
     for listing in buying_listings:
         title = getattr(listing, "title", "")
         buy_price = getattr(listing, "price", 0) or getattr(listing, "current_bid", 0)
-        url = getattr(listing, "url", "")
-        image_url = getattr(listing, "image_url", "")
-        description = getattr(listing, "description", "")
-        days_listed = getattr(listing, "days_listed", None)
-        platform = getattr(listing, "source", "onbekend")
-        quantity = getattr(listing, "quantity_available", 1) or 1
-        price_type = getattr(listing, "price_type", "fixed")
-        price_negotiable = price_type in ("bidding", "see_description")
-
         if not title or buy_price <= 0:
             continue
-
-        # Skip items matching negative feedback patterns
         title_lower = title.lower()
         if any(pattern and pattern in title_lower for pattern in rejected_patterns):
             continue
+        description = getattr(listing, "description", "")
+        price_type = getattr(listing, "price_type", "fixed")
+        candidates.append(_ListingData(
+            title=title,
+            buy_price=buy_price,
+            url=getattr(listing, "url", ""),
+            image_url=getattr(listing, "image_url", ""),
+            description=description,
+            days_listed=getattr(listing, "days_listed", None),
+            platform=getattr(listing, "source", "onbekend"),
+            quantity=getattr(listing, "quantity_available", 1) or 1,
+            price_negotiable=price_type in ("bidding", "see_description"),
+            is_pallet=is_pallet_listing(title, description),
+        ))
 
-        # Pallet/bulk lots cannot be meaningfully priced via Vinted product search
-        # upfront — their value is only known after Vision analysis.  Skip the
-        # normal Vinted search and margin filter for them; they will be picked up
-        # by _run_pallet_analyses() in the enrichment phase.
-        listing_is_pallet = is_pallet_listing(title, description)
+    # ── Phase 2: parallel Vinted search for non-pallet listings ──
+    # 3 workers, each sleeps 1.5s after their request → ~3x throughput
+    # with polite rate limiting (avg 1 request per 0.5s across workers).
+    def _vinted_search(cand: "_ListingData"):
+        if cand.is_pallet:
+            return cand, None
+        result = search_vinted_for_product(cand.title, buy_price=cand.buy_price)
+        time.sleep(1.5)
+        return cand, result
 
-        if listing_is_pallet:
-            # Placeholder values — overwritten by pallet Vision analysis later
-            estimated_sell = buy_price * 2.0  # optimistic placeholder
+    vinted_results: dict[int, Optional[Any]] = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+        for idx, (cand, trend) in enumerate(pool.map(_vinted_search, candidates)):
+            vinted_results[id(cand)] = trend
+
+    # ── Phase 3: build Opportunity objects ────────────────────────
+    opportunities: list[Opportunity] = []
+
+    for cand in candidates:
+        title = cand.title
+        buy_price = cand.buy_price
+        description = cand.description
+
+        if cand.is_pallet:
+            estimated_sell = buy_price * 2.0
             trend_name = "pallet-analyse"
             vinted_demand = 5.0
             price_source = "pallet-analyse"
             margin = calculate_margin(buy_price, estimated_sell)
         else:
-            # Per-product Vinted search — exact price data for this specific item.
-            # Falls back to category trend matching if Vinted returns <3 results.
-            product_trend = search_vinted_for_product(title, buy_price=buy_price)
-            time.sleep(1.0)  # rate limit
-
+            product_trend = vinted_results.get(id(cand))
             if product_trend is not None:
                 estimated_sell = estimate_sell_price_from_listings(
                     product_trend.sample_listings, buy_price=buy_price
@@ -370,7 +401,6 @@ def match_opportunities(
                 vinted_demand = product_trend.demand_score
                 price_source = "product-specifiek"
             else:
-                # Fallback: pre-scraped category trends
                 trend = _find_best_trend(title, description, vinted_trends)
                 trend_name = trend.search_term if trend else "algemeen"
                 vinted_demand = trend.demand_score if trend else 5.0
@@ -381,8 +411,6 @@ def match_opportunities(
 
             if estimated_sell < MIN_SELL_PRICE:
                 continue
-
-            # Calculate margin
             margin = calculate_margin(buy_price, estimated_sell)
             if not margin.is_viable:
                 continue
@@ -392,24 +420,24 @@ def match_opportunities(
             title=title,
             description=description,
             buy_price=buy_price,
-            days_listed=days_listed,
+            days_listed=cand.days_listed,
             vinted_demand_score=vinted_demand,
             margin_result=margin,
         )
 
         # Volume bonus: reward bulk availability
-        volume_bonus = min(quantity, 10) * 1.5 if quantity > 1 else 0.0
+        volume_bonus = min(cand.quantity, 10) * 1.5 if cand.quantity > 1 else 0.0
 
         # Deal ID and new/returning tracking
-        deal_id = _generate_deal_id(title, url)
+        deal_id = _generate_deal_id(title, cand.url)
         is_new = deal_id not in seen_deals
 
         opp = Opportunity(
-            source_platform=platform,
+            source_platform=cand.platform,
             title=title,
             buy_price=buy_price,
-            buy_url=url,
-            image_url=image_url,
+            buy_url=cand.url,
+            image_url=cand.image_url,
             estimated_sell_price=estimated_sell,
             net_profit=margin.net_profit,
             margin_pct=margin.margin_pct,
@@ -423,7 +451,7 @@ def match_opportunities(
             matched_trend=trend_name,
             shipping_cost=margin.shipping_cost,
             vinted_commission=margin.vinted_commission,
-            quantity_available=quantity,
+            quantity_available=cand.quantity,
             volume_bonus=volume_bonus,
             deal_id=deal_id,
             is_new=is_new,
@@ -432,7 +460,7 @@ def match_opportunities(
             is_viable=margin.is_viable,
             margin_reason=margin.reason,
             price_source=price_source,
-            price_negotiable=price_negotiable,
+            price_negotiable=cand.price_negotiable,
         )
         opportunities.append(opp)
 
