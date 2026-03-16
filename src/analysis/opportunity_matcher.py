@@ -386,7 +386,7 @@ def match_opportunities(
         description = cand.description
 
         if cand.is_pallet:
-            estimated_sell = buy_price * 2.0
+            estimated_sell = buy_price  # placeholder — overschreven door Vision analyse
             trend_name = "pallet-analyse"
             vinted_demand = 5.0
             price_source = "pallet-analyse"

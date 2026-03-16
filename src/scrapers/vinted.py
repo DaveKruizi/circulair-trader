@@ -16,6 +16,7 @@ Use responsibly and respect rate limits.
 import asyncio
 import time
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Optional
 
 from vinted_scraper import VintedScraper
@@ -128,20 +129,55 @@ def _parse_listing(item) -> Optional[VintedListing]:
         return None
 
 
+def _parse_created_at(value: str) -> Optional[datetime]:
+    """Parse a Vinted created_at value — Unix timestamp or ISO string."""
+    if not value:
+        return None
+    try:
+        return datetime.fromtimestamp(float(value), tz=timezone.utc)
+    except (ValueError, OSError):
+        pass
+    for fmt in ("%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%d %H:%M:%S"):
+        try:
+            dt = datetime.strptime(value[:19], fmt[:len(fmt)])
+            return dt.replace(tzinfo=timezone.utc)
+        except ValueError:
+            continue
+    return None
+
+
 def _compute_demand_score(listings: list[VintedListing]) -> float:
     """
-    Score 0-10. Higher = more demand.
-    Based on avg favorites and number of listings (more listings = more supply,
-    which dilutes demand score).
+    Score 0–10. Hogere score = meer vraag.
+
+    Combineert twee signalen:
+    - Velocity (60 %): favorites per dag — snel oplopende favorieten op recente
+      listings wijzen op actieve vraag.
+    - Populariteit (40 %): absolute gem. favorites — tijdloze indicator van interesse.
+
+    Calibratie: 0,5 fav/dag ≈ score 5 bij velocity-component.
     """
     if not listings:
         return 0.0
+
+    now = datetime.now(timezone.utc)
+    velocities: list[float] = []
+
+    for lst in listings:
+        dt = _parse_created_at(lst.created_at)
+        if dt:
+            days = max(1.0, (now - dt).total_seconds() / 86400)
+        else:
+            days = 7.0  # conservatieve aanname als timestamp ontbreekt
+        velocities.append(lst.favorites_count / days)
+
+    avg_velocity = sum(velocities) / len(velocities)
     avg_fav = sum(l.favorites_count for l in listings) / len(listings)
-    # Many listings with high favorites = high demand
-    # Few listings with high favorites = niche but high demand
-    # Normalize: 5 avg favorites = score of 5, capped at 10
-    score = min(10.0, avg_fav * 1.5)
-    return round(score, 1)
+
+    velocity_score = min(10.0, avg_velocity * 20)   # 0,5 fav/dag → 10
+    fav_score = min(10.0, avg_fav * 1.5)             # 6,7 favs gem → 10
+
+    return round(0.6 * velocity_score + 0.4 * fav_score, 1)
 
 
 # Dutch stop words to strip when building a product-specific search query

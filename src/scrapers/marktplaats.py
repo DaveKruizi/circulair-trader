@@ -5,6 +5,7 @@ Uses the `marktplaats` PyPI package.
 Focused on bulk/partij listings (quantity > 1) across all product categories.
 """
 
+import concurrent.futures
 import re
 import time
 from dataclasses import dataclass
@@ -198,35 +199,34 @@ def scrape_marktplaats(
         print("[Marktplaats] Package not installed. Run: pip install marktplaats")
         return []
 
-    results: list[MarktplaatsListing] = []
-    seen_ids: set[str] = set()
-
-    for term in search_terms:
+    def _fetch_term(term: str) -> list[MarktplaatsListing]:
         try:
             search = SearchQuery(
                 query=term,
                 price_to=int(max_price * 100),  # price_to is in cents
                 limit=max_per_term,
             )
-            listings = search.get_listings()
-
-            for raw in listings or []:
-                listing = _parse_listing(raw)
-                if not listing:
-                    continue
-                if listing.id in seen_ids:
-                    continue
-                if listing.price_type == "fixed" and listing.price > max_price:
-                    continue
-                if listing.quantity_available < min_quantity:
-                    continue
-                seen_ids.add(listing.id)
-                results.append(listing)
-
-            time.sleep(1.0)
+            raw_listings = search.get_listings() or []
+            time.sleep(1.0)  # per-worker rate limit
+            return [
+                lst for raw in raw_listings
+                if (lst := _parse_listing(raw))
+                and (lst.price_type != "fixed" or lst.price <= max_price)
+                and lst.quantity_available >= min_quantity
+            ]
         except Exception as e:
             print(f"[Marktplaats] Error scraping '{term}': {e}")
-            continue
+            return []
+
+    seen_ids: set[str] = set()
+    results: list[MarktplaatsListing] = []
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        for batch in pool.map(_fetch_term, search_terms):
+            for listing in batch:
+                if listing.id not in seen_ids:
+                    seen_ids.add(listing.id)
+                    results.append(listing)
 
     # Biggest lots first
     results.sort(key=lambda l: l.quantity_available, reverse=True)
