@@ -50,7 +50,24 @@ jobs:
           SHIPPING_COST: "5"
           MAX_BUY_PRICE: "50"
           OUTPUT_DIR: "output"
-        run: python src/main.py
+        run: python src/main.py 2>&1 | tee output_log.txt; exit ${PIPESTATUS[0]}
+
+      - name: Toon output log en gegenereerde bestanden
+        if: always()
+        run: |
+          echo "=== Generate step uitkomst: ${{ steps.generate.outcome }} ==="
+          echo ""
+          echo "=== Output directory inhoud ==="
+          ls -lah output/ 2>/dev/null || echo "(output/ map bestaat niet)"
+          echo ""
+          echo "=== Laatste 30 regels log ==="
+          tail -30 output_log.txt 2>/dev/null || echo "(geen log)"
+          echo ""
+          if [ -f output/index.html ]; then
+            echo "=== index.html gegenereerd: $(wc -c < output/index.html) bytes ==="
+          else
+            echo "=== GEEN index.html gegenereerd ==="
+          fi
 
       - name: Placeholder aanmaken als dashboard generatie mislukte
         if: steps.generate.outcome == 'failure'
