@@ -14,12 +14,16 @@ Use responsibly and respect rate limits.
 """
 
 import asyncio
+import os
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Optional
 
+from dotenv import load_dotenv
 from vinted_scraper import VintedScraper
+
+load_dotenv()
 
 
 # ── Playwright-gebaseerde sessie-cookie fetch ─────────────────────────────────
@@ -73,9 +77,25 @@ def _fetch_cookie_via_playwright(domain: str) -> Optional[dict]:
 
 
 def _get_session_cookie(domain: str) -> Optional[dict]:
-    """Geeft de gecachede cookie terug, of haalt hem op als hij nog niet bestaat."""
-    if domain not in _session_cookies:
-        _session_cookies[domain] = _fetch_cookie_via_playwright(domain)
+    """Geeft de gecachede cookie terug, of haalt hem op als hij nog niet bestaat.
+
+    Volgorde:
+    1. Cache (al opgehaald deze run)
+    2. VINTED_SESSION_COOKIE env-var (handmatig ingesteld)
+    3. Playwright (automatisch via headless browser)
+    """
+    if domain in _session_cookies:
+        return _session_cookies[domain]
+
+    # Env-var heeft prioriteit — snel en geen browser nodig
+    env_cookie = os.getenv("VINTED_SESSION_COOKIE", "").strip()
+    if env_cookie:
+        cookie = {"access_token_web": env_cookie}
+        _session_cookies[domain] = cookie
+        return cookie
+
+    # Fallback: Playwright
+    _session_cookies[domain] = _fetch_cookie_via_playwright(domain)
     return _session_cookies[domain]
 
 
