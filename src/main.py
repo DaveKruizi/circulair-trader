@@ -224,7 +224,7 @@ def run_daily(dry_run: bool = False):
         ("Marktplaats", lambda: scrape_marktplaats(
             BULK_SEARCH_TERMS, max_price=3000, min_quantity=2
         )),
-        ("Troostwijk", lambda: scrape_troostwijk(max_current_bid=50)),
+        ("Troostwijk", lambda: scrape_troostwijk(max_current_bid=3000)),
         ("Stocklear", scrape_stocklear),
         ("Merkandi", scrape_merkandi),
         ("PartijHandelaren", scrape_partijhandelaren),

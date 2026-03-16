@@ -337,35 +337,49 @@ def match_opportunities(
         if any(pattern and pattern in title_lower for pattern in rejected_patterns):
             continue
 
-        # Per-product Vinted search — exact price data for this specific item.
-        # Falls back to category trend matching if Vinted returns <3 results.
-        product_trend = search_vinted_for_product(title, buy_price=buy_price)
-        time.sleep(1.0)  # rate limit
+        # Pallet/bulk lots cannot be meaningfully priced via Vinted product search
+        # upfront — their value is only known after Vision analysis.  Skip the
+        # normal Vinted search and margin filter for them; they will be picked up
+        # by _run_pallet_analyses() in the enrichment phase.
+        listing_is_pallet = is_pallet_listing(title, description)
 
-        if product_trend is not None:
-            estimated_sell = estimate_sell_price_from_listings(
-                product_trend.sample_listings, buy_price=buy_price
-            )
-            trend_name = product_trend.search_term
-            vinted_demand = product_trend.demand_score
-            price_source = "product-specifiek"
+        if listing_is_pallet:
+            # Placeholder values — overwritten by pallet Vision analysis later
+            estimated_sell = buy_price * 2.0  # optimistic placeholder
+            trend_name = "pallet-analyse"
+            vinted_demand = 5.0
+            price_source = "pallet-analyse"
+            margin = calculate_margin(buy_price, estimated_sell)
         else:
-            # Fallback: pre-scraped category trends
-            trend = _find_best_trend(title, description, vinted_trends)
-            trend_name = trend.search_term if trend else "algemeen"
-            vinted_demand = trend.demand_score if trend else 5.0
-            estimated_sell = estimate_sell_price_from_trends(
-                title, vinted_trends, buy_price=buy_price
-            )
-            price_source = "categorie"
+            # Per-product Vinted search — exact price data for this specific item.
+            # Falls back to category trend matching if Vinted returns <3 results.
+            product_trend = search_vinted_for_product(title, buy_price=buy_price)
+            time.sleep(1.0)  # rate limit
 
-        if estimated_sell < MIN_SELL_PRICE:
-            continue
+            if product_trend is not None:
+                estimated_sell = estimate_sell_price_from_listings(
+                    product_trend.sample_listings, buy_price=buy_price
+                )
+                trend_name = product_trend.search_term
+                vinted_demand = product_trend.demand_score
+                price_source = "product-specifiek"
+            else:
+                # Fallback: pre-scraped category trends
+                trend = _find_best_trend(title, description, vinted_trends)
+                trend_name = trend.search_term if trend else "algemeen"
+                vinted_demand = trend.demand_score if trend else 5.0
+                estimated_sell = estimate_sell_price_from_trends(
+                    title, vinted_trends, buy_price=buy_price
+                )
+                price_source = "categorie"
 
-        # Calculate margin
-        margin = calculate_margin(buy_price, estimated_sell)
-        if not margin.is_viable:
-            continue
+            if estimated_sell < MIN_SELL_PRICE:
+                continue
+
+            # Calculate margin
+            margin = calculate_margin(buy_price, estimated_sell)
+            if not margin.is_viable:
+                continue
 
         # Score risk
         risk = score_opportunity(
