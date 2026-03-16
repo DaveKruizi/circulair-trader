@@ -211,6 +211,7 @@ async def _get_claude_insight(
     estimated_sell_price: float,
     platform: str,
     trend_name: str,
+    semaphore: asyncio.Semaphore,
 ) -> tuple[str, str]:
     """
     Ask Claude for a plain-language opportunity summary and selling tips.
@@ -230,29 +231,40 @@ Geef in maximaal 2 zinnen:
 
 Antwoord in het Nederlands. Wees direct en praktisch."""
 
-    try:
-        response = await client.messages.create(
-            model="claude-haiku-4-5-20251001",
-            max_tokens=300,
-            messages=[{"role": "user", "content": prompt}],
-        )
-        # Registreer token gebruik en controleer budget
-        register_usage(
-            input_tokens=response.usage.input_tokens,
-            output_tokens=response.usage.output_tokens,
-        )
-        text = next(
-            (b.text for b in response.content if b.type == "text"), ""
-        )
-        lines = [l.strip() for l in text.strip().split("\n") if l.strip()]
-        summary = lines[0] if lines else "Zie productdetails."
-        tips = " ".join(lines[1:]) if len(lines) > 1 else "Gebruik heldere foto's en een goede beschrijving."
-        return summary, tips
-    except BudgetExceededError:
-        raise  # Laat budget errors door — tool moet stoppen
-    except Exception as e:
-        print(f"[Claude] Error getting insight for '{title}': {e}")
-        return "Analyse niet beschikbaar.", "Gebruik heldere foto's en een goede beschrijving."
+    backoff = 2.0
+    for attempt in range(3):
+        try:
+            async with semaphore:
+                response = await client.messages.create(
+                    model="claude-haiku-4-5-20251001",
+                    max_tokens=300,
+                    messages=[{"role": "user", "content": prompt}],
+                )
+            # Registreer token gebruik en controleer budget
+            register_usage(
+                input_tokens=response.usage.input_tokens,
+                output_tokens=response.usage.output_tokens,
+            )
+            text = next(
+                (b.text for b in response.content if b.type == "text"), ""
+            )
+            lines = [l.strip() for l in text.strip().split("\n") if l.strip()]
+            summary = lines[0] if lines else "Zie productdetails."
+            tips = " ".join(lines[1:]) if len(lines) > 1 else "Gebruik heldere foto's en een goede beschrijving."
+            return summary, tips
+        except BudgetExceededError:
+            raise  # Laat budget errors door — tool moet stoppen
+        except (anthropic.APIConnectionError, anthropic.APIStatusError) as e:
+            if attempt < 2:
+                print(f"[Claude] Verbindingsfout voor '{title}', retry {attempt + 1}/3 na {backoff:.0f}s: {e}")
+                await asyncio.sleep(backoff)
+                backoff *= 2
+                continue
+            print(f"[Claude] Error getting insight for '{title}': {e}")
+            return "Analyse niet beschikbaar.", "Gebruik heldere foto's en een goede beschrijving."
+        except Exception as e:
+            print(f"[Claude] Error getting insight for '{title}': {e}")
+            return "Analyse niet beschikbaar.", "Gebruik heldere foto's en een goede beschrijving."
 
 
 async def _enrich_opportunities(
@@ -264,6 +276,7 @@ async def _enrich_opportunities(
         return opportunities
 
     client = anthropic.AsyncAnthropic(api_key=ANTHROPIC_API_KEY)
+    semaphore = asyncio.Semaphore(3)  # max 3 gelijktijdige API calls
 
     # Only enrich top 10 to keep API costs low
     to_enrich = opportunities[:10]
@@ -276,6 +289,7 @@ async def _enrich_opportunities(
             opp.estimated_sell_price,
             opp.source_platform,
             opp.matched_trend,
+            semaphore,
         )
         for opp in to_enrich
     ]
