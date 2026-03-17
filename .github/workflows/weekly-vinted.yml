@@ -21,8 +21,6 @@ jobs:
     steps:
       - name: Code ophalen
         uses: actions/checkout@v4
-        with:
-          ref: master
 
       - name: Data cache herstellen
         uses: actions/cache@v4
