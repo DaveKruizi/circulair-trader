@@ -1,0 +1,86 @@
+name: Wekelijkse Vinted Prijsanalyse
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+on:
+  # Zondag 03:00 NL wintertijd = 02:00 UTC
+  schedule:
+    - cron: '0 2 * * 0'
+
+  # Handmatig starten
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-vinted:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code ophalen
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Data ophalen van data branch
+        run: |
+          git fetch origin data-storage 2>/dev/null || true
+          if git show-ref --verify --quiet refs/remotes/origin/data-storage; then
+            git checkout origin/data-storage -- data/ 2>/dev/null || echo "Geen bestaande data, start vers"
+          else
+            mkdir -p data
+          fi
+
+      - name: Python installeren
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Dependencies installeren
+        run: pip install -r requirements.txt
+
+      - name: Playwright browsers installeren
+        run: playwright install chromium --with-deps 2>/dev/null || true
+
+      - name: Vinted scrapen
+        id: scrape
+        timeout-minutes: 45
+        env:
+          PYTHONPATH: "."
+        run: python src/main_weekly.py 2>&1 | tee vinted_log.txt; exit ${PIPESTATUS[0]}
+
+      - name: Log tonen
+        if: always()
+        run: |
+          echo "=== Resultaat: ${{ steps.scrape.outcome }} ==="
+          tail -30 vinted_log.txt 2>/dev/null || echo "(geen log)"
+          ls -lah data/ 2>/dev/null || echo "(geen data)"
+
+      - name: Data opslaan naar data branch
+        if: always()
+        run: |
+          if [ -f "data/vinted_prices.json" ] || [ -f "data/vinted_price_history.json" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+
+            git fetch origin data-storage 2>/dev/null || true
+
+            if git show-ref --verify --quiet refs/remotes/origin/data-storage; then
+              git checkout -b data-storage origin/data-storage 2>/dev/null || git checkout data-storage
+            else
+              git checkout --orphan data-storage
+              git rm -rf . --quiet 2>/dev/null || true
+            fi
+
+            # Pull latest data files from current working dir
+            mkdir -p data
+            git checkout master -- . 2>/dev/null || true
+            git add data/ --force
+            git diff --cached --quiet || git commit -m "Vinted prijsdata update $(date -u '+%Y-%m-%d')"
+            git push origin data-storage
+            git checkout master
+          fi
+        continue-on-error: true

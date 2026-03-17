@@ -1,1080 +1,423 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Circulair Trader — Dagelijks Overzicht</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #f4f5f7;
-            color: #1a1a2e;
-            line-height: 1.5;
-        }
-
-        header {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: white;
-            padding: 24px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-
-        header h1 { font-size: 1.5rem; font-weight: 700; }
-        header .subtitle { font-size: 0.85rem; opacity: 0.7; margin-top: 2px; }
-        header .timestamp { font-size: 0.8rem; opacity: 0.6; text-align: right; }
-        header .nav-link { color: #e94560; text-decoration: none; font-size: 0.85rem; margin-left: 16px; }
-        header .nav-link:hover { text-decoration: underline; }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
-
-        /* Stats bar */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px;
-            margin-bottom: 28px;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: 10px;
-            padding: 16px;
-            text-align: center;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-        }
-
-        .stat-card .value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #0f3460;
-        }
-
-        .stat-card .label {
-            font-size: 0.75rem;
-            color: #666;
-            margin-top: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Section titles */
-        .section-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #444;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 20px;
-            background: white;
-            border-radius: 10px;
-            padding: 4px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 10px 16px;
-            border: none;
-            border-radius: 8px;
-            background: transparent;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.15s;
-            color: #666;
-        }
-
-        .tab-btn.active {
-            background: #0f3460;
-            color: white;
-        }
-
-        .tab-btn:hover:not(.active) { background: #f0f4ff; color: #0f3460; }
-
-        .tab-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.3);
-            border-radius: 10px;
-            padding: 1px 7px;
-            font-size: 0.72rem;
-            margin-left: 4px;
-        }
-
-        .tab-btn:not(.active) .tab-badge { background: #eee; }
-
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-
-        /* Trend section */
-        .trends-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .trend-chip {
-            background: white;
-            border-radius: 8px;
-            padding: 12px 14px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.07);
-            border-left: 3px solid #e94560;
-        }
-
-        .trend-chip .trend-name { font-weight: 600; font-size: 0.9rem; }
-        .trend-chip .trend-meta { font-size: 0.78rem; color: #666; margin-top: 4px; }
-
-        .demand-bar {
-            height: 4px;
-            border-radius: 2px;
-            background: #eee;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-
-        .demand-fill {
-            height: 100%;
-            border-radius: 2px;
-            background: linear-gradient(90deg, #f39c12, #e74c3c);
-            transition: width 0.3s;
-        }
-
-        /* Trend chart */
-        .trend-chart-container {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 28px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-        }
-
-        .chart-legend {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-top: 12px;
-            font-size: 0.78rem;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .legend-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-
-        /* Opportunities grid */
-        .opportunities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 16px;
-        }
-
-        .opportunity-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            overflow: hidden;
-            transition: transform 0.15s, box-shadow 0.15s;
-            position: relative;
-        }
-
-        .opportunity-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-        }
-
-        .opportunity-card.returning { border-left: 3px solid #3498db; }
-        .opportunity-card.new-deal { border-left: 3px solid #27ae60; }
-
-        .new-badge {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            background: #27ae60;
-            color: white;
-            font-size: 0.68rem;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 4px;
-            z-index: 2;
-        }
-
-        .volume-badge {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: #8e44ad;
-            color: white;
-            font-size: 0.68rem;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 4px;
-            z-index: 2;
-        }
-
-        .card-image {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            background: #eee;
-        }
-
-        .card-image-placeholder {
-            width: 100%;
-            height: 160px;
-            background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: #bbb;
-        }
-
-        .card-body { padding: 16px; }
-
-        .card-platform {
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: #888;
-            margin-bottom: 4px;
-        }
-
-        .card-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #1a1a2e;
-            margin-bottom: 8px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .card-summary {
-            font-size: 0.82rem;
-            color: #555;
-            margin-bottom: 12px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .price-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-
-        .price-box {
-            background: #f8f9fa;
-            border-radius: 6px;
-            padding: 8px 10px;
-            text-align: center;
-        }
-
-        .price-box .price-label { font-size: 0.68rem; color: #888; text-transform: uppercase; }
-        .price-box .price-value { font-size: 1.1rem; font-weight: 700; margin-top: 2px; }
-        .price-box.buy .price-value { color: #e74c3c; }
-        .price-box.sell .price-value { color: #27ae60; }
-        .price-value.price-unknown { color: #f57c00; font-style: italic; font-size: 0.95rem; }
-
-        .profit-row {
-            background: linear-gradient(135deg, #0f3460, #16213e);
-            color: white;
-            border-radius: 8px;
-            padding: 10px 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .profit-row .profit-label { font-size: 0.78rem; opacity: 0.8; }
-        .profit-row .profit-value { font-size: 1.2rem; font-weight: 700; }
-        .profit-row .profit-pct { font-size: 0.75rem; opacity: 0.7; }
-
-        .risk-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            color: #666;
-            margin-bottom: 8px;
-        }
-
-        .risk-badge {
-            padding: 3px 8px;
-            border-radius: 20px;
-            font-size: 0.72rem;
-            font-weight: 600;
-        }
-
-        .risk-low { background: #d5f5e3; color: #1e8449; }
-        .risk-medium { background: #fef9e7; color: #9a7d0a; }
-        .risk-high { background: #fdedec; color: #922b21; }
-
-        .flags {
-            font-size: 0.75rem;
-            color: #c0392b;
-            margin-bottom: 8px;
-        }
-
-        .tips {
-            font-size: 0.78rem;
-            color: #555;
-            background: #f0f4ff;
-            border-radius: 6px;
-            padding: 8px 10px;
-            margin-bottom: 12px;
-        }
-
-        .tips::before { content: "💡 "; }
-
-        /* Negotiable price */
-        .negotiable-badge {
-            background: #e3f2fd;
-            color: #1565c0;
-            font-size: 0.65rem;
-            font-weight: 700;
-            padding: 1px 5px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-            vertical-align: middle;
-        }
-        .negotiable-notice {
-            background: #e3f2fd;
-            border-left: 3px solid #1976d2;
-            border-radius: 0 6px 6px 0;
-            padding: 6px 10px;
-            font-size: 0.78rem;
-            color: #1565c0;
-            margin-bottom: 10px;
-        }
-
-        /* Pallet breakdown */
-        .pallet-breakdown {
-            background: #fff8e1;
-            border: 1px solid #ffe082;
-            border-radius: 8px;
-            padding: 10px 12px;
-            margin-bottom: 12px;
-            font-size: 0.8rem;
-        }
-        .pallet-header {
-            font-weight: 700;
-            margin-bottom: 6px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .pallet-confidence {
-            font-weight: 400;
-            color: #888;
-            font-size: 0.75rem;
-        }
-        .pallet-notes {
-            color: #666;
-            font-style: italic;
-            margin-bottom: 8px;
-        }
-        .pallet-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.75rem;
-        }
-        .pallet-table th {
-            text-align: left;
-            color: #888;
-            font-weight: 600;
-            padding: 2px 4px;
-            border-bottom: 1px solid #ffe082;
-        }
-        .pallet-table td {
-            padding: 3px 4px;
-            border-bottom: 1px solid #fff3cd;
-        }
-        .pallet-table tfoot td {
-            border-top: 2px solid #ffe082;
-            border-bottom: none;
-            padding-top: 5px;
-        }
-
-        /* Card action buttons */
-        .card-actions {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 10px;
-        }
-
-        .action-btn {
-            flex: 1;
-            padding: 7px;
-            border: 1.5px solid #eee;
-            border-radius: 7px;
-            background: white;
-            font-size: 0.82rem;
-            cursor: pointer;
-            transition: all 0.15s;
-            text-align: center;
-        }
-
-        .action-btn:hover { background: #f8f9fa; }
-
-        .action-btn.thumbs-up:hover, .action-btn.thumbs-up.active {
-            border-color: #27ae60; background: #d5f5e3; color: #1e8449;
-        }
-        .action-btn.thumbs-down:hover, .action-btn.thumbs-down.active {
-            border-color: #e74c3c; background: #fdedec; color: #922b21;
-        }
-        .action-btn.favorite:hover, .action-btn.favorite.active {
-            border-color: #f39c12; background: #fef9e7; color: #9a7d0a;
-        }
-
-        .card-footer {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 9px;
-            border: none;
-            border-radius: 7px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            text-align: center;
-            transition: opacity 0.15s;
-        }
-
-        .btn:hover { opacity: 0.85; }
-        .btn-primary { background: #e94560; color: white; }
-        .btn-secondary { background: #f0f4ff; color: #0f3460; }
-
-        /* Filters */
-        .filters {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-            align-items: center;
-        }
-
-        .filter-label { font-size: 0.82rem; color: #666; }
-
-        .filter-btn {
-            padding: 6px 14px;
-            border: 1.5px solid #ddd;
-            border-radius: 20px;
-            background: white;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            border-color: #e94560;
-            color: #e94560;
-            background: #fff0f3;
-        }
-
-        /* Empty state */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #888;
-        }
-
-        .empty-state h3 { font-size: 1.1rem; margin-bottom: 8px; }
-        .empty-state p { font-size: 0.85rem; }
-
-        /* Feedback modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 100;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-overlay.open { display: flex; }
-
-        .modal {
-            background: white;
-            border-radius: 16px;
-            padding: 28px;
-            max-width: 440px;
-            width: 90%;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        }
-
-        .modal h3 { font-size: 1.1rem; margin-bottom: 12px; }
-
-        .modal textarea {
-            width: 100%;
-            min-height: 80px;
-            border: 1.5px solid #ddd;
-            border-radius: 8px;
-            padding: 10px;
-            font-family: inherit;
-            font-size: 0.9rem;
-            resize: vertical;
-            margin-bottom: 12px;
-        }
-
-        .modal textarea:focus { outline: none; border-color: #e94560; }
-
-        .modal-actions {
-            display: flex;
-            gap: 8px;
-            justify-content: flex-end;
-        }
-
-        .modal-btn {
-            padding: 8px 20px;
-            border: none;
-            border-radius: 7px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .modal-btn.cancel { background: #f0f0f0; color: #666; }
-        .modal-btn.submit { background: #e94560; color: white; }
-
-        /* GitHub token setup banner */
-        .setup-banner {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            border-radius: 10px;
-            padding: 16px 20px;
-            margin-bottom: 20px;
-            font-size: 0.85rem;
-        }
-
-        .setup-banner a { color: #0f3460; font-weight: 600; }
-
-        .setup-banner input {
-            padding: 6px 10px;
-            border: 1.5px solid #ddd;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            width: 300px;
-            margin: 8px 4px 0 0;
-        }
-
-        .setup-banner button {
-            padding: 6px 14px;
-            background: #0f3460;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            cursor: pointer;
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .opportunities-grid { grid-template-columns: 1fr; }
-            header { flex-direction: column; gap: 8px; text-align: center; }
-            .tabs { flex-direction: column; }
-            .setup-banner input { width: 100%; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LEGO Deal Tracker</title>
+  <style>
+    :root {
+      --bg: #0f1117; --card: #1a1d27; --card-hover: #1e2130; --border: #2a2d3a;
+      --text: #e2e8f0; --muted: #8892a4; --accent: #3b82f6; --green: #10b981;
+      --orange: #f59e0b; --red: #ef4444; --purple: #8b5cf6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
+    .header { background: var(--card); border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; position: sticky; top: 0; z-index: 100; }
+    .header-title { font-size: 1.3rem; font-weight: 700; }
+    .header-title span { color: var(--accent); }
+    .header-meta { font-size: 0.78rem; color: var(--muted); }
+    .stats-bar { display: flex; background: var(--card); border-bottom: 1px solid var(--border); overflow-x: auto; }
+    .stat { padding: 14px 20px; border-right: 1px solid var(--border); min-width: 120px; }
+    .stat-value { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+    .stat-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .blue { color: var(--accent); } .green { color: var(--green); } .orange { color: var(--orange); } .purple { color: var(--purple); }
+    .filter-bar { padding: 14px 24px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; border-bottom: 1px solid var(--border); }
+    .filter-label { font-size: 0.78rem; color: var(--muted); }
+    select, .filter-btn { background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px; font-size: 0.82rem; cursor: pointer; }
+    select:hover, .filter-btn:hover { border-color: var(--accent); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+    .filter-divider { width: 1px; height: 24px; background: var(--border); }
+    .main { padding: 24px; max-width: 1400px; margin: 0 auto; }
+    .sets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+    .set-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .set-card:hover { border-color: var(--accent); }
+    .set-card.has-deals { border-color: #2a3a5a; }
+    .set-card.has-halfprijs { border-color: #2d4a2d; }
+    .set-card-header { display: flex; gap: 14px; padding: 16px; cursor: pointer; user-select: none; }
+    .set-card-header:hover { background: var(--card-hover); }
+    .set-img { width: 80px; height: 60px; object-fit: cover; border-radius: 6px; background: #1f2937; flex-shrink: 0; }
+    .set-img-placeholder { width: 80px; height: 60px; border-radius: 6px; background: #1f2937; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+    .set-info { flex: 1; min-width: 0; }
+    .set-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .set-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+    .set-number { font-size: 0.75rem; color: var(--muted); }
+    .theme-badge { font-size: 0.68rem; padding: 2px 7px; border-radius: 4px; background: #1e3a5f; color: #93c5fd; }
+    .retired-badge { font-size: 0.68rem; padding: 2px 7px; border-radius: 4px; background: #3b1f5e; color: #c4b5fd; }
+    .set-prices { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+    .price-label { font-size: 0.72rem; color: var(--muted); }
+    .price-value { font-size: 0.88rem; font-weight: 600; }
+    .set-card-footer { padding: 10px 16px; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+    .deal-count-badge { font-size: 0.78rem; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
+    .deal-count-badge.has-deals { background: #1e3a5f; color: #93c5fd; }
+    .deal-count-badge.no-deals { background: #1f2937; color: var(--muted); }
+    .deal-count-badge.has-hot { background: #1a3a1a; color: #6ee7b7; }
+    .vinted-count { font-size: 0.75rem; color: var(--muted); }
+    .velocity-badge { font-size: 0.72rem; padding: 2px 7px; border-radius: 4px; }
+    .velocity-SNEL { background: #1a3a1a; color: #6ee7b7; }
+    .velocity-NORMAAL { background: #1f2937; color: var(--muted); }
+    .velocity-LANGZAAM { background: #3b2000; color: #fbbf24; }
+    .expand-icon { color: var(--muted); font-size: 0.8rem; transition: transform 0.2s; }
+    .set-card.expanded .expand-icon { transform: rotate(180deg); }
+    .deals-panel { display: none; border-top: 1px solid var(--border); }
+    .set-card.expanded .deals-panel { display: block; }
+    .deals-panel-empty { padding: 20px; text-align: center; color: var(--muted); font-size: 0.85rem; }
+    .deal-item { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 12px; }
+    .deal-item:last-child { border-bottom: none; }
+    .deal-item:hover { background: var(--card-hover); }
+    .deal-thumb { width: 56px; height: 42px; object-fit: cover; border-radius: 5px; flex-shrink: 0; }
+    .deal-thumb-placeholder { width: 56px; height: 42px; border-radius: 5px; background: #1f2937; flex-shrink: 0; }
+    .deal-body { flex: 1; min-width: 0; }
+    .deal-title { font-size: 0.88rem; font-weight: 500; margin-bottom: 5px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+    .deal-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 7px; }
+    .badge { font-size: 0.68rem; font-weight: 600; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+    .badge-halfprijs { background: #1a3a1a; color: #6ee7b7; }
+    .badge-biedingdeal { background: #1e3a5f; color: #93c5fd; }
+    .badge-oudaanbod { background: #3b2000; color: #fbbf24; }
+    .badge-new { background: #2d1a3a; color: #c4b5fd; }
+    .badge-pricedrop { background: #3a1a1a; color: #fca5a5; }
+    .badge-NIB { background: #065f46; color: #6ee7b7; }
+    .badge-CIB { background: #1e3a5f; color: #93c5fd; }
+    .badge-incomplete { background: #7c2d12; color: #fdba74; }
+    .badge-unknown { background: #1f2937; color: #9ca3af; }
+    .deal-prices { display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; margin-bottom: 6px; }
+    .dp-buy { font-size: 0.95rem; font-weight: 700; }
+    .dp-ref { font-size: 0.82rem; color: var(--muted); text-decoration: line-through; }
+    .dp-discount { font-size: 0.78rem; color: var(--green); font-weight: 600; }
+    .dp-bid { font-size: 0.82rem; color: var(--orange); }
+    .deal-margin-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 5px; }
+    .margin-pill { font-size: 0.72rem; padding: 2px 7px; border-radius: 4px; font-weight: 600; }
+    .margin-positive { background: #1a3a1a; color: #6ee7b7; }
+    .margin-zero { background: #1f2937; color: var(--muted); }
+    .margin-negative { background: #3a1a1a; color: #fca5a5; }
+    .deal-meta { font-size: 0.72rem; color: var(--muted); }
+    .deal-link { display: inline-block; margin-top: 6px; font-size: 0.78rem; color: var(--accent); text-decoration: none; }
+    .deal-link:hover { text-decoration: underline; }
+    .chart-btn { background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--muted); font-size: 0.72rem; padding: 2px 8px; cursor: pointer; }
+    .chart-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .price-chart-panel { display: none; padding: 16px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.15); }
+    .price-chart-panel.open { display: block; }
+    .chart-legend { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+    .legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.72rem; color: var(--muted); }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .cost-footer { margin: 24px; padding: 20px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; max-width: 1400px; margin-left: auto; margin-right: auto; }
+    .cost-footer-title { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+    .cost-bar-wrap { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+    .cost-bar-bg { flex: 1; height: 10px; background: #1f2937; border-radius: 5px; overflow: hidden; max-width: 300px; }
+    .cost-bar-fill { height: 100%; border-radius: 5px; }
+    .cost-bar-low { background: var(--green); }
+    .cost-bar-mid { background: var(--orange); }
+    .cost-bar-high { background: var(--red); }
+    .cost-text { font-size: 0.85rem; font-weight: 600; }
+    .cost-meta { font-size: 0.75rem; color: var(--muted); }
+    .empty-state { text-align: center; padding: 60px 24px; color: var(--muted); }
+    .empty-state-icon { font-size: 3rem; margin-bottom: 16px; }
+    .empty-state-title { font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+    @media (max-width: 600px) { .sets-grid { grid-template-columns: 1fr; } .main { padding: 16px; } }
+  </style>
 </head>
 <body>
-    <header>
-        <div>
-            <h1>Circulair Trader</h1>
-            <div class="subtitle">Kinderkleding · Speelgoed · Kinderboeken</div>
-        </div>
-        <div style="display:flex;align-items:center;">
-            <div class="timestamp">
-                Gegenereerd op: {{ generated_at }}<br>
-                Volgende update: {{ next_update }}
-            </div>
-            <a href="favorieten.html" class="nav-link">&#9733; Favorieten</a>
-        </div>
-    </header>
 
-    <div class="container">
+<header class="header">
+  <div style="display:flex; align-items:center; gap:16px;">
+    <div class="header-title">🧱 LEGO <span>Deal</span> Tracker</div>
+    <div class="header-meta">Marktplaats: {{ scraped_at }}{% if vinted_prices_date and vinted_prices_date != '—' %} · Vinted: {{ vinted_prices_date }}{% endif %}</div>
+  </div>
+  <div class="header-meta">{{ generated_at }} · <a href="https://github.com/{{ github_repo }}" target="_blank" style="color:var(--muted);text-decoration:none;">GitHub</a></div>
+</header>
 
-        <!-- GitHub token setup (hidden if already set) -->
-        <div class="setup-banner" id="token-setup" style="display:none;">
-            <strong>Feedback & Favorieten instellen:</strong> Om feedback te geven en favorieten op te slaan, heb je een
-            <a href="https://github.com/settings/tokens/new?scopes=public_repo&description=Circulair+Trader+Feedback" target="_blank">GitHub Personal Access Token</a> nodig (scope: public_repo).<br>
-            <input type="password" id="gh-token-input" placeholder="ghp_xxxxxxxxxxxx">
-            <button onclick="saveToken()">Opslaan</button>
-        </div>
+<div class="stats-bar">
+  <div class="stat"><div class="stat-value blue">{{ total_deals }}</div><div class="stat-label">Actieve deals</div></div>
+  <div class="stat"><div class="stat-value purple">{{ new_today }}</div><div class="stat-label">Nieuw vandaag</div></div>
+  <div class="stat"><div class="stat-value orange">{{ price_drops }}</div><div class="stat-label">Prijsdalingen</div></div>
+  <div class="stat"><div class="stat-value green">{{ sets_with_deals }}</div><div class="stat-label">Sets met deals</div></div>
+  <div class="stat"><div class="stat-value">{{ total_sets }}</div><div class="stat-label">Sets gevolgd</div></div>
+</div>
 
-        <!-- Stats bar -->
-        <div class="stats-bar">
-            <div class="stat-card">
-                <div class="value">{{ stats.total_opportunities }}</div>
-                <div class="label">Opportunities</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">{{ stats.new_deals_count }}</div>
-                <div class="label">Nieuw vandaag</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">&euro;{{ stats.best_profit }}</div>
-                <div class="label">Beste winstmarge</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">&euro;{{ stats.avg_profit }}</div>
-                <div class="label">Gem. netto winst</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">{{ stats.low_risk_count }}</div>
-                <div class="label">Laag risico</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">{{ stats.sources_scanned }}</div>
-                <div class="label">Bronnen gescand</div>
-            </div>
-        </div>
+<div class="filter-bar">
+  <span class="filter-label">Filter:</span>
+  <select id="filter-theme" onchange="applyFilters()">
+    <option value="">Alle thema's</option>
+    {% for theme in themes %}<option value="{{ theme }}">{{ theme }}</option>{% endfor %}
+  </select>
+  <select id="filter-condition" onchange="applyFilters()">
+    <option value="">Alle condities</option>
+    <option value="NIB">Nieuw in doos (NIB)</option>
+    <option value="CIB">Compleet in doos (CIB)</option>
+    <option value="incomplete">Incompleet</option>
+    <option value="unknown">Onbekend</option>
+  </select>
+  <select id="filter-deal-type" onchange="applyFilters()">
+    <option value="">Alle deal types</option>
+    <option value="HALFPRIJS">🔥 Halfprijs</option>
+    <option value="BIEDING_DEAL">⚡ Bieding deal</option>
+    <option value="OUD_AANBOD">⌛ Oud aanbod</option>
+  </select>
+  <div class="filter-divider"></div>
+  <button class="filter-btn" id="btn-new-today" onclick="toggleFilter('new_today')">🆕 Nieuw vandaag</button>
+  <button class="filter-btn" id="btn-old-offer" onclick="toggleFilter('old_offer')">⌛ Oud aanbod</button>
+  <button class="filter-btn active" id="btn-deals-only" onclick="toggleFilter('deals_only')">Alleen met deals</button>
+</div>
 
-        <!-- Tabs: Nieuw / Nog beschikbaar / Alles -->
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('all', this)">
-                Alles <span class="tab-badge">{{ stats.total_opportunities }}</span>
-            </button>
-            <button class="tab-btn" onclick="switchTab('new', this)">
-                Nieuw vandaag <span class="tab-badge">{{ stats.new_deals_count }}</span>
-            </button>
-            <button class="tab-btn" onclick="switchTab('returning', this)">
-                Nog beschikbaar <span class="tab-badge">{{ stats.returning_deals_count }}</span>
-            </button>
-            <button class="tab-btn" onclick="switchTab('favorites-tab', this)">
-                &#9733; Favorieten <span class="tab-badge" id="fav-count">0</span>
-            </button>
-        </div>
+<main class="main">
+  {% if not sets %}
+  <div class="empty-state">
+    <div class="empty-state-icon">🔍</div>
+    <div class="empty-state-title">Nog geen data beschikbaar</div>
+    <p>De eerste scrape is nog niet uitgevoerd. Morgen om 04:00 start de eerste automatische run.</p>
+  </div>
+  {% else %}
+  <div id="sets-grid" class="sets-grid">
+    {% for lego_set in sets %}
+    {% set has_hot = namespace(v=false) %}
+    {% for d in lego_set.deals %}{% if d.deal_verdict and d.deal_verdict.deal_type == 'HALFPRIJS' %}{% set has_hot.v = true %}{% endif %}{% endfor %}
+    {% set ref_price = lego_set.market_value_new if lego_set.is_retired and lego_set.market_value_new else lego_set.retail_price %}
+    {% set new_count = namespace(v=0) %}{% for d in lego_set.deals %}{% if d.is_new_today %}{% set new_count.v = new_count.v + 1 %}{% endif %}{% endfor %}
+    {% set old_count = namespace(v=0) %}{% for d in lego_set.deals %}{% if d.deal_verdict and d.deal_verdict.deal_type == 'OUD_AANBOD' %}{% set old_count.v = old_count.v + 1 %}{% endif %}{% endfor %}
+    {% set conds = lego_set.deals | map(attribute='condition_category') | join(',') %}
+    {% set dtypes = lego_set.deals | map(attribute='deal_verdict') | selectattr('deal_type') | map(attribute='deal_type') | join(',') %}
 
-        <!-- Vinted trends (laatste 4 weken) -->
-        {% if trends %}
-        <div class="section-title">&#128293; Vinted trends (laatste 4 weken)</div>
-        <div class="trends-grid">
-            {% for trend in trends[:8] %}
-            <div class="trend-chip">
-                <div class="trend-name">{{ trend.search_term }}</div>
-                <div class="trend-meta">
-                    Gem. &euro;{{ "%.0f"|format(trend.avg_price) }} &middot;
-                    {{ trend.listing_count }} listings
-                </div>
-                <div class="demand-bar">
-                    <div class="demand-fill" style="width: {{ (trend.demand_score / 10 * 100)|int }}%"></div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+    <div class="set-card {% if lego_set.deal_count > 0 %}has-deals{% endif %}{% if has_hot.v %} has-halfprijs{% endif %}"
+         data-theme="{{ lego_set.theme }}"
+         data-deal-count="{{ lego_set.deal_count }}"
+         data-has-new="{{ new_count.v }}"
+         data-has-old="{{ old_count.v }}"
+         data-conditions="{{ conds }}"
+         data-deal-types="{{ dtypes }}">
 
-        <!-- Trend chart -->
-        <div class="trend-chart-container">
-            <div class="section-title" style="margin-bottom:16px;">&#128200; Trendontwikkeling</div>
-            <canvas id="trendChart" width="800" height="250" style="width:100%;height:250px;"></canvas>
-            <div class="chart-legend" id="chartLegend"></div>
-        </div>
+      <div class="set-card-header" onclick="toggleCard(this)">
+        {% if lego_set.image_url %}
+        <img class="set-img" src="{{ lego_set.image_url }}" alt="{{ lego_set.name }}" loading="lazy" onerror="this.style.display='none'">
+        {% else %}
+        <div class="set-img-placeholder">🧱</div>
         {% endif %}
-
-        <!-- Filters -->
-        <div class="filters">
-            <span class="filter-label">Filter:</span>
-            <button class="filter-btn active" onclick="filterCards('all', this)">Alles</button>
-            <button class="filter-btn" onclick="filterCards('low-risk', this)">Laag risico</button>
-            <button class="filter-btn" onclick="filterCards('marktplaats', this)">Marktplaats</button>
-            <button class="filter-btn" onclick="filterCards('troostwijk', this)">Troostwijk</button>
-            <button class="filter-btn" onclick="filterCards('stocklear', this)">Stocklear</button>
-            <button class="filter-btn" onclick="filterCards('merkandi', this)">Merkandi</button>
-        </div>
-
-        <!-- ALL opportunities tab -->
-        <div class="tab-content active" id="tab-all">
-            <div class="section-title">&#128188; Top opportunities &mdash; {{ date_label }}</div>
-            {% if opportunities %}
-            <div class="opportunities-grid" id="opportunities-grid">
-                {% for opp in opportunities %}
-                {% include "opportunity_card.html" %}
-                {% endfor %}
-            </div>
-            {% else %}
-            <div class="empty-state">
-                <h3>Geen opportunities gevonden</h3>
-                <p>Er zijn vandaag geen items gevonden die voldoen aan je minimumcriteria.</p>
-            </div>
+        <div class="set-info">
+          <div class="set-name" title="{{ lego_set.name }}">{{ lego_set.name }}</div>
+          <div class="set-meta">
+            <span class="set-number">#{{ lego_set.set_number }}</span>
+            <span class="theme-badge">{{ lego_set.theme }}</span>
+            {% if lego_set.is_retired %}<span class="retired-badge">Retired</span>{% endif %}
+          </div>
+          <div class="set-prices">
+            <span class="price-label">Nieuw:</span>
+            <span class="price-value">€{{ "%.0f"|format(lego_set.retail_price) }}</span>
+            {% if lego_set.is_retired and lego_set.market_value_new %}
+            <span class="price-label">Marktw.:</span>
+            <span class="price-value" style="color:var(--purple);">€{{ "%.0f"|format(lego_set.market_value_new) }}</span>
             {% endif %}
-        </div>
-
-        <!-- NEW deals tab -->
-        <div class="tab-content" id="tab-new">
-            <div class="section-title">&#127381; Nieuwe deals vandaag</div>
-            {% if new_deals %}
-            <div class="opportunities-grid">
-                {% for opp in new_deals %}
-                {% include "opportunity_card.html" %}
-                {% endfor %}
-            </div>
-            {% else %}
-            <div class="empty-state">
-                <h3>Geen nieuwe deals vandaag</h3>
-                <p>Alle gevonden deals waren al eerder zichtbaar.</p>
-            </div>
+            {% set vp = lego_set.vinted_prices %}
+            {% if vp and vp.NIB and vp.NIB.realistic_sell_price %}
+            <span class="price-label">Vinted NIB:</span>
+            <span class="price-value" style="color:var(--orange);">€{{ "%.0f"|format(vp.NIB.realistic_sell_price) }}</span>
             {% endif %}
+          </div>
         </div>
-
-        <!-- RETURNING deals tab -->
-        <div class="tab-content" id="tab-returning">
-            <div class="section-title">&#128230; Nog beschikbaar van eerdere dagen</div>
-            {% if returning_deals %}
-            <div class="opportunities-grid">
-                {% for opp in returning_deals %}
-                {% include "opportunity_card.html" %}
-                {% endfor %}
-            </div>
-            {% else %}
-            <div class="empty-state">
-                <h3>Geen terugkerende deals</h3>
-                <p>Alle deals zijn nieuw vandaag.</p>
-            </div>
-            {% endif %}
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;">
+          {% if lego_set.deal_count > 0 %}
+          <span class="deal-count-badge {% if has_hot.v %}has-hot{% else %}has-deals{% endif %}">
+            {% if has_hot.v %}🔥{% endif %} {{ lego_set.deal_count }} deal{{ 's' if lego_set.deal_count != 1 }}
+          </span>
+          {% else %}
+          <span class="deal-count-badge no-deals">Geen deals</span>
+          {% endif %}
+          <span class="expand-icon">▼</span>
         </div>
+      </div>
 
-        <!-- FAVORITES tab (loaded from GitHub Issues via JS) -->
-        <div class="tab-content" id="tab-favorites-tab">
-            <div class="section-title">&#9733; Mijn favorieten</div>
-            <div id="favorites-list" class="opportunities-grid">
-                <div class="empty-state">
-                    <h3>Laden...</h3>
-                    <p>Favorieten worden opgehaald uit GitHub Issues.</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Feedback modal -->
-    <div class="modal-overlay" id="feedbackModal">
-        <div class="modal">
-            <h3>&#128078; Waarom is dit geen goede deal?</h3>
-            <textarea id="feedbackReason" placeholder="Bijv. 'Prijs te hoog voor dit merk', 'Niet populair bij mijn doelgroep', 'Verkeerde maat/variant'..."></textarea>
-            <div class="modal-actions">
-                <button class="modal-btn cancel" onclick="closeFeedbackModal()">Annuleren</button>
-                <button class="modal-btn submit" onclick="submitNegativeFeedback()">Versturen</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Budget indicator -->
-    <div style="text-align:center; padding: 24px; color: #aaa; font-size: 0.75rem;">
-        API kosten deze maand: &euro;{{ "%.2f"|format(api_cost.cost_eur) }} van &euro;{{ api_cost.budget_eur }}
-        ({{ api_cost.pct_used }}% gebruikt)
-        {% if api_cost.pct_used >= 80 %}
-        <span style="color:#e74c3c; font-weight:bold;"> &mdash; Budget bijna op!</span>
+      <div class="set-card-footer">
+        <span class="vinted-count">Vinted: {% if lego_set.vinted_total_count > 0 %}{{ lego_set.vinted_total_count }} te koop{% else %}geen data{% endif %}</span>
+        {% if lego_set.velocity_trend and lego_set.velocity_trend != 'ONBEKEND' %}
+        <span class="velocity-badge velocity-{{ lego_set.velocity_trend }}">
+          {% if lego_set.velocity_trend == 'SNEL' %}⚡ Snel weg
+          {% elif lego_set.velocity_trend == 'LANGZAAM' %}🐌 Langzaam
+          {% else %}→ Normaal{% endif %}
+        </span>
         {% endif %}
+        {% if lego_set.price_chart_data %}
+        <button class="chart-btn" onclick="event.stopPropagation(); toggleChart(this, '{{ lego_set.set_number }}')">📈 Prijsgrafiek</button>
+        {% endif %}
+      </div>
+
+      {% if lego_set.price_chart_data %}
+      <div class="price-chart-panel" id="chart-{{ lego_set.set_number }}">
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:8px;">Verwachte verkoopprijs op Vinted (per week)</div>
+        <div class="chart-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#6ee7b7"></div>NIB</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#93c5fd"></div>CIB</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#fdba74"></div>Incompleet</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#9ca3af"></div>Alle</div>
+        </div>
+        <svg id="svg-{{ lego_set.set_number }}" data-chart='{{ lego_set.price_chart_data | tojson }}' style="width:100%;height:110px;display:block;"></svg>
+      </div>
+      {% endif %}
+
+      <div class="deals-panel">
+        {% if lego_set.deals %}
+        {% for deal in lego_set.deals %}
+        {% set verdict = deal.deal_verdict %}
+        {% set cond = deal.condition_category %}
+        {% set margin_data = {} %}
+        {% if deal.margins %}{% set margin_data = deal.margins.get(cond) or deal.margins.get('unknown') or {} %}{% endif %}
+        <div class="deal-item">
+          {% if deal.image_url %}
+          <img class="deal-thumb" src="{{ deal.image_url }}" alt="" loading="lazy" onerror="this.style.display='none'">
+          {% else %}
+          <div class="deal-thumb-placeholder"></div>
+          {% endif %}
+          <div class="deal-body">
+            <div class="deal-title" title="{{ deal.title }}">{{ deal.title }}</div>
+            <div class="deal-badges">
+              {% if verdict %}
+              {% set dt = verdict.deal_type %}
+              <span class="badge badge-{{ dt | replace('_','') | lower }}">{{ verdict.deal_badge }}</span>
+              {% endif %}
+              {% if deal.is_new_today %}<span class="badge badge-new">🆕 Nieuw</span>{% endif %}
+              {% if deal.price_changed %}<span class="badge badge-pricedrop">↓ Prijs gedaald</span>{% endif %}
+              <span class="badge badge-{{ cond }}">
+                {% if cond == 'NIB' %}Nieuw in doos{% elif cond == 'CIB' %}Compleet in doos{% elif cond == 'incomplete' %}Incompleet{% else %}Onbekend{% endif %}
+              </span>
+            </div>
+            <div class="deal-prices">
+              <span class="dp-buy">€{{ "%.0f"|format(deal.price) }}</span>
+              {% if verdict and verdict.reference_price %}
+              <span style="font-size:0.75rem;color:var(--muted);">vs</span>
+              <span class="dp-ref">€{{ "%.0f"|format(verdict.reference_price) }}</span>
+              {% if verdict.discount_pct %}<span class="dp-discount">-{{ verdict.discount_pct }}%</span>{% endif %}
+              {% endif %}
+              {% if deal.price_type == 'bidding' %}
+              <span class="dp-bid">{% if deal.current_bid %}⚡ Huidig bod: €{{ "%.0f"|format(deal.current_bid) }}{% else %}⚡ Bieden (geen bod){% endif %}</span>
+              {% endif %}
+              {% if deal.price_changed and deal.previous_price %}
+              <span style="font-size:0.75rem;color:var(--red);">was €{{ "%.0f"|format(deal.previous_price) }}</span>
+              {% endif %}
+            </div>
+            {% if deal.margins %}
+            <div class="deal-margin-row">
+              {% for cat_key in ['NIB', 'CIB', 'incomplete'] %}
+              {% set m = deal.margins.get(cat_key, {}) %}
+              {% if m and m.expected_sell_price %}
+              {% set profit = m.net_profit %}
+              <span class="margin-pill {% if profit and profit > 0 %}margin-positive{% elif profit and profit < 0 %}margin-negative{% else %}margin-zero{% endif %}"
+                    title="Verkoop: €{{ '%.0f'|format(m.expected_sell_price) }} · Commissie: €{{ '%.0f'|format(m.vinted_commission or 0) }} · Verzending: €5.50">
+                {{ cat_key }}: {% if profit %}{{ '+' if profit > 0 else '' }}€{{ "%.0f"|format(profit) }}{% else %}—{% endif %}
+              </span>
+              {% endif %}
+              {% endfor %}
+            </div>
+            {% endif %}
+            <div class="deal-meta" style="margin-top:5px;">
+              {% if deal.location %}{{ deal.location }}{% if deal.days_listed %} · {% endif %}{% endif %}
+              {% if deal.days_listed %}{{ deal.days_listed }} dag{{ 'en' if deal.days_listed != 1 }} te koop{% endif %}
+              {% if deal.seller_name %} · {{ deal.seller_name }}{% endif %}
+            </div>
+            <a class="deal-link" href="{{ deal.url }}" target="_blank" rel="noopener">Bekijk op Marktplaats →</a>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="deals-panel-empty">Geen kwalificerende deals op dit moment.</div>
+        {% endif %}
+      </div>
     </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</main>
 
-    <script>
-    // ── Config ──────────────────────────────────────────────────
-    const GITHUB_REPO = '{{ github_repo }}';
-    const GITHUB_API = 'https://api.github.com';
+<div style="padding: 0 24px 32px; max-width:1400px; margin:0 auto;">
+  <div class="cost-footer">
+    <div class="cost-footer-title">💰 Maandelijkse technologiekosten</div>
+    <div class="cost-bar-wrap">
+      <div class="cost-bar-bg">
+        <div class="cost-bar-fill cost-bar-{% if cost_pct > 80 %}high{% elif cost_pct > 50 %}mid{% else %}low{% endif %}" style="width:{{ cost_pct }}%;"></div>
+      </div>
+      <span class="cost-text">€{{ cost_eur }} / €{{ budget_eur }}</span>
+      <span style="font-size:0.75rem;color:var(--muted);">({{ cost_pct }}%)</span>
+      {% if cost_pct > 80 %}<span style="color:var(--red);font-weight:600;font-size:0.82rem;">⚠️ Budget bijna vol</span>{% endif %}
+    </div>
+    <div class="cost-meta">GitHub Actions: gratis · GitHub Pages: gratis · Claude API: €{{ cost_eur }} · Limiet: €{{ budget_eur }}/maand</div>
+  </div>
+</div>
 
-    // ── Token management ────────────────────────────────────────
-    function getToken() { return localStorage.getItem('gh_pat') || ''; }
+<script>
+function toggleCard(headerEl) {
+  const card = headerEl.closest('.set-card');
+  card.classList.toggle('expanded');
+}
 
-    function saveToken() {
-        const token = document.getElementById('gh-token-input').value.trim();
-        if (token) {
-            localStorage.setItem('gh_pat', token);
-            document.getElementById('token-setup').style.display = 'none';
-            loadFavorites();
-        }
-    }
+function toggleChart(btn, setNumber) {
+  const panel = document.getElementById('chart-' + setNumber);
+  if (!panel) return;
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) { renderChart(setNumber); btn.textContent = '📈 Verberg'; }
+  else { btn.textContent = '📈 Prijsgrafiek'; }
+}
 
-    // Show setup banner if no token
-    if (!getToken()) {
-        document.getElementById('token-setup').style.display = 'block';
-    }
+function renderChart(setNumber) {
+  const svg = document.getElementById('svg-' + setNumber);
+  if (!svg || svg.dataset.rendered) return;
+  svg.dataset.rendered = '1';
+  let data; try { data = JSON.parse(svg.dataset.chart); } catch(e) { return; }
+  if (!data || data.length < 2) { svg.innerHTML = '<text x="50%" y="50%" fill="#6b7280" text-anchor="middle" font-size="11">Onvoldoende data voor grafiek</text>'; return; }
+  const W = svg.clientWidth || 300, H = 110;
+  const PAD = {top:8, right:8, bottom:20, left:44};
+  const pw = W - PAD.left - PAD.right, ph = H - PAD.top - PAD.bottom;
+  const cats = ['NIB','CIB','incomplete','all'];
+  const colors = {NIB:'#6ee7b7', CIB:'#93c5fd', incomplete:'#fdba74', all:'#9ca3af'};
+  let minP = Infinity, maxP = 0;
+  data.forEach(d => cats.forEach(c => { if(d[c]) { minP = Math.min(minP, d[c]); maxP = Math.max(maxP, d[c]); } }));
+  if (minP === Infinity) return;
+  const range = maxP - minP || 1;
+  const x = i => PAD.left + (data.length > 1 ? (i / (data.length - 1)) * pw : pw/2);
+  const y = v => PAD.top + ph - ((v - minP) / range) * ph;
+  let h = `<text x="${PAD.left-4}" y="${PAD.top+8}" fill="#6b7280" font-size="9" text-anchor="end">€${Math.round(maxP)}</text>`;
+  h += `<text x="${PAD.left-4}" y="${PAD.top+ph}" fill="#6b7280" font-size="9" text-anchor="end">€${Math.round(minP)}</text>`;
+  if (data.length > 0) {
+    h += `<text x="${x(0)}" y="${H-2}" fill="#6b7280" font-size="8" text-anchor="middle">${data[0].week}</text>`;
+    if (data.length > 1) h += `<text x="${x(data.length-1)}" y="${H-2}" fill="#6b7280" font-size="8" text-anchor="middle">${data[data.length-1].week}</text>`;
+  }
+  cats.forEach(cat => {
+    const pts = data.reduce((acc,d,i) => { if(d[cat]) acc.push({xi:x(i),yi:y(d[cat])}); return acc; }, []);
+    if (pts.length < 2) return;
+    const d = pts.map((p,i) => `${i===0?'M':'L'}${p.xi.toFixed(1)},${p.yi.toFixed(1)}`).join(' ');
+    h += `<path d="${d}" stroke="${colors[cat]}" stroke-width="1.5" fill="none" opacity="0.85"/>`;
+    const last = pts[pts.length-1];
+    h += `<circle cx="${last.xi.toFixed(1)}" cy="${last.yi.toFixed(1)}" r="3" fill="${colors[cat]}"/>`;
+  });
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.innerHTML = h;
+}
 
-    // ── Tab switching ───────────────────────────────────────────
-    function switchTab(tabId, btn) {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById('tab-' + tabId).classList.add('active');
-    }
+const activeFilters = {new_today:false, old_offer:false, deals_only:true};
 
-    // ── Card filtering ──────────────────────────────────────────
-    function filterCards(filter, btn) {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+function toggleFilter(key) {
+  activeFilters[key] = !activeFilters[key];
+  const id = 'btn-' + key.replace('_','-');
+  document.getElementById(id)?.classList.toggle('active', activeFilters[key]);
+  applyFilters();
+}
 
-        document.querySelectorAll('.opportunity-card').forEach(card => {
-            if (filter === 'all') {
-                card.style.display = '';
-            } else if (filter === 'low-risk') {
-                card.style.display = card.dataset.risk === 'low-risk' ? '' : 'none';
-            } else {
-                card.style.display = card.dataset.platform === filter ? '' : 'none';
-            }
-        });
-    }
+function applyFilters() {
+  const theme = document.getElementById('filter-theme').value;
+  const cond = document.getElementById('filter-condition').value;
+  const dtype = document.getElementById('filter-deal-type').value;
+  document.querySelectorAll('.set-card').forEach(card => {
+    let show = true;
+    if (theme && card.dataset.theme !== theme) show = false;
+    if (activeFilters.deals_only && parseInt(card.dataset.dealCount||0) === 0) show = false;
+    if (activeFilters.new_today && parseInt(card.dataset.hasNew||0) === 0) show = false;
+    if (activeFilters.old_offer && parseInt(card.dataset.hasOld||0) === 0) show = false;
+    if (cond) { const cs = (card.dataset.conditions||'').split(','); if (!cs.includes(cond)) show = false; }
+    if (dtype) { const ds = (card.dataset.dealTypes||'').split(','); if (!ds.includes(dtype)) show = false; }
+    card.style.display = show ? '' : 'none';
+  });
+}
 
-    // ── GitHub Issues API helpers ────────────────────────────────
-    async function createIssue(title, body, labels) {
-        const token = getToken();
-        if (!token) {
-            document.getElementById('token-setup').style.display = 'block';
-            return null;
-        }
-        const resp = await fetch(`${GITHUB_API}/repos/${GITHUB_REPO}/issues`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `token ${token}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ title, body, labels }),
-        });
-        if (!resp.ok) {
-            const err = await resp.text();
-            console.error('GitHub API error:', err);
-            if (resp.status === 401) {
-                localStorage.removeItem('gh_pat');
-                document.getElementById('token-setup').style.display = 'block';
-            }
-            return null;
-        }
-        return await resp.json();
-    }
+// Auto-expand sets with 1-2 deals
+document.querySelectorAll('.set-card.has-deals').forEach(card => {
+  if (parseInt(card.dataset.dealCount||0) <= 2) card.classList.add('expanded');
+});
 
-    // ── Feedback (thumbs up / thumbs down) ──────────────────────
-    let pendingFeedbackCard = null;
-
-    function giveFeedback(type, btn, title, url, price) {
-        if (type === 'up') {
-            btn.classList.add('active');
-            createIssue(
-                `[feedback] ${title}`,
-                `**Type:** Positief (goede deal)\n**Product:** ${title}\n**URL:** ${url}\n**Prijs:** €${price}`,
-                ['feedback-positive']
-            ).then(issue => {
-                if (issue) btn.textContent = '👍 Verstuurd';
-            });
-        } else {
-            pendingFeedbackCard = { title, url, price };
-            document.getElementById('feedbackModal').classList.add('open');
-        }
-    }
-
-    function closeFeedbackModal() {
-        document.getElementById('feedbackModal').classList.remove('open');
-        document.getElementById('feedbackReason').value = '';
-        pendingFeedbackCard = null;
-    }
-
-    function submitNegativeFeedback() {
-        const reason = document.getElementById('feedbackReason').value.trim();
-        if (!reason) return;
-
-        const card = pendingFeedbackCard;
-        createIssue(
-            `[feedback] ${card.title}`,
-            `**Type:** Negatief (niet relevant)\n**Product:** ${card.title}\n**URL:** ${card.url}\n**Prijs:** €${card.price}\n\n**Reden:**\n${reason}`,
-            ['feedback-negative']
-        ).then(issue => {
-            if (issue) {
-                closeFeedbackModal();
-            }
-        });
-    }
-
-    // ── Favorites ───────────────────────────────────────────────
-    function toggleFavorite(btn, title, url, price, imageUrl) {
-        if (btn.classList.contains('active')) return;
-        btn.classList.add('active');
-        btn.textContent = '★ Opgeslagen';
-
-        createIssue(
-            `[favoriet] ${title}`,
-            `**Product:** ${title}\n**URL:** ${url}\n**Prijs:** €${price}\n**Afbeelding:** ${imageUrl}\n**Datum:** ${new Date().toISOString().split('T')[0]}`,
-            ['favorite']
-        ).then(issue => {
-            if (issue) loadFavorites();
-        });
-    }
-
-    async function loadFavorites() {
-        const token = getToken();
-        if (!token) return;
-
-        try {
-            const resp = await fetch(
-                `${GITHUB_API}/repos/${GITHUB_REPO}/issues?labels=favorite&state=open&per_page=50`,
-                { headers: { 'Authorization': `token ${token}` } }
-            );
-            if (!resp.ok) return;
-            const issues = await resp.json();
-
-            const container = document.getElementById('favorites-list');
-            document.getElementById('fav-count').textContent = issues.length;
-
-            if (issues.length === 0) {
-                container.innerHTML = '<div class="empty-state"><h3>Geen favorieten</h3><p>Klik op ★ bij een deal om deze op te slaan.</p></div>';
-                return;
-            }
-
-            container.innerHTML = issues.map(issue => {
-                const body = issue.body || '';
-                const urlMatch = body.match(/\*\*URL:\*\*\s*(.+)/);
-                const priceMatch = body.match(/\*\*Prijs:\*\*\s*€?([\d.]+)/);
-                const imgMatch = body.match(/\*\*Afbeelding:\*\*\s*(.+)/);
-                const dateMatch = body.match(/\*\*Datum:\*\*\s*(.+)/);
-                const hasUitverkocht = issue.labels.some(l => l.name === 'uitverkocht');
-                const title = issue.title.replace('[favoriet] ', '');
-
-                return `
-                <div class="opportunity-card" style="${hasUitverkocht ? 'opacity:0.5;' : ''}">
-                    ${imgMatch ? `<img class="card-image" src="${imgMatch[1].trim()}" alt="${title}" loading="lazy" onerror="this.style.display='none'">` : '<div class="card-image-placeholder">📦</div>'}
-                    <div class="card-body">
-                        <div class="card-title">${title}</div>
-                        ${priceMatch ? `<div style="font-size:1.1rem;font-weight:700;color:#0f3460;margin-bottom:8px;">€${priceMatch[1]}</div>` : ''}
-                        ${dateMatch ? `<div style="font-size:0.78rem;color:#888;margin-bottom:8px;">Opgeslagen op ${dateMatch[1].trim()}</div>` : ''}
-                        ${hasUitverkocht ? '<div style="color:#e74c3c;font-weight:600;font-size:0.85rem;margin-bottom:8px;">Niet meer beschikbaar</div>' : ''}
-                        <div class="card-footer">
-                            ${urlMatch ? `<a href="${urlMatch[1].trim()}" target="_blank" class="btn btn-primary">${hasUitverkocht ? 'Link (verlopen)' : 'Bekijk aanbieding'}</a>` : ''}
-                        </div>
-                    </div>
-                </div>`;
-            }).join('');
-        } catch (e) {
-            console.error('Error loading favorites:', e);
-        }
-    }
-
-    // Load favorites on page load
-    loadFavorites();
-
-    // ── Trend chart ─────────────────────────────────────────────
-    const CHART_COLORS = ['#e94560', '#3498db', '#27ae60', '#f39c12', '#8e44ad'];
-
-    function drawTrendChart() {
-        const raw = {{ trend_chart_data|safe }};
-        if (!raw || !raw.dates || raw.dates.length < 2) return;
-
-        const canvas = document.getElementById('trendChart');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        const dpr = window.devicePixelRatio || 1;
-
-        canvas.width = canvas.offsetWidth * dpr;
-        canvas.height = 250 * dpr;
-        ctx.scale(dpr, dpr);
-
-        const W = canvas.offsetWidth;
-        const H = 250;
-        const pad = { top: 20, right: 20, bottom: 30, left: 40 };
-        const plotW = W - pad.left - pad.right;
-        const plotH = H - pad.top - pad.bottom;
-
-        // Find max demand score
-        let maxVal = 10;
-        const cats = Object.keys(raw.categories);
-
-        // Draw axes
-        ctx.strokeStyle = '#ddd';
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(pad.left, pad.top);
-        ctx.lineTo(pad.left, H - pad.bottom);
-        ctx.lineTo(W - pad.right, H - pad.bottom);
-        ctx.stroke();
-
-        // Y axis labels
-        ctx.fillStyle = '#999';
-        ctx.font = '11px -apple-system, sans-serif';
-        ctx.textAlign = 'right';
-        for (let i = 0; i <= 10; i += 2) {
-            const y = pad.top + plotH - (i / maxVal * plotH);
-            ctx.fillText(i.toString(), pad.left - 6, y + 4);
-            ctx.strokeStyle = '#f0f0f0';
-            ctx.beginPath();
-            ctx.moveTo(pad.left, y);
-            ctx.lineTo(W - pad.right, y);
-            ctx.stroke();
-        }
-
-        // X axis labels (dates)
-        ctx.textAlign = 'center';
-        const step = Math.max(1, Math.floor(raw.dates.length / 6));
-        raw.dates.forEach((d, i) => {
-            if (i % step === 0 || i === raw.dates.length - 1) {
-                const x = pad.left + (i / (raw.dates.length - 1)) * plotW;
-                ctx.fillText(d.slice(5), x, H - pad.bottom + 16);
-            }
-        });
-
-        // Draw lines per category
-        const legend = document.getElementById('chartLegend');
-        legend.innerHTML = '';
-
-        cats.forEach((cat, ci) => {
-            const color = CHART_COLORS[ci % CHART_COLORS.length];
-            const scores = raw.categories[cat].demand_scores;
-
-            ctx.strokeStyle = color;
-            ctx.lineWidth = 2.5;
-            ctx.lineJoin = 'round';
-            ctx.beginPath();
-
-            scores.forEach((val, i) => {
-                const x = pad.left + (i / (scores.length - 1)) * plotW;
-                const y = pad.top + plotH - (val / maxVal * plotH);
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            });
-            ctx.stroke();
-
-            // Draw dots
-            scores.forEach((val, i) => {
-                const x = pad.left + (i / (scores.length - 1)) * plotW;
-                const y = pad.top + plotH - (val / maxVal * plotH);
-                ctx.fillStyle = color;
-                ctx.beginPath();
-                ctx.arc(x, y, 3, 0, Math.PI * 2);
-                ctx.fill();
-            });
-
-            // Legend
-            legend.innerHTML += `<div class="legend-item"><div class="legend-dot" style="background:${color}"></div>${cat}</div>`;
-        });
-    }
-
-    drawTrendChart();
-    window.addEventListener('resize', drawTrendChart);
-    </script>
+applyFilters();
+</script>
 </body>
 </html>

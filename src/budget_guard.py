@@ -16,11 +16,6 @@ import json
 from datetime import datetime
 from pathlib import Path
 
-from src.config import OUTPUT_DIR
-
-
-# Maximum kosten in euro's per maand
-# ($1 ≈ €0.92 — we gebruiken een kleine buffer)
 BUDGET_EUR = 10.0
 BUDGET_USD = BUDGET_EUR / 0.92  # ~$10.87
 
@@ -28,7 +23,8 @@ BUDGET_USD = BUDGET_EUR / 0.92  # ~$10.87
 PRICE_INPUT_PER_TOKEN = 5.00 / 1_000_000    # $0.000005
 PRICE_OUTPUT_PER_TOKEN = 25.00 / 1_000_000  # $0.000025
 
-USAGE_FILE = Path(OUTPUT_DIR) / "api_usage.json"
+USAGE_FILE = Path("data/api_usage.json")
+OUTPUT_DIR = "output"
 
 
 class BudgetExceededError(Exception):
@@ -51,7 +47,7 @@ def _load_usage() -> dict:
 
 def _save_usage(data: dict):
     """Sla verbruiksdata op."""
-    Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
+    USAGE_FILE.parent.mkdir(parents=True, exist_ok=True)
     USAGE_FILE.write_text(json.dumps(data, indent=2))
 
 
@@ -99,6 +95,8 @@ def get_current_cost() -> dict:
         "output_tokens": data["output_tokens"],
         "cost_usd": round(cost_usd, 4),
         "cost_eur": round(cost_eur, 4),
+        "total_cost_eur": round(cost_eur, 2),   # used by dashboard generator
+        "monthly_budget_eur": BUDGET_EUR,
         "budget_eur": BUDGET_EUR,
         "remaining_eur": round(max(0, BUDGET_EUR - cost_eur), 4),
         "pct_used": round(cost_eur / BUDGET_EUR * 100, 1),

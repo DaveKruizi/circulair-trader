@@ -1,101 +1,104 @@
 """
-Dashboard generator.
+Dashboard generator for LEGO Circulair Trader.
 
-Renders the Jinja2 HTML template with opportunity and trend data.
-Writes output to the configured OUTPUT_DIR.
+Renders the Jinja2 HTML template with LEGO set data, deals, and Vinted prices.
+Writes output to the output/ directory for GitHub Pages deployment.
 """
 
 import json
-import os
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
-from src.config import OUTPUT_DIR, GITHUB_REPO
-from src.budget_guard import get_current_cost
-
-
 TEMPLATE_DIR = Path(__file__).parent / "templates"
+OUTPUT_DIR = Path("output")
+GITHUB_REPO = "DaveKruizi/circulair-trader"
+API_COST_PATH = Path("data/api_usage.json")
+
+
+def _load_api_cost() -> dict:
+    """Load current month API cost from api_usage.json."""
+    if API_COST_PATH.exists():
+        try:
+            return json.loads(API_COST_PATH.read_text())
+        except Exception:
+            pass
+    return {"total_cost_eur": 0.0, "monthly_budget_eur": 10.0, "month": ""}
 
 
 def generate_dashboard(
-    opportunities: list,
-    trends: list,
-    sources_scanned: list[str],
-    trend_history: dict = None,
+    sets: list[dict],
+    scraped_at: str,
+    total_deals: int,
+    new_today: int,
+    price_drops: int,
+    vinted_prices_date: str = "",
 ) -> str:
     """
-    Render the dashboard HTML and write to output directory.
+    Render the LEGO dashboard HTML and write to output/index.html.
 
     Args:
-        opportunities: List of Opportunity objects.
-        trends: List of VintedTrend objects.
-        sources_scanned: List of platform names that were scraped.
-        trend_history: Dict of date -> {term -> data} for trend charts.
+        sets: List of enriched lego_set dicts, each with 'deals' list attached.
+        scraped_at: ISO timestamp of last Marktplaats scrape.
+        total_deals: Total qualifying deals across all sets.
+        new_today: Number of deals seen for the first time today.
+        price_drops: Number of deals where price dropped since last scrape.
+        vinted_prices_date: ISO timestamp of last Vinted scrape.
 
     Returns:
-        Path to the generated HTML file.
+        Path to generated HTML file.
     """
     env = Environment(
         loader=FileSystemLoader(str(TEMPLATE_DIR)),
         autoescape=True,
     )
-    # Add urlencode filter
     from urllib.parse import quote_plus
     env.filters["urlencode"] = quote_plus
 
     template = env.get_template("dashboard.html")
 
     now = datetime.now()
-    next_run = now + timedelta(days=1)
-    next_run = next_run.replace(hour=7, minute=0, second=0)
 
-    viable_opps = [o for o in opportunities if o.is_viable]
-    profits = [o.net_profit for o in viable_opps]
+    # Gather all themes for filter
+    themes = sorted({s.get("theme", "Overig") for s in sets})
 
-    new_deals = [o for o in viable_opps if o.is_new]
-    returning_deals = [o for o in viable_opps if not o.is_new]
+    # API cost data
+    api_cost = _load_api_cost()
+    cost_eur = float(api_cost.get("total_cost_eur", 0.0))
+    budget_eur = float(api_cost.get("monthly_budget_eur", 10.0))
+    cost_pct = min(round((cost_eur / budget_eur) * 100, 1), 100.0) if budget_eur > 0 else 0.0
 
-    stats = {
-        "total_opportunities": len(viable_opps),
-        "best_profit": f"{max(profits):.2f}" if profits else "0.00",
-        "avg_profit": f"{sum(profits) / len(profits):.2f}" if profits else "0.00",
-        "low_risk_count": sum(1 for o in viable_opps if o.risk_score >= 7.5),
-        "sources_scanned": len(sources_scanned),
-        "new_deals_count": len(new_deals),
-        "returning_deals_count": len(returning_deals),
-    }
-
-    # Prepare trend chart data (last 28 days)
-    trend_chart_data = _prepare_trend_chart(trend_history) if trend_history else {}
+    # Stats
+    sets_with_deals = sum(1 for s in sets if s.get("deal_count", 0) > 0)
+    sets_with_vinted = sum(1 for s in sets if s.get("vinted_total_count", 0) > 0)
 
     html = template.render(
-        opportunities=viable_opps[:20],
-        new_deals=new_deals[:20],
-        returning_deals=returning_deals[:20],
-        trends=trends,
-        stats=stats,
+        sets=sets,
+        themes=themes,
+        scraped_at=_format_dt(scraped_at),
+        vinted_prices_date=_format_dt(vinted_prices_date),
         generated_at=now.strftime("%d %b %Y, %H:%M"),
-        next_update=next_run.strftime("%d %b %Y, %H:%M"),
-        date_label=now.strftime("%d %B %Y"),
-        api_cost=get_current_cost(),
-        trend_chart_data=json.dumps(trend_chart_data),
+        total_deals=total_deals,
+        new_today=new_today,
+        price_drops=price_drops,
+        sets_with_deals=sets_with_deals,
+        total_sets=len(sets),
+        sets_with_vinted=sets_with_vinted,
+        cost_eur=round(cost_eur, 2),
+        budget_eur=budget_eur,
+        cost_pct=cost_pct,
         github_repo=GITHUB_REPO,
     )
 
-    # Write output
-    output_path = Path(OUTPUT_DIR)
-    output_path.mkdir(parents=True, exist_ok=True)
-    out_file = output_path / "index.html"
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    out_file = OUTPUT_DIR / "index.html"
     out_file.write_text(html, encoding="utf-8")
 
-    # Also write a dated archive copy
-    archive_file = output_path / f"dashboard_{now.strftime('%Y-%m-%d')}.html"
+    archive_file = OUTPUT_DIR / f"dashboard_{now.strftime('%Y-%m-%d')}.html"
     archive_file.write_text(html, encoding="utf-8")
 
-    # .nojekyll is required for GitHub Pages to serve files without Jekyll processing
-    nojekyll = output_path / ".nojekyll"
+    nojekyll = OUTPUT_DIR / ".nojekyll"
     if not nojekyll.exists():
         nojekyll.touch()
 
@@ -103,54 +106,12 @@ def generate_dashboard(
     return str(out_file)
 
 
-def _prepare_trend_chart(trend_history: dict) -> dict:
-    """
-    Prepare trend history for SVG chart rendering.
-
-    Returns: {
-        "dates": ["2024-03-01", ...],
-        "categories": {
-            "Kinderkleding": {"demand_scores": [7.2, ...], "avg_prices": [12.5, ...]},
-            ...
-        }
-    }
-    """
-    if not trend_history:
-        return {}
-
-    dates = sorted(trend_history.keys())
-    categories: dict[str, dict] = {}
-
-    for date in dates:
-        day_data = trend_history[date]
-        for term, data in day_data.items():
-            cat = data.get("category", term)
-            if cat not in categories:
-                categories[cat] = {"demand_scores": [], "avg_prices": [], "terms": set()}
-            categories[cat]["terms"].add(term)
-
-    # Fill data per date per category
-    for cat in categories:
-        categories[cat]["demand_scores"] = []
-        categories[cat]["avg_prices"] = []
-        for date in dates:
-            day_data = trend_history[date]
-            scores = []
-            prices = []
-            for term in categories[cat]["terms"]:
-                if term in day_data:
-                    scores.append(day_data[term]["demand_score"])
-                    prices.append(day_data[term]["avg_price"])
-            categories[cat]["demand_scores"].append(
-                round(sum(scores) / len(scores), 1) if scores else 0
-            )
-            categories[cat]["avg_prices"].append(
-                round(sum(prices) / len(prices), 2) if prices else 0
-            )
-        # Convert set to list for JSON serialization
-        categories[cat]["terms"] = list(categories[cat]["terms"])
-
-    return {
-        "dates": dates,
-        "categories": categories,
-    }
+def _format_dt(iso_str: str) -> str:
+    """Format ISO timestamp to human-readable Dutch date/time."""
+    if not iso_str:
+        return "—"
+    try:
+        dt = datetime.fromisoformat(iso_str.split("T")[0] if "T" in iso_str else iso_str)
+        return dt.strftime("%d %b %Y")
+    except Exception:
+        return iso_str[:10] if iso_str else "—"

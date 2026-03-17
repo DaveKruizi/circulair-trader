@@ -1,207 +1,130 @@
 """
-Margin calculator for Circulair Trader.
+Margin calculator for LEGO deals.
 
-Calculates net profit per item given:
-- Buy price
-- Estimated sell price (from Vinted trend data)
-- Shipping cost
-- Vinted Pro commission (placeholder — update when known)
-- Monthly Vinted Pro subscription (amortized per sale)
-
-NOTE: VINTED_COMMISSION_PCT is a placeholder (5%).
-Update this once you have your actual Vinted Pro rate.
+Calculates expected profit per deal based on:
+- Buy price (Marktplaats)
+- Condition category (NIB / CIB / incomplete / unknown)
+- Expected sell price on Vinted per condition (from vinted_prices.json)
+- Vinted platform costs (commission + shipping)
 """
 
 from dataclasses import dataclass
-from src.config import VINTED_COMMISSION_PCT, SHIPPING_COST, MIN_SELL_PRICE, MIN_NET_MARGIN
+from typing import Optional
+
+# Vinted platform costs
+VINTED_COMMISSION_PCT = 0.08         # 8% seller commission (Pro seller rate estimate)
+SHIPPING_COST = 5.50                 # average PostNL parcel shipping cost
+
+# Condition-based price adjustment multipliers relative to NIB
+CONDITION_MULTIPLIERS = {
+    "NIB": 1.00,
+    "CIB": 0.75,        # typically 25% less than NIB
+    "incomplete": 0.45, # typically 45-55% less than NIB
+    "unknown": 0.70,    # conservative estimate
+}
 
 
 @dataclass
 class MarginResult:
     buy_price: float
-    estimated_sell_price: float
+    condition_category: str
+    expected_sell_price: Optional[float]
+    vinted_commission: Optional[float]
     shipping_cost: float
-    vinted_commission: float
-    vinted_commission_pct: float
-    # Amortized Vinted Pro subscription per sale (€15/month ÷ estimated monthly sales)
-    subscription_per_sale: float
-    net_profit: float
-    margin_pct: float
+    net_profit: Optional[float]
+    margin_pct: Optional[float]
     is_viable: bool
-    reason: str  # Why viable or not
+    sell_price_source: str  # "vinted_NIB", "vinted_CIB", etc., or "estimated" / "no_data"
 
 
 def calculate_margin(
     buy_price: float,
-    estimated_sell_price: float,
-    shipping_cost: float = None,
-    monthly_sales_estimate: int = 20,
+    condition_category: str,
+    vinted_price_data: Optional[dict],
 ) -> MarginResult:
     """
-    Calculate net profit for a buy/sell opportunity.
+    Calculate the expected margin for a deal.
 
     Args:
-        buy_price: What you pay to acquire the item (euros).
-        estimated_sell_price: Expected sell price on Vinted (euros).
-        shipping_cost: Shipping to buyer. Defaults to config value.
-        monthly_sales_estimate: Estimated monthly sales (for subscription amortization).
+        buy_price: purchase price on Marktplaats
+        condition_category: "NIB", "CIB", "incomplete", or "unknown"
+        vinted_price_data: dict from vinted_prices.json for this set
+                           (key: condition_category -> SetPriceData dict)
+                           May be None if no Vinted data available yet.
 
     Returns:
-        MarginResult with full breakdown.
+        MarginResult with full breakdown
     """
-    if shipping_cost is None:
-        shipping_cost = SHIPPING_COST
+    sell_price, sell_source = _get_sell_price(condition_category, vinted_price_data)
 
-    vinted_commission = estimated_sell_price * (VINTED_COMMISSION_PCT / 100)
+    if sell_price is None or sell_price <= 0:
+        return MarginResult(
+            buy_price=buy_price,
+            condition_category=condition_category,
+            expected_sell_price=None,
+            vinted_commission=None,
+            shipping_cost=SHIPPING_COST,
+            net_profit=None,
+            margin_pct=None,
+            is_viable=False,
+            sell_price_source="no_data",
+        )
 
-    # Vinted Pro subscription ~€15/month, amortized over monthly sales
-    vinted_pro_monthly = 15.0
-    subscription_per_sale = vinted_pro_monthly / max(monthly_sales_estimate, 1)
-
-    net_profit = (
-        estimated_sell_price
-        - buy_price
-        - shipping_cost
-        - vinted_commission
-        - subscription_per_sale
-    )
-
-    margin_pct = (net_profit / estimated_sell_price * 100) if estimated_sell_price > 0 else 0
-
-    # Viability checks
-    if estimated_sell_price < MIN_SELL_PRICE:
-        viable = False
-        reason = f"Verkoopprijs €{estimated_sell_price:.2f} onder minimum van €{MIN_SELL_PRICE:.2f}"
-    elif net_profit < MIN_NET_MARGIN:
-        viable = False
-        reason = f"Netto winst €{net_profit:.2f} onder minimum van €{MIN_NET_MARGIN:.2f}"
-    elif buy_price <= 0:
-        viable = False
-        reason = "Inkoopprijs ontbreekt"
-    else:
-        viable = True
-        reason = f"Netto winst €{net_profit:.2f} ({margin_pct:.0f}% marge)"
+    commission = round(sell_price * VINTED_COMMISSION_PCT, 2)
+    total_costs = buy_price + commission + SHIPPING_COST
+    net_profit = round(sell_price - total_costs, 2)
+    margin_pct = round((net_profit / sell_price) * 100, 1) if sell_price > 0 else 0.0
+    is_viable = net_profit > 0
 
     return MarginResult(
-        buy_price=round(buy_price, 2),
-        estimated_sell_price=round(estimated_sell_price, 2),
-        shipping_cost=round(shipping_cost, 2),
-        vinted_commission=round(vinted_commission, 2),
-        vinted_commission_pct=VINTED_COMMISSION_PCT,
-        subscription_per_sale=round(subscription_per_sale, 2),
-        net_profit=round(net_profit, 2),
-        margin_pct=round(margin_pct, 1),
-        is_viable=viable,
-        reason=reason,
+        buy_price=buy_price,
+        condition_category=condition_category,
+        expected_sell_price=round(sell_price, 2),
+        vinted_commission=commission,
+        shipping_cost=SHIPPING_COST,
+        net_profit=net_profit,
+        margin_pct=margin_pct,
+        is_viable=is_viable,
+        sell_price_source=sell_source,
     )
 
 
-def estimate_sell_price_from_listings(
-    listings: list,
-    buy_price: float = 0,
-) -> float:
+def _get_sell_price(
+    condition_category: str,
+    vinted_data: Optional[dict],
+) -> tuple[Optional[float], str]:
     """
-    Estimate Vinted sell price from *product-specific* search results.
-
-    Uses the median price of the most-favorited listings, filtered to a
-    realistic resale range relative to the buy price.
-
-    Args:
-        listings:  List of VintedListing objects from a per-product search.
-        buy_price: Used to filter out unrealistic price outliers.
-
-    Returns:
-        Estimated sell price in euros, or 0.0 if no usable listings.
+    Determine the expected sell price.
+    1. Try exact condition category from Vinted data
+    2. Try "all" category and apply condition multiplier
+    3. Return None if no data
     """
-    if not listings:
-        return 0.0
+    if not vinted_data:
+        return None, "no_data"
 
-    if buy_price > 0:
-        relevant = [l for l in listings if buy_price * 1.5 <= l.price <= buy_price * 5]
-    else:
-        relevant = list(listings)
+    cat_data = vinted_data.get(condition_category, {})
+    if cat_data and cat_data.get("realistic_sell_price"):
+        return float(cat_data["realistic_sell_price"]), f"vinted_{condition_category}"
 
-    if not relevant:
-        relevant = list(listings)
+    all_data = vinted_data.get("all", {})
+    if all_data and all_data.get("realistic_sell_price"):
+        base = float(all_data["realistic_sell_price"])
+        multiplier = CONDITION_MULTIPLIERS.get(condition_category, 0.70)
+        adjusted = base * multiplier
+        return round(adjusted, 2), "estimated_from_all"
 
-    top = sorted(relevant, key=lambda l: l.favorites_count, reverse=True)[:5]
-    prices = sorted(l.price for l in top)
-    mid = len(prices) // 2
-    median_price = prices[mid] if len(prices) % 2 == 1 else (prices[mid - 1] + prices[mid]) / 2
-    return round(median_price, 2)
-
-
-def _median(values: list[float]) -> float:
-    """Return the median of a non-empty list of floats."""
-    s = sorted(values)
-    mid = len(s) // 2
-    return s[mid] if len(s) % 2 == 1 else (s[mid - 1] + s[mid]) / 2
+    return None, "no_data"
 
 
-def estimate_sell_price_from_trends(
-    item_title: str,
-    vinted_trends: list,
-    fallback_multiplier: float = 2.5,
-    buy_price: float = 0,
-) -> float:
+def all_condition_margins(
+    buy_price: float,
+    vinted_price_data: Optional[dict],
+) -> dict[str, MarginResult]:
     """
-    Estimate Vinted sell price based on trend data.
-
-    Matching strategy:
-    1. Find best trend via keyword overlap (most specific match wins).
-    2. Use median price of sample_listings (high-favorite items) filtered to a
-       realistic price range relative to the buy price (1.5x – 5x).
-    3. Weight the result by the trend's demand_score (low demand → conservative).
-    4. Falls back to avg_price if no usable samples, then buy_price * multiplier.
-
-    Args:
-        item_title: Title of the item to sell.
-        vinted_trends: List of VintedTrend objects.
-        fallback_multiplier: Multiplier on buy price if no trend match.
-        buy_price: Buy price used for price-range filtering and fallback.
-
-    Returns:
-        Estimated sell price in euros.
+    Calculate margins for all condition categories at once.
+    Useful for displaying all three scenarios in the dashboard.
     """
-    title_lower = item_title.lower()
-    title_words = set(title_lower.split())
-
-    best_match = None
-    best_score = 0.0
-
-    for trend in vinted_trends:
-        words = trend.search_term.lower().split()
-        matched = sum(1 for w in words if w in title_words)
-        if not matched:
-            continue
-        # Specificity: a full single-word match ("duplo") beats a partial
-        # multi-word match ("kinderkleding pakket" with 1/2 words).
-        score = matched * (matched / len(words))
-        if score > best_score:
-            best_score = score
-            best_match = trend
-
-    if best_match and best_score > 0:
-        samples = getattr(best_match, "sample_listings", [])
-        demand_score = getattr(best_match, "demand_score", 5.0)
-        # Confidence factor: low demand → more conservative (0.70 – 1.00)
-        confidence = 0.7 + (demand_score / 10) * 0.3
-
-        # Filter samples to a realistic price bracket relative to buy price
-        if buy_price > 0 and samples:
-            relevant = [s for s in samples if buy_price * 1.5 <= s.price <= buy_price * 5]
-        else:
-            relevant = list(samples)
-
-        if relevant:
-            median_price = _median([s.price for s in relevant])
-            return round(median_price * confidence, 2)
-
-        # No relevant samples — fall back to avg_price with confidence weight
-        return round(best_match.avg_price * confidence, 2)
-
-    # No trend match — fall back to buy_price * multiplier
-    if buy_price > 0:
-        return round(buy_price * fallback_multiplier, 2)
-
-    return 0.0
+    return {
+        cat: calculate_margin(buy_price, cat, vinted_price_data)
+        for cat in ["NIB", "CIB", "incomplete", "unknown"]
+    }

@@ -1,17 +1,7 @@
-from .vinted import scrape_vinted_trends
-from .marktplaats import scrape_marktplaats
-from .troostwijk import scrape_troostwijk
-from .stocklear import scrape_stocklear
-from .merkandi import scrape_merkandi
-from .partijhandelaren import scrape_partijhandelaren
-from .onlineveilingmeester import scrape_onlineveilingmeester
+from .marktplaats_lego import scrape_all_sets as scrape_marktplaats_lego
+from .vinted_lego import scrape_all_sets as scrape_vinted_lego
 
 __all__ = [
-    "scrape_vinted_trends",
-    "scrape_marktplaats",
-    "scrape_troostwijk",
-    "scrape_stocklear",
-    "scrape_merkandi",
-    "scrape_partijhandelaren",
-    "scrape_onlineveilingmeester",
+    "scrape_marktplaats_lego",
+    "scrape_vinted_lego",
 ]
