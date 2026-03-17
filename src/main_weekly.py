@@ -47,9 +47,9 @@ def run_weekly(dry_run: bool = False) -> None:
     results = scrape_all_sets(lego_sets)
 
     total_listings = sum(
-        (cat_data.get("all", {}).get("listing_count", 0) if isinstance(cat_data, dict) else 0)
-        for cat_data in results.values()
-        if isinstance(cat_data, dict)
+        set_data["all"].listing_count
+        for set_data in results.values()
+        if isinstance(set_data, dict) and "all" in set_data
     )
 
     elapsed = (datetime.now() - start).seconds
