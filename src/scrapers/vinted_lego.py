@@ -7,6 +7,7 @@ Tracks weekly listing counts to derive velocity trends.
 """
 
 import json
+import os
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
@@ -131,12 +132,20 @@ def _is_lego_set(title: str, set_number: str, set_name: str) -> bool:
     return any(w in title_lower for w in name_words[:3])
 
 
+def _get_session_cookie() -> Optional[dict]:
+    """Return session cookie dict from env, or None to let the library auto-fetch."""
+    token = os.getenv("VINTED_SESSION_COOKIE", "").strip()
+    if token:
+        return {"access_token_web": token}
+    return None
+
+
 def _scrape_platform(platform: str, query: str, max_results: int = 80) -> list:
     """Scrape a single Vinted platform for a query. Returns raw listing objects."""
     if not _VINTED_AVAILABLE:
         return []
     try:
-        scraper = VintedScraper(platform)
+        scraper = VintedScraper(platform, session_cookie=_get_session_cookie())
         params = {"search_text": query, "per_page": min(max_results, 96)}
         items = scraper.search(params) or []
         return list(items)[:max_results]
