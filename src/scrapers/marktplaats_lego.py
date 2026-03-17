@@ -161,8 +161,12 @@ def _parse_listing(listing, set_number: str, seen: dict, today: str) -> Optional
         seller_name = listing.seller.name if listing.seller else ""
         location_str = listing.location.city if listing.location else ""
 
-        # listing.date is a datetime object or None
-        date_str = listing.date.date().isoformat() if listing.date else ""
+        # listing.date can be a datetime or date object, or None
+        if listing.date:
+            d = listing.date if isinstance(listing.date, date) else listing.date.date()
+            date_str = d.isoformat()
+        else:
+            date_str = ""
         days = _days_since(listing.date)
 
         url = str(listing.link or f"https://www.marktplaats.nl/v/{listing_id}")
