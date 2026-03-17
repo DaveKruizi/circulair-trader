@@ -9,7 +9,7 @@ Tracks first-seen dates and price changes via seen_deals.json.
 import json
 import re
 import time
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Optional
 
@@ -47,7 +47,8 @@ def _days_since(dt: Optional[datetime]) -> int:
     if not dt:
         return 0
     try:
-        return (datetime.now().date() - dt.date()).days
+        d = dt if isinstance(dt, date) else dt.date()
+        return (datetime.now().date() - d).days
     except Exception:
         return 0
 
