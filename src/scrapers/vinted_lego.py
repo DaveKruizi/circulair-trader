@@ -78,14 +78,16 @@ def _parse_vinted_listing(raw, platform_domain: str) -> Optional[VintedListing]:
         url_raw = getattr(raw, "url", "") or ""
         url = str(url_raw) if url_raw else ""
 
-        photo = getattr(raw, "photo", None)
+        photos = getattr(raw, "photos", None)
         image_url = ""
-        if photo:
-            image_url = str(
-                getattr(photo, "url", "")
-                or getattr(photo, "full_size_url", "")
-                or ""
-            )
+        if photos:
+            first_photo = photos[0] if photos else None
+            if first_photo:
+                image_url = str(
+                    getattr(first_photo, "url", "")
+                    or getattr(first_photo, "full_size_url", "")
+                    or ""
+                )
 
         created_raw = getattr(raw, "created_at_ts", None) or getattr(raw, "created_at", None)
         created_at = ""
