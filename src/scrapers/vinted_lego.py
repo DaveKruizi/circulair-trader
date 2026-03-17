@@ -22,11 +22,9 @@ except ImportError:
 VINTED_PRICES_PATH = Path("data/vinted_prices.json")
 VINTED_HISTORY_PATH = Path("data/vinted_price_history.json")
 
-# Platforms to scrape (NL = primary, BE + DE for international pricing)
+# Alleen NL — Vinted is internationaal, listings zijn platform-breed zichtbaar
 VINTED_PLATFORMS = [
     "https://www.vinted.nl",
-    "https://www.vinted.be",
-    "https://www.vinted.de",
 ]
 
 STALE_DAYS = 21  # listings older than this are considered "stale"
