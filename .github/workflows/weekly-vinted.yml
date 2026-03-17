@@ -24,14 +24,13 @@ jobs:
         with:
           ref: master
 
-      - name: Data ophalen van data branch
-        run: |
-          git fetch origin data-storage 2>/dev/null || true
-          if git show-ref --verify --quiet refs/remotes/origin/data-storage; then
-            git checkout origin/data-storage -- data/ 2>/dev/null || echo "Geen bestaande data, start vers"
-          else
-            mkdir -p data
-          fi
+      - name: Data cache herstellen
+        uses: actions/cache@v4
+        with:
+          path: data/
+          key: lego-data-v1-${{ github.run_id }}
+          restore-keys: |
+            lego-data-v1-
 
       - name: Python installeren
         uses: actions/setup-python@v5
@@ -41,9 +40,6 @@ jobs:
 
       - name: Dependencies installeren
         run: pip install -r requirements.txt
-
-      - name: Playwright browsers installeren
-        run: playwright install chromium --with-deps 2>/dev/null || true
 
       - name: Vinted scrapen
         id: scrape
@@ -57,30 +53,12 @@ jobs:
         run: |
           echo "=== Resultaat: ${{ steps.scrape.outcome }} ==="
           tail -30 vinted_log.txt 2>/dev/null || echo "(geen log)"
+          echo "--- data/ ---"
           ls -lah data/ 2>/dev/null || echo "(geen data)"
 
-      - name: Data opslaan naar data branch
+      - name: Data cache opslaan
         if: always()
-        run: |
-          if [ -f "data/vinted_prices.json" ] || [ -f "data/vinted_price_history.json" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-
-            git fetch origin data-storage 2>/dev/null || true
-
-            if git show-ref --verify --quiet refs/remotes/origin/data-storage; then
-              git checkout -b data-storage origin/data-storage 2>/dev/null || git checkout data-storage
-            else
-              git checkout --orphan data-storage
-              git rm -rf . --quiet 2>/dev/null || true
-            fi
-
-            # Pull latest data files from current working dir
-            mkdir -p data
-            git checkout master -- . 2>/dev/null || true
-            git add data/ --force
-            git diff --cached --quiet || git commit -m "Vinted prijsdata update $(date -u '+%Y-%m-%d')"
-            git push origin data-storage
-            git checkout master
-          fi
-        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: data/
+          key: lego-data-v1-${{ github.run_id }}
