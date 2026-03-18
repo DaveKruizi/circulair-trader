@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Data cache herstellen
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: data/
           key: lego-data-v2-${{ github.run_id }}
