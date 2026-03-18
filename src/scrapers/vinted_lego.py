@@ -155,7 +155,9 @@ def scrape_set(
                 log_rejection(
                     platform_code, set_number, lid, title, price,
                     "price_too_low",
-                    f"€{price:.0f} < {MIN_PRICE_RATIO*100:.0f}% of retail €{retail_price:.0f}"
+                    f"€{price:.0f} < {MIN_PRICE_RATIO*100:.0f}% of retail €{retail_price:.0f}",
+                    image_url=parsed["image_url"],
+                    url=parsed["url"],
                 )
                 continue
 

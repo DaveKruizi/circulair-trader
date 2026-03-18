@@ -77,7 +77,9 @@ def init_db() -> None:
                 title       TEXT,
                 price       REAL,
                 reason      TEXT,
-                details     TEXT
+                details     TEXT,
+                image_url   TEXT DEFAULT '',
+                url         TEXT DEFAULT ''
             );
 
             CREATE INDEX IF NOT EXISTS idx_listings_set
@@ -89,6 +91,14 @@ def init_db() -> None:
             CREATE INDEX IF NOT EXISTS idx_rejection_date
                 ON rejection_log(log_date, set_number);
         """)
+        # Migrate existing DBs that predate image_url/url columns
+        for col, default in [("image_url", "''"), ("url", "''")] :
+            try:
+                conn.execute(
+                    f"ALTER TABLE rejection_log ADD COLUMN {col} TEXT DEFAULT {default}"
+                )
+            except Exception:
+                pass  # column already exists
 
 
 def upsert_listing(
@@ -176,12 +186,17 @@ def log_rejection(
     price: float,
     reason: str,
     details: str = "",
+    image_url: str = "",
+    url: str = "",
 ) -> None:
     today = datetime.now().date().isoformat()
     with get_connection() as conn:
         conn.execute(
-            "INSERT INTO rejection_log VALUES (?,?,?,?,?,?,?,?)",
-            (today, platform, set_number, listing_id, title[:120], price, reason, details),
+            """INSERT INTO rejection_log
+               (log_date, platform, set_number, listing_id, title, price, reason, details, image_url, url)
+               VALUES (?,?,?,?,?,?,?,?,?,?)""",
+            (today, platform, set_number, listing_id, title[:120], price, reason, details,
+             image_url, url),
         )
 
 
@@ -263,6 +278,21 @@ def get_recent_rejections(days: int = 7) -> list[dict]:
                FROM rejection_log
                WHERE log_date >= date('now', ?)
                ORDER BY log_date DESC, platform, set_number""",
+            (f"-{days} days",),
+        ).fetchall()
+        return [dict(r) for r in rows]
+
+
+def get_price_too_low_details(days: int = 7) -> list[dict]:
+    """Return price_too_low rejections with image/url for dashboard display."""
+    with get_connection() as conn:
+        rows = conn.execute(
+            """SELECT log_date, platform, set_number, listing_id, title, price, details,
+                      image_url, url
+               FROM rejection_log
+               WHERE reason = 'price_too_low'
+                 AND log_date >= date('now', ?)
+               ORDER BY set_number, price ASC""",
             (f"-{days} days",),
         ).fetchall()
         return [dict(r) for r in rows]

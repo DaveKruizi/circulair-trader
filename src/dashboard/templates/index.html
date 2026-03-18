@@ -239,9 +239,55 @@
     margin-bottom: 24px;
   }
   .rejection-bar h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 8px; }
-  .rejection-items { display: flex; gap: 16px; flex-wrap: wrap; }
+  .rejection-items { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
   .rejection-item { font-size: 12px; }
   .rejection-item .rej-count { font-weight: 700; color: var(--orange); }
+  .rej-toggle-btn {
+    background: none; border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent); font-size: 11px; cursor: pointer; padding: 2px 8px;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .rej-toggle-btn:hover { background: var(--border); }
+  .price-too-low-panel {
+    margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px;
+    display: none;
+  }
+  .price-too-low-panel.open { display: block; }
+  .ptl-set-group { margin-bottom: 16px; }
+  .ptl-set-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--muted); margin-bottom: 8px;
+  }
+  .ptl-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+  .ptl-card {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden; text-decoration: none; color: var(--text);
+    display: flex; flex-direction: column;
+    transition: border-color .15s;
+  }
+  .ptl-card:hover { border-color: var(--accent); }
+  .ptl-card img {
+    width: 100%; aspect-ratio: 1/1; object-fit: cover; background: #111;
+    display: block;
+  }
+  .ptl-card .ptl-img-placeholder {
+    width: 100%; aspect-ratio: 1/1; background: #111;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 22px;
+  }
+  .ptl-card .ptl-info {
+    padding: 6px 8px; font-size: 11px;
+  }
+  .ptl-card .ptl-price { font-weight: 700; color: var(--orange); font-size: 13px; }
+  .ptl-card .ptl-title {
+    color: var(--muted); margin-top: 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .ptl-card .ptl-platform { font-size: 10px; color: var(--muted); margin-top: 2px; }
 
   footer {
     text-align: center;
@@ -278,6 +324,7 @@
   <div id="rejection-bar" class="rejection-bar" style="display:none">
     <h3>Afgewezen listings (afgelopen 7 dagen)</h3>
     <div class="rejection-items" id="rejection-items"></div>
+    <div class="price-too-low-panel" id="price-too-low-panel"></div>
   </div>
   <div class="sets-grid" id="sets-grid"></div>
 </div>
@@ -341,7 +388,7 @@ function renderAll(data) {
   renderSummary(data);
 
   // Rejection summary
-  renderRejections(data.rejection_summary_7d);
+  renderRejections(data.rejection_summary_7d, data.price_too_low_7d);
 
   // Set cards
   const grid = document.getElementById('sets-grid');
@@ -381,7 +428,7 @@ function renderSummary(data) {
   `;
 }
 
-function renderRejections(summary) {
+function renderRejections(summary, priceTooLowDetails) {
   if (!summary || Object.keys(summary).length === 0) return;
   const total = Object.values(summary).reduce((a,b) => a+b, 0);
   const bar = document.getElementById('rejection-bar');
@@ -394,9 +441,70 @@ function renderRejections(summary) {
     invalid_price: 'Ongeldige prijs',
   };
   const items = document.getElementById('rejection-items');
-  items.innerHTML = Object.entries(summary).map(([reason, count]) =>
-    `<div class="rejection-item"><span class="rej-count">${count}×</span> ${labels[reason] || reason}</div>`
-  ).join('') + `<div class="rejection-item" style="margin-left:auto;color:var(--muted)">Totaal: ${total}</div>`;
+  const hasPtlDetails = priceTooLowDetails && priceTooLowDetails.length > 0;
+  items.innerHTML = Object.entries(summary).map(([reason, count]) => {
+    if (reason === 'price_too_low' && hasPtlDetails) {
+      return `<div class="rejection-item">
+        <span class="rej-count">${count}×</span> ${labels[reason]}
+        <button class="rej-toggle-btn" id="ptl-toggle-btn" onclick="togglePriceTooLow()">
+          <span id="ptl-toggle-icon">▼</span> Bekijk
+        </button>
+      </div>`;
+    }
+    return `<div class="rejection-item"><span class="rej-count">${count}×</span> ${labels[reason] || reason}</div>`;
+  }).join('') + `<div class="rejection-item" style="margin-left:auto;color:var(--muted)">Totaal: ${total}</div>`;
+
+  if (hasPtlDetails) {
+    renderPriceTooLowPanel(priceTooLowDetails);
+  }
+}
+
+function togglePriceTooLow() {
+  const panel = document.getElementById('price-too-low-panel');
+  const icon = document.getElementById('ptl-toggle-icon');
+  const isOpen = panel.classList.toggle('open');
+  icon.textContent = isOpen ? '▲' : '▼';
+}
+
+function renderPriceTooLowPanel(items) {
+  const panel = document.getElementById('price-too-low-panel');
+  const platformLabels = { marktplaats: 'Marktplaats', vinted_nl: 'Vinted NL', vinted_be: 'Vinted BE' };
+
+  // Group by set_number
+  const bySet = {};
+  items.forEach(item => {
+    if (!bySet[item.set_number]) bySet[item.set_number] = [];
+    bySet[item.set_number].push(item);
+  });
+
+  // Lookup set name from dashData
+  const setNames = {};
+  if (dashData && dashData.sets) {
+    dashData.sets.forEach(s => { setNames[s.set_number] = s.name; });
+  }
+
+  panel.innerHTML = Object.entries(bySet).map(([setNum, listings]) => {
+    const setLabel = setNames[setNum] ? `${setNum} – ${setNames[setNum]}` : setNum;
+    const cards = listings.map(l => {
+      const imgHtml = l.image_url
+        ? `<img src="${l.image_url}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+        : '';
+      const placeholder = `<div class="ptl-img-placeholder" style="${l.image_url ? 'display:none' : ''}">🧱</div>`;
+      const href = l.url || '#';
+      return `<a class="ptl-card" href="${href}" target="_blank" rel="noopener">
+        ${imgHtml}${placeholder}
+        <div class="ptl-info">
+          <div class="ptl-price">€${l.price ? l.price.toFixed(0) : '?'}</div>
+          <div class="ptl-title">${l.title || '—'}</div>
+          <div class="ptl-platform">${platformLabels[l.platform] || l.platform}</div>
+        </div>
+      </a>`;
+    }).join('');
+    return `<div class="ptl-set-group">
+      <div class="ptl-set-label">${setLabel}</div>
+      <div class="ptl-grid">${cards}</div>
+    </div>`;
+  }).join('');
 }
 
 function buildSetCard(set, idx) {

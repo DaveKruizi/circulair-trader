@@ -84,6 +84,7 @@ def build_dashboard_data(
         })
 
     rejection_summary = db.get_rejection_summary(days=7)
+    price_too_low_details = db.get_price_too_low_details(days=7)
 
     return {
         "generated_at": datetime.now().isoformat(),
@@ -91,6 +92,7 @@ def build_dashboard_data(
         "platform_labels": PLATFORM_LABELS,
         "sets": sets_out,
         "rejection_summary_7d": rejection_summary,
+        "price_too_low_7d": price_too_low_details,
     }
 
 
