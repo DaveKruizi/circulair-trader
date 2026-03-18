@@ -1,1 +1,801 @@
-<!DOCTYPE html><html lang="nl"><head><meta charset="UTF-8"><meta http-equiv="refresh" content="300"><title>LEGO Deal Tracker</title><style>body{background:#0f1117;color:#e2e8f0;font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}.card{background:#1a1d27;border-radius:16px;padding:2.5rem 3rem;text-align:center;max-width:480px}h1{color:#3b82f6}p{color:#8892a4;line-height:1.6}</style></head><body><div class="card"><div style="font-size:3rem;margin-bottom:1rem;">🧱</div><h1>LEGO Deal Tracker</h1><p>Dashboard wordt elke ochtend om <strong>04:00</strong> bijgewerkt. Kom later terug.</p><p style="font-size:.85rem;margin-top:1rem">Pagina ververst automatisch over 5 minuten.</p></div></body></html>
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEGO Handel Tracker</title>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e2e8f0;
+    --muted: #8892a4;
+    --accent: #3b82f6;
+    --green: #22c55e;
+    --orange: #f59e0b;
+    --red: #ef4444;
+    --nib: #22c55e;
+    --cib: #3b82f6;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  header {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  header h1 { font-size: 18px; font-weight: 700; }
+  header .subtitle { color: var(--muted); font-size: 12px; }
+
+  .filter-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-left: auto;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: var(--border);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all .15s;
+  }
+  .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .main { padding: 24px; max-width: 1400px; margin: 0 auto; }
+
+  .summary-bar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 20px;
+    min-width: 140px;
+  }
+  .stat-card .label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; }
+  .stat-card .value { font-size: 22px; font-weight: 700; margin-top: 2px; }
+
+  .sets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(680px, 1fr));
+    gap: 20px;
+  }
+
+  .set-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .set-header {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .set-img {
+    width: 80px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 6px;
+    background: #111;
+    flex-shrink: 0;
+  }
+
+  .set-meta { flex: 1; min-width: 0; }
+  .set-name { font-size: 15px; font-weight: 700; }
+  .set-sub { color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .badge-retired { background: #7c3aed22; color: #a78bfa; border: 1px solid #7c3aed44; }
+  .badge-active  { background: #22c55e22; color: #4ade80; border: 1px solid #22c55e44; }
+  .badge-nib     { background: #22c55e22; color: #4ade80; border: 1px solid #22c55e44; }
+  .badge-cib     { background: #3b82f622; color: #60a5fa; border: 1px solid #3b82f644; }
+  .badge-mp      { background: #f59e0b22; color: #fbbf24; border: 1px solid #f59e0b44; }
+
+  .set-body { padding: 16px; }
+
+  .condition-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .cond-tab {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    background: transparent;
+    border: none;
+    transition: all .15s;
+  }
+  .cond-tab.active-nib { background: #22c55e18; color: var(--nib); }
+  .cond-tab.active-cib { background: #3b82f618; color: var(--cib); }
+  .cond-tab:hover { color: var(--text); }
+
+  .condition-panel { display: none; }
+  .condition-panel.visible { display: block; }
+
+  .platform-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-size: 13px;
+  }
+  .platform-table th {
+    color: var(--muted);
+    font-weight: 500;
+    text-align: left;
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .platform-table td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .platform-table tr:last-child td { border-bottom: none; }
+
+  .price-fast   { color: var(--green); font-weight: 700; font-size: 15px; }
+  .price-real   { color: var(--accent); font-weight: 600; }
+  .price-none   { color: var(--muted); font-style: italic; }
+  .count-badge  { background: var(--border); color: var(--muted); border-radius: 4px; padding: 1px 7px; font-size: 11px; }
+
+  .charts-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .chart-box {
+    background: #13151f;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px;
+  }
+  .chart-box h4 { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+
+  .listings-section { margin-top: 16px; }
+  .listings-section h4 { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px; }
+
+  .active-listing {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .active-listing:last-child { border-bottom: none; }
+  .active-listing img { width: 40px; height: 40px; object-fit: cover; border-radius: 4px; background: #111; flex-shrink: 0; }
+  .active-listing .al-title { flex: 1; min-width: 0; }
+  .active-listing .al-title a { color: var(--text); text-decoration: none; }
+  .active-listing .al-title a:hover { color: var(--accent); }
+  .active-listing .al-title .al-sub { color: var(--muted); font-size: 11px; }
+  .active-listing .al-price { font-weight: 700; white-space: nowrap; }
+  .price-nib { color: var(--nib); }
+  .price-cib { color: var(--cib); }
+  .price-unknown { color: var(--muted); }
+
+  .chart-filter-row {
+    display: flex; gap: 6px; margin-bottom: 8px;
+  }
+  .chart-filter-btn {
+    background: var(--border); border: 1px solid var(--border);
+    color: var(--muted); padding: 3px 10px; border-radius: 5px;
+    cursor: pointer; font-size: 11px; font-weight: 500; transition: all .12s;
+  }
+  .chart-filter-btn:hover { color: var(--text); }
+  .chart-filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .tooltip-hint { color: var(--muted); font-size: 11px; cursor: help; text-decoration: underline dotted; }
+
+  .no-data { color: var(--muted); font-style: italic; font-size: 13px; padding: 12px 0; text-align: center; }
+
+  .rejection-bar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 24px;
+  }
+  .rejection-bar h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 8px; }
+  .rejection-items { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .rejection-item { font-size: 12px; }
+  .rejection-item .rej-count { font-weight: 700; color: var(--orange); }
+  .rej-toggle-btn {
+    background: none; border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent); font-size: 11px; cursor: pointer; padding: 2px 8px;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .rej-toggle-btn:hover { background: var(--border); }
+  .price-too-low-panel {
+    margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px;
+    display: none;
+  }
+  .price-too-low-panel.open { display: block; }
+  .ptl-set-group { margin-bottom: 16px; }
+  .ptl-set-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--muted); margin-bottom: 8px;
+  }
+  .ptl-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+  .ptl-card {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden; text-decoration: none; color: var(--text);
+    display: flex; flex-direction: column;
+    transition: border-color .15s;
+  }
+  .ptl-card:hover { border-color: var(--accent); }
+  .ptl-card img {
+    width: 100%; aspect-ratio: 1/1; object-fit: cover; background: #111;
+    display: block;
+  }
+  .ptl-card .ptl-img-placeholder {
+    width: 100%; aspect-ratio: 1/1; background: #111;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 22px;
+  }
+  .ptl-card .ptl-info {
+    padding: 6px 8px; font-size: 11px;
+  }
+  .ptl-card .ptl-price { font-weight: 700; color: var(--orange); font-size: 13px; }
+  .ptl-card .ptl-title {
+    color: var(--muted); margin-top: 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .ptl-card .ptl-platform { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  @media (max-width: 720px) {
+    .sets-grid { grid-template-columns: 1fr; }
+    .charts-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>LEGO Handel Tracker</h1>
+    <div class="subtitle" id="gen-time">Laden...</div>
+  </div>
+  <div class="filter-row">
+    <span style="color:var(--muted);font-size:12px">Filter:</span>
+    <button class="filter-btn active" onclick="setCondition('both')" id="btn-both">Nieuw + Gebruikt</button>
+    <button class="filter-btn" onclick="setCondition('NIB')" id="btn-NIB">Nieuw</button>
+    <button class="filter-btn" onclick="setCondition('CIB')" id="btn-CIB">Gebruikt</button>
+  </div>
+</header>
+
+<div class="main">
+  <div id="summary-bar" class="summary-bar"></div>
+  <div id="rejection-bar" class="rejection-bar" style="display:none">
+    <h3>Afgewezen listings (afgelopen 7 dagen)</h3>
+    <div class="rejection-items" id="rejection-items"></div>
+  </div>
+  <div class="sets-grid" id="sets-grid"></div>
+</div>
+
+<footer id="footer">Gegenereerd op <span id="footer-time"></span></footer>
+
+<script>
+let dashData = null;
+let activeCondition = 'both';
+const chartFilters = {};  // key: `${idx}_${cond}`, value: 'all'|'marktplaats'|'vinted_nl'
+
+fetch('./data/dashboard_data.json')
+  .then(r => r.json())
+  .then(data => {
+    dashData = data;
+    renderAll(data);
+  })
+  .catch(err => {
+    document.getElementById('sets-grid').innerHTML =
+      '<div class="no-data">Fout bij laden data. Probeer later opnieuw.</div>';
+  });
+
+function activateTabInCard(card, cond) {
+  card.querySelectorAll('.cond-tab').forEach(t => {
+    t.classList.remove('active-nib', 'active-cib');
+    if (t.dataset.cond === cond) t.classList.add('active-' + cond.toLowerCase());
+  });
+  card.querySelectorAll('.condition-panel').forEach(panel => {
+    panel.classList.toggle('visible', panel.dataset.cond === cond);
+  });
+}
+
+function setCondition(cond) {
+  activeCondition = cond;
+  ['both','NIB','CIB'].forEach(c => {
+    document.getElementById('btn-' + c).classList.toggle('active', c === cond);
+  });
+  if (!dashData) return;
+  if (cond === 'both') {
+    // Reset all cards to show NIB by default; user can switch per card with tabs
+    document.querySelectorAll('.set-card').forEach(card => activateTabInCard(card, 'NIB'));
+  } else {
+    // Global filter: show only the selected condition in all cards
+    document.querySelectorAll('.condition-panel').forEach(panel => {
+      panel.classList.toggle('visible', panel.dataset.cond === cond);
+    });
+    document.querySelectorAll('.cond-tab').forEach(tab => {
+      tab.classList.remove('active-nib', 'active-cib');
+      if (tab.dataset.cond === cond) tab.classList.add('active-' + cond.toLowerCase());
+    });
+  }
+}
+
+function renderAll(data) {
+  // Header time
+  const gen = new Date(data.generated_at);
+  document.getElementById('gen-time').textContent =
+    'Bijgewerkt: ' + gen.toLocaleDateString('nl-NL', {day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});
+  document.getElementById('footer-time').textContent = gen.toLocaleString('nl-NL');
+
+  // Summary stats
+  renderSummary(data);
+
+  // Rejection summary (counts only — details are per set-card)
+  renderRejections(data.rejection_summary_7d);
+
+  // Set cards
+  const grid = document.getElementById('sets-grid');
+  grid.innerHTML = '';
+  data.sets.forEach((set, idx) => {
+    const card = buildSetCard(set, idx);
+    grid.appendChild(card);
+  });
+
+  // Render all charts after DOM is ready
+  data.sets.forEach((set, idx) => {
+    renderCharts(set, idx);
+  });
+
+  // Apply initial condition filter
+  setCondition(activeCondition);
+}
+
+function renderSummary(data) {
+  const bar = document.getElementById('summary-bar');
+  const totalSets = data.sets.length;
+  let totalActiveNIB = 0, totalActiveCIB = 0;
+  let setsWithPriceNIB = 0, setsWithPriceCIB = 0;
+
+  data.sets.forEach(s => {
+    const vn = s.platforms['vinted_nl'] || {};
+    if (vn.NIB && vn.NIB.active_count > 0) { totalActiveNIB += vn.NIB.active_count; setsWithPriceNIB++; }
+    if (vn.CIB && vn.CIB.active_count > 0) { totalActiveCIB += vn.CIB.active_count; setsWithPriceCIB++; }
+  });
+
+  bar.innerHTML = `
+    <div class="stat-card"><div class="label">Sets gevolgd</div><div class="value">${totalSets}</div></div>
+    <div class="stat-card"><div class="label">Actief Vinted Nieuw</div><div class="value" style="color:var(--nib)">${totalActiveNIB}</div></div>
+    <div class="stat-card"><div class="label">Actief Vinted Gebruikt</div><div class="value" style="color:var(--cib)">${totalActiveCIB}</div></div>
+    <div class="stat-card"><div class="label">Sets met prijs Nieuw</div><div class="value">${setsWithPriceNIB}</div></div>
+    <div class="stat-card"><div class="label">Sets met prijs Gebruikt</div><div class="value">${setsWithPriceCIB}</div></div>
+  `;
+}
+
+function renderRejections(summary) {
+  if (!summary || Object.keys(summary).length === 0) return;
+  const total = Object.values(summary).reduce((a,b) => a+b, 0);
+  const bar = document.getElementById('rejection-bar');
+  bar.style.display = 'block';
+  const labels = {
+    low_confidence: 'Setnummer niet in titel',
+    price_too_low: 'Prijs te laag (zie per set)',
+    price_too_high: 'Prijs te hoog',
+    incomplete: 'Incompleet (cat C)',
+    invalid_price: 'Ongeldige prijs',
+  };
+  const items = document.getElementById('rejection-items');
+  items.innerHTML = Object.entries(summary).map(([reason, count]) =>
+    `<div class="rejection-item"><span class="rej-count">${count}×</span> ${labels[reason] || reason}</div>`
+  ).join('') + `<div class="rejection-item" style="margin-left:auto;color:var(--muted)">Totaal: ${total}</div>`;
+}
+
+function buildSetCard(set, idx) {
+  const card = document.createElement('div');
+  card.className = 'set-card';
+
+  const retired = set.is_retired
+    ? '<span class="badge badge-retired">Retired</span>'
+    : '<span class="badge badge-active">Actief</span>';
+
+  const retail = set.retail_price ? `€${set.retail_price.toFixed(0)}` : '—';
+  const mv = set.market_value_new ? `Marktwaarde: €${set.market_value_new.toFixed(0)}` : '';
+
+  card.innerHTML = `
+    <div class="set-header">
+      <img class="set-img" src="${escHtml(set.image_url)}" alt="${escHtml(set.name)}"
+           onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2260%22><rect width=%2280%22 height=%2260%22 fill=%22%23222%22/></svg>'">
+      <div class="set-meta">
+        <div class="set-name">${escHtml(set.name)}</div>
+        <div class="set-sub">#${set.set_number} · ${set.theme} · ${set.piece_count || '?'} stenen · ${set.release_year || ''}</div>
+        <div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          ${retired}
+          <span style="color:var(--muted);font-size:12px">Retail: ${retail}</span>
+          ${mv ? `<span style="color:var(--muted);font-size:12px">${mv}</span>` : ''}
+        </div>
+      </div>
+    </div>
+    <div class="set-body">
+      <div class="condition-tabs">
+        <button class="cond-tab active-nib" data-cond="NIB" onclick="switchTab(${idx},'NIB')">Nieuw</button>
+        <button class="cond-tab" data-cond="CIB" onclick="switchTab(${idx},'CIB')">Gebruikt</button>
+      </div>
+      ${buildConditionPanel(set, 'NIB', idx)}
+      ${buildConditionPanel(set, 'CIB', idx)}
+      ${buildActiveListingsSection(set)}
+      ${buildPriceTooLowSection(set, idx)}
+    </div>
+  `;
+  return card;
+}
+
+function switchTab(idx, cond) {
+  if (activeCondition !== 'both') return;
+  const card = document.querySelectorAll('.set-card')[idx];
+  activateTabInCard(card, cond);
+}
+
+function buildConditionPanel(set, cond, idx) {
+  const condLower = cond.toLowerCase();
+  const platforms = ['vinted_nl', 'marktplaats'];
+  const labels = {'vinted_nl': 'Vinted NL', 'marktplaats': 'Marktplaats'};
+
+  let rows = '';
+  platforms.forEach(platform => {
+    const pd = (set.platforms[platform] || {})[cond] || {};
+    const fast = pd.sell_price_fast != null ? `<span class="price-fast">€${pd.sell_price_fast.toFixed(0)}</span>` : '<span class="price-none">—</span>';
+    const real = pd.sell_price_realistic != null ? `<span class="price-real">€${pd.sell_price_realistic.toFixed(0)}</span>` : '<span class="price-none">—</span>';
+    const count = pd.active_count || 0;
+    const p50 = pd.p50 != null ? `€${pd.p50.toFixed(0)}` : '—';
+    const vel = pd.disappeared_7d > 0 ? `<span style="color:var(--green);font-size:11px">↑${pd.disappeared_7d} verkocht/7d</span>` : '';
+
+    rows += `<tr>
+      <td><strong>${labels[platform]}</strong></td>
+      <td>${fast}</td>
+      <td>${real}</td>
+      <td>${p50}</td>
+      <td><span class="count-badge">${count}</span> ${vel}</td>
+    </tr>`;
+  });
+
+  const initialVisible = cond === 'NIB' ? ' visible' : '';
+  return `
+    <div class="condition-panel${initialVisible}" data-cond="${cond}" data-idx="${idx}">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <span class="badge badge-${condLower}">${cond === 'NIB' ? 'Nieuw' : 'Gebruikt'}</span>
+      </div>
+      <table class="platform-table">
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>
+              <span class="tooltip-hint" title="p20 van actieve, verse listings. Dit is de prijs waarbij je snel verkoopt (~7 dagen).">Snel-verkoopprijs</span>
+            </th>
+            <th>
+              <span class="tooltip-hint" title="Gewogen gemiddelde van verdwenen listings ≤21 dagen actief. Beste proxy voor echte transactieprijs.">Reële verkoopprijs</span>
+            </th>
+            <th>Mediaan vraagprijs</th>
+            <th>Actief</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <div class="chart-filter-row">
+        <button class="chart-filter-btn active" onclick="setChartFilter(${idx},'${cond}','all',this)">Alles</button>
+        <button class="chart-filter-btn" onclick="setChartFilter(${idx},'${cond}','marktplaats',this)">Marktplaats</button>
+        <button class="chart-filter-btn" onclick="setChartFilter(${idx},'${cond}','vinted_nl',this)">Vinted</button>
+      </div>
+      <div class="charts-row">
+        <div class="chart-box">
+          <h4>Prijsontwikkeling</h4>
+          <div id="chart-hist-${idx}-${cond}" style="height:180px"></div>
+        </div>
+        <div class="chart-box">
+          <h4>Verdeling actieve vraagprijzen (€10 stappen)</h4>
+          <div id="chart-bucket-${idx}-${cond}" style="height:180px"></div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function buildActiveListingsSection(set) {
+  const platformLabels = { marktplaats: 'Marktplaats', vinted_nl: 'Vinted NL' };
+  const condLabels = { NIB: 'Nieuw', CIB: 'Gebruikt', unknown: '?' };
+  const condPriceClass = { NIB: 'price-nib', CIB: 'price-cib', unknown: 'price-unknown' };
+  const condBadgeClass = { NIB: 'badge-nib', CIB: 'badge-cib', unknown: '' };
+
+  // Collect active listings from all platforms + conditions (including unknown)
+  const all = [];
+  ['marktplaats', 'vinted_nl'].forEach(platform => {
+    ['NIB', 'CIB'].forEach(cond => {
+      const listings = ((set.platforms[platform] || {})[cond] || {}).listings || [];
+      listings.forEach(l => all.push({ ...l, platform, cond }));
+    });
+    // Unknown condition (e.g. Vinted listings without recognisable condition keywords)
+    const unknown = (set.platforms[platform] || {}).unknown_listings || [];
+    unknown.forEach(l => all.push({ ...l, platform, cond: 'unknown' }));
+  });
+
+  // Also include mp_listings for extra fields (price_type, days_listed)
+  // but deduplicate by url
+  const mpExtra = {};
+  (set.mp_listings || []).forEach(l => { if (l.url) mpExtra[l.url] = l; });
+
+  if (all.length === 0) return '';
+
+  // Sort by price ascending
+  all.sort((a, b) => (a.price || 0) - (b.price || 0));
+
+  const items = all.slice(0, 12).map(l => {
+    const cond = l.cond;
+    const extra = mpExtra[l.url] || {};
+    const sub = [
+      platformLabels[l.platform] || l.platform,
+      extra.price_type ? extra.price_type : null,
+      extra.days_listed != null ? `${extra.days_listed}d online` : null,
+    ].filter(Boolean).join(' · ');
+    const badgeCls = condBadgeClass[cond] || '';
+    return `<div class="active-listing">
+      <img src="${escHtml(l.image_url || '')}" alt="" onerror="this.style.display='none'">
+      <div class="al-title">
+        <a href="${escHtml(l.url)}" target="_blank" rel="noopener">${escHtml(l.title)}</a>
+        <div class="al-sub">${badgeCls ? `<span class="badge ${badgeCls}">${condLabels[cond]}</span> ` : ''}${sub}</div>
+      </div>
+      <div class="al-price ${condPriceClass[cond] || ''}">€${Number(l.price || 0).toFixed(0)}</div>
+    </div>`;
+  }).join('');
+
+  return `<div class="listings-section">
+    <h4>Actief aanbod (${all.length})</h4>
+    ${items}
+  </div>`;
+}
+
+function buildPriceTooLowSection(set, idx) {
+  const items = set.price_too_low_7d || [];
+  if (items.length === 0) return '';
+  const platformLabels = { marktplaats: 'Marktplaats', vinted_nl: 'Vinted NL' };
+  const cards = items.map(l => {
+    const imgHtml = l.image_url
+      ? `<img src="${escHtml(l.image_url)}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      : '';
+    const placeholder = `<div class="ptl-img-placeholder" style="${l.image_url ? 'display:none' : ''}">🧱</div>`;
+    return `<a class="ptl-card" href="${escHtml(l.url || '#')}" target="_blank" rel="noopener">
+      ${imgHtml}${placeholder}
+      <div class="ptl-info">
+        <div class="ptl-price">€${l.price ? Number(l.price).toFixed(0) : '?'}</div>
+        <div class="ptl-title">${escHtml(l.title || '—')}</div>
+        <div class="ptl-platform">${platformLabels[l.platform] || l.platform}</div>
+      </div>
+    </a>`;
+  }).join('');
+
+  const panelId = `ptl-panel-${idx}`;
+  const btnId = `ptl-btn-${idx}`;
+  return `<div class="listings-section" style="border-top:1px solid var(--border);margin-top:12px;padding-top:12px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <h4 style="margin:0">Afgewezen: prijs te laag (7d) — ${items.length}</h4>
+      <button class="rej-toggle-btn" id="${btnId}" onclick="togglePtlPanel('${panelId}','${btnId}')">
+        <span>▼</span> Bekijk
+      </button>
+    </div>
+    <div id="${panelId}" style="display:none">
+      <div class="ptl-grid">${cards}</div>
+    </div>
+  </div>`;
+}
+
+function togglePtlPanel(panelId, btnId) {
+  const panel = document.getElementById(panelId);
+  const btn = document.getElementById(btnId);
+  const isOpen = panel.style.display === 'none';
+  panel.style.display = isOpen ? 'block' : 'none';
+  btn.querySelector('span').textContent = isOpen ? '▲' : '▼';
+}
+
+function setChartFilter(idx, cond, platform, btn) {
+  chartFilters[`${idx}_${cond}`] = platform;
+  // Update button active state
+  btn.closest('.chart-filter-row').querySelectorAll('.chart-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  // Re-render charts
+  const set = dashData.sets[idx];
+  renderHistoryChart(set, idx, cond);
+  renderBucketChart(set, idx, cond);
+}
+
+function renderCharts(set, idx) {
+  ['NIB','CIB'].forEach(cond => {
+    chartFilters[`${idx}_${cond}`] = 'all';
+    renderHistoryChart(set, idx, cond);
+    renderBucketChart(set, idx, cond);
+  });
+}
+
+function renderHistoryChart(set, idx, cond) {
+  const elId = `chart-hist-${idx}-${cond}`;
+  const el = document.getElementById(elId);
+  if (!el) return;
+
+  const filterPlatform = chartFilters[`${idx}_${cond}`] || 'all';
+  const history = (set.price_history || []).filter(h =>
+    h.condition === cond && (filterPlatform === 'all' || h.platform === filterPlatform)
+  );
+
+  const platforms = [...new Set(history.map(h => h.platform))];
+  const platformLabels = {'vinted_nl':'Vinted NL','marktplaats':'Marktplaats'};
+  const colors = {'vinted_nl':'#3b82f6','marktplaats':'#f59e0b'};
+
+  const traces = [];
+  platforms.forEach(platform => {
+    const pts = history.filter(h => h.platform === platform);
+    if (pts.length === 0) return;
+
+    const fastPts = pts.filter(h => h.sell_price_fast != null);
+    if (fastPts.length > 0) {
+      traces.push({
+        x: fastPts.map(h => h.date),
+        y: fastPts.map(h => h.sell_price_fast),
+        mode: 'lines+markers',
+        name: `${platformLabels[platform] || platform} snel`,
+        line: { color: colors[platform] || '#888', width: 2 },
+        marker: { size: 4 },
+      });
+    }
+
+    const realPts = pts.filter(h => h.sell_price_realistic != null);
+    if (realPts.length > 0) {
+      traces.push({
+        x: realPts.map(h => h.date),
+        y: realPts.map(h => h.sell_price_realistic),
+        mode: 'lines+markers',
+        name: `${platformLabels[platform] || platform} reëel`,
+        line: { color: colors[platform] || '#888', width: 2, dash: 'dot' },
+        marker: { size: 4 },
+      });
+    }
+  });
+
+  if (traces.length === 0) {
+    el.innerHTML = '<div class="no-data">Nog geen historische data</div>';
+    return;
+  }
+
+  Plotly.newPlot(el, traces, {
+    paper_bgcolor: 'transparent',
+    plot_bgcolor: 'transparent',
+    font: { color: '#8892a4', size: 10 },
+    xaxis: { gridcolor: '#2a2d3a', tickfont: { size: 9 }, showgrid: true },
+    yaxis: { gridcolor: '#2a2d3a', tickprefix: '€', tickfont: { size: 9 }, showgrid: true },
+    legend: { font: { size: 9 }, bgcolor: 'transparent' },
+    margin: { l: 44, r: 8, t: 8, b: 28 },
+    showlegend: traces.length > 1,
+  }, { responsive: true, displayModeBar: false });
+}
+
+function renderBucketChart(set, idx, cond) {
+  const elId = `chart-bucket-${idx}-${cond}`;
+  const el = document.getElementById(elId);
+  if (!el) return;
+
+  const filterPlatform = chartFilters[`${idx}_${cond}`] || 'all';
+  const platformsToShow = filterPlatform === 'all' ? ['vinted_nl','marktplaats'] : [filterPlatform];
+
+  // Merge buckets from selected platforms for this condition
+  const mergedBuckets = {};
+  platformsToShow.forEach(platform => {
+    const pd = (set.platforms[platform] || {})[cond] || {};
+    const buckets = pd.price_buckets || {};
+    Object.entries(buckets).forEach(([k, v]) => {
+      mergedBuckets[k] = (mergedBuckets[k] || 0) + v;
+    });
+  });
+
+  const keys = Object.keys(mergedBuckets).sort((a,b) => {
+    return parseInt(a) - parseInt(b);
+  });
+
+  if (keys.length === 0) {
+    el.innerHTML = '<div class="no-data">Geen actieve listings</div>';
+    return;
+  }
+
+  const color = cond === 'NIB' ? '#22c55e' : '#3b82f6';
+
+  Plotly.newPlot(el, [{
+    x: keys.map(k => '€' + k),
+    y: keys.map(k => mergedBuckets[k]),
+    type: 'bar',
+    marker: { color: color + 'aa' },
+  }], {
+    paper_bgcolor: 'transparent',
+    plot_bgcolor: 'transparent',
+    font: { color: '#8892a4', size: 10 },
+    xaxis: { gridcolor: '#2a2d3a', tickfont: { size: 8 }, showgrid: false },
+    yaxis: { gridcolor: '#2a2d3a', tickfont: { size: 9 }, showgrid: true, dtick: 1 },
+    margin: { l: 30, r: 8, t: 8, b: 40 },
+    showlegend: false,
+    bargap: 0.15,
+  }, { responsive: true, displayModeBar: false });
+}
+
+function escHtml(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+</script>
+</body>
+</html>
