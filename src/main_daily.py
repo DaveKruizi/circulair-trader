@@ -49,10 +49,11 @@ def run_daily(dry_run: bool = False) -> None:
     total_mp = sum(len(v) for v in marktplaats_data.get("sets", {}).values())
     print(f"[Daily] Marktplaats: {total_mp} valid listings found")
 
-    # Step 2: Compute Marktplaats price intelligence
+    # Step 2: Compute price intelligence for all platforms
+    # (Vinted data is already in SQLite from the earlier Vinted workflow run)
     from src.analysis.price_intelligence import compute_all_sets
-    print("[Daily] Computing Marktplaats price intelligence...")
-    compute_all_sets(lego_sets, ["marktplaats"])
+    print("[Daily] Computing price intelligence for all platforms...")
+    compute_all_sets(lego_sets, ["marktplaats", "vinted_nl"])
 
     # Step 3: Rejection summary
     from src import db

@@ -4,11 +4,12 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
-  # 04:00 NL wintertijd = 03:00 UTC
-  schedule:
-    - cron: '0 3 * * *'
+  # Automatisch starten zodra de Vinted-run klaar is
+  workflow_run:
+    workflows: ["Dagelijkse Vinted Prijsanalyse"]
+    types: [completed]
 
-  # Handmatig starten via GitHub Actions
+  # Handmatig starten via GitHub Actions (bijv. voor eerste deploy)
   workflow_dispatch:
 
   # Bij push naar master voor eerste deploy
