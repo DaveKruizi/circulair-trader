@@ -27,6 +27,35 @@ VINTED_PLATFORMS = [
     ("https://www.vinted.nl", "vinted_nl"),
 ]
 
+# Vinted native condition values that map to NIB / CIB
+_VINTED_NIB_RAW = {
+    "1", "new_with_tags", "new with tags",
+    "2", "new_without_tags", "new without tags",
+}
+_VINTED_CIB_RAW = {
+    "3", "very_good", "very good",
+    "4", "good",
+    "5", "satisfactory",
+}
+
+
+def _classify_vinted_condition(title: str, condition_raw: str) -> str:
+    """
+    Classify Vinted listing condition using keyword matching first,
+    then falling back to Vinted's own condition field.
+    """
+    from src.analysis.condition_classifier import classify_condition
+    result = classify_condition(title, "")
+    if result != "unknown":
+        return result
+    # Fallback: use Vinted native condition
+    raw = (condition_raw or "").strip().lower()
+    if raw in _VINTED_NIB_RAW:
+        return "NIB"
+    if raw in _VINTED_CIB_RAW:
+        return "CIB"
+    return "unknown"
+
 
 def _get_session_cookie() -> Optional[dict]:
     token = os.getenv("VINTED_SESSION_COOKIE", "").strip()
@@ -111,7 +140,6 @@ def scrape_set(
     Also updates SQLite lifecycle tracking and logs rejections.
     """
     from src.db import init_db, upsert_listing, mark_disappeared, log_rejection
-    from src.analysis.condition_classifier import classify_condition
 
     init_db()
     today = datetime.now().date().isoformat()
@@ -169,7 +197,7 @@ def scrape_set(
                 )
                 continue
 
-            condition = classify_condition(title, "")
+            condition = _classify_vinted_condition(title, parsed["condition_raw"])
             if condition == "incomplete":
                 log_rejection(
                     platform_code, set_number, lid, title, price,
