@@ -1,7 +1,7 @@
 name: Dagelijkse Vinted Prijsanalyse
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
   # 02:00 UTC = 03:00 NL wintertijd — vóór de Marktplaats run om 04:00
