@@ -26,9 +26,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: data/
-          key: lego-data-v1-${{ github.run_id }}
+          key: lego-data-v2-${{ github.run_id }}
           restore-keys: |
-            lego-data-v1-
+            lego-data-v2-
 
       - name: Python installeren
         uses: actions/setup-python@v5
@@ -59,4 +59,4 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: data/
-          key: lego-data-v1-${{ github.run_id }}
+          key: lego-data-v2-${{ github.run_id }}

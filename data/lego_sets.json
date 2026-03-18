@@ -1,78 +1,6 @@
 {
-  "last_updated": "2026-03-17",
+  "last_updated": "2026-03-18",
   "sets": [
-    {
-      "set_number": "10270",
-      "name": "Bookshop",
-      "theme": "Icons",
-      "retail_price": 179.99,
-      "is_retired": true,
-      "market_value_new": 260.0,
-      "release_year": 2020,
-      "piece_count": 2504,
-      "image_url": "https://images.brickset.com/sets/images/10270-1.jpg",
-      "search_terms": ["10270 lego", "lego bookshop"]
-    },
-    {
-      "set_number": "10278",
-      "name": "Police Station",
-      "theme": "Icons",
-      "retail_price": 199.99,
-      "is_retired": true,
-      "market_value_new": 270.0,
-      "release_year": 2021,
-      "piece_count": 2923,
-      "image_url": "https://images.brickset.com/sets/images/10278-1.jpg",
-      "search_terms": ["10278 lego", "lego police station"]
-    },
-    {
-      "set_number": "10280",
-      "name": "Flower Bouquet",
-      "theme": "Icons",
-      "retail_price": 49.99,
-      "is_retired": true,
-      "market_value_new": 75.0,
-      "release_year": 2021,
-      "piece_count": 756,
-      "image_url": "https://images.brickset.com/sets/images/10280-1.jpg",
-      "search_terms": ["10280 lego", "lego flower bouquet", "lego bloemboeket"]
-    },
-    {
-      "set_number": "10281",
-      "name": "Bonsai Tree",
-      "theme": "Icons",
-      "retail_price": 54.99,
-      "is_retired": true,
-      "market_value_new": 80.0,
-      "release_year": 2021,
-      "piece_count": 878,
-      "image_url": "https://images.brickset.com/sets/images/10281-1.jpg",
-      "search_terms": ["10281 lego", "lego bonsai tree", "lego bonsai boom"]
-    },
-    {
-      "set_number": "10289",
-      "name": "Bird of Paradise",
-      "theme": "Icons",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": 140.0,
-      "release_year": 2021,
-      "piece_count": 1173,
-      "image_url": "https://images.brickset.com/sets/images/10289-1.jpg",
-      "search_terms": ["10289 lego", "lego bird of paradise", "lego strelitzia"]
-    },
-    {
-      "set_number": "10294",
-      "name": "Titanic",
-      "theme": "Icons",
-      "retail_price": 629.99,
-      "is_retired": true,
-      "market_value_new": 720.0,
-      "release_year": 2021,
-      "piece_count": 9090,
-      "image_url": "https://images.brickset.com/sets/images/10294-1.jpg",
-      "search_terms": ["10294 lego", "lego titanic"]
-    },
     {
       "set_number": "10295",
       "name": "Porsche 911",
@@ -83,19 +11,10 @@
       "release_year": 2021,
       "piece_count": 1458,
       "image_url": "https://images.brickset.com/sets/images/10295-1.jpg",
-      "search_terms": ["10295 lego", "lego porsche 911"]
-    },
-    {
-      "set_number": "10297",
-      "name": "Boutique Hotel",
-      "theme": "Icons",
-      "retail_price": 249.99,
-      "is_retired": true,
-      "market_value_new": 320.0,
-      "release_year": 2022,
-      "piece_count": 3066,
-      "image_url": "https://images.brickset.com/sets/images/10297-1.jpg",
-      "search_terms": ["10297 lego", "lego boutique hotel"]
+      "search_terms": [
+        "lego 10295"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "10298",
@@ -107,7 +26,10 @@
       "release_year": 2022,
       "piece_count": 1106,
       "image_url": "https://images.brickset.com/sets/images/10298-1.jpg",
-      "search_terms": ["10298 lego", "lego vespa 125", "lego vespa"]
+      "search_terms": [
+        "lego 10298"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "10300",
@@ -119,103 +41,10 @@
       "release_year": 2022,
       "piece_count": 1872,
       "image_url": "https://images.brickset.com/sets/images/10300-1.jpg",
-      "search_terms": ["10300 lego", "lego back to the future", "lego delorean"]
-    },
-    {
-      "set_number": "10302",
-      "name": "Optimus Prime",
-      "theme": "Icons",
-      "retail_price": 179.99,
-      "is_retired": true,
-      "market_value_new": 230.0,
-      "release_year": 2022,
-      "piece_count": 1508,
-      "image_url": "https://images.brickset.com/sets/images/10302-1.jpg",
-      "search_terms": ["10302 lego", "lego optimus prime", "lego transformers"]
-    },
-    {
-      "set_number": "10305",
-      "name": "Lion Knights' Castle",
-      "theme": "Icons",
-      "retail_price": 399.99,
-      "is_retired": true,
-      "market_value_new": 460.0,
-      "release_year": 2022,
-      "piece_count": 4514,
-      "image_url": "https://images.brickset.com/sets/images/10305-1.jpg",
-      "search_terms": ["10305 lego", "lego lion knights castle", "lego ridderburcht"]
-    },
-    {
-      "set_number": "10307",
-      "name": "Eiffel Tower",
-      "theme": "Icons",
-      "retail_price": 629.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2022,
-      "piece_count": 10001,
-      "image_url": "https://images.brickset.com/sets/images/10307-1.jpg",
-      "search_terms": ["10307 lego", "lego eiffel tower", "lego eiffeltoren"]
-    },
-    {
-      "set_number": "10311",
-      "name": "Orchid",
-      "theme": "Icons",
-      "retail_price": 49.99,
-      "is_retired": true,
-      "market_value_new": 70.0,
-      "release_year": 2022,
-      "piece_count": 608,
-      "image_url": "https://images.brickset.com/sets/images/10311-1.jpg",
-      "search_terms": ["10311 lego", "lego orchid", "lego orchidee"]
-    },
-    {
-      "set_number": "10313",
-      "name": "Wild Flower Bouquet",
-      "theme": "Icons",
-      "retail_price": 59.99,
-      "is_retired": true,
-      "market_value_new": 82.0,
-      "release_year": 2022,
-      "piece_count": 939,
-      "image_url": "https://images.brickset.com/sets/images/10313-1.jpg",
-      "search_terms": ["10313 lego", "lego wild flower bouquet", "lego wildbloemboeket"]
-    },
-    {
-      "set_number": "10314",
-      "name": "Dried Flower Centerpiece",
-      "theme": "Icons",
-      "retail_price": 59.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 812,
-      "image_url": "https://images.brickset.com/sets/images/10314-1.jpg",
-      "search_terms": ["10314 lego", "lego dried flower centerpiece", "lego droogbloemen"]
-    },
-    {
-      "set_number": "10315",
-      "name": "Tranquil Garden",
-      "theme": "Icons",
-      "retail_price": 109.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 1363,
-      "image_url": "https://images.brickset.com/sets/images/10315-1.jpg",
-      "search_terms": ["10315 lego", "lego tranquil garden", "lego japanse tuin"]
-    },
-    {
-      "set_number": "10316",
-      "name": "The Lord of the Rings: Rivendell",
-      "theme": "Icons",
-      "retail_price": 449.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 6167,
-      "image_url": "https://images.brickset.com/sets/images/10316-1.jpg",
-      "search_terms": ["10316 lego", "lego rivendell", "lego lord of the rings"]
+      "search_terms": [
+        "lego 10300"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "10317",
@@ -227,91 +56,10 @@
       "release_year": 2023,
       "piece_count": 2336,
       "image_url": "https://images.brickset.com/sets/images/10317-1.jpg",
-      "search_terms": ["10317 lego", "lego land rover defender", "lego defender 90"]
-    },
-    {
-      "set_number": "10318",
-      "name": "Concorde",
-      "theme": "Icons",
-      "retail_price": 199.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 2083,
-      "image_url": "https://images.brickset.com/sets/images/10318-1.jpg",
-      "search_terms": ["10318 lego", "lego concorde"]
-    },
-    {
-      "set_number": "10323",
-      "name": "PAC-MAN Arcade",
-      "theme": "Icons",
-      "retail_price": 269.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 2651,
-      "image_url": "https://images.brickset.com/sets/images/10323-1.jpg",
-      "search_terms": ["10323 lego", "lego pac-man arcade", "lego pacman"]
-    },
-    {
-      "set_number": "10326",
-      "name": "Natural History Museum",
-      "theme": "Icons",
-      "retail_price": 229.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 4014,
-      "image_url": "https://images.brickset.com/sets/images/10326-1.jpg",
-      "search_terms": ["10326 lego", "lego natural history museum", "lego natuurhistorisch museum"]
-    },
-    {
-      "set_number": "10328",
-      "name": "Bouquet of Roses",
-      "theme": "Icons",
-      "retail_price": 59.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2024,
-      "piece_count": 822,
-      "image_url": "https://images.brickset.com/sets/images/10328-1.jpg",
-      "search_terms": ["10328 lego", "lego bouquet of roses", "lego rozenboeket"]
-    },
-    {
-      "set_number": "10329",
-      "name": "Tiny Plants",
-      "theme": "Icons",
-      "retail_price": 59.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2024,
-      "piece_count": 758,
-      "image_url": "https://images.brickset.com/sets/images/10329-1.jpg",
-      "search_terms": ["10329 lego", "lego tiny plants", "lego miniplantjes"]
-    },
-    {
-      "set_number": "10331",
-      "name": "Kingfisher Bird",
-      "theme": "Icons",
-      "retail_price": 59.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2024,
-      "piece_count": 834,
-      "image_url": "https://images.brickset.com/sets/images/10331-1.jpg",
-      "search_terms": ["10331 lego", "lego kingfisher bird", "lego ijsvogel"]
-    },
-    {
-      "set_number": "10334",
-      "name": "Adults Welcome: Art Deco",
-      "theme": "Icons",
-      "retail_price": 149.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2024,
-      "piece_count": 2020,
-      "image_url": "https://images.brickset.com/sets/images/10334-1.jpg",
-      "search_terms": ["10334 lego", "lego art deco"]
+      "search_terms": [
+        "lego 10317"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "10337",
@@ -323,187 +71,10 @@
       "release_year": 2024,
       "piece_count": 1437,
       "image_url": "https://images.brickset.com/sets/images/10337-1.jpg",
-      "search_terms": ["10337 lego", "lego bugatti chiron super sport"]
-    },
-    {
-      "set_number": "75192",
-      "name": "Millennium Falcon",
-      "theme": "Star Wars",
-      "retail_price": 699.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2017,
-      "piece_count": 7541,
-      "image_url": "https://images.brickset.com/sets/images/75192-1.jpg",
-      "search_terms": ["75192 lego", "lego millennium falcon"]
-    },
-    {
-      "set_number": "75252",
-      "name": "Imperial Star Destroyer",
-      "theme": "Star Wars",
-      "retail_price": 699.99,
-      "is_retired": true,
-      "market_value_new": 900.0,
-      "release_year": 2019,
-      "piece_count": 4784,
-      "image_url": "https://images.brickset.com/sets/images/75252-1.jpg",
-      "search_terms": ["75252 lego", "lego imperial star destroyer"]
-    },
-    {
-      "set_number": "75290",
-      "name": "Mos Eisley Cantina",
-      "theme": "Star Wars",
-      "retail_price": 349.99,
-      "is_retired": true,
-      "market_value_new": 450.0,
-      "release_year": 2020,
-      "piece_count": 3187,
-      "image_url": "https://images.brickset.com/sets/images/75290-1.jpg",
-      "search_terms": ["75290 lego", "lego mos eisley cantina"]
-    },
-    {
-      "set_number": "75309",
-      "name": "Republic Gunship",
-      "theme": "Star Wars",
-      "retail_price": 349.99,
-      "is_retired": true,
-      "market_value_new": 420.0,
-      "release_year": 2021,
-      "piece_count": 3292,
-      "image_url": "https://images.brickset.com/sets/images/75309-1.jpg",
-      "search_terms": ["75309 lego", "lego republic gunship"]
-    },
-    {
-      "set_number": "75313",
-      "name": "AT-AT",
-      "theme": "Star Wars",
-      "retail_price": 799.99,
-      "is_retired": true,
-      "market_value_new": 950.0,
-      "release_year": 2021,
-      "piece_count": 6785,
-      "image_url": "https://images.brickset.com/sets/images/75313-1.jpg",
-      "search_terms": ["75313 lego", "lego at-at", "lego atat"]
-    },
-    {
-      "set_number": "75326",
-      "name": "Boba Fett's Throne Room",
-      "theme": "Star Wars",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": 130.0,
-      "release_year": 2022,
-      "piece_count": 732,
-      "image_url": "https://images.brickset.com/sets/images/75326-1.jpg",
-      "search_terms": ["75326 lego", "lego boba fett throne room", "lego boba fett troonkamer"]
-    },
-    {
-      "set_number": "75330",
-      "name": "Dagobah Jedi Training Diorama",
-      "theme": "Star Wars",
-      "retail_price": 79.99,
-      "is_retired": true,
-      "market_value_new": 110.0,
-      "release_year": 2022,
-      "piece_count": 1000,
-      "image_url": "https://images.brickset.com/sets/images/75330-1.jpg",
-      "search_terms": ["75330 lego", "lego dagobah jedi training", "lego dagobah diorama"]
-    },
-    {
-      "set_number": "75331",
-      "name": "The Razor Crest",
-      "theme": "Star Wars",
-      "retail_price": 599.99,
-      "is_retired": true,
-      "market_value_new": 700.0,
-      "release_year": 2022,
-      "piece_count": 6187,
-      "image_url": "https://images.brickset.com/sets/images/75331-1.jpg",
-      "search_terms": ["75331 lego", "lego razor crest", "lego the mandalorian"]
-    },
-    {
-      "set_number": "75337",
-      "name": "AT-TE Walker",
-      "theme": "Star Wars",
-      "retail_price": 134.99,
-      "is_retired": true,
-      "market_value_new": 175.0,
-      "release_year": 2022,
-      "piece_count": 1082,
-      "image_url": "https://images.brickset.com/sets/images/75337-1.jpg",
-      "search_terms": ["75337 lego", "lego at-te walker"]
-    },
-    {
-      "set_number": "75341",
-      "name": "Luke Skywalker's Landspeeder",
-      "theme": "Star Wars",
-      "retail_price": 199.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2022,
-      "piece_count": 1890,
-      "image_url": "https://images.brickset.com/sets/images/75341-1.jpg",
-      "search_terms": ["75341 lego", "lego luke skywalker landspeeder"]
-    },
-    {
-      "set_number": "75343",
-      "name": "Dark Trooper Helmet",
-      "theme": "Star Wars",
-      "retail_price": 59.99,
-      "is_retired": true,
-      "market_value_new": 85.0,
-      "release_year": 2022,
-      "piece_count": 693,
-      "image_url": "https://images.brickset.com/sets/images/75343-1.jpg",
-      "search_terms": ["75343 lego", "lego dark trooper helmet"]
-    },
-    {
-      "set_number": "75349",
-      "name": "Captain Rex Phase II Helmet",
-      "theme": "Star Wars",
-      "retail_price": 59.99,
-      "is_retired": true,
-      "market_value_new": 82.0,
-      "release_year": 2023,
-      "piece_count": 854,
-      "image_url": "https://images.brickset.com/sets/images/75349-1.jpg",
-      "search_terms": ["75349 lego", "lego captain rex helmet"]
-    },
-    {
-      "set_number": "75352",
-      "name": "Emperor's Throne Room Diorama",
-      "theme": "Star Wars",
-      "retail_price": 99.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 807,
-      "image_url": "https://images.brickset.com/sets/images/75352-1.jpg",
-      "search_terms": ["75352 lego", "lego emperor throne room", "lego emperor palpatine diorama"]
-    },
-    {
-      "set_number": "75357",
-      "name": "Ghost & Phantom II",
-      "theme": "Star Wars",
-      "retail_price": 199.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 1394,
-      "image_url": "https://images.brickset.com/sets/images/75357-1.jpg",
-      "search_terms": ["75357 lego", "lego ghost phantom star wars rebels"]
-    },
-    {
-      "set_number": "75376",
-      "name": "Tantive IV",
-      "theme": "Star Wars",
-      "retail_price": 199.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2024,
-      "piece_count": 654,
-      "image_url": "https://images.brickset.com/sets/images/75376-1.jpg",
-      "search_terms": ["75376 lego", "lego tantive iv", "lego princess leia ship"]
+      "search_terms": [
+        "lego 10337"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "42115",
@@ -515,7 +86,10 @@
       "release_year": 2020,
       "piece_count": 3696,
       "image_url": "https://images.brickset.com/sets/images/42115-1.jpg",
-      "search_terms": ["42115 lego", "lego lamborghini sian", "lego technic lamborghini"]
+      "search_terms": [
+        "lego 42115"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "42125",
@@ -527,7 +101,10 @@
       "release_year": 2021,
       "piece_count": 1677,
       "image_url": "https://images.brickset.com/sets/images/42125-1.jpg",
-      "search_terms": ["42125 lego", "lego ferrari 488 gte", "lego technic ferrari"]
+      "search_terms": [
+        "lego 42125"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "42130",
@@ -539,7 +116,10 @@
       "release_year": 2022,
       "piece_count": 1920,
       "image_url": "https://images.brickset.com/sets/images/42130-1.jpg",
-      "search_terms": ["42130 lego", "lego bmw m 1000 rr", "lego technic bmw motor"]
+      "search_terms": [
+        "lego 42130"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "42143",
@@ -551,7 +131,10 @@
       "release_year": 2022,
       "piece_count": 3778,
       "image_url": "https://images.brickset.com/sets/images/42143-1.jpg",
-      "search_terms": ["42143 lego", "lego ferrari daytona sp3", "lego technic ferrari daytona"]
+      "search_terms": [
+        "lego 42143"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "42151",
@@ -563,7 +146,10 @@
       "release_year": 2022,
       "piece_count": 905,
       "image_url": "https://images.brickset.com/sets/images/42151-1.jpg",
-      "search_terms": ["42151 lego", "lego bugatti bolide", "lego technic bugatti"]
+      "search_terms": [
+        "lego 42151"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "42154",
@@ -575,7 +161,10 @@
       "release_year": 2023,
       "piece_count": 1466,
       "image_url": "https://images.brickset.com/sets/images/42154-1.jpg",
-      "search_terms": ["42154 lego", "lego ford gt", "lego technic ford gt"]
+      "search_terms": [
+        "lego 42154"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "42156",
@@ -587,7 +176,10 @@
       "release_year": 2023,
       "piece_count": 1775,
       "image_url": "https://images.brickset.com/sets/images/42156-1.jpg",
-      "search_terms": ["42156 lego", "lego peugeot 9x8", "lego technic peugeot le mans"]
+      "search_terms": [
+        "lego 42156"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "42159",
@@ -599,7 +191,10 @@
       "release_year": 2023,
       "piece_count": 1478,
       "image_url": "https://images.brickset.com/sets/images/42159-1.jpg",
-      "search_terms": ["42159 lego", "lego yamaha mt-10 sp", "lego technic yamaha"]
+      "search_terms": [
+        "lego 42159"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "42162",
@@ -611,7 +206,10 @@
       "release_year": 2024,
       "piece_count": 614,
       "image_url": "https://images.brickset.com/sets/images/42162-1.jpg",
-      "search_terms": ["42162 lego", "lego bmw m 1000 rr technic 2024"]
+      "search_terms": [
+        "lego 42162"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "42170",
@@ -623,547 +221,10 @@
       "release_year": 2024,
       "piece_count": 1383,
       "image_url": "https://images.brickset.com/sets/images/42170-1.jpg",
-      "search_terms": ["42170 lego", "lego kawasaki ninja h2r", "lego technic kawasaki"]
-    },
-    {
-      "set_number": "71043",
-      "name": "Hogwarts Castle",
-      "theme": "Harry Potter",
-      "retail_price": 469.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2018,
-      "piece_count": 6020,
-      "image_url": "https://images.brickset.com/sets/images/71043-1.jpg",
-      "search_terms": ["71043 lego", "lego hogwarts castle", "lego zweinstein kasteel"]
-    },
-    {
-      "set_number": "75978",
-      "name": "Diagon Alley",
-      "theme": "Harry Potter",
-      "retail_price": 399.99,
-      "is_retired": true,
-      "market_value_new": 510.0,
-      "release_year": 2020,
-      "piece_count": 5544,
-      "image_url": "https://images.brickset.com/sets/images/75978-1.jpg",
-      "search_terms": ["75978 lego", "lego diagon alley", "lego wegisweg"]
-    },
-    {
-      "set_number": "76388",
-      "name": "Hogsmeade Village Visit",
-      "theme": "Harry Potter",
-      "retail_price": 74.99,
-      "is_retired": true,
-      "market_value_new": 105.0,
-      "release_year": 2021,
-      "piece_count": 851,
-      "image_url": "https://images.brickset.com/sets/images/76388-1.jpg",
-      "search_terms": ["76388 lego", "lego hogsmeade village", "lego zweinsveld"]
-    },
-    {
-      "set_number": "76389",
-      "name": "Hogwarts Chamber of Secrets",
-      "theme": "Harry Potter",
-      "retail_price": 129.99,
-      "is_retired": true,
-      "market_value_new": 170.0,
-      "release_year": 2021,
-      "piece_count": 1176,
-      "image_url": "https://images.brickset.com/sets/images/76389-1.jpg",
-      "search_terms": ["76389 lego", "lego hogwarts chamber of secrets", "lego kamer van geheimen"]
-    },
-    {
-      "set_number": "76391",
-      "name": "Hogwarts Icons - Collectors' Edition",
-      "theme": "Harry Potter",
-      "retail_price": 129.99,
-      "is_retired": true,
-      "market_value_new": 180.0,
-      "release_year": 2021,
-      "piece_count": 3010,
-      "image_url": "https://images.brickset.com/sets/images/76391-1.jpg",
-      "search_terms": ["76391 lego", "lego hogwarts icons", "lego harry potter collectors edition"]
-    },
-    {
-      "set_number": "76394",
-      "name": "Fawkes, Dumbledore's Phoenix",
-      "theme": "Harry Potter",
-      "retail_price": 79.99,
-      "is_retired": true,
-      "market_value_new": 115.0,
-      "release_year": 2022,
-      "piece_count": 597,
-      "image_url": "https://images.brickset.com/sets/images/76394-1.jpg",
-      "search_terms": ["76394 lego", "lego fawkes phoenix", "lego perkamentus feniks"]
-    },
-    {
-      "set_number": "76402",
-      "name": "Hogwarts: Dumbledore's Office",
-      "theme": "Harry Potter",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": 140.0,
-      "release_year": 2022,
-      "piece_count": 654,
-      "image_url": "https://images.brickset.com/sets/images/76402-1.jpg",
-      "search_terms": ["76402 lego", "lego dumbledore office", "lego perkamentus kantoor"]
-    },
-    {
-      "set_number": "76405",
-      "name": "Hogwarts Express – Collectors' Edition",
-      "theme": "Harry Potter",
-      "retail_price": 499.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 5129,
-      "image_url": "https://images.brickset.com/sets/images/76405-1.jpg",
-      "search_terms": ["76405 lego", "lego hogwarts express collectors", "lego zweinstein express"]
-    },
-    {
-      "set_number": "21325",
-      "name": "Medieval Blacksmith",
-      "theme": "Ideas",
-      "retail_price": 179.99,
-      "is_retired": true,
-      "market_value_new": 255.0,
-      "release_year": 2021,
-      "piece_count": 2164,
-      "image_url": "https://images.brickset.com/sets/images/21325-1.jpg",
-      "search_terms": ["21325 lego", "lego medieval blacksmith", "lego middeleeuwse smid"]
-    },
-    {
-      "set_number": "21327",
-      "name": "Typewriter",
-      "theme": "Ideas",
-      "retail_price": 209.99,
-      "is_retired": true,
-      "market_value_new": 285.0,
-      "release_year": 2021,
-      "piece_count": 2079,
-      "image_url": "https://images.brickset.com/sets/images/21327-1.jpg",
-      "search_terms": ["21327 lego", "lego typewriter", "lego typemachine"]
-    },
-    {
-      "set_number": "21330",
-      "name": "Home Alone",
-      "theme": "Ideas",
-      "retail_price": 229.99,
-      "is_retired": true,
-      "market_value_new": 305.0,
-      "release_year": 2021,
-      "piece_count": 3955,
-      "image_url": "https://images.brickset.com/sets/images/21330-1.jpg",
-      "search_terms": ["21330 lego", "lego home alone", "lego kevin alleen thuis"]
-    },
-    {
-      "set_number": "21332",
-      "name": "The Globe",
-      "theme": "Ideas",
-      "retail_price": 219.99,
-      "is_retired": true,
-      "market_value_new": 285.0,
-      "release_year": 2022,
-      "piece_count": 2585,
-      "image_url": "https://images.brickset.com/sets/images/21332-1.jpg",
-      "search_terms": ["21332 lego", "lego the globe", "lego wereldbol"]
-    },
-    {
-      "set_number": "21333",
-      "name": "Vincent van Gogh - The Starry Night",
-      "theme": "Ideas",
-      "retail_price": 169.99,
-      "is_retired": true,
-      "market_value_new": 225.0,
-      "release_year": 2022,
-      "piece_count": 2316,
-      "image_url": "https://images.brickset.com/sets/images/21333-1.jpg",
-      "search_terms": ["21333 lego", "lego van gogh starry night", "lego sterrennacht van gogh"]
-    },
-    {
-      "set_number": "21335",
-      "name": "Motorised Lighthouse",
-      "theme": "Ideas",
-      "retail_price": 229.99,
-      "is_retired": true,
-      "market_value_new": 290.0,
-      "release_year": 2022,
-      "piece_count": 2065,
-      "image_url": "https://images.brickset.com/sets/images/21335-1.jpg",
-      "search_terms": ["21335 lego", "lego motorised lighthouse", "lego vuurtoren"]
-    },
-    {
-      "set_number": "21336",
-      "name": "The Office",
-      "theme": "Ideas",
-      "retail_price": 249.99,
-      "is_retired": true,
-      "market_value_new": 325.0,
-      "release_year": 2022,
-      "piece_count": 2132,
-      "image_url": "https://images.brickset.com/sets/images/21336-1.jpg",
-      "search_terms": ["21336 lego", "lego the office", "lego dunder mifflin"]
-    },
-    {
-      "set_number": "21337",
-      "name": "Table Football",
-      "theme": "Ideas",
-      "retail_price": 249.99,
-      "is_retired": true,
-      "market_value_new": 305.0,
-      "release_year": 2022,
-      "piece_count": 2339,
-      "image_url": "https://images.brickset.com/sets/images/21337-1.jpg",
-      "search_terms": ["21337 lego", "lego table football", "lego tafelvoetbal"]
-    },
-    {
-      "set_number": "21338",
-      "name": "A-Frame Cabin",
-      "theme": "Ideas",
-      "retail_price": 189.99,
-      "is_retired": true,
-      "market_value_new": 245.0,
-      "release_year": 2023,
-      "piece_count": 2082,
-      "image_url": "https://images.brickset.com/sets/images/21338-1.jpg",
-      "search_terms": ["21338 lego", "lego a-frame cabin", "lego vakantiehuisje"]
-    },
-    {
-      "set_number": "21339",
-      "name": "BTS Dynamite",
-      "theme": "Ideas",
-      "retail_price": 169.99,
-      "is_retired": true,
-      "market_value_new": 215.0,
-      "release_year": 2023,
-      "piece_count": 749,
-      "image_url": "https://images.brickset.com/sets/images/21339-1.jpg",
-      "search_terms": ["21339 lego", "lego bts dynamite"]
-    },
-    {
-      "set_number": "21341",
-      "name": "Disney Hocus Pocus: The Sanderson Sisters' Cottage",
-      "theme": "Ideas",
-      "retail_price": 129.99,
-      "is_retired": true,
-      "market_value_new": 168.0,
-      "release_year": 2023,
-      "piece_count": 2316,
-      "image_url": "https://images.brickset.com/sets/images/21341-1.jpg",
-      "search_terms": ["21341 lego", "lego hocus pocus", "lego sanderson sisters"]
-    },
-    {
-      "set_number": "21343",
-      "name": "Viking Village",
-      "theme": "Ideas",
-      "retail_price": 129.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 2103,
-      "image_url": "https://images.brickset.com/sets/images/21343-1.jpg",
-      "search_terms": ["21343 lego", "lego viking village", "lego vikings dorp"]
-    },
-    {
-      "set_number": "21344",
-      "name": "The Pirate Ship",
-      "theme": "Ideas",
-      "retail_price": 99.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 2545,
-      "image_url": "https://images.brickset.com/sets/images/21344-1.jpg",
-      "search_terms": ["21344 lego", "lego pirate ship", "lego piratenschip"]
-    },
-    {
-      "set_number": "21345",
-      "name": "Polaroid OneStep SX-70 Camera",
-      "theme": "Ideas",
-      "retail_price": 79.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 516,
-      "image_url": "https://images.brickset.com/sets/images/21345-1.jpg",
-      "search_terms": ["21345 lego", "lego polaroid camera", "lego polaroid sx-70"]
-    },
-    {
-      "set_number": "21347",
-      "name": "Old Trafford - Manchester United",
-      "theme": "Ideas",
-      "retail_price": 309.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 3898,
-      "image_url": "https://images.brickset.com/sets/images/21347-1.jpg",
-      "search_terms": ["21347 lego", "lego old trafford manchester united", "lego man united stadion"]
-    },
-    {
-      "set_number": "31197",
-      "name": "Andy Warhol's Marilyn Monroe",
-      "theme": "Art",
-      "retail_price": 119.99,
-      "is_retired": true,
-      "market_value_new": 155.0,
-      "release_year": 2021,
-      "piece_count": 3341,
-      "image_url": "https://images.brickset.com/sets/images/31197-1.jpg",
-      "search_terms": ["31197 lego", "lego andy warhol marilyn monroe", "lego art marilyn"]
-    },
-    {
-      "set_number": "31199",
-      "name": "Marvel Studios Iron Man",
-      "theme": "Art",
-      "retail_price": 119.99,
-      "is_retired": true,
-      "market_value_new": 165.0,
-      "release_year": 2021,
-      "piece_count": 3167,
-      "image_url": "https://images.brickset.com/sets/images/31199-1.jpg",
-      "search_terms": ["31199 lego", "lego iron man art", "lego marvel iron man mosaic"]
-    },
-    {
-      "set_number": "31200",
-      "name": "Star Wars The Sith",
-      "theme": "Art",
-      "retail_price": 119.99,
-      "is_retired": true,
-      "market_value_new": 165.0,
-      "release_year": 2020,
-      "piece_count": 3395,
-      "image_url": "https://images.brickset.com/sets/images/31200-1.jpg",
-      "search_terms": ["31200 lego", "lego star wars sith art", "lego darth vader mosaic"]
-    },
-    {
-      "set_number": "31201",
-      "name": "Harry Potter Hogwarts Crests",
-      "theme": "Art",
-      "retail_price": 119.99,
-      "is_retired": true,
-      "market_value_new": 158.0,
-      "release_year": 2021,
-      "piece_count": 4249,
-      "image_url": "https://images.brickset.com/sets/images/31201-1.jpg",
-      "search_terms": ["31201 lego", "lego hogwarts crests art", "lego harry potter wapenschilden"]
-    },
-    {
-      "set_number": "31203",
-      "name": "World Map",
-      "theme": "Art",
-      "retail_price": 249.99,
-      "is_retired": true,
-      "market_value_new": 310.0,
-      "release_year": 2021,
-      "piece_count": 11695,
-      "image_url": "https://images.brickset.com/sets/images/31203-1.jpg",
-      "search_terms": ["31203 lego", "lego world map", "lego wereldkaart"]
-    },
-    {
-      "set_number": "31204",
-      "name": "Jim Lee Batman Collection",
-      "theme": "Art",
-      "retail_price": 119.99,
-      "is_retired": true,
-      "market_value_new": 162.0,
-      "release_year": 2022,
-      "piece_count": 4167,
-      "image_url": "https://images.brickset.com/sets/images/31204-1.jpg",
-      "search_terms": ["31204 lego", "lego batman art jim lee", "lego batman mosaic"]
-    },
-    {
-      "set_number": "31206",
-      "name": "The Rolling Stones",
-      "theme": "Art",
-      "retail_price": 119.99,
-      "is_retired": true,
-      "market_value_new": 152.0,
-      "release_year": 2022,
-      "piece_count": 3508,
-      "image_url": "https://images.brickset.com/sets/images/31206-1.jpg",
-      "search_terms": ["31206 lego", "lego rolling stones", "lego rolling stones art"]
-    },
-    {
-      "set_number": "31210",
-      "name": "Floral Art",
-      "theme": "Art",
-      "retail_price": 119.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 2870,
-      "image_url": "https://images.brickset.com/sets/images/31210-1.jpg",
-      "search_terms": ["31210 lego", "lego floral art", "lego bloemen kunst"]
-    },
-    {
-      "set_number": "43222",
-      "name": "Disney Castle",
-      "theme": "Disney",
-      "retail_price": 349.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 4837,
-      "image_url": "https://images.brickset.com/sets/images/43222-1.jpg",
-      "search_terms": ["43222 lego", "lego disney castle", "lego disney kasteel"]
-    },
-    {
-      "set_number": "43230",
-      "name": "Walt Disney Tribute Camera",
-      "theme": "Disney",
-      "retail_price": 119.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 811,
-      "image_url": "https://images.brickset.com/sets/images/43230-1.jpg",
-      "search_terms": ["43230 lego", "lego walt disney tribute camera", "lego disney camera"]
-    },
-    {
-      "set_number": "71040",
-      "name": "The Disney Castle",
-      "theme": "Disney",
-      "retail_price": 349.99,
-      "is_retired": true,
-      "market_value_new": 650.0,
-      "release_year": 2016,
-      "piece_count": 4080,
-      "image_url": "https://images.brickset.com/sets/images/71040-1.jpg",
-      "search_terms": ["71040 lego", "lego disney castle 2016", "lego disney kasteel origineel"]
-    },
-    {
-      "set_number": "71741",
-      "name": "NINJAGO City Gardens",
-      "theme": "Ninjago",
-      "retail_price": 299.99,
-      "is_retired": true,
-      "market_value_new": 390.0,
-      "release_year": 2021,
-      "piece_count": 5685,
-      "image_url": "https://images.brickset.com/sets/images/71741-1.jpg",
-      "search_terms": ["71741 lego", "lego ninjago city gardens", "lego ninjago city tuinen"]
-    },
-    {
-      "set_number": "71767",
-      "name": "Ninja Dojo Temple",
-      "theme": "Ninjago",
-      "retail_price": 179.99,
-      "is_retired": true,
-      "market_value_new": 225.0,
-      "release_year": 2022,
-      "piece_count": 1394,
-      "image_url": "https://images.brickset.com/sets/images/71767-1.jpg",
-      "search_terms": ["71767 lego", "lego ninja dojo temple", "lego ninjago dojo tempel"]
-    },
-    {
-      "set_number": "60337",
-      "name": "Express Passenger Train",
-      "theme": "City",
-      "retail_price": 199.99,
-      "is_retired": true,
-      "market_value_new": 260.0,
-      "release_year": 2022,
-      "piece_count": 764,
-      "image_url": "https://images.brickset.com/sets/images/60337-1.jpg",
-      "search_terms": ["60337 lego", "lego express passenger train", "lego city trein"]
-    },
-    {
-      "set_number": "60335",
-      "name": "Train Station",
-      "theme": "City",
-      "retail_price": 199.99,
-      "is_retired": true,
-      "market_value_new": 255.0,
-      "release_year": 2022,
-      "piece_count": 907,
-      "image_url": "https://images.brickset.com/sets/images/60335-1.jpg",
-      "search_terms": ["60335 lego", "lego train station", "lego treinstation"]
-    },
-    {
-      "set_number": "21186",
-      "name": "The Ice Castle",
-      "theme": "Minecraft",
-      "retail_price": 119.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2022,
-      "piece_count": 1426,
-      "image_url": "https://images.brickset.com/sets/images/21186-1.jpg",
-      "search_terms": ["21186 lego", "lego minecraft ice castle", "lego minecraft ijskasteel"]
-    },
-    {
-      "set_number": "21176",
-      "name": "The Jungle Abomination",
-      "theme": "Minecraft",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": 130.0,
-      "release_year": 2021,
-      "piece_count": 560,
-      "image_url": "https://images.brickset.com/sets/images/21176-1.jpg",
-      "search_terms": ["21176 lego", "lego minecraft jungle abomination"]
-    },
-    {
-      "set_number": "76419",
-      "name": "Hogwarts Castle and Grounds",
-      "theme": "Harry Potter",
-      "retail_price": 169.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 2660,
-      "image_url": "https://images.brickset.com/sets/images/76419-1.jpg",
-      "search_terms": ["76419 lego", "lego hogwarts castle grounds", "lego zweinstein kasteel terrein"]
-    },
-    {
-      "set_number": "10255",
-      "name": "Assembly Square",
-      "theme": "Icons",
-      "retail_price": 279.99,
-      "is_retired": true,
-      "market_value_new": 420.0,
-      "release_year": 2017,
-      "piece_count": 4002,
-      "image_url": "https://images.brickset.com/sets/images/10255-1.jpg",
-      "search_terms": ["10255 lego", "lego assembly square", "lego stadsplein"]
-    },
-    {
-      "set_number": "10264",
-      "name": "Corner Garage",
-      "theme": "Icons",
-      "retail_price": 199.99,
-      "is_retired": true,
-      "market_value_new": 290.0,
-      "release_year": 2019,
-      "piece_count": 2569,
-      "image_url": "https://images.brickset.com/sets/images/10264-1.jpg",
-      "search_terms": ["10264 lego", "lego corner garage", "lego hoekgarage"]
-    },
-    {
-      "set_number": "10257",
-      "name": "Carousel",
-      "theme": "Icons",
-      "retail_price": 199.99,
-      "is_retired": true,
-      "market_value_new": 310.0,
-      "release_year": 2017,
-      "piece_count": 2670,
-      "image_url": "https://images.brickset.com/sets/images/10257-1.jpg",
-      "search_terms": ["10257 lego", "lego carousel", "lego draaimolen"]
-    },
-    {
-      "set_number": "10261",
-      "name": "Roller Coaster",
-      "theme": "Icons",
-      "retail_price": 379.99,
-      "is_retired": true,
-      "market_value_new": 520.0,
-      "release_year": 2018,
-      "piece_count": 4124,
-      "image_url": "https://images.brickset.com/sets/images/10261-1.jpg",
-      "search_terms": ["10261 lego", "lego roller coaster", "lego achtbaan"]
+      "search_terms": [
+        "lego 42170"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "42083",
@@ -1175,7 +236,10 @@
       "release_year": 2018,
       "piece_count": 3599,
       "image_url": "https://images.brickset.com/sets/images/42083-1.jpg",
-      "search_terms": ["42083 lego", "lego bugatti chiron technic", "lego technic bugatti chiron"]
+      "search_terms": [
+        "lego 42083"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "42110",
@@ -1187,19 +251,10 @@
       "release_year": 2019,
       "piece_count": 2573,
       "image_url": "https://images.brickset.com/sets/images/42110-1.jpg",
-      "search_terms": ["42110 lego", "lego land rover defender technic", "lego technic land rover"]
-    },
-    {
-      "set_number": "21334",
-      "name": "Jazz Quartet",
-      "theme": "Ideas",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": 132.0,
-      "release_year": 2022,
-      "piece_count": 1615,
-      "image_url": "https://images.brickset.com/sets/images/21334-1.jpg",
-      "search_terms": ["21334 lego", "lego jazz quartet", "lego jazz kwartet"]
+      "search_terms": [
+        "lego 42110"
+      ],
+      "category": "vehicle"
     }
   ]
 }

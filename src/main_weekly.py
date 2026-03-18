@@ -2,18 +2,17 @@
 Weekly orchestrator — runs on Sunday at 03:00 NL time.
 
 Steps:
-1. Load LEGO set catalog
-2. Scrape Vinted (NL + BE + DE) for all sets
-3. Calculate price statistics per condition category
-4. Update price history for charts
-5. Save to data/vinted_prices.json and data/vinted_price_history.json
+1. Load LEGO set catalog (vehicle sets only)
+2. Scrape Vinted NL for all sets (set-number-only search, lifecycle tracking)
+3. Compute price intelligence (sell_price_fast, sell_price_realistic per platform/condition)
+4. Log summary
 """
 
-import json
 import sys
 import traceback
 from datetime import datetime
 from pathlib import Path
+import json
 
 LEGO_SETS_PATH = Path("data/lego_sets.json")
 
@@ -36,24 +35,33 @@ def run_weekly(dry_run: bool = False) -> None:
 
     if dry_run:
         print("[Weekly] DRY RUN: skipping Vinted scrape")
-        from src.scrapers.vinted_lego import load_prices
-        prices = load_prices()
-        if prices:
-            print(f"[Weekly] Loaded existing price data from {prices.get('scraped_at', 'unknown')}")
         return
 
-    from src.scrapers.vinted_lego import scrape_all_sets
-    print("[Weekly] Scraping Vinted NL/BE/DE for all sets...")
+    # Step 1: Scrape Vinted
+    from src.scrapers.vinted_lego import scrape_all_sets, VINTED_PLATFORMS
+    print("[Weekly] Scraping Vinted NL for all sets...")
     results = scrape_all_sets(lego_sets)
 
-    total_listings = sum(
-        set_data["all"].listing_count
+    total = sum(
+        len(listings)
         for set_data in results.values()
-        if isinstance(set_data, dict) and "all" in set_data
+        for listings in set_data.values()
     )
 
+    # Step 2: Compute price intelligence from SQLite lifecycle data
+    from src.analysis.price_intelligence import compute_all_sets
+    platforms = [code for _, code in VINTED_PLATFORMS]
+    print("[Weekly] Computing price intelligence...")
+    compute_all_sets(lego_sets, platforms)
+
+    # Step 3: Rejection summary
+    from src import db
+    summary = db.get_rejection_summary(days=1)
+    if summary:
+        print(f"[Weekly] Auto-rejections today: {dict(summary)}")
+
     elapsed = (datetime.now() - start).seconds
-    print(f"[Weekly] Completed in {elapsed}s — {len(results)} sets scraped, {total_listings} total Vinted listings")
+    print(f"[Weekly] Completed in {elapsed}s — {len(results)} sets, {total} valid listings")
 
 
 def main():

@@ -1,117 +1,122 @@
 """
 Dashboard generator for LEGO Circulair Trader.
 
-Renders the Jinja2 HTML template with LEGO set data, deals, and Vinted prices.
-Writes output to the output/ directory for GitHub Pages deployment.
+Produces:
+- output/data/dashboard_data.json  : all data consumed by the interactive JS dashboard
+- output/index.html                : static shell that fetches the JSON and renders it
 """
 
 import json
+import shutil
 from datetime import datetime
 from pathlib import Path
 
-from jinja2 import Environment, FileSystemLoader
-
-TEMPLATE_DIR = Path(__file__).parent / "templates"
 OUTPUT_DIR = Path("output")
-GITHUB_REPO = "DaveKruizi/circulair-trader"
-API_COST_PATH = Path("data/api_usage.json")
+DATA_OUTPUT_DIR = OUTPUT_DIR / "data"
+TEMPLATE_PATH = Path(__file__).parent / "templates" / "index.html"
+
+ALL_PLATFORMS = ["vinted_nl", "marktplaats"]
+PLATFORM_LABELS = {
+    "vinted_nl": "Vinted NL",
+    "marktplaats": "Marktplaats",
+}
 
 
-def _load_api_cost() -> dict:
-    """Load current month API cost from api_usage.json."""
-    if API_COST_PATH.exists():
-        try:
-            return json.loads(API_COST_PATH.read_text())
-        except Exception:
-            pass
-    return {"total_cost_eur": 0.0, "monthly_budget_eur": 10.0, "month": ""}
+def build_dashboard_data(
+    lego_sets: list[dict],
+    marktplaats_deals: dict,
+    scraped_at: str,
+) -> dict:
+    """
+    Assemble all data needed by the interactive dashboard.
+    Reads price intelligence from SQLite.
+    """
+    from src.analysis.price_intelligence import (
+        compute_price_intelligence,
+        get_price_history_for_dashboard,
+    )
+    from src import db
+    db.init_db()
+
+    sets_out = []
+    for lego_set in lego_sets:
+        set_number = lego_set["set_number"]
+        retail_price = lego_set.get("retail_price")
+
+        # Price intelligence per platform per condition
+        platforms_data: dict[str, dict] = {}
+        for platform in ALL_PLATFORMS:
+            platforms_data[platform] = {}
+            for condition in ["NIB", "CIB"]:
+                intel = compute_price_intelligence(set_number, platform, condition, retail_price)
+                # Active listings for this platform+condition (for display)
+                active = db.get_active_listings(set_number, platform, condition)
+                intel["listings"] = [
+                    {
+                        "title": r["title"],
+                        "price": r["price"],
+                        "url": r["url"],
+                        "image_url": r["image_url"],
+                    }
+                    for r in active[:20]  # max 20 per card
+                ]
+                platforms_data[platform][condition] = intel
+
+        # Price history for chart
+        history = get_price_history_for_dashboard(set_number, ALL_PLATFORMS)
+
+        # Marktplaats active listings (all conditions, for buying opps section)
+        mp_listings = marktplaats_deals.get("sets", {}).get(set_number, [])
+
+        sets_out.append({
+            "set_number": set_number,
+            "name": lego_set["name"],
+            "theme": lego_set.get("theme", ""),
+            "retail_price": retail_price,
+            "market_value_new": lego_set.get("market_value_new"),
+            "is_retired": lego_set.get("is_retired", False),
+            "release_year": lego_set.get("release_year"),
+            "piece_count": lego_set.get("piece_count"),
+            "image_url": lego_set.get("image_url", ""),
+            "platforms": platforms_data,
+            "price_history": history,
+            "mp_listings": mp_listings[:15],
+        })
+
+    rejection_summary = db.get_rejection_summary(days=7)
+
+    return {
+        "generated_at": datetime.now().isoformat(),
+        "scraped_at": scraped_at,
+        "platform_labels": PLATFORM_LABELS,
+        "sets": sets_out,
+        "rejection_summary_7d": rejection_summary,
+    }
 
 
 def generate_dashboard(
-    sets: list[dict],
+    lego_sets: list[dict],
+    marktplaats_deals: dict,
     scraped_at: str,
-    total_deals: int,
-    new_today: int,
-    price_drops: int,
-    vinted_prices_date: str = "",
 ) -> str:
-    """
-    Render the LEGO dashboard HTML and write to output/index.html.
-
-    Args:
-        sets: List of enriched lego_set dicts, each with 'deals' list attached.
-        scraped_at: ISO timestamp of last Marktplaats scrape.
-        total_deals: Total qualifying deals across all sets.
-        new_today: Number of deals seen for the first time today.
-        price_drops: Number of deals where price dropped since last scrape.
-        vinted_prices_date: ISO timestamp of last Vinted scrape.
-
-    Returns:
-        Path to generated HTML file.
-    """
-    env = Environment(
-        loader=FileSystemLoader(str(TEMPLATE_DIR)),
-        autoescape=True,
-    )
-    from urllib.parse import quote_plus
-    env.filters["urlencode"] = quote_plus
-
-    template = env.get_template("dashboard.html")
-
-    now = datetime.now()
-
-    # Gather all themes for filter
-    themes = sorted({s.get("theme", "Overig") for s in sets})
-
-    # API cost data
-    api_cost = _load_api_cost()
-    cost_eur = float(api_cost.get("total_cost_eur", 0.0))
-    budget_eur = float(api_cost.get("monthly_budget_eur", 10.0))
-    cost_pct = min(round((cost_eur / budget_eur) * 100, 1), 100.0) if budget_eur > 0 else 0.0
-
-    # Stats
-    sets_with_deals = sum(1 for s in sets if s.get("deal_count", 0) > 0)
-    sets_with_vinted = sum(1 for s in sets if s.get("vinted_total_count", 0) > 0)
-
-    html = template.render(
-        sets=sets,
-        themes=themes,
-        scraped_at=_format_dt(scraped_at),
-        vinted_prices_date=_format_dt(vinted_prices_date),
-        generated_at=now.strftime("%d %b %Y, %H:%M"),
-        total_deals=total_deals,
-        new_today=new_today,
-        price_drops=price_drops,
-        sets_with_deals=sets_with_deals,
-        total_sets=len(sets),
-        sets_with_vinted=sets_with_vinted,
-        cost_eur=round(cost_eur, 2),
-        budget_eur=budget_eur,
-        cost_pct=cost_pct,
-        github_repo=GITHUB_REPO,
-    )
-
+    """Generate dashboard_data.json and copy index.html to output/."""
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    out_file = OUTPUT_DIR / "index.html"
-    out_file.write_text(html, encoding="utf-8")
+    DATA_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    archive_file = OUTPUT_DIR / f"dashboard_{now.strftime('%Y-%m-%d')}.html"
-    archive_file.write_text(html, encoding="utf-8")
+    # Build data
+    data = build_dashboard_data(lego_sets, marktplaats_deals, scraped_at)
 
-    nojekyll = OUTPUT_DIR / ".nojekyll"
-    if not nojekyll.exists():
-        nojekyll.touch()
+    # Write JSON
+    json_path = DATA_OUTPUT_DIR / "dashboard_data.json"
+    json_path.write_text(json.dumps(data, ensure_ascii=False, indent=2))
 
-    print(f"[Dashboard] Generated: {out_file}")
-    return str(out_file)
+    # Copy static HTML shell
+    html_dest = OUTPUT_DIR / "index.html"
+    shutil.copy(str(TEMPLATE_PATH), str(html_dest))
 
+    # Ensure .nojekyll for GitHub Pages
+    (OUTPUT_DIR / ".nojekyll").touch()
 
-def _format_dt(iso_str: str) -> str:
-    """Format ISO timestamp to human-readable Dutch date/time."""
-    if not iso_str:
-        return "—"
-    try:
-        dt = datetime.fromisoformat(iso_str.split("T")[0] if "T" in iso_str else iso_str)
-        return dt.strftime("%d %b %Y")
-    except Exception:
-        return iso_str[:10] if iso_str else "—"
+    print(f"[Dashboard] Written to {html_dest}")
+    print(f"[Dashboard] Data JSON: {json_path} ({json_path.stat().st_size // 1024}KB)")
+    return str(html_dest)

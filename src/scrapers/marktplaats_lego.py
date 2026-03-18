@@ -1,9 +1,12 @@
 """
 Marktplaats.nl LEGO scraper.
 
-Per LEGO set: search by set number AND by product name.
-For bidding listings: fetch the listing page to extract the current highest bid.
-Tracks first-seen dates and price changes via seen_deals.json.
+Per LEGO set: searches by set number only ("lego {set_number}").
+- Set number must appear in listing title, else rejected + logged
+- Price outside [20%, 300%] of retail price → rejected + logged
+- Incomplete condition → excluded + logged
+- Tracks listing lifecycle in SQLite to detect disappearances (sold proxy)
+- For bidding listings: fetches current highest bid from listing page
 """
 
 import json
@@ -22,28 +25,13 @@ try:
 except ImportError:
     _MARKTPLAATS_AVAILABLE = False
 
-SEEN_DEALS_PATH = Path("data/seen_deals.json")
 DEALS_DATA_PATH = Path("data/marktplaats_deals.json")
 
-
-def _load_seen_deals() -> dict:
-    if SEEN_DEALS_PATH.exists():
-        try:
-            return json.loads(SEEN_DEALS_PATH.read_text())
-        except Exception:
-            return {}
-    return {}
-
-
-def _save_seen_deals(seen: dict) -> None:
-    SEEN_DEALS_PATH.parent.mkdir(parents=True, exist_ok=True)
-    cutoff = (datetime.now() - timedelta(days=90)).date().isoformat()
-    pruned = {k: v for k, v in seen.items() if v.get("last_seen", "2000-01-01") >= cutoff}
-    SEEN_DEALS_PATH.write_text(json.dumps(pruned, ensure_ascii=False, indent=2))
+MIN_PRICE_RATIO = 0.20
+MAX_PRICE_RATIO = 3.00
 
 
 def _days_since(dt: Optional[datetime]) -> int:
-    """Calculate days since a datetime object."""
     if not dt:
         return 0
     try:
@@ -53,48 +41,7 @@ def _days_since(dt: Optional[datetime]) -> int:
         return 0
 
 
-def _classify_condition(title: str, description: str) -> str:
-    """
-    Classify listing condition into one of 4 categories.
-    NIB  = Nieuw In Doos (sealed, unopened)
-    CIB  = Compleet In Doos (opened but complete with box + manual)
-    incomplete = missing box, manual, or pieces
-    unknown = cannot determine
-    """
-    text = (title + " " + description).lower()
-
-    nib_keywords = [
-        "sealed", "ongeopend", "new in box", "nib", "verzegeld",
-        "nooit geopend", "nieuw in verpakking", "nieuw in doos",
-        "factory sealed", "geseald", "origineel verzegeld",
-    ]
-    if any(kw in text for kw in nib_keywords):
-        return "NIB"
-
-    incomplete_keywords = [
-        "zonder doos", "geen doos", "zonder handleiding", "geen handleiding",
-        "losse steentjes", "los", "niet compleet", "incompleet",
-        "onderdelen ontbreken", "beschadigd", "kapot",
-        "zonder instructies", "geen instructies", "steentjes alleen",
-        "doos beschadigd", "doos mist", "handleiding mist",
-    ]
-    if any(kw in text for kw in incomplete_keywords):
-        return "incomplete"
-
-    cib_keywords = [
-        "compleet", "met doos", "met handleiding", "inclusief handleiding",
-        "originele doos", "volledig", "met instructies", "inclusief instructies",
-        "doos aanwezig", "handleiding aanwezig", "complete set",
-        "met alle onderdelen", "volledig compleet",
-    ]
-    if any(kw in text for kw in cib_keywords):
-        return "CIB"
-
-    return "unknown"
-
-
 def _get_price_type(listing) -> str:
-    """Map Marktplaats PriceType enum to our internal type string."""
     pt = listing.price_type
     if pt in (PriceType.BID, PriceType.BID_FROM):
         return "bidding"
@@ -104,9 +51,8 @@ def _get_price_type(listing) -> str:
 
 
 def _get_image_url(listing) -> str:
-    """Extract medium image URL from listing._images list."""
     try:
-        images = listing._images  # list of ListingFirstImage
+        images = listing._images
         if images:
             return images[0].medium or ""
     except Exception:
@@ -115,7 +61,6 @@ def _get_image_url(listing) -> str:
 
 
 def _fetch_current_bid(url: str) -> Optional[float]:
-    """Fetch listing page and extract current highest bid."""
     try:
         headers = {
             "User-Agent": (
@@ -128,7 +73,6 @@ def _fetch_current_bid(url: str) -> Optional[float]:
         resp = httpx.get(url, headers=headers, timeout=10, follow_redirects=True)
         if resp.status_code != 200:
             return None
-
         soup = BeautifulSoup(resp.text, "lxml")
         text = soup.get_text(" ", strip=True)
         patterns = [
@@ -148,123 +92,148 @@ def _fetch_current_bid(url: str) -> Optional[float]:
         return None
 
 
-def _parse_listing(listing, set_number: str, seen: dict, today: str) -> Optional[dict]:
-    """Convert a Marktplaats Listing object into a serializable dict."""
-    try:
-        listing_id = str(listing.id)
-        title = str(listing.title or "")
-        description = str(listing.description or "")[:600]
-        price = float(listing.price or 0)
-        price_type = _get_price_type(listing)
-        image_url = _get_image_url(listing)
-
-        seller_name = listing.seller.name if listing.seller else ""
-        location_str = listing.location.city if listing.location else ""
-
-        # listing.date can be a datetime or date object, or None
-        if listing.date:
-            d = listing.date if isinstance(listing.date, date) else listing.date.date()
-            date_str = d.isoformat()
-        else:
-            date_str = ""
-        days = _days_since(listing.date)
-
-        url = str(listing.link or f"https://www.marktplaats.nl/v/{listing_id}")
-        condition = _classify_condition(title, description)
-
-        prev = seen.get(listing_id)
-        first_seen = prev["first_seen"] if prev else today
-        price_changed = bool(prev and prev.get("price") != price and prev.get("price") is not None)
-        previous_price = prev.get("price") if price_changed else None
-
-        seen[listing_id] = {
-            "first_seen": first_seen,
-            "last_seen": today,
-            "price": price,
-            "title": title[:80],
-            "set_number": set_number,
-        }
-
-        return {
-            "id": listing_id,
-            "set_number": set_number,
-            "title": title,
-            "price": price,
-            "price_type": price_type,
-            "current_bid": None,
-            "ask_price": price,
-            "condition_category": condition,
-            "description": description,
-            "location": location_str or "",
-            "url": url,
-            "image_url": image_url,
-            "date_posted": date_str,
-            "days_listed": days,
-            "seller_name": seller_name or "",
-            "first_seen": first_seen,
-            "price_changed": price_changed,
-            "previous_price": previous_price,
-            "source": "marktplaats",
-        }
-    except Exception as e:
-        print(f"[Marktplaats] Parse error for listing: {e}")
-        return None
-
-
-def scrape_set(set_number: str, name: str) -> list[dict]:
+def scrape_set(
+    set_number: str,
+    name: str,
+    retail_price: Optional[float] = None,
+) -> list[dict]:
     """
-    Scrape Marktplaats for a single LEGO set.
-    Searches by set number AND by name (deduplicates results).
-    Fetches current bid for bidding-type listings.
+    Scrape Marktplaats for a single LEGO set using 'lego {set_number}' only.
+    Validates, classifies, tracks lifecycle in SQLite, logs rejections.
     """
     if not _MARKTPLAATS_AVAILABLE:
         print("[Marktplaats] Package not installed. Run: pip install marktplaats")
         return []
 
-    seen = _load_seen_deals()
+    from src.db import init_db, upsert_listing, mark_disappeared, log_rejection
+    from src.analysis.condition_classifier import classify_condition
+
+    init_db()
     today = datetime.now().date().isoformat()
 
-    name_words = [w for w in name.split() if len(w) > 2][:3]
-    name_query = " ".join(name_words)
-    queries = list(dict.fromkeys([f"{set_number} lego", f"lego {name_query}"]))
+    min_price = (retail_price * MIN_PRICE_RATIO) if retail_price else 0.0
+    max_price = (retail_price * MAX_PRICE_RATIO) if retail_price else float("inf")
 
     seen_ids: set[str] = set()
     results: list[dict] = []
 
-    for query in queries:
-        try:
-            search = SearchQuery(query, limit=30)
-            raw_listings = search.get_listings() or []
-            time.sleep(1.5)
+    query = f"lego {set_number}"
+    try:
+        search = SearchQuery(query, limit=50)
+        raw_listings = search.get_listings() or []
+        time.sleep(1.5)
 
-            for raw in raw_listings:
-                parsed = _parse_listing(raw, set_number, seen, today)
-                if not parsed or parsed["id"] in seen_ids:
-                    continue
+        for raw in raw_listings:
+            try:
+                listing_id = str(raw.id)
+                title = str(raw.title or "")
+                description = str(raw.description or "")[:600]
+                price = float(raw.price or 0)
+                price_type = _get_price_type(raw)
+                image_url = _get_image_url(raw)
+                seller_name = raw.seller.name if raw.seller else ""
+                location_str = raw.location.city if raw.location else ""
 
-                # Relevance check: title must contain set number OR a key name word
-                title_lower = parsed["title"].lower()
-                set_in_title = set_number in title_lower
-                name_in_title = any(
-                    w.lower() in title_lower
-                    for w in name.split()
-                    if len(w) > 3
+                if raw.date:
+                    d = raw.date if isinstance(raw.date, date) else raw.date.date()
+                    date_str = d.isoformat()
+                else:
+                    date_str = ""
+                days = _days_since(raw.date)
+                url = str(raw.link or f"https://www.marktplaats.nl/v/{listing_id}")
+
+            except Exception as e:
+                print(f"[Marktplaats] Parse error: {e}")
+                continue
+
+            if listing_id in seen_ids:
+                continue
+
+            # Set number must be in title
+            if set_number not in title:
+                log_rejection(
+                    "marktplaats", set_number, listing_id, title, price,
+                    "low_confidence", f"'{set_number}' not found in title"
                 )
-                if set_in_title or name_in_title:
-                    seen_ids.add(parsed["id"])
-                    results.append(parsed)
+                continue
 
-        except Exception as e:
-            print(f"[Marktplaats] Error scraping '{query}': {e}")
+            if price <= 0 and price_type != "free":
+                log_rejection("marktplaats", set_number, listing_id, title, price,
+                              "invalid_price", "price is zero")
+                continue
 
-    # Fetch current bids (max 10 per set to limit HTTP requests)
-    bidding = [r for r in results if r["price_type"] == "bidding"][:10]
-    for item in bidding:
+            if retail_price and price > 0 and price < min_price:
+                log_rejection(
+                    "marktplaats", set_number, listing_id, title, price,
+                    "price_too_low",
+                    f"€{price:.0f} < {MIN_PRICE_RATIO*100:.0f}% of retail €{retail_price:.0f}"
+                )
+                continue
+
+            if retail_price and price > max_price:
+                log_rejection(
+                    "marktplaats", set_number, listing_id, title, price,
+                    "price_too_high",
+                    f"€{price:.0f} > {MAX_PRICE_RATIO*100:.0f}% of retail €{retail_price:.0f}"
+                )
+                continue
+
+            condition = classify_condition(title, description)
+            if condition == "incomplete":
+                log_rejection(
+                    "marktplaats", set_number, listing_id, title, price,
+                    "incomplete", "condition classified as incomplete (cat C)"
+                )
+                continue
+
+            seen_ids.add(listing_id)
+
+            upsert_listing(
+                listing_id=listing_id,
+                platform="marktplaats",
+                set_number=set_number,
+                title=title,
+                price=price,
+                condition_category=condition,
+                url=url,
+                image_url=image_url,
+                seller_id="",
+                today=today,
+                match_confidence=0.95,
+            )
+
+            results.append({
+                "id": listing_id,
+                "set_number": set_number,
+                "title": title,
+                "price": price,
+                "price_type": price_type,
+                "current_bid": None,
+                "ask_price": price,
+                "condition_category": condition,
+                "description": description,
+                "location": location_str or "",
+                "url": url,
+                "image_url": image_url,
+                "date_posted": date_str,
+                "days_listed": days,
+                "seller_name": seller_name or "",
+                "source": "marktplaats",
+            })
+
+    except Exception as e:
+        print(f"[Marktplaats] Error scraping '{query}': {e}")
+
+    # Fetch current bids (max 10 per set)
+    for item in [r for r in results if r["price_type"] == "bidding"][:10]:
         bid = _fetch_current_bid(item["url"])
         item["current_bid"] = bid
         time.sleep(0.5)
 
-    _save_seen_deals(seen)
+    disappeared = mark_disappeared("marktplaats", set_number, seen_ids, today)
+    if disappeared:
+        print(f"  [Lifecycle] {disappeared} Marktplaats listings disappeared → sold proxy")
+
     return results
 
 
@@ -278,10 +247,11 @@ def scrape_all_sets(lego_sets: list[dict]) -> dict[str, list[dict]]:
     for i, lego_set in enumerate(lego_sets, 1):
         set_number = lego_set["set_number"]
         name = lego_set["name"]
+        retail_price = lego_set.get("retail_price")
         print(f"[Marktplaats] [{i}/{len(lego_sets)}] {set_number}: {name}")
-        listings = scrape_set(set_number, name)
+        listings = scrape_set(set_number, name, retail_price)
         results[set_number] = listings
-        print(f"  → {len(listings)} listings found")
+        print(f"  → {len(listings)} valid listings found")
         time.sleep(0.5)
 
     _save_deals_data(results)
