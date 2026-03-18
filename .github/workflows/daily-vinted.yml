@@ -39,11 +39,30 @@ jobs:
       - name: Dependencies installeren
         run: pip install -r requirements.txt
 
+      - name: Controleer VINTED_SESSION_COOKIE
+        env:
+          VINTED_SESSION_COOKIE: ${{ secrets.VINTED_SESSION_COOKIE }}
+        run: |
+          if [ -z "$VINTED_SESSION_COOKIE" ]; then
+            echo "❌ VINTED_SESSION_COOKIE secret is niet ingesteld!"
+            echo ""
+            echo "Hoe dit op te lossen:"
+            echo "  1. Log in op vinted.nl in je browser"
+            echo "  2. Open DevTools → Application → Cookies → www.vinted.nl"
+            echo "  3. Kopieer de waarde van 'access_token_web'"
+            echo "  4. Ga naar GitHub repo → Settings → Secrets → Actions"
+            echo "  5. Voeg toe: VINTED_SESSION_COOKIE = <gekopieerde waarde>"
+            exit 1
+          else
+            echo "✓ VINTED_SESSION_COOKIE is ingesteld (${#VINTED_SESSION_COOKIE} tekens)"
+          fi
+
       - name: Vinted scrapen
         id: scrape
         timeout-minutes: 20
         env:
           PYTHONPATH: "."
+          VINTED_SESSION_COOKIE: ${{ secrets.VINTED_SESSION_COOKIE }}
         run: python src/main_vinted.py 2>&1 | tee vinted_log.txt; exit ${PIPESTATUS[0]}
 
       - name: Log tonen

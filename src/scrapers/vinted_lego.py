@@ -59,6 +59,10 @@ def _classify_vinted_condition(title: str, condition_raw: str) -> str:
 
 def _get_session_cookie() -> Optional[dict]:
     token = os.getenv("VINTED_SESSION_COOKIE", "").strip()
+    if not token:
+        print("[Vinted] WARNING: VINTED_SESSION_COOKIE not set — library will try to auto-fetch cookie.")
+        print("[Vinted]   If Vinted blocks the runner IP (e.g. GitHub Actions), all results will be 0.")
+        print("[Vinted]   Fix: add VINTED_SESSION_COOKIE as a GitHub Actions secret.")
     return {"access_token_web": token} if token else None
 
 
@@ -71,8 +75,8 @@ def _scrape_platform(platform_url: str, query: str, max_results: int = 80) -> li
         items = scraper.search(params) or []
         return list(items)[:max_results]
     except Exception as e:
-        print(f"[Vinted] Error on {platform_url} for '{query}': {e}")
-        return []
+        # Raise so the caller can count consecutive failures and abort early
+        raise RuntimeError(f"Vinted request failed for '{query}' on {platform_url}: {e}") from e
 
 
 def _parse_raw(raw, platform_code: str) -> Optional[dict]:
@@ -151,7 +155,12 @@ def scrape_set(
 
     for platform_url, platform_code in VINTED_PLATFORMS:
         query = f"lego {set_number}"
-        raw_items = _scrape_platform(platform_url, query, max_results=80)
+        try:
+            raw_items = _scrape_platform(platform_url, query, max_results=80)
+        except RuntimeError as e:
+            print(f"  [Vinted] SKIP {platform_code} for set {set_number}: {e}")
+            results[platform_code] = []
+            continue
         time.sleep(1.0)
 
         seen_ids: set[str] = set()
@@ -237,8 +246,13 @@ def scrape_all_sets(lego_sets: list[dict]) -> dict[str, dict[str, list[dict]]]:
     """
     Scrape Vinted for all LEGO sets.
     Returns dict: set_number -> {platform_code -> [listing dicts]}
+
+    Raises RuntimeError if every single set returned 0 results — this signals a
+    connectivity/auth problem (blocked IP, expired cookie) rather than genuine
+    "no listings found".
     """
     results: dict[str, dict[str, list[dict]]] = {}
+    sets_with_results = 0
 
     for i, lego_set in enumerate(lego_sets, 1):
         set_number = lego_set["set_number"]
@@ -250,9 +264,20 @@ def scrape_all_sets(lego_sets: list[dict]) -> dict[str, dict[str, list[dict]]]:
             results[set_number] = platform_data
             total = sum(len(v) for v in platform_data.values())
             print(f"  → {total} valid listings found")
+            if total > 0:
+                sets_with_results += 1
         except Exception as e:
             print(f"  → Error: {e}")
             results[set_number] = {}
         time.sleep(2.0)
+
+    if lego_sets and sets_with_results == 0:
+        raise RuntimeError(
+            "[Vinted] FATAL: 0 results across all sets — Vinted is likely blocking this IP "
+            "or the session cookie is invalid/missing.\n"
+            "Fix: set VINTED_SESSION_COOKIE as a GitHub Actions secret.\n"
+            "How to get it: log in to vinted.nl → DevTools → Application → "
+            "Cookies → copy the value of 'access_token_web'."
+        )
 
     return results
