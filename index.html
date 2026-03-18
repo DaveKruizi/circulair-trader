@@ -267,9 +267,9 @@
   </div>
   <div class="filter-row">
     <span style="color:var(--muted);font-size:12px">Filter:</span>
-    <button class="filter-btn active" onclick="setCondition('both')" id="btn-both">Cat A + B</button>
-    <button class="filter-btn" onclick="setCondition('NIB')" id="btn-NIB">Cat A — Geseald</button>
-    <button class="filter-btn" onclick="setCondition('CIB')" id="btn-CIB">Cat B — Compleet</button>
+    <button class="filter-btn active" onclick="setCondition('both')" id="btn-both">Nieuw + Gebruikt</button>
+    <button class="filter-btn" onclick="setCondition('NIB')" id="btn-NIB">Nieuw</button>
+    <button class="filter-btn" onclick="setCondition('CIB')" id="btn-CIB">Gebruikt</button>
   </div>
 </header>
 
@@ -299,23 +299,35 @@ fetch('./data/dashboard_data.json')
       '<div class="no-data">Fout bij laden data. Probeer later opnieuw.</div>';
   });
 
+function activateTabInCard(card, cond) {
+  card.querySelectorAll('.cond-tab').forEach(t => {
+    t.classList.remove('active-nib', 'active-cib');
+    if (t.dataset.cond === cond) t.classList.add('active-' + cond.toLowerCase());
+  });
+  card.querySelectorAll('.condition-panel').forEach(panel => {
+    panel.classList.toggle('visible', panel.dataset.cond === cond);
+  });
+}
+
 function setCondition(cond) {
   activeCondition = cond;
   ['both','NIB','CIB'].forEach(c => {
     document.getElementById('btn-' + c).classList.toggle('active', c === cond);
   });
   if (!dashData) return;
-  document.querySelectorAll('.cond-tab').forEach(tab => {
-    const c = tab.dataset.cond;
-    tab.classList.remove('active-nib','active-cib');
-    const show = cond === 'both' || cond === c;
-    if (show && c === 'NIB') tab.classList.add('active-nib');
-    if (show && c === 'CIB') tab.classList.add('active-cib');
-  });
-  document.querySelectorAll('.condition-panel').forEach(panel => {
-    const c = panel.dataset.cond;
-    panel.classList.toggle('visible', cond === 'both' || cond === c);
-  });
+  if (cond === 'both') {
+    // Reset all cards to show NIB by default; user can switch per card with tabs
+    document.querySelectorAll('.set-card').forEach(card => activateTabInCard(card, 'NIB'));
+  } else {
+    // Global filter: show only the selected condition in all cards
+    document.querySelectorAll('.condition-panel').forEach(panel => {
+      panel.classList.toggle('visible', panel.dataset.cond === cond);
+    });
+    document.querySelectorAll('.cond-tab').forEach(tab => {
+      tab.classList.remove('active-nib', 'active-cib');
+      if (tab.dataset.cond === cond) tab.classList.add('active-' + cond.toLowerCase());
+    });
+  }
 }
 
 function renderAll(data) {
@@ -362,10 +374,10 @@ function renderSummary(data) {
 
   bar.innerHTML = `
     <div class="stat-card"><div class="label">Sets gevolgd</div><div class="value">${totalSets}</div></div>
-    <div class="stat-card"><div class="label">Actief Vinted NIB</div><div class="value" style="color:var(--nib)">${totalActiveNIB}</div></div>
-    <div class="stat-card"><div class="label">Actief Vinted CIB</div><div class="value" style="color:var(--cib)">${totalActiveCIB}</div></div>
-    <div class="stat-card"><div class="label">Sets met prijs NIB</div><div class="value">${setsWithPriceNIB}</div></div>
-    <div class="stat-card"><div class="label">Sets met prijs CIB</div><div class="value">${setsWithPriceCIB}</div></div>
+    <div class="stat-card"><div class="label">Actief Vinted Nieuw</div><div class="value" style="color:var(--nib)">${totalActiveNIB}</div></div>
+    <div class="stat-card"><div class="label">Actief Vinted Gebruikt</div><div class="value" style="color:var(--cib)">${totalActiveCIB}</div></div>
+    <div class="stat-card"><div class="label">Sets met prijs Nieuw</div><div class="value">${setsWithPriceNIB}</div></div>
+    <div class="stat-card"><div class="label">Sets met prijs Gebruikt</div><div class="value">${setsWithPriceCIB}</div></div>
   `;
 }
 
@@ -414,8 +426,8 @@ function buildSetCard(set, idx) {
     </div>
     <div class="set-body">
       <div class="condition-tabs">
-        <button class="cond-tab active-nib" data-cond="NIB" onclick="switchTab(${idx},'NIB')">Cat A — Geseald (NIB)</button>
-        <button class="cond-tab active-cib" data-cond="CIB" onclick="switchTab(${idx},'CIB')">Cat B — Compleet (CIB)</button>
+        <button class="cond-tab active-nib" data-cond="NIB" onclick="switchTab(${idx},'NIB')">Nieuw</button>
+        <button class="cond-tab" data-cond="CIB" onclick="switchTab(${idx},'CIB')">Gebruikt</button>
       </div>
       ${buildConditionPanel(set, 'NIB', idx)}
       ${buildConditionPanel(set, 'CIB', idx)}
@@ -426,13 +438,9 @@ function buildSetCard(set, idx) {
 }
 
 function switchTab(idx, cond) {
-  // Only active in 'both' mode — in NIB/CIB mode, filter buttons control visibility
   if (activeCondition !== 'both') return;
   const card = document.querySelectorAll('.set-card')[idx];
-  card.querySelectorAll('.cond-tab').forEach(t => {
-    t.classList.remove('active-nib','active-cib');
-    if (t.dataset.cond === cond) t.classList.add('active-' + cond.toLowerCase());
-  });
+  activateTabInCard(card, cond);
 }
 
 function buildConditionPanel(set, cond, idx) {
@@ -458,10 +466,11 @@ function buildConditionPanel(set, cond, idx) {
     </tr>`;
   });
 
+  const initialVisible = cond === 'NIB' ? ' visible' : '';
   return `
-    <div class="condition-panel visible" data-cond="${cond}" data-idx="${idx}">
+    <div class="condition-panel${initialVisible}" data-cond="${cond}" data-idx="${idx}">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
-        <span class="badge badge-${condLower}">${cond === 'NIB' ? 'Cat A — Geseald' : 'Cat B — Compleet met doos'}</span>
+        <span class="badge badge-${condLower}">${cond === 'NIB' ? 'Nieuw' : 'Gebruikt'}</span>
       </div>
       <table class="platform-table">
         <thead>
@@ -498,7 +507,7 @@ function buildMPSection(set) {
 
   const items = listings.slice(0, 8).map(l => {
     const cond = l.condition_category || 'unknown';
-    const condLabels = {NIB:'Cat A',CIB:'Cat B',unknown:'?'};
+    const condLabels = {NIB:'Nieuw',CIB:'Gebruikt',unknown:'?'};
     return `<div class="mp-listing">
       <img src="${escHtml(l.image_url || '')}" alt="" onerror="this.style.display='none'">
       <div class="mp-title">
