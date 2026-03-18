@@ -1,5 +1,5 @@
 """
-Weekly orchestrator — runs on Sunday at 03:00 NL time.
+Dagelijkse Vinted scraper — draait om 02:00 UTC (03:00 NL), vóór de Marktplaats run.
 
 Steps:
 1. Load LEGO set catalog (vehicle sets only)
@@ -66,7 +66,7 @@ def run_weekly(dry_run: bool = False) -> None:
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="LEGO Circulair Trader — Weekly Vinted Run")
+    parser = argparse.ArgumentParser(description="LEGO Circulair Trader — Dagelijkse Vinted Run")
     parser.add_argument("--dry-run", action="store_true", help="Skip scraping")
     args = parser.parse_args()
 

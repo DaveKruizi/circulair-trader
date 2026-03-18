@@ -1,12 +1,12 @@
-name: Wekelijkse Vinted Prijsanalyse
+name: Dagelijkse Vinted Prijsanalyse
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true
 
 on:
-  # Zondag 03:00 NL wintertijd = 02:00 UTC
+  # 02:00 UTC = 03:00 NL wintertijd — vóór de Marktplaats run om 04:00
   schedule:
-    - cron: '0 2 * * 0'
+    - cron: '0 2 * * *'
 
   # Handmatig starten
   workflow_dispatch:
@@ -41,10 +41,10 @@ jobs:
 
       - name: Vinted scrapen
         id: scrape
-        timeout-minutes: 45
+        timeout-minutes: 20
         env:
           PYTHONPATH: "."
-        run: python src/main_weekly.py 2>&1 | tee vinted_log.txt; exit ${PIPESTATUS[0]}
+        run: python src/main_vinted.py 2>&1 | tee vinted_log.txt; exit ${PIPESTATUS[0]}
 
       - name: Log tonen
         if: always()
