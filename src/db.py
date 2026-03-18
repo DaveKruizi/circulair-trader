@@ -34,6 +34,7 @@ def init_db() -> None:
                 title       TEXT,
                 price       REAL,
                 condition_category TEXT,
+                condition_raw      TEXT,
                 url         TEXT,
                 image_url   TEXT,
                 seller_id   TEXT,
@@ -99,6 +100,11 @@ def init_db() -> None:
                 )
             except Exception:
                 pass  # column already exists
+        # Migrate existing DBs that predate condition_raw column
+        try:
+            conn.execute("ALTER TABLE listings ADD COLUMN condition_raw TEXT DEFAULT ''")
+        except Exception:
+            pass  # column already exists
 
 
 def upsert_listing(
@@ -113,6 +119,7 @@ def upsert_listing(
     seller_id: str,
     today: str,
     match_confidence: float = 0.95,
+    condition_raw: str = "",
 ) -> None:
     with get_connection() as conn:
         existing = conn.execute(
@@ -123,10 +130,10 @@ def upsert_listing(
         if existing:
             conn.execute(
                 """UPDATE listings
-                   SET title=?, price=?, condition_category=?, url=?, image_url=?,
-                       last_seen=?, status='active', match_confidence=?
+                   SET title=?, price=?, condition_category=?, condition_raw=?,
+                       url=?, image_url=?, last_seen=?, status='active', match_confidence=?
                    WHERE id=? AND platform=?""",
-                (title, price, condition_category, url, image_url, today,
+                (title, price, condition_category, condition_raw, url, image_url, today,
                  match_confidence, listing_id, platform),
             )
             if existing["price"] != price:
@@ -137,16 +144,41 @@ def upsert_listing(
         else:
             conn.execute(
                 """INSERT INTO listings
-                   (id, platform, set_number, title, price, condition_category,
+                   (id, platform, set_number, title, price, condition_category, condition_raw,
                     url, image_url, seller_id, first_seen, last_seen, status, match_confidence)
-                   VALUES (?,?,?,?,?,?,?,?,?,?,?,'active',?)""",
-                (listing_id, platform, set_number, title, price, condition_category,
+                   VALUES (?,?,?,?,?,?,?,?,?,?,?,?,'active',?)""",
+                (listing_id, platform, set_number, title, price, condition_category, condition_raw,
                  url, image_url, seller_id, today, today, match_confidence),
             )
             conn.execute(
                 "INSERT OR IGNORE INTO price_history VALUES (?,?,?,?)",
                 (listing_id, platform, today, price),
             )
+
+
+def reclassify_unknown_listings(classifier_fn) -> int:
+    """
+    Herclassificeer bestaande 'unknown' listings op basis van opgeslagen condition_raw.
+    classifier_fn(title, condition_raw) -> str  (NIB / CIB / incomplete / unknown)
+    Geeft het aantal herclassificeerde listings terug.
+    """
+    with get_connection() as conn:
+        rows = conn.execute(
+            """SELECT id, platform, title, condition_raw
+               FROM listings
+               WHERE condition_category = 'unknown' AND condition_raw != '' AND condition_raw IS NOT NULL"""
+        ).fetchall()
+
+        count = 0
+        for row in rows:
+            new_category = classifier_fn(row["title"] or "", row["condition_raw"] or "")
+            if new_category != "unknown":
+                conn.execute(
+                    "UPDATE listings SET condition_category=? WHERE id=? AND platform=?",
+                    (new_category, row["id"], row["platform"]),
+                )
+                count += 1
+        return count
 
 
 def mark_disappeared(platform: str, set_number: str, seen_ids: set, today: str) -> int:

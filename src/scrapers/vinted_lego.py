@@ -227,6 +227,7 @@ def scrape_set(
                 title=title,
                 price=price,
                 condition_category=condition,
+                condition_raw=parsed["condition_raw"],
                 url=parsed["url"],
                 image_url=parsed["image_url"],
                 seller_id=parsed["seller_id"],

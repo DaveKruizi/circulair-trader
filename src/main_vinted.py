@@ -48,6 +48,15 @@ def run_weekly(dry_run: bool = False) -> None:
         for listings in set_data.values()
     )
 
+    # Step 1b: Herclassificeer bestaande 'unknown' listings op basis van condition_raw
+    from src import db
+    from src.scrapers.vinted_lego import _classify_vinted_condition
+    reclassified = db.reclassify_unknown_listings(
+        lambda title, raw: _classify_vinted_condition(title, raw)
+    )
+    if reclassified:
+        print(f"[Weekly] Herclassificeerd: {reclassified} 'unknown' listings bijgewerkt")
+
     # Step 2: Compute price intelligence from SQLite lifecycle data
     from src.analysis.price_intelligence import compute_all_sets
     platforms = [code for _, code in VINTED_PLATFORMS]
@@ -55,7 +64,6 @@ def run_weekly(dry_run: bool = False) -> None:
     compute_all_sets(lego_sets, platforms)
 
     # Step 3: Rejection summary
-    from src import db
     summary = db.get_rejection_summary(days=1)
     if summary:
         print(f"[Weekly] Auto-rejections today: {dict(summary)}")
