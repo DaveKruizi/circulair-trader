@@ -62,6 +62,18 @@ def build_dashboard_data(
                 ]
                 platforms_data[platform][condition] = intel
 
+            # Unknown-condition listings (no price intelligence, shown as-is)
+            unknown_active = db.get_active_listings(set_number, platform, "unknown")
+            platforms_data[platform]["unknown_listings"] = [
+                {
+                    "title": r["title"],
+                    "price": r["price"],
+                    "url": r["url"],
+                    "image_url": r["image_url"],
+                }
+                for r in unknown_active[:20]
+            ]
+
         # Price history for chart
         history = get_price_history_for_dashboard(set_number, ALL_PLATFORMS)
 
@@ -81,10 +93,16 @@ def build_dashboard_data(
             "platforms": platforms_data,
             "price_history": history,
             "mp_listings": mp_listings[:15],
+            "price_too_low_7d": ptl_by_set.get(set_number, []),
         })
 
     rejection_summary = db.get_rejection_summary(days=7)
     price_too_low_details = db.get_price_too_low_details(days=7)
+
+    # Group price-too-low rejections by set_number for per-card display
+    ptl_by_set: dict[str, list] = {}
+    for item in price_too_low_details:
+        ptl_by_set.setdefault(item["set_number"], []).append(item)
 
     return {
         "generated_at": datetime.now().isoformat(),
@@ -92,7 +110,6 @@ def build_dashboard_data(
         "platform_labels": PLATFORM_LABELS,
         "sets": sets_out,
         "rejection_summary_7d": rejection_summary,
-        "price_too_low_7d": price_too_low_details,
     }
 
 

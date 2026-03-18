@@ -338,7 +338,6 @@
   <div id="rejection-bar" class="rejection-bar" style="display:none">
     <h3>Afgewezen listings (afgelopen 7 dagen)</h3>
     <div class="rejection-items" id="rejection-items"></div>
-    <div class="price-too-low-panel" id="price-too-low-panel"></div>
   </div>
   <div class="sets-grid" id="sets-grid"></div>
 </div>
@@ -402,8 +401,8 @@ function renderAll(data) {
   // Summary stats
   renderSummary(data);
 
-  // Rejection summary
-  renderRejections(data.rejection_summary_7d, data.price_too_low_7d);
+  // Rejection summary (counts only — details are per set-card)
+  renderRejections(data.rejection_summary_7d);
 
   // Set cards
   const grid = document.getElementById('sets-grid');
@@ -443,83 +442,22 @@ function renderSummary(data) {
   `;
 }
 
-function renderRejections(summary, priceTooLowDetails) {
+function renderRejections(summary) {
   if (!summary || Object.keys(summary).length === 0) return;
   const total = Object.values(summary).reduce((a,b) => a+b, 0);
   const bar = document.getElementById('rejection-bar');
   bar.style.display = 'block';
   const labels = {
     low_confidence: 'Setnummer niet in titel',
-    price_too_low: 'Prijs te laag',
+    price_too_low: 'Prijs te laag (zie per set)',
     price_too_high: 'Prijs te hoog',
     incomplete: 'Incompleet (cat C)',
     invalid_price: 'Ongeldige prijs',
   };
   const items = document.getElementById('rejection-items');
-  const hasPtlDetails = priceTooLowDetails && priceTooLowDetails.length > 0;
-  items.innerHTML = Object.entries(summary).map(([reason, count]) => {
-    if (reason === 'price_too_low' && hasPtlDetails) {
-      return `<div class="rejection-item">
-        <span class="rej-count">${count}×</span> ${labels[reason]}
-        <button class="rej-toggle-btn" id="ptl-toggle-btn" onclick="togglePriceTooLow()">
-          <span id="ptl-toggle-icon">▼</span> Bekijk
-        </button>
-      </div>`;
-    }
-    return `<div class="rejection-item"><span class="rej-count">${count}×</span> ${labels[reason] || reason}</div>`;
-  }).join('') + `<div class="rejection-item" style="margin-left:auto;color:var(--muted)">Totaal: ${total}</div>`;
-
-  if (hasPtlDetails) {
-    renderPriceTooLowPanel(priceTooLowDetails);
-  }
-}
-
-function togglePriceTooLow() {
-  const panel = document.getElementById('price-too-low-panel');
-  const icon = document.getElementById('ptl-toggle-icon');
-  const isOpen = panel.classList.toggle('open');
-  icon.textContent = isOpen ? '▲' : '▼';
-}
-
-function renderPriceTooLowPanel(items) {
-  const panel = document.getElementById('price-too-low-panel');
-  const platformLabels = { marktplaats: 'Marktplaats', vinted_nl: 'Vinted NL', vinted_be: 'Vinted BE' };
-
-  // Group by set_number
-  const bySet = {};
-  items.forEach(item => {
-    if (!bySet[item.set_number]) bySet[item.set_number] = [];
-    bySet[item.set_number].push(item);
-  });
-
-  // Lookup set name from dashData
-  const setNames = {};
-  if (dashData && dashData.sets) {
-    dashData.sets.forEach(s => { setNames[s.set_number] = s.name; });
-  }
-
-  panel.innerHTML = Object.entries(bySet).map(([setNum, listings]) => {
-    const setLabel = setNames[setNum] ? `${setNum} – ${setNames[setNum]}` : setNum;
-    const cards = listings.map(l => {
-      const imgHtml = l.image_url
-        ? `<img src="${l.image_url}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-        : '';
-      const placeholder = `<div class="ptl-img-placeholder" style="${l.image_url ? 'display:none' : ''}">🧱</div>`;
-      const href = l.url || '#';
-      return `<a class="ptl-card" href="${href}" target="_blank" rel="noopener">
-        ${imgHtml}${placeholder}
-        <div class="ptl-info">
-          <div class="ptl-price">€${l.price ? l.price.toFixed(0) : '?'}</div>
-          <div class="ptl-title">${l.title || '—'}</div>
-          <div class="ptl-platform">${platformLabels[l.platform] || l.platform}</div>
-        </div>
-      </a>`;
-    }).join('');
-    return `<div class="ptl-set-group">
-      <div class="ptl-set-label">${setLabel}</div>
-      <div class="ptl-grid">${cards}</div>
-    </div>`;
-  }).join('');
+  items.innerHTML = Object.entries(summary).map(([reason, count]) =>
+    `<div class="rejection-item"><span class="rej-count">${count}×</span> ${labels[reason] || reason}</div>`
+  ).join('') + `<div class="rejection-item" style="margin-left:auto;color:var(--muted)">Totaal: ${total}</div>`;
 }
 
 function buildSetCard(set, idx) {
@@ -555,6 +493,7 @@ function buildSetCard(set, idx) {
       ${buildConditionPanel(set, 'NIB', idx)}
       ${buildConditionPanel(set, 'CIB', idx)}
       ${buildActiveListingsSection(set)}
+      ${buildPriceTooLowSection(set, idx)}
     </div>
   `;
   return card;
@@ -635,13 +574,16 @@ function buildActiveListingsSection(set) {
   const condPriceClass = { NIB: 'price-nib', CIB: 'price-cib', unknown: 'price-unknown' };
   const condBadgeClass = { NIB: 'badge-nib', CIB: 'badge-cib', unknown: '' };
 
-  // Collect active listings from all platforms + conditions
+  // Collect active listings from all platforms + conditions (including unknown)
   const all = [];
   ['marktplaats', 'vinted_nl'].forEach(platform => {
     ['NIB', 'CIB'].forEach(cond => {
       const listings = ((set.platforms[platform] || {})[cond] || {}).listings || [];
       listings.forEach(l => all.push({ ...l, platform, cond }));
     });
+    // Unknown condition (e.g. Vinted listings without recognisable condition keywords)
+    const unknown = (set.platforms[platform] || {}).unknown_listings || [];
+    unknown.forEach(l => all.push({ ...l, platform, cond: 'unknown' }));
   });
 
   // Also include mp_listings for extra fields (price_type, days_listed)
@@ -677,6 +619,48 @@ function buildActiveListingsSection(set) {
     <h4>Actief aanbod (${all.length})</h4>
     ${items}
   </div>`;
+}
+
+function buildPriceTooLowSection(set, idx) {
+  const items = set.price_too_low_7d || [];
+  if (items.length === 0) return '';
+  const platformLabels = { marktplaats: 'Marktplaats', vinted_nl: 'Vinted NL' };
+  const cards = items.map(l => {
+    const imgHtml = l.image_url
+      ? `<img src="${escHtml(l.image_url)}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      : '';
+    const placeholder = `<div class="ptl-img-placeholder" style="${l.image_url ? 'display:none' : ''}">🧱</div>`;
+    return `<a class="ptl-card" href="${escHtml(l.url || '#')}" target="_blank" rel="noopener">
+      ${imgHtml}${placeholder}
+      <div class="ptl-info">
+        <div class="ptl-price">€${l.price ? Number(l.price).toFixed(0) : '?'}</div>
+        <div class="ptl-title">${escHtml(l.title || '—')}</div>
+        <div class="ptl-platform">${platformLabels[l.platform] || l.platform}</div>
+      </div>
+    </a>`;
+  }).join('');
+
+  const panelId = `ptl-panel-${idx}`;
+  const btnId = `ptl-btn-${idx}`;
+  return `<div class="listings-section" style="border-top:1px solid var(--border);margin-top:12px;padding-top:12px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <h4 style="margin:0">Afgewezen: prijs te laag (7d) — ${items.length}</h4>
+      <button class="rej-toggle-btn" id="${btnId}" onclick="togglePtlPanel('${panelId}','${btnId}')">
+        <span>▼</span> Bekijk
+      </button>
+    </div>
+    <div id="${panelId}" style="display:none">
+      <div class="ptl-grid">${cards}</div>
+    </div>
+  </div>`;
+}
+
+function togglePtlPanel(panelId, btnId) {
+  const panel = document.getElementById(panelId);
+  const btn = document.getElementById(btnId);
+  const isOpen = panel.style.display === 'none';
+  panel.style.display = isOpen ? 'block' : 'none';
+  btn.querySelector('span').textContent = isOpen ? '▲' : '▼';
 }
 
 function setChartFilter(idx, cond, platform, btn) {
