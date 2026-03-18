@@ -28,13 +28,27 @@ INCOMPLETE_KEYWORDS = [
 ]
 
 CIB_KEYWORDS = [
+    # Compleetheid
     "compleet", "met doos", "met handleiding", "inclusief handleiding",
     "originele doos", "volledig", "met instructies", "inclusief instructies",
     "doos aanwezig", "handleiding aanwezig", "complete set",
     "met alle onderdelen", "volledig compleet",
-    "vollständig", "mit box", "mit anleitung", "komplett",  # German
-    "complet", "avec boîte", "avec notice",  # French
-    "complete", "with box", "with instructions",  # English
+    # Staat van gebruik — gebruikt maar in goede staat (NIET sealed)
+    "nieuwstaat", "nieuw staat", "als nieuw", "zo goed als nieuw",
+    "nagenoeg nieuw", "uitstekende staat", "perfecte staat",
+    "goede staat", "zeer goede staat", "nette staat",
+    # Gebouwd/gemonteerd — expliciet bewijs dat set geopend is
+    "gebouwd", "opgebouwd", "in elkaar gezet", "gemonteerd",
+    "zorgvuldig gebouwd", "1x gebouwd", "eenmalig gebouwd",
+    "opnieuw te bouwen", "displaymodel", "display model",
+    # Duits
+    "vollständig", "mit box", "mit anleitung", "komplett",
+    "gebaut", "zusammengebaut", "neuwertig", "wie neu",
+    # Frans
+    "complet", "avec boîte", "avec notice",
+    # Engels
+    "complete", "with box", "with instructions", "like new",
+    "built once", "display model",
 ]
 
 
