@@ -38,6 +38,13 @@ def build_dashboard_data(
     from src import db
     db.init_db()
 
+    # Fetch rejection data upfront so it's available during the sets loop
+    rejection_summary = db.get_rejection_summary(days=7)
+    price_too_low_details = db.get_price_too_low_details(days=7)
+    ptl_by_set: dict[str, list] = {}
+    for item in price_too_low_details:
+        ptl_by_set.setdefault(item["set_number"], []).append(item)
+
     sets_out = []
     for lego_set in lego_sets:
         set_number = lego_set["set_number"]
@@ -95,14 +102,6 @@ def build_dashboard_data(
             "mp_listings": mp_listings[:15],
             "price_too_low_7d": ptl_by_set.get(set_number, []),
         })
-
-    rejection_summary = db.get_rejection_summary(days=7)
-    price_too_low_details = db.get_price_too_low_details(days=7)
-
-    # Group price-too-low rejections by set_number for per-card display
-    ptl_by_set: dict[str, list] = {}
-    for item in price_too_low_details:
-        ptl_by_set.setdefault(item["set_number"], []).append(item)
 
     return {
         "generated_at": datetime.now().isoformat(),
