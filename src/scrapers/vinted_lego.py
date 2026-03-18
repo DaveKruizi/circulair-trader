@@ -27,15 +27,18 @@ VINTED_PLATFORMS = [
     ("https://www.vinted.nl", "vinted_nl"),
 ]
 
-# Vinted native condition values that map to NIB / CIB
+# Vinted native condition values that map to NIB / CIB / incomplete
 _VINTED_NIB_RAW = {
-    "1", "new_with_tags", "new with tags",
-    "2", "new_without_tags", "new without tags",
+    "1", "new_with_tags", "new with tags", "nieuw",
 }
 _VINTED_CIB_RAW = {
-    "3", "very_good", "very good",
-    "4", "good",
-    "5", "satisfactory",
+    "2", "new_without_tags", "new without tags", "als nieuw", "nieuw zonder prijskaartje",
+    "3", "very_good", "very good", "heel goed",
+    "4", "good", "goed",
+    "5", "satisfactory", "veelgebruikt",
+}
+_VINTED_INCOMPLETE_RAW = {
+    "6", "needs_repair", "moet gerepareerd worden",
 }
 
 
@@ -54,6 +57,8 @@ def _classify_vinted_condition(title: str, condition_raw: str) -> str:
         return "NIB"
     if raw in _VINTED_CIB_RAW:
         return "CIB"
+    if raw in _VINTED_INCOMPLETE_RAW:
+        return "incomplete"
     return "unknown"
 
 
@@ -113,7 +118,7 @@ def _parse_raw(raw, platform_code: str) -> Optional[dict]:
             except Exception:
                 pass
 
-        condition_obj = getattr(raw, "status", None) or getattr(raw, "condition", None)
+        condition_obj = getattr(raw, "condition", None) or getattr(raw, "status", None)
         condition_raw = str(condition_obj) if condition_obj else ""
 
         return {
