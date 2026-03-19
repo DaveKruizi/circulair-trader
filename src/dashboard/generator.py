@@ -103,12 +103,16 @@ def build_dashboard_data(
             "price_too_low_7d": ptl_by_set.get(set_number, []),
         })
 
+    total_sold = db.get_total_sold_count()
+
     return {
         "generated_at": datetime.now().isoformat(),
         "scraped_at": scraped_at,
         "platform_labels": PLATFORM_LABELS,
         "sets": sets_out,
         "rejection_summary_7d": rejection_summary,
+        "total_sold_NIB": total_sold.get("NIB", 0),
+        "total_sold_CIB": total_sold.get("CIB", 0),
     }
 
 

@@ -244,6 +244,18 @@ def get_active_listings(set_number: str, platform: str, condition: str) -> list[
         return [dict(r) for r in rows]
 
 
+def get_total_sold_count() -> dict[str, int]:
+    """Count all-time disappeared listings per condition across all sets and platforms."""
+    with get_connection() as conn:
+        rows = conn.execute(
+            """SELECT condition_category, COUNT(*) as cnt
+               FROM listings
+               WHERE status='disappeared'
+               GROUP BY condition_category"""
+        ).fetchall()
+    return {r["condition_category"]: r["cnt"] for r in rows}
+
+
 def get_disappeared_listings(
     set_number: str, platform: str, condition: str, max_days: int = 21
 ) -> list[dict]:

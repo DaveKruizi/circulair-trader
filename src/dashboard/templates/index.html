@@ -438,7 +438,6 @@ function renderSummary(data) {
 
   let nibVinted = 0, nibMp = 0;
   let cibVinted = 0, cibMp = 0;
-  let setsWithNIB = 0, setsWithCIB = 0;
 
   data.sets.forEach(s => {
     const vn = s.platforms['vinted_nl'] || {};
@@ -449,8 +448,6 @@ function renderSummary(data) {
     const cibM = (mp.CIB || {}).active_count || 0;
     nibVinted += nibV; nibMp += nibM;
     cibVinted += cibV; cibMp += cibM;
-    if (nibV + nibM > 0) setsWithNIB++;
-    if (cibV + cibM > 0) setsWithCIB++;
   });
 
   const nibTotal = nibVinted + nibMp;
@@ -472,12 +469,14 @@ function renderSummary(data) {
       <div class="breakdown">Vinted: ${cibVinted} · Marktplaats: ${cibMp}</div>
     </div>
     <div class="stat-card">
-      <div class="label">Sets met prijs Nieuw</div>
-      <div class="value">${setsWithNIB}</div>
+      <div class="label">Verkocht Nieuw</div>
+      <div class="value" style="color:var(--nib)">${data.total_sold_NIB ?? 0}</div>
+      <div class="breakdown">alle platforms · alle tijd</div>
     </div>
     <div class="stat-card">
-      <div class="label">Sets met prijs Gebruikt</div>
-      <div class="value">${setsWithCIB}</div>
+      <div class="label">Verkocht Gebruikt</div>
+      <div class="value" style="color:var(--cib)">${data.total_sold_CIB ?? 0}</div>
+      <div class="breakdown">alle platforms · alle tijd</div>
     </div>
   `;
 }
