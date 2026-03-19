@@ -76,22 +76,14 @@ def compute_price_intelligence(
     p25 = _percentile(all_active_prices, 25)
     p50 = _percentile(all_active_prices, 50)
 
-    # sell_price_realistic: time-weighted avg of disappeared listings <21d
+    # sell_price_realistic: median of disappeared listings <21d
+    # (mediaan is eerlijker dan time-weighted avg — verdwenen ≠ verkocht,
+    #  en korte listings zijn niet per se echte verkopen)
     disappeared = db.get_disappeared_listings(set_number, platform, condition, max_days=21)
     sell_price_realistic = None
     if disappeared:
-        weights = []
-        prices = []
-        for d in disappeared:
-            days = d.get("days_listed_at_disappearance") or 1
-            w = 1.0 / max(days, 1)
-            weights.append(w)
-            prices.append(d["price"])
-        total_w = sum(weights)
-        if total_w > 0:
-            sell_price_realistic = round(
-                sum(p * w for p, w in zip(prices, weights)) / total_w, 2
-            )
+        disappeared_prices = sorted(d["price"] for d in disappeared)
+        sell_price_realistic = _percentile(disappeared_prices, 50)
 
     # Price distribution in €10 buckets
     buckets: dict[str, int] = {}
