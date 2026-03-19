@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-19T19:21:28.699385",
+  "generated_at": "2026-03-19T19:49:11.212838",
   "scraped_at": "2026-03-18T13:28:53.610460",
   "platform_labels": {
     "vinted_nl": "Vinted NL",
@@ -5874,7 +5874,7 @@
           "NIB": {
             "active_count": 10,
             "sell_price_fast": 170.0,
-            "sell_price_realistic": 168.5,
+            "sell_price_realistic": 167.5,
             "p10": 168.1,
             "p25": 171.25,
             "p50": 180.0,
@@ -6154,7 +6154,7 @@
           "platform": "marktplaats",
           "condition": "NIB",
           "sell_price_fast": 170.0,
-          "sell_price_realistic": 168.5,
+          "sell_price_realistic": 167.5,
           "active_count": 10
         },
         {
@@ -16030,5 +16030,7 @@
     "price_too_low": 228,
     "incomplete": 73,
     "price_too_high": 11
-  }
+  },
+  "total_sold_NIB": 12,
+  "total_sold_CIB": 14
 }
