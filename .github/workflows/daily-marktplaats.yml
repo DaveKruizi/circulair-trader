@@ -70,7 +70,7 @@ jobs:
           if [ ! -f output/index.html ]; then
             mkdir -p output
             touch output/.nojekyll
-            printf '%s\n' '<!DOCTYPE html><html lang="nl"><head><meta charset="UTF-8"><meta http-equiv="refresh" content="300"><title>LEGO Deal Tracker</title><style>body{background:#0f1117;color:#e2e8f0;font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}.card{background:#1a1d27;border-radius:16px;padding:2.5rem 3rem;text-align:center;max-width:480px}h1{color:#3b82f6}p{color:#8892a4;line-height:1.6}</style></head><body><div class="card"><div style="font-size:3rem;margin-bottom:1rem;">🧱</div><h1>LEGO Deal Tracker</h1><p>Dashboard kon niet worden gegenereerd. Probeer het later opnieuw.</p></div></body></html>' > output/index.html
+            printf '%s\n' '<!DOCTYPE html><html lang="nl"><head><meta charset="UTF-8"><meta http-equiv="refresh" content="300"><title>Ina AI</title><style>body{background:#0f1117;color:#e2e8f0;font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}.card{background:#1a1d27;border-radius:16px;padding:2.5rem 3rem;text-align:center;max-width:480px}h1{color:#3b82f6}p{color:#8892a4;line-height:1.6}</style></head><body><div class="card"><div style="font-size:3rem;margin-bottom:1rem;">🍬</div><h1>Ina AI</h1><p>Dashboard kon niet worden gegenereerd. Probeer het later opnieuw.</p></div></body></html>' > output/index.html
           else
             echo "output/index.html bestaat — placeholder overgeslagen"
           fi
