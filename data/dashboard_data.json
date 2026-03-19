@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-03-19T15:25:26.646880",
-  "scraped_at": "2026-03-19T15:25:26.351548",
+  "generated_at": "2026-03-19T16:11:07.309909",
+  "scraped_at": "2026-03-19T16:11:07.007676",
   "platform_labels": {
     "vinted_nl": "Vinted NL",
     "marktplaats": "Marktplaats"
@@ -751,6 +751,17 @@
           "details": "€5 < 20% of retail €140",
           "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/cb/cbda510f-d0b0-4ce1-9e72-c99b42842d0b?rule=ecg_mp_eps$_82.jpg",
           "url": "https://link.marktplaats.nl/m2370203328"
+        },
+        {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "10295",
+          "listing_id": "m2370203328",
+          "title": "Lego porsche 10295 lege lego doos",
+          "price": 5.0,
+          "details": "€5 < 20% of retail €140",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/cb/cbda510f-d0b0-4ce1-9e72-c99b42842d0b?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2370203328"
         }
       ]
     },
@@ -1144,24 +1155,6 @@
           "source": "marktplaats"
         },
         {
-          "id": "m2378786154",
-          "set_number": "10298",
-          "title": "Lego Vespa 125 Scooter Set 10298",
-          "price": 70.0,
-          "price_type": "bidding",
-          "current_bid": null,
-          "ask_price": 70.0,
-          "condition_category": "unknown",
-          "description": "Lego vespa 125 scooter set 10298. Deze prachtige set is een gedetailleerde replica van de iconische vespa scooter, perfect voor verzamelaars en liefhebbers van lego en scooters. De set bevat 1106 onde",
-          "location": "Hellevoetsluis",
-          "url": "https://link.marktplaats.nl/m2378786154",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/3aed4238-9de1-47cf-8912-2cfb5db18ae4?rule=ecg_mp_eps$_82.jpg",
-          "date_posted": "2026-03-18",
-          "days_listed": 1,
-          "seller_name": "Nikki van Houdt",
-          "source": "marktplaats"
-        },
-        {
           "id": "m2378873376",
           "set_number": "10298",
           "title": "LEGO 10298 Creator Expert Vespa 125 - Nieuw!",
@@ -1177,6 +1170,24 @@
           "date_posted": "2026-03-19",
           "days_listed": 0,
           "seller_name": "LegoMeppel",
+          "source": "marktplaats"
+        },
+        {
+          "id": "m2378786154",
+          "set_number": "10298",
+          "title": "Lego Vespa 125 Scooter Set 10298",
+          "price": 70.0,
+          "price_type": "bidding",
+          "current_bid": null,
+          "ask_price": 70.0,
+          "condition_category": "unknown",
+          "description": "Lego vespa 125 scooter set 10298. Deze prachtige set is een gedetailleerde replica van de iconische vespa scooter, perfect voor verzamelaars en liefhebbers van lego en scooters. De set bevat 1106 onde",
+          "location": "Hellevoetsluis",
+          "url": "https://link.marktplaats.nl/m2378786154",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/3aed4238-9de1-47cf-8912-2cfb5db18ae4?rule=ecg_mp_eps$_82.jpg",
+          "date_posted": "2026-03-18",
+          "days_listed": 1,
+          "seller_name": "Nikki van Houdt",
           "source": "marktplaats"
         },
         {
@@ -1288,24 +1299,6 @@
           "source": "marktplaats"
         },
         {
-          "id": "m2377251635",
-          "set_number": "10298",
-          "title": "LEGO Vespa 125 (10298) - Nieuw in doos",
-          "price": 70.0,
-          "price_type": "bidding",
-          "current_bid": null,
-          "ask_price": 70.0,
-          "condition_category": "NIB",
-          "description": "Te koop: een gloednieuwe en ongeopende lego creator expert vespa 125 (setnummer 10298). Deze prachtige set is een gedetailleerde replica van de iconische vespa scooter uit de jaren 60, perfect voor le",
-          "location": "Venlo",
-          "url": "https://link.marktplaats.nl/m2377251635",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/39b5f4c3-6d3b-48b9-a84d-69ac7ccb66b6?rule=ecg_mp_eps$_82.jpg",
-          "date_posted": "2026-03-14",
-          "days_listed": 5,
-          "seller_name": "Neville Minten",
-          "source": "marktplaats"
-        },
-        {
           "id": "m2376157041",
           "set_number": "10298",
           "title": "lego, vespa 125 setnummer 10298",
@@ -1321,6 +1314,24 @@
           "date_posted": "2026-03-12",
           "days_listed": 7,
           "seller_name": "mattijs.veldman",
+          "source": "marktplaats"
+        },
+        {
+          "id": "m2377251635",
+          "set_number": "10298",
+          "title": "LEGO Vespa 125 (10298) - Nieuw in doos",
+          "price": 70.0,
+          "price_type": "bidding",
+          "current_bid": null,
+          "ask_price": 70.0,
+          "condition_category": "NIB",
+          "description": "Te koop: een gloednieuwe en ongeopende lego creator expert vespa 125 (setnummer 10298). Deze prachtige set is een gedetailleerde replica van de iconische vespa scooter uit de jaren 60, perfect voor le",
+          "location": "Venlo",
+          "url": "https://link.marktplaats.nl/m2377251635",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/39b5f4c3-6d3b-48b9-a84d-69ac7ccb66b6?rule=ecg_mp_eps$_82.jpg",
+          "date_posted": "2026-03-14",
+          "days_listed": 5,
+          "seller_name": "Neville Minten",
           "source": "marktplaats"
         },
         {
@@ -1342,6 +1353,24 @@
           "source": "marktplaats"
         },
         {
+          "id": "m2377537229",
+          "set_number": "10298",
+          "title": "LEGO Vespa 125cc scooter / NIEUW / 10298",
+          "price": 82.5,
+          "price_type": "fixed",
+          "current_bid": null,
+          "ask_price": 82.5,
+          "condition_category": "NIB",
+          "description": "Nieuw in doos en gesealed. Nimmer open geweest. Collectors item. Voorkeur voor ophalen. Bij verzending zijn kosten en risico voor koper. Wordt verzonden met postnl. Zie ook mijn andere advertenties.",
+          "location": "Heerenveen",
+          "url": "https://link.marktplaats.nl/m2377537229",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/c4ed407d-e4a6-4e7b-b6b8-0700a6372652?rule=ecg_mp_eps$_82.jpg",
+          "date_posted": "2026-03-15",
+          "days_listed": 4,
+          "seller_name": "Feiko",
+          "source": "marktplaats"
+        },
+        {
           "id": "m2375888418",
           "set_number": "10298",
           "title": "LEGO Vespa 125 (10298) - Zo goed als nieuw",
@@ -1357,24 +1386,6 @@
           "date_posted": "2026-03-11",
           "days_listed": 8,
           "seller_name": "Efe",
-          "source": "marktplaats"
-        },
-        {
-          "id": "m2377442167",
-          "set_number": "10298",
-          "title": "Lego 10298 - Vespa 125 - Icons - Nieuw",
-          "price": 69.95,
-          "price_type": "bidding",
-          "current_bid": null,
-          "ask_price": 69.95,
-          "condition_category": "NIB",
-          "description": "Leuke icons set 'vespa 125 '. De set is nieuw en zit in een verzegelde en ongeopende verpakking. Nog maar 1 beschikbaar. Vaste prijs. Je kan hem ophalen in veenendaal of ik doe hem voor je op ",
-          "location": "Veenendaal",
-          "url": "https://link.marktplaats.nl/m2377442167",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/ca93b3a5-ed2d-47e4-8c50-e291a00d2e2b?rule=ecg_mp_eps$_82.jpg",
-          "date_posted": "2026-03-15",
-          "days_listed": 4,
-          "seller_name": "H&K",
           "source": "marktplaats"
         }
       ],
@@ -2338,24 +2349,6 @@
           "source": "marktplaats"
         },
         {
-          "id": "m2370741418",
-          "set_number": "10317",
-          "title": "lego icons land rover classic defender 90 10317",
-          "price": 230.0,
-          "price_type": "fixed",
-          "current_bid": null,
-          "ask_price": 230.0,
-          "condition_category": "NIB",
-          "description": "Doos nieuw en geseald zolang de advertentie online staat is het nog te koop prijs staat vast",
-          "location": "Rotterdam",
-          "url": "https://link.marktplaats.nl/m2370741418",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/98/98b1e36e-0351-4f29-b73d-ccdbca806c40?rule=ecg_mp_eps$_82.jpg",
-          "date_posted": "2026-02-25",
-          "days_listed": 22,
-          "seller_name": "verkoper",
-          "source": "marktplaats"
-        },
-        {
           "id": "m2346887830",
           "set_number": "10317",
           "title": "Kerst: Lego Icons 10317 Land Rover Classic Defender 90",
@@ -2371,6 +2364,24 @@
           "date_posted": "2025-12-20",
           "days_listed": 89,
           "seller_name": "Richardus",
+          "source": "marktplaats"
+        },
+        {
+          "id": "m2370741418",
+          "set_number": "10317",
+          "title": "lego icons land rover classic defender 90 10317",
+          "price": 230.0,
+          "price_type": "fixed",
+          "current_bid": null,
+          "ask_price": 230.0,
+          "condition_category": "NIB",
+          "description": "Doos nieuw en geseald zolang de advertentie online staat is het nog te koop prijs staat vast",
+          "location": "Rotterdam",
+          "url": "https://link.marktplaats.nl/m2370741418",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/98/98b1e36e-0351-4f29-b73d-ccdbca806c40?rule=ecg_mp_eps$_82.jpg",
+          "date_posted": "2026-02-25",
+          "days_listed": 22,
+          "seller_name": "verkoper",
           "source": "marktplaats"
         },
         {
@@ -2428,21 +2439,21 @@
           "source": "marktplaats"
         },
         {
-          "id": "m2363846689",
+          "id": "m2363191663",
           "set_number": "10317",
-          "title": "Lego icons Landrover defender classic nr 10317 nieuw ongeope",
-          "price": 225.0,
+          "title": "10317 lego icons Land Rover Classic Defender 90",
+          "price": 210.0,
           "price_type": "bidding",
           "current_bid": null,
-          "ask_price": 225.0,
-          "condition_category": "NIB",
-          "description": "Lego icons landrover defender classic nr 10317 nieuw ongeopend prijs € 225 voorkeur is ophalen kijk voor meer duplo en lego bij mijn andere advertenties",
-          "location": "Appelscha",
-          "url": "https://link.marktplaats.nl/m2363846689",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/5c/5c7d86ae-b296-490e-b29f-d57a5979a8d7?rule=ecg_mp_eps$_82.jpg",
-          "date_posted": "2026-02-06",
-          "days_listed": 41,
-          "seller_name": "Industrieel",
+          "ask_price": 210.0,
+          "condition_category": "unknown",
+          "description": "Geef je creativiteit een boost met de lego® icons land rover classic defender 90 (10317). Dit boeiende bouwproject voor volwassenen laat je een van de beroemdste voertuigen uit de offroadgeschiedenis ",
+          "location": "Gorinchem",
+          "url": "https://link.marktplaats.nl/m2363191663",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/5b/5bbe7f02-6d91-498f-bb42-6d6a3c7f4c56?rule=ecg_mp_eps$_82.jpg",
+          "date_posted": "2026-02-04",
+          "days_listed": 43,
+          "seller_name": "David",
           "source": "marktplaats"
         }
       ],
@@ -2536,6 +2547,17 @@
           "url": "https://link.marktplaats.nl/m2373042753"
         },
         {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "10317",
+          "listing_id": "m2373042753",
+          "title": "LEGO Botanicals 10317 Petite Sunny Bouquet - Nieuw in doos",
+          "price": 25.0,
+          "details": "€25 < 20% of retail €240",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/390ecce2-b8ae-4c6b-9af8-a124bd7d706a?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2373042753"
+        },
+        {
           "log_date": "2026-03-18",
           "platform": "marktplaats",
           "set_number": "10317",
@@ -2592,6 +2614,17 @@
         },
         {
           "log_date": "2026-03-18",
+          "platform": "marktplaats",
+          "set_number": "10317",
+          "listing_id": "m2362187793",
+          "title": "LED Verlichting voor Land Rover Classic Defender 10317 Nieuw",
+          "price": 34.95,
+          "details": "€35 < 20% of retail €240",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/c3/c3c4c3ae-1acc-4078-9659-db5a18c369c2?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2362187793"
+        },
+        {
+          "log_date": "2026-03-19",
           "platform": "marktplaats",
           "set_number": "10317",
           "listing_id": "m2362187793",
@@ -3201,6 +3234,28 @@
           "url": "https://link.marktplaats.nl/m2375035517"
         },
         {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "10337",
+          "listing_id": "m2374270970",
+          "title": "Lamborghini Countach 10337 aangepaste voor- & achterwielen",
+          "price": 18.0,
+          "details": "€18 < 20% of retail €230",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/3c31f0e0-a83e-4ceb-84d8-19decfcc587f?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2374270970"
+        },
+        {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "10337",
+          "listing_id": "m2375035517",
+          "title": "Lamborghini Countach 10337 aangepaste voor- & achterwielen",
+          "price": 18.0,
+          "details": "€18 < 20% of retail €230",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/42e1b3d7-6afd-49ca-a8f9-48a1cb510377?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2375035517"
+        },
+        {
           "log_date": "2026-03-18",
           "platform": "marktplaats",
           "set_number": "10337",
@@ -3257,6 +3312,17 @@
         },
         {
           "log_date": "2026-03-18",
+          "platform": "marktplaats",
+          "set_number": "10337",
+          "listing_id": "m2363303802",
+          "title": "LED Verlichting voor Lamborghini Countach 10337 Nieuw",
+          "price": 39.95,
+          "details": "€40 < 20% of retail €230",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/df/df6da961-0023-438d-8a52-9cd907cf2c09?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2363303802"
+        },
+        {
+          "log_date": "2026-03-19",
           "platform": "marktplaats",
           "set_number": "10337",
           "listing_id": "m2363303802",
@@ -3994,6 +4060,17 @@
         },
         {
           "log_date": "2026-03-18",
+          "platform": "marktplaats",
+          "set_number": "42115",
+          "listing_id": "m2372029289",
+          "title": "technic Lego bouwinstructies 42115",
+          "price": 15.0,
+          "details": "€15 < 20% of retail €380",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/421698f3-dcac-4b13-bd3b-0cfe58b3b7b9?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2372029289"
+        },
+        {
+          "log_date": "2026-03-19",
           "platform": "marktplaats",
           "set_number": "42115",
           "listing_id": "m2372029289",
@@ -5397,6 +5474,17 @@
           "details": "€20 < 20% of retail €230",
           "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/9b/9bf4f0a6-01bf-4aaa-961e-8c8a30fcdc85?rule=ecg_mp_eps$_82.jpg",
           "url": "https://link.marktplaats.nl/m2369571474"
+        },
+        {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "42130",
+          "listing_id": "m2369571474",
+          "title": "Lego Technic 42130 Monster Jam Monster Mutt Dalmatian",
+          "price": 20.0,
+          "details": "€20 < 20% of retail €230",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/9b/9bf4f0a6-01bf-4aaa-961e-8c8a30fcdc85?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2369571474"
         }
       ]
     },
@@ -5889,24 +5977,6 @@
           "source": "marktplaats"
         },
         {
-          "id": "m2364674638",
-          "set_number": "42143",
-          "title": "42143 Lego Ferrari Daytona SP3",
-          "price": 250.0,
-          "price_type": "fixed",
-          "current_bid": null,
-          "ask_price": 250.0,
-          "condition_category": "CIB",
-          "description": "Zeer mooi gedetaïlleerde ferrari daytona sp3. Is twee keer in elkaar gezet en weer reverse afbroken. De onderdelen in genummerde zakjes gedaan die corresponderen met de bouwtekening. Dat maakt opnieuw",
-          "location": "Helmond",
-          "url": "https://link.marktplaats.nl/m2364674638",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/ec/ec3fa660-de9d-4671-95b8-9d5d1db88e5c?rule=ecg_mp_eps$_82.jpg",
-          "date_posted": "2026-02-08",
-          "days_listed": 39,
-          "seller_name": "Ike",
-          "source": "marktplaats"
-        },
-        {
           "id": "m2376127472",
           "set_number": "42143",
           "title": "42143 ferrari",
@@ -5994,6 +6064,24 @@
           "date_posted": "2026-02-07",
           "days_listed": 40,
           "seller_name": "Rebuild",
+          "source": "marktplaats"
+        },
+        {
+          "id": "m2364674638",
+          "set_number": "42143",
+          "title": "42143 Lego Ferrari Daytona SP3",
+          "price": 250.0,
+          "price_type": "fixed",
+          "current_bid": null,
+          "ask_price": 250.0,
+          "condition_category": "CIB",
+          "description": "Zeer mooi gedetaïlleerde ferrari daytona sp3. Is twee keer in elkaar gezet en weer reverse afbroken. De onderdelen in genummerde zakjes gedaan die corresponderen met de bouwtekening. Dat maakt opnieuw",
+          "location": "Helmond",
+          "url": "https://link.marktplaats.nl/m2364674638",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/ec/ec3fa660-de9d-4671-95b8-9d5d1db88e5c?rule=ecg_mp_eps$_82.jpg",
+          "date_posted": "2026-02-08",
+          "days_listed": 39,
+          "seller_name": "Ike",
           "source": "marktplaats"
         }
       ],
@@ -6109,6 +6197,17 @@
           "url": "https://link.marktplaats.nl/m2349816082"
         },
         {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "42143",
+          "listing_id": "m2349816082",
+          "title": "Lego Doos/Verpakking - Ferrari Daytona SP3 (42143)",
+          "price": 10.0,
+          "details": "€10 < 20% of retail €400",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/d2/d2b9fdd2-fae2-4190-b92d-dae5491c8f6d?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2349816082"
+        },
+        {
           "log_date": "2026-03-18",
           "platform": "marktplaats",
           "set_number": "42143",
@@ -6208,6 +6307,17 @@
           "url": "https://link.marktplaats.nl/m2374625095"
         },
         {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "42143",
+          "listing_id": "m2374625095",
+          "title": "technic Lego wielen van de Ferrari 42143",
+          "price": 20.0,
+          "details": "€20 < 20% of retail €400",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/c439c9d9-6683-4f70-aed0-998c18160bad?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2374625095"
+        },
+        {
           "log_date": "2026-03-18",
           "platform": "marktplaats",
           "set_number": "42143",
@@ -6264,6 +6374,17 @@
         },
         {
           "log_date": "2026-03-18",
+          "platform": "marktplaats",
+          "set_number": "42143",
+          "listing_id": "m2375986660",
+          "title": "Lego Technic Ferrari Daytona SP3 42143 rood",
+          "price": 50.0,
+          "details": "€50 < 20% of retail €400",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/3683303a-78b0-4c5e-864d-069f066e2fee?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2375986660"
+        },
+        {
+          "log_date": "2026-03-19",
           "platform": "marktplaats",
           "set_number": "42143",
           "listing_id": "m2375986660",
@@ -6757,6 +6878,24 @@
           "source": "marktplaats"
         },
         {
+          "id": "m2374817201",
+          "set_number": "42151",
+          "title": "Lego Technic Bugatti Bolide 42151",
+          "price": 25.0,
+          "price_type": "bidding",
+          "current_bid": null,
+          "ask_price": 25.0,
+          "condition_category": "unknown",
+          "description": "Te koop aangeboden: lego technic bugatti bolide (setnummer 42151). De auto is uit elkaar gehaald. Deze indrukwekkende replica van de bugatti bolide is een must-have voor elke lego- en autoliefhebber. ",
+          "location": "Herveld",
+          "url": "https://link.marktplaats.nl/m2374817201",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/d6b81f6c-0276-4c21-9f9f-b87804a0e622?rule=ecg_mp_eps$_82.jpg",
+          "date_posted": "2026-03-08",
+          "days_listed": 11,
+          "seller_name": "Maaike",
+          "source": "marktplaats"
+        },
+        {
           "id": "m2374867545",
           "set_number": "42151",
           "title": "Lego Technic 42151",
@@ -6793,24 +6932,6 @@
           "source": "marktplaats"
         },
         {
-          "id": "m2374817201",
-          "set_number": "42151",
-          "title": "Lego Technic Bugatti Bolide 42151",
-          "price": 25.0,
-          "price_type": "bidding",
-          "current_bid": null,
-          "ask_price": 25.0,
-          "condition_category": "unknown",
-          "description": "Te koop aangeboden: lego technic bugatti bolide (setnummer 42151). De auto is uit elkaar gehaald. Deze indrukwekkende replica van de bugatti bolide is een must-have voor elke lego- en autoliefhebber. ",
-          "location": "Herveld",
-          "url": "https://link.marktplaats.nl/m2374817201",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/d6b81f6c-0276-4c21-9f9f-b87804a0e622?rule=ecg_mp_eps$_82.jpg",
-          "date_posted": "2026-03-08",
-          "days_listed": 11,
-          "seller_name": "Maaike",
-          "source": "marktplaats"
-        },
-        {
           "id": "m2377426592",
           "set_number": "42151",
           "title": "Lego Technic Bugatti Bolide 42151 - Zo goed als nieuw",
@@ -6826,6 +6947,24 @@
           "date_posted": "2026-03-15",
           "days_listed": 4,
           "seller_name": "Six Art",
+          "source": "marktplaats"
+        },
+        {
+          "id": "m2376491276",
+          "set_number": "42151",
+          "title": "Lego 42196 / Lego 42161 / Lego 42151",
+          "price": 40.0,
+          "price_type": "bidding",
+          "current_bid": null,
+          "ask_price": 40.0,
+          "condition_category": "NIB",
+          "description": "Hierbij bied ik diverse nieuwe lego sets te koop aan: sets zijn nieuw in doos prijs € 40 euro per stuk hoeven niet in 1x als set weg mogen ook per stuk weg.  Sets zijn op te halen in barneveld, v",
+          "location": "Barneveld",
+          "url": "https://link.marktplaats.nl/m2376491276",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/45249de1-d3e6-46af-a20a-16aa9160e78c?rule=ecg_mp_eps$_82.jpg",
+          "date_posted": "2026-03-13",
+          "days_listed": 6,
+          "seller_name": "Ferdinand",
           "source": "marktplaats"
         },
         {
@@ -6862,24 +7001,6 @@
           "date_posted": "2026-02-06",
           "days_listed": 41,
           "seller_name": "Helvoirt-marktplaats",
-          "source": "marktplaats"
-        },
-        {
-          "id": "m2376491276",
-          "set_number": "42151",
-          "title": "Lego 42196 / Lego 42161 / Lego 42151",
-          "price": 40.0,
-          "price_type": "bidding",
-          "current_bid": null,
-          "ask_price": 40.0,
-          "condition_category": "NIB",
-          "description": "Hierbij bied ik diverse nieuwe lego sets te koop aan: sets zijn nieuw in doos prijs € 40 euro per stuk hoeven niet in 1x als set weg mogen ook per stuk weg.  Sets zijn op te halen in barneveld, v",
-          "location": "Barneveld",
-          "url": "https://link.marktplaats.nl/m2376491276",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/45249de1-d3e6-46af-a20a-16aa9160e78c?rule=ecg_mp_eps$_82.jpg",
-          "date_posted": "2026-03-13",
-          "days_listed": 6,
-          "seller_name": "Ferdinand",
           "source": "marktplaats"
         },
         {
@@ -6976,6 +7097,17 @@
           "url": "https://link.marktplaats.nl/a1523799155"
         },
         {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "42151",
+          "listing_id": "a1523799155",
+          "title": "Lego Set - Technic - TECHNIC 42151 BUGATI BOLIDE 2023",
+          "price": 2.0,
+          "details": "€2 < 20% of retail €100",
+          "image_url": "https://mp.images.icas.io/api/v1/a6519ad0/images/d7/d746ea60-99ac-4620-aea6-f86de8971ae6?rule=eps_82.JPG",
+          "url": "https://link.marktplaats.nl/a1523799155"
+        },
+        {
           "log_date": "2026-03-18",
           "platform": "marktplaats",
           "set_number": "42151",
@@ -7064,6 +7196,17 @@
           "url": "https://link.marktplaats.nl/m2374105051"
         },
         {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "42151",
+          "listing_id": "m2374105051",
+          "title": "lego bugatti bolide 42151",
+          "price": 15.0,
+          "details": "€15 < 20% of retail €100",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/eece1604-0466-46ee-886c-c5a68f5d7d28?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2374105051"
+        },
+        {
           "log_date": "2026-03-18",
           "platform": "marktplaats",
           "set_number": "42151",
@@ -7120,6 +7263,17 @@
         },
         {
           "log_date": "2026-03-18",
+          "platform": "marktplaats",
+          "set_number": "42151",
+          "listing_id": "m2352625956",
+          "title": "Lego 42151 Technic",
+          "price": 18.0,
+          "details": "€18 < 20% of retail €100",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/48/48645510-aa8e-4ac7-ab34-3283209e6a2f?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2352625956"
+        },
+        {
+          "log_date": "2026-03-19",
           "platform": "marktplaats",
           "set_number": "42151",
           "listing_id": "m2352625956",
@@ -7238,15 +7392,15 @@
           "CIB": {
             "active_count": 22,
             "sell_price_fast": 55.0,
-            "sell_price_realistic": 61.67,
+            "sell_price_realistic": 66.67,
             "p10": 50.0,
             "p25": 55.0,
-            "p50": 65.5,
+            "p50": 62.5,
             "price_buckets": {
               "40-50": 1,
               "50-60": 8,
-              "60-70": 3,
-              "70-80": 5,
+              "60-70": 4,
+              "70-80": 4,
               "80-90": 2,
               "90-100": 2,
               "100-110": 1
@@ -7314,6 +7468,12 @@
                 "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/81/81560115-f08d-4691-a137-a7de4803609c?rule=ecg_mp_eps$_82.jpg"
               },
               {
+                "title": "LEGO Technic Ford GT 42154 - Supercar Model",
+                "price": 60.0,
+                "url": "https://link.marktplaats.nl/m2371478389",
+                "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/48be0233-4896-473f-8680-f8c6f2d86874?rule=ecg_mp_eps$_82.jpg"
+              },
+              {
                 "title": "Lego Technic Ford GT 42154",
                 "price": 65.0,
                 "url": "https://link.marktplaats.nl/m2364645190",
@@ -7336,12 +7496,6 @@
                 "price": 75.0,
                 "url": "https://link.marktplaats.nl/m2354832164",
                 "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/d3/d357133b-88a0-4d75-8a35-1f9883c9fa13?rule=ecg_mp_eps$_82.jpg"
-              },
-              {
-                "title": "Lego technic 42154 Ford GT met verlichting",
-                "price": 75.0,
-                "url": "https://link.marktplaats.nl/m2365402187",
-                "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/0d/0ddf834b-21b9-40a9-8a99-7343764cf7aa?rule=ecg_mp_eps$_82.jpg"
               },
               {
                 "title": "Lego Technic Ford GT 42154 - Nieuwstaat",
@@ -7477,7 +7631,7 @@
           "platform": "marktplaats",
           "condition": "CIB",
           "sell_price_fast": 55.0,
-          "sell_price_realistic": 61.67,
+          "sell_price_realistic": 66.67,
           "active_count": 22
         }
       ],
@@ -7645,6 +7799,24 @@
           "source": "marktplaats"
         },
         {
+          "id": "m2369328115",
+          "set_number": "42154",
+          "title": "Lego Technic Ford GT #42154",
+          "price": 55.0,
+          "price_type": "fixed",
+          "current_bid": null,
+          "ask_price": 55.0,
+          "condition_category": "CIB",
+          "description": "Prachtige lego technic ford gt (setnummer 42154) te koop. Deze set is compleet en in uitstekende staat. Ideaal voor de lego-liefhebber en verzamelaar. Inclusief originele doos en instructieboekjes.",
+          "location": "Oud-Beijerland",
+          "url": "https://link.marktplaats.nl/m2369328115",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/8e/8e0b09e9-d1f1-4451-ab4a-e3f45ed55b02?rule=ecg_mp_eps$_82.jpg",
+          "date_posted": "2026-02-21",
+          "days_listed": 26,
+          "seller_name": "Johan",
+          "source": "marktplaats"
+        },
+        {
           "id": "m2365095499",
           "set_number": "42154",
           "title": "Lego technic. Ford GT. 42154.",
@@ -7663,21 +7835,21 @@
           "source": "marktplaats"
         },
         {
-          "id": "m2369328115",
+          "id": "m2377404429",
           "set_number": "42154",
-          "title": "Lego Technic Ford GT #42154",
-          "price": 55.0,
-          "price_type": "fixed",
+          "title": "LEGO Technic Ford GT 42154 - Nieuw in doos",
+          "price": 75.0,
+          "price_type": "bidding",
           "current_bid": null,
-          "ask_price": 55.0,
-          "condition_category": "CIB",
-          "description": "Prachtige lego technic ford gt (setnummer 42154) te koop. Deze set is compleet en in uitstekende staat. Ideaal voor de lego-liefhebber en verzamelaar. Inclusief originele doos en instructieboekjes.",
-          "location": "Oud-Beijerland",
-          "url": "https://link.marktplaats.nl/m2369328115",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/8e/8e0b09e9-d1f1-4451-ab4a-e3f45ed55b02?rule=ecg_mp_eps$_82.jpg",
-          "date_posted": "2026-02-21",
-          "days_listed": 26,
-          "seller_name": "Johan",
+          "ask_price": 75.0,
+          "condition_category": "NIB",
+          "description": "Te koop: een gloednieuwe lego technic ford gt (setnummer 42154). Dit gedetailleerde model is een must-have voor autoliefhebbers en lego-verzamelaars. Bouw je eigen iconische ford gt met realistische f",
+          "location": "Hoofddorp",
+          "url": "https://link.marktplaats.nl/m2377404429",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/189f8e06-5d6a-43c0-baf4-66bb3ba55004?rule=ecg_mp_eps$_82.jpg",
+          "date_posted": "2026-03-15",
+          "days_listed": 4,
+          "seller_name": "Overdevest",
           "source": "marktplaats"
         },
         {
@@ -7732,24 +7904,6 @@
           "date_posted": "2026-03-13",
           "days_listed": 6,
           "seller_name": "WilcoA",
-          "source": "marktplaats"
-        },
-        {
-          "id": "m2354832164",
-          "set_number": "42154",
-          "title": "Lego set 42154 Ford GT",
-          "price": 75.0,
-          "price_type": "bidding",
-          "current_bid": null,
-          "ask_price": 75.0,
-          "condition_category": "CIB",
-          "description": "Lego technic set 42154 ford gt 1466 blokjes 1 keer gebouwd in de kast gestaan daarna is het in verhuisdozen weg gezet vandaar dat ik zeg 99,5 % compleet inclusief doos en boekje verzenden is mogelijk ",
-          "location": "Zwolle",
-          "url": "https://link.marktplaats.nl/m2354832164",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/d3/d357133b-88a0-4d75-8a35-1f9883c9fa13?rule=ecg_mp_eps$_82.jpg",
-          "date_posted": "2026-01-12",
-          "days_listed": 66,
-          "seller_name": "bas",
           "source": "marktplaats"
         }
       ],
@@ -7824,6 +7978,17 @@
           "log_date": "2026-03-19",
           "platform": "marktplaats",
           "set_number": "42154",
+          "listing_id": "a1523798551",
+          "title": "Lego Set - 42154 - Technic - Ford GT",
+          "price": 7.0,
+          "details": "€7 < 20% of retail €80",
+          "image_url": "https://mp.images.icas.io/api/v1/a6519ad0/images/ed/ed37c14d-dfb4-40dc-b9cb-3cb7f671b31a?rule=eps_82.JPG",
+          "url": "https://link.marktplaats.nl/a1523798551"
+        },
+        {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "42154",
           "listing_id": "a1523799113",
           "title": "Lego Set - 42154 - Technic - Ford GT",
           "price": 15.0,
@@ -7871,16 +8036,16 @@
         },
         "marktplaats": {
           "NIB": {
-            "active_count": 11,
-            "sell_price_fast": 140.0,
+            "active_count": 12,
+            "sell_price_fast": 141.0,
             "sell_price_realistic": null,
             "p10": 139.95,
-            "p25": 142.5,
-            "p50": 149.5,
+            "p25": 143.75,
+            "p50": 149.72,
             "price_buckets": {
               "130-140": 2,
               "140-150": 5,
-              "150-160": 4
+              "150-160": 5
             },
             "disappeared_7d": 0,
             "listings": [
@@ -7931,6 +8096,12 @@
                 "price": 150.0,
                 "url": "https://link.marktplaats.nl/m2364526868",
                 "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/73/73c5cbfe-202f-4c44-8b02-bfc9f813d4ea?rule=ecg_mp_eps$_82.jpg"
+              },
+              {
+                "title": "Lego Set - 42156 - Technic - Peugeot 9X8",
+                "price": 150.0,
+                "url": "https://link.marktplaats.nl/a1523798384",
+                "image_url": ""
               },
               {
                 "title": "Lego Technic 42156 Peugeot 9x8 Nieuw",
@@ -8167,9 +8338,9 @@
           "date": "2026-03-19",
           "platform": "marktplaats",
           "condition": "NIB",
-          "sell_price_fast": 140.0,
+          "sell_price_fast": 141.0,
           "sell_price_realistic": null,
-          "active_count": 11
+          "active_count": 12
         },
         {
           "date": "2026-03-19",
@@ -8233,6 +8404,24 @@
           "date_posted": "2026-03-15",
           "days_listed": 4,
           "seller_name": "Jeroen",
+          "source": "marktplaats"
+        },
+        {
+          "id": "a1523798384",
+          "set_number": "42156",
+          "title": "Lego Set - 42156 - Technic - Peugeot 9X8",
+          "price": 150.0,
+          "price_type": "fixed",
+          "current_bid": null,
+          "ask_price": 150.0,
+          "condition_category": "NIB",
+          "description": "Lego technic-set peugeot 9x8 met seriennummer 42156, gemaakt van plastic in denemarken, uit 2020 of nieuwer, ongebruikt en compleet, verpakt in een onbeschadigde verzegelde originele doos. Nieuwe seal",
+          "location": "",
+          "url": "https://link.marktplaats.nl/a1523798384",
+          "image_url": "",
+          "date_posted": "2026-03-15",
+          "days_listed": 4,
+          "seller_name": "Catawiki",
           "source": "marktplaats"
         },
         {
@@ -8308,24 +8497,6 @@
           "source": "marktplaats"
         },
         {
-          "id": "m2366835469",
-          "set_number": "42156",
-          "title": "Lego Technic 42156",
-          "price": 90.0,
-          "price_type": "fixed",
-          "current_bid": null,
-          "ask_price": 90.0,
-          "condition_category": "CIB",
-          "description": "Zgan met doos en boekje",
-          "location": "Zwijndrecht",
-          "url": "https://link.marktplaats.nl/m2366835469",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/8c/8c190d60-1ec6-419f-87bf-c8a09811930f?rule=ecg_mp_eps$_82.jpg",
-          "date_posted": "2026-02-14",
-          "days_listed": 33,
-          "seller_name": "willem",
-          "source": "marktplaats"
-        },
-        {
           "id": "m2362140783",
           "set_number": "42156",
           "title": "lego technic 42156",
@@ -8359,6 +8530,24 @@
           "date_posted": "2026-01-30",
           "days_listed": 48,
           "seller_name": "Tom",
+          "source": "marktplaats"
+        },
+        {
+          "id": "m2366835469",
+          "set_number": "42156",
+          "title": "Lego Technic 42156",
+          "price": 90.0,
+          "price_type": "fixed",
+          "current_bid": null,
+          "ask_price": 90.0,
+          "condition_category": "CIB",
+          "description": "Zgan met doos en boekje",
+          "location": "Zwijndrecht",
+          "url": "https://link.marktplaats.nl/m2366835469",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/8c/8c190d60-1ec6-419f-87bf-c8a09811930f?rule=ecg_mp_eps$_82.jpg",
+          "date_posted": "2026-02-14",
+          "days_listed": 33,
+          "seller_name": "willem",
           "source": "marktplaats"
         },
         {
@@ -8432,24 +8621,6 @@
           "days_listed": 21,
           "seller_name": "Barry",
           "source": "marktplaats"
-        },
-        {
-          "id": "m2371318369",
-          "set_number": "42156",
-          "title": "Lego Technic 42156 Peugeot 9X8 24H Le Mans Hybrid",
-          "price": 90.0,
-          "price_type": "bidding",
-          "current_bid": null,
-          "ask_price": 90.0,
-          "condition_category": "unknown",
-          "description": "Bouw en race met de lego technic 42156 peugeot 9x8 24h le mans hybrid. Deze set is een replica van de iconische raceauto en biedt een uitdagende en lonende bouwervaring. Perfect voor lego- en autospor",
-          "location": "Dordrecht",
-          "url": "https://link.marktplaats.nl/m2371318369",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/305aa7e4-649d-4ea9-9d20-0086d4bc5d34?rule=ecg_mp_eps$_82.jpg",
-          "date_posted": "2026-02-27",
-          "days_listed": 20,
-          "seller_name": "Martijn",
-          "source": "marktplaats"
         }
       ],
       "price_too_low_7d": [
@@ -8510,6 +8681,17 @@
         },
         {
           "log_date": "2026-03-18",
+          "platform": "marktplaats",
+          "set_number": "42156",
+          "listing_id": "m2351020615",
+          "title": "Lego 42156 per onderdeeltje!!",
+          "price": 0.1,
+          "details": "€0 < 20% of retail €180",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/a0/a0f98fa1-d529-4248-8221-0cb1ec11e35c?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2351020615"
+        },
+        {
+          "log_date": "2026-03-19",
           "platform": "marktplaats",
           "set_number": "42156",
           "listing_id": "m2351020615",
@@ -9085,6 +9267,17 @@
           "url": "https://link.marktplaats.nl/m2375781828"
         },
         {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "42159",
+          "listing_id": "m2375781828",
+          "title": "Lege lego dozen 42159 42202",
+          "price": 7.5,
+          "details": "€8 < 20% of retail €200",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/3d46e1cf-a832-4434-9d58-45f753e9c6bb?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2375781828"
+        },
+        {
           "log_date": "2026-03-18",
           "platform": "marktplaats",
           "set_number": "42159",
@@ -9141,6 +9334,17 @@
         },
         {
           "log_date": "2026-03-18",
+          "platform": "marktplaats",
+          "set_number": "42159",
+          "listing_id": "m2369099242",
+          "title": "LED Verlichting voor Yamaha  MT-10 SP 42159 Nieuw",
+          "price": 34.95,
+          "details": "€35 < 20% of retail €200",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/c6/c6bc68eb-5194-4647-bd91-31a49176f989?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2369099242"
+        },
+        {
+          "log_date": "2026-03-19",
           "platform": "marktplaats",
           "set_number": "42159",
           "listing_id": "m2369099242",
@@ -9738,6 +9942,17 @@
           "details": "€3 < 20% of retail €80",
           "image_url": "https://mp.images.icas.io/api/v1/a6519ad0/images/4f/4f8ec9ed-785b-4f8b-9639-0cfab9b6fcd1?rule=eps_82.JPG",
           "url": "https://link.marktplaats.nl/a1523799153"
+        },
+        {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "42162",
+          "listing_id": "a1523799153",
+          "title": "Lego Set - 42162 - Technic - 42162 Bugatti Bolide Agile Blue",
+          "price": 3.0,
+          "details": "€3 < 20% of retail €80",
+          "image_url": "https://mp.images.icas.io/api/v1/a6519ad0/images/4f/4f8ec9ed-785b-4f8b-9639-0cfab9b6fcd1?rule=eps_82.JPG",
+          "url": "https://link.marktplaats.nl/a1523799153"
         }
       ]
     },
@@ -10268,6 +10483,17 @@
           "url": "https://link.marktplaats.nl/a1523799185"
         },
         {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "42170",
+          "listing_id": "a1523799185",
+          "title": "Lego Set - 42170 - Technic - Kawasaki Ninja H2R",
+          "price": 5.0,
+          "details": "€5 < 20% of retail €180",
+          "image_url": "https://mp.images.icas.io/api/v1/a6519ad0/images/6a/6aace9fa-d0df-4cdc-b308-e60f7df8c794?rule=eps_82.JPG",
+          "url": "https://link.marktplaats.nl/a1523799185"
+        },
+        {
           "log_date": "2026-03-18",
           "platform": "marktplaats",
           "set_number": "42170",
@@ -10356,6 +10582,17 @@
           "url": "https://link.marktplaats.nl/m2375234437"
         },
         {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "42170",
+          "listing_id": "m2375234437",
+          "title": "lego technic creator 42170,,21347,10318 bouwboeken",
+          "price": 7.0,
+          "details": "€7 < 20% of retail €180",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/79828b1d-8cb8-479d-a4e1-bc978220ea8f?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2375234437"
+        },
+        {
           "log_date": "2026-03-18",
           "platform": "marktplaats",
           "set_number": "42170",
@@ -10444,6 +10681,17 @@
           "url": "https://link.marktplaats.nl/m2370260252"
         },
         {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "42170",
+          "listing_id": "m2370260252",
+          "title": "LEGO Technic 42170 Kawasaki Ninja H2R Motorfiets",
+          "price": 27.5,
+          "details": "€28 < 20% of retail €180",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/f15e5bd8-fd5d-43d4-814b-85dc51e48fd2?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2370260252"
+        },
+        {
           "log_date": "2026-03-18",
           "platform": "marktplaats",
           "set_number": "42170",
@@ -10500,6 +10748,17 @@
         },
         {
           "log_date": "2026-03-18",
+          "platform": "marktplaats",
+          "set_number": "42170",
+          "listing_id": "m2344196494",
+          "title": "Lego Kawasaki Ninja H2R motor 42170 | Pawn Eindhoven",
+          "price": 29.99,
+          "details": "€30 < 20% of retail €180",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/10/106c8c19-6638-4a75-a292-f69e858b3e82?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2344196494"
+        },
+        {
+          "log_date": "2026-03-19",
           "platform": "marktplaats",
           "set_number": "42170",
           "listing_id": "m2344196494",
@@ -10654,6 +10913,28 @@
         },
         {
           "log_date": "2026-03-18",
+          "platform": "marktplaats",
+          "set_number": "42170",
+          "listing_id": "m2361445420",
+          "title": "Lego Technic 42170 Kawasaki Ninja H2R",
+          "price": 30.0,
+          "details": "€30 < 20% of retail €180",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/29/29c25ac0-062a-442e-b408-0ce5c4414674?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2361445420"
+        },
+        {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "42170",
+          "listing_id": "m2369352832",
+          "title": "Lego Technic Kawasaki Ninja H2R 42170",
+          "price": 30.0,
+          "details": "€30 < 20% of retail €180",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/22/223a9414-6dbd-4765-83c9-15cbda7ec457?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2369352832"
+        },
+        {
+          "log_date": "2026-03-19",
           "platform": "marktplaats",
           "set_number": "42170",
           "listing_id": "m2361445420",
@@ -10764,6 +11045,17 @@
         },
         {
           "log_date": "2026-03-18",
+          "platform": "marktplaats",
+          "set_number": "42170",
+          "listing_id": "m2369476562",
+          "title": "LED Verlichting voor 42170 Kawasaki Ninja H2R Nieuw",
+          "price": 34.95,
+          "details": "€35 < 20% of retail €180",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/bf/bfb8878d-cac6-4e1d-8ea2-49426169c3b5?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2369476562"
+        },
+        {
+          "log_date": "2026-03-19",
           "platform": "marktplaats",
           "set_number": "42170",
           "listing_id": "m2369476562",
@@ -11413,6 +11705,17 @@
           "title": "Lego Set - 42083 - Technic - LEGO Technic Bugatti Chiron -",
           "price": 3.0,
           "details": "€3 < 20% of retail €450",
+          "image_url": "https://mp.images.icas.io/api/v1/a6519ad0/images/aa/aa2e116d-efa2-4735-b28c-6b46198909c6?rule=eps_82.JPG",
+          "url": "https://link.marktplaats.nl/a1523799066"
+        },
+        {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "42083",
+          "listing_id": "a1523799066",
+          "title": "Lego Set - 42083 - Technic - LEGO Technic Bugatti Chiron -",
+          "price": 84.0,
+          "details": "€84 < 20% of retail €450",
           "image_url": "https://mp.images.icas.io/api/v1/a6519ad0/images/aa/aa2e116d-efa2-4735-b28c-6b46198909c6?rule=eps_82.JPG",
           "url": "https://link.marktplaats.nl/a1523799066"
         },
@@ -12145,6 +12448,17 @@
           "url": "https://link.marktplaats.nl/m2353703662"
         },
         {
+          "log_date": "2026-03-19",
+          "platform": "marktplaats",
+          "set_number": "42110",
+          "listing_id": "m2353703662",
+          "title": "Lego landrover BOEK nr 42110",
+          "price": 15.0,
+          "details": "€15 < 20% of retail €200",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/0d/0d55b822-d9b1-49c3-91e5-92393ba06773?rule=ecg_mp_eps$_82.jpg",
+          "url": "https://link.marktplaats.nl/m2353703662"
+        },
+        {
           "log_date": "2026-03-18",
           "platform": "marktplaats",
           "set_number": "42110",
@@ -12159,10 +12473,10 @@
     }
   ],
   "rejection_summary_7d": {
-    "invalid_price": 1068,
-    "low_confidence": 1066,
-    "price_too_low": 232,
-    "incomplete": 115,
-    "price_too_high": 14
+    "invalid_price": 1203,
+    "low_confidence": 1199,
+    "price_too_low": 260,
+    "incomplete": 131,
+    "price_too_high": 18
   }
 }
