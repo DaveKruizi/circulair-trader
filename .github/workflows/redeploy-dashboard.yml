@@ -4,7 +4,12 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
-  # Alleen handmatig starten — geen scraping, geen belasting op Marktplaats/Vinted
+  # Automatisch starten nadat de Marktplaats-run klaar is (dan hebben beide scrapers gedraaid)
+  workflow_run:
+    workflows: ["Dagelijkse Marktplaats Scrape"]
+    types: [completed]
+
+  # Ook handmatig te starten
   workflow_dispatch:
 
 permissions:
