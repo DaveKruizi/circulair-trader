@@ -64,6 +64,7 @@ def build_dashboard_data(
                         "price": r["price"],
                         "url": r["url"],
                         "image_url": r["image_url"],
+                        "is_reserved": bool(r.get("is_reserved", 0)),
                     }
                     for r in active[:20]  # max 20 per card
                 ]

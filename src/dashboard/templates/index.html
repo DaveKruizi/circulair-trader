@@ -220,6 +220,7 @@
   .active-listing .al-title .al-sub { color: var(--muted); font-size: 11px; }
   .active-listing .al-price { font-weight: 700; white-space: nowrap; color: var(--green); }
   .price-unknown { color: var(--muted); }
+  .reserved-badge { display: inline-block; font-size: 10px; font-weight: 600; background: #7c3aed22; color: #a78bfa; border: 1px solid #7c3aed55; border-radius: 4px; padding: 1px 5px; margin-left: 4px; vertical-align: middle; white-space: nowrap; }
 
   .expand-btn {
     background: none;
@@ -322,31 +323,50 @@
     <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <!-- achtergrond -->
       <rect width="36" height="36" rx="9" fill="#1a1d27" stroke="#2a2d3a" stroke-width="1"/>
-      <!-- gezicht (bolle toet) -->
-      <circle cx="18" cy="19" r="11" fill="#3b82f6"/>
-      <!-- bolle wangen -->
-      <ellipse cx="8" cy="22" rx="4" ry="3" fill="#93c5fd" opacity="0.4"/>
-      <ellipse cx="28" cy="22" rx="4" ry="3" fill="#93c5fd" opacity="0.4"/>
-      <!-- linkeroog (normaal) -->
-      <ellipse cx="14" cy="18" rx="2" ry="2.3" fill="white"/>
-      <circle cx="14.7" cy="18.5" r="1.2" fill="#0f1117"/>
-      <circle cx="15.2" cy="17.8" r="0.4" fill="white"/>
-      <!-- rechteroog (iets toegeknepen — scherp oog voor de deal) -->
-      <ellipse cx="22" cy="18" rx="2" ry="1.6" fill="white"/>
-      <circle cx="22.7" cy="18.2" r="1.1" fill="#0f1117"/>
-      <circle cx="23.2" cy="17.7" r="0.4" fill="white"/>
-      <path d="M 20.2 16.8 Q 22 16 23.8 16.8" stroke="#2563eb" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-      <!-- wetende glimlach -->
-      <path d="M 14 24 Q 18 27.5 22 24" stroke="white" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-      <!-- snoepje (bonbon) rechtsboven — voor de snoeperd -->
-      <circle cx="30" cy="7" r="3" fill="#f59e0b"/>
-      <circle cx="29" cy="6" r="1" fill="#fde68a" opacity="0.7"/>
-      <line x1="27.2" y1="4.8" x2="27.2" y2="9.2" stroke="#d97706" stroke-width="0.8"/>
-      <path d="M 27.2 4.8 L 25.5 3.5" stroke="#d97706" stroke-width="1.1" stroke-linecap="round"/>
-      <path d="M 27.2 9.2 L 25.5 10.5" stroke="#d97706" stroke-width="1.1" stroke-linecap="round"/>
-      <line x1="32.8" y1="4.8" x2="32.8" y2="9.2" stroke="#d97706" stroke-width="0.8"/>
-      <path d="M 32.8 4.8 L 34.5 3.5" stroke="#d97706" stroke-width="1.1" stroke-linecap="round"/>
-      <path d="M 32.8 9.2 L 34.5 10.5" stroke="#d97706" stroke-width="1.1" stroke-linecap="round"/>
+      <!-- grijs haar (bun + zijkanten) -->
+      <ellipse cx="18" cy="10" rx="9" ry="7" fill="#9ca3af"/>
+      <ellipse cx="9.5" cy="15" rx="3.5" ry="5" fill="#9ca3af"/>
+      <ellipse cx="26.5" cy="15" rx="3.5" ry="5" fill="#9ca3af"/>
+      <!-- highlight haar -->
+      <ellipse cx="15" cy="7" rx="4" ry="2.5" fill="#d1d5db" opacity="0.35"/>
+      <!-- gezicht (warm peach) -->
+      <ellipse cx="18" cy="21" rx="8.5" ry="9.5" fill="#f0c080"/>
+      <!-- wenkbrauwen (dun, grijs) -->
+      <path d="M 12 15 Q 14.5 14 16 15" stroke="#9ca3af" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <path d="M 20 15 Q 21.5 14 24 15" stroke="#9ca3af" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <!-- gouden brilletje -->
+      <circle cx="14" cy="19" r="3" stroke="#d4a017" stroke-width="1.3" fill="rgba(200,230,255,0.08)"/>
+      <circle cx="22" cy="19" r="3" stroke="#d4a017" stroke-width="1.3" fill="rgba(200,230,255,0.08)"/>
+      <path d="M 17 19 L 19 19" stroke="#d4a017" stroke-width="1.1"/>
+      <path d="M 11 18.5 L 8.5 18" stroke="#d4a017" stroke-width="1" stroke-linecap="round"/>
+      <path d="M 25 18.5 L 27.5 18" stroke="#d4a017" stroke-width="1" stroke-linecap="round"/>
+      <!-- ogen -->
+      <circle cx="14" cy="19.3" r="1.4" fill="#2d1a0e"/>
+      <circle cx="22" cy="19.3" r="1.4" fill="#2d1a0e"/>
+      <circle cx="14.5" cy="18.7" r="0.45" fill="white"/>
+      <circle cx="22.5" cy="18.7" r="0.45" fill="white"/>
+      <!-- vriendelijke omaatjes-glimlach -->
+      <path d="M 14.5 25 Q 18 28 21.5 25" stroke="#c07040" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+      <!-- rimpeltje bij ooghoek -->
+      <path d="M 10.8 20.5 Q 11.5 21.5 10.8 22.5" stroke="#d4956a" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+      <path d="M 25.2 20.5 Q 24.5 21.5 25.2 22.5" stroke="#d4956a" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+      <!-- dikke gouden ketting -->
+      <path d="M 11 29.5 Q 18 34.5 25 29.5" stroke="#b07a10" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M 11 29.5 Q 18 34.5 25 29.5" stroke="#f0c030" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2 2.5"/>
+      <circle cx="13.5" cy="31" r="1.4" fill="#f0c030"/>
+      <circle cx="18" cy="33" r="1.4" fill="#f0c030"/>
+      <circle cx="22.5" cy="31" r="1.4" fill="#f0c030"/>
+      <!-- worstje linksboven -->
+      <rect x="1" y="2.5" width="8" height="3.5" rx="1.75" fill="#c97b5a" transform="rotate(-20 5 4.25)"/>
+      <ellipse cx="1.8" cy="3.5" rx="1.2" ry="1.8" fill="#a05030" transform="rotate(-20 1.8 3.5)"/>
+      <ellipse cx="8.2" cy="5.5" rx="1.2" ry="1.8" fill="#a05030" transform="rotate(-20 8.2 5.5)"/>
+      <path d="M 3 2.5 Q 5 1 7 2.5" stroke="#e08a60" stroke-width="0.6" fill="none" stroke-linecap="round"/>
+      <!-- kaasje rechtsboven (wig met gaatjes) -->
+      <polygon points="28,2 35,8.5 28,8.5" fill="#f5d742"/>
+      <polygon points="28,8.5 35,8.5 35,10 28,10" fill="#e8b820"/>
+      <circle cx="30.5" cy="6.5" r="0.8" fill="#c9a800" opacity="0.65"/>
+      <circle cx="32.5" cy="5" r="0.65" fill="#c9a800" opacity="0.65"/>
+      <circle cx="31.5" cy="8.5" r="0.55" fill="#c9a800" opacity="0.5"/>
     </svg>
     <div>
       <h1>Ina AI</h1>
@@ -664,10 +684,11 @@ function buildListingsColumn(platform, label, listings, idx) {
       l.price_type || null,
       l.days_listed != null ? `${l.days_listed}d online` : null,
     ].filter(Boolean).join(' · ');
+    const reservedBadge = l.is_reserved ? '<span class="reserved-badge">Gereserveerd</span>' : '';
     return `<div class="active-listing">
       <img src="${escHtml(l.image_url || '')}" alt="" onerror="this.style.display='none'">
       <div class="al-title">
-        <a href="${escHtml(l.url)}" target="_blank" rel="noopener">${escHtml(l.title)}</a>
+        <a href="${escHtml(l.url)}" target="_blank" rel="noopener">${escHtml(l.title)}${reservedBadge}</a>
         ${sub ? `<div class="al-sub">${sub}</div>` : ''}
       </div>
       <div class="al-price">€${Number(l.price || 0).toFixed(0)}</div>

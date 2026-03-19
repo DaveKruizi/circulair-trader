@@ -105,6 +105,11 @@ def init_db() -> None:
             conn.execute("ALTER TABLE listings ADD COLUMN condition_raw TEXT DEFAULT ''")
         except Exception:
             pass  # column already exists
+        # Migrate existing DBs that predate is_reserved column
+        try:
+            conn.execute("ALTER TABLE listings ADD COLUMN is_reserved INTEGER DEFAULT 0")
+        except Exception:
+            pass  # column already exists
 
 
 def upsert_listing(
@@ -120,6 +125,7 @@ def upsert_listing(
     today: str,
     match_confidence: float = 0.95,
     condition_raw: str = "",
+    is_reserved: bool = False,
 ) -> None:
     with get_connection() as conn:
         existing = conn.execute(
@@ -127,14 +133,16 @@ def upsert_listing(
             (listing_id, platform),
         ).fetchone()
 
+        reserved_int = 1 if is_reserved else 0
         if existing:
             conn.execute(
                 """UPDATE listings
                    SET title=?, price=?, condition_category=?, condition_raw=?,
-                       url=?, image_url=?, last_seen=?, status='active', match_confidence=?
+                       url=?, image_url=?, last_seen=?, status='active',
+                       match_confidence=?, is_reserved=?
                    WHERE id=? AND platform=?""",
                 (title, price, condition_category, condition_raw, url, image_url, today,
-                 match_confidence, listing_id, platform),
+                 match_confidence, reserved_int, listing_id, platform),
             )
             if existing["price"] != price:
                 conn.execute(
@@ -145,10 +153,11 @@ def upsert_listing(
             conn.execute(
                 """INSERT INTO listings
                    (id, platform, set_number, title, price, condition_category, condition_raw,
-                    url, image_url, seller_id, first_seen, last_seen, status, match_confidence)
-                   VALUES (?,?,?,?,?,?,?,?,?,?,?,?,'active',?)""",
+                    url, image_url, seller_id, first_seen, last_seen, status, match_confidence,
+                    is_reserved)
+                   VALUES (?,?,?,?,?,?,?,?,?,?,?,?,'active',?,?)""",
                 (listing_id, platform, set_number, title, price, condition_category, condition_raw,
-                 url, image_url, seller_id, today, today, match_confidence),
+                 url, image_url, seller_id, today, today, match_confidence, reserved_int),
             )
             conn.execute(
                 "INSERT OR IGNORE INTO price_history VALUES (?,?,?,?)",
@@ -235,7 +244,8 @@ def log_rejection(
 def get_active_listings(set_number: str, platform: str, condition: str) -> list[dict]:
     with get_connection() as conn:
         rows = conn.execute(
-            """SELECT id, price, first_seen, last_seen, title, url, image_url
+            """SELECT id, price, first_seen, last_seen, title, url, image_url,
+                      COALESCE(is_reserved, 0) as is_reserved
                FROM listings
                WHERE set_number=? AND platform=? AND condition_category=? AND status='active'
                ORDER BY price""",

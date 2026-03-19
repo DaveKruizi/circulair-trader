@@ -190,6 +190,8 @@ def scrape_set(
 
             seen_ids.add(listing_id)
 
+            is_reserved = "gereserveerd" in title.lower() or "gereserveerd" in description.lower()
+
             upsert_listing(
                 listing_id=listing_id,
                 platform="marktplaats",
@@ -202,7 +204,11 @@ def scrape_set(
                 seller_id="",
                 today=today,
                 match_confidence=0.95,
+                is_reserved=is_reserved,
             )
+
+            if is_reserved:
+                print(f"  [Gereserveerd] {title[:60]}")
 
             results.append({
                 "id": listing_id,
@@ -221,6 +227,7 @@ def scrape_set(
                 "days_listed": days,
                 "seller_name": seller_name or "",
                 "source": "marktplaats",
+                "is_reserved": is_reserved,
             })
 
     except Exception as e:
