@@ -239,9 +239,12 @@ def scrape_set(
             parsed["is_stale"] = parsed["days_old"] >= STALE_DAYS
             valid_listings.append(parsed)
 
-        disappeared = mark_disappeared(platform_code, set_number, seen_ids, today)
-        if disappeared:
-            print(f"  [Lifecycle] {disappeared} listings gone from {platform_code} → sold proxy")
+        if seen_ids:
+            disappeared = mark_disappeared(platform_code, set_number, seen_ids, today)
+            if disappeared:
+                print(f"  [Lifecycle] {disappeared} listings gone from {platform_code} → sold proxy")
+        else:
+            print(f"  [Lifecycle] SKIP mark_disappeared for {platform_code} set {set_number}: 0 results (auth issue?)")
 
         results[platform_code] = valid_listings
 
