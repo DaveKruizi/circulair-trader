@@ -39,30 +39,62 @@ jobs:
       - name: Dependencies installeren
         run: pip install -r requirements.txt
 
-      - name: Controleer VINTED_SESSION_COOKIE
+      - name: Playwright browser installeren
+        run: playwright install chromium --with-deps
+
+      # ------------------------------------------------------------------
+      # Stap 1: Probeer automatisch een verse cookie op te halen via login
+      # ------------------------------------------------------------------
+      - name: Cookie vernieuwen via Playwright login
+        id: playwright_login
+        continue-on-error: true
         env:
-          VINTED_SESSION_COOKIE: ${{ secrets.VINTED_SESSION_COOKIE }}
+          VINTED_EMAIL: ${{ secrets.VINTED_EMAIL }}
+          VINTED_PASSWORD: ${{ secrets.VINTED_PASSWORD }}
         run: |
-          if [ -z "$VINTED_SESSION_COOKIE" ]; then
-            echo "❌ VINTED_SESSION_COOKIE secret is niet ingesteld!"
-            echo ""
-            echo "Hoe dit op te lossen:"
-            echo "  1. Log in op vinted.nl in je browser"
-            echo "  2. Open DevTools → Application → Cookies → www.vinted.nl"
-            echo "  3. Kopieer de waarde van 'access_token_web'"
-            echo "  4. Ga naar GitHub repo → Settings → Secrets → Actions"
-            echo "  5. Voeg toe: VINTED_SESSION_COOKIE = <gekopieerde waarde>"
-            exit 1
+          echo "--- Playwright cookie refresh ---"
+          COOKIE=$(python src/auth/vinted_cookie_refresh.py 2>/tmp/playwright_log.txt)
+          EXIT=$?
+          cat /tmp/playwright_log.txt
+
+          if [ $EXIT -eq 0 ] && [ -n "$COOKIE" ]; then
+            echo "✓ Verse cookie verkregen via Playwright (${#COOKIE} tekens)"
+            echo "VINTED_SESSION_COOKIE=$COOKIE" >> $GITHUB_ENV
           else
-            echo "✓ VINTED_SESSION_COOKIE is ingesteld (${#VINTED_SESSION_COOKIE} tekens)"
+            echo "⚠ Playwright login mislukt (exit $EXIT)"
           fi
 
+      # ------------------------------------------------------------------
+      # Stap 2: Fallback op opgeslagen secret als Playwright mislukte
+      # ------------------------------------------------------------------
+      - name: Cookie beschikbaarheid controleren
+        env:
+          SECRET_COOKIE: ${{ secrets.VINTED_SESSION_COOKIE }}
+        run: |
+          if [ -n "$VINTED_SESSION_COOKIE" ]; then
+            echo "✓ Verse cookie via Playwright beschikbaar (${#VINTED_SESSION_COOKIE} tekens)"
+
+          elif [ -n "$SECRET_COOKIE" ]; then
+            echo "⚠ Playwright mislukt — gebruik opgeslagen VINTED_SESSION_COOKIE als fallback"
+            echo "VINTED_SESSION_COOKIE=$SECRET_COOKIE" >> $GITHUB_ENV
+
+          else
+            echo "❌ Geen cookie beschikbaar!"
+            echo ""
+            echo "Oplossingen (kies één):"
+            echo "  Automatisch: voeg VINTED_EMAIL + VINTED_PASSWORD toe als GitHub secrets"
+            echo "  Handmatig:   voeg VINTED_SESSION_COOKIE toe (vinted.nl → DevTools → Cookies)"
+            exit 1
+          fi
+
+      # ------------------------------------------------------------------
+      # Stap 3: Eigenlijke scrape
+      # ------------------------------------------------------------------
       - name: Vinted scrapen
         id: scrape
         timeout-minutes: 20
         env:
           PYTHONPATH: "."
-          VINTED_SESSION_COOKIE: ${{ secrets.VINTED_SESSION_COOKIE }}
         run: python src/main_vinted.py 2>&1 | tee vinted_log.txt; exit ${PIPESTATUS[0]}
 
       - name: Log tonen
