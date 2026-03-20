@@ -149,6 +149,7 @@ def scrape_set(
     Also updates SQLite lifecycle tracking and logs rejections.
     """
     from src.db import init_db, upsert_listing, mark_disappeared, log_rejection
+    from src.analysis.content_filters import is_replica, is_accessory
 
     init_db()
     today = datetime.now().date().isoformat()
@@ -185,6 +186,26 @@ def scrape_set(
                 log_rejection(
                     platform_code, set_number, lid, title, price,
                     "low_confidence", f"'{set_number}' not found in title"
+                )
+                continue
+
+            # Replica / namaak LEGO (Vinted geeft geen beschrijving via search-API)
+            flagged, kw = is_replica(title, "")
+            if flagged:
+                log_rejection(
+                    platform_code, set_number, lid, title, price,
+                    "replica", f"namaak-signaal: '{kw}'"
+                )
+                continue
+
+            # Accessoire (verlichtingskit, display-box, etc.) — wél loggen met URL
+            flagged, kw = is_accessory(title)
+            if flagged:
+                log_rejection(
+                    platform_code, set_number, lid, title, price,
+                    "accessory", f"accessoire-signaal: '{kw}'",
+                    image_url=parsed["image_url"],
+                    url=parsed["url"],
                 )
                 continue
 

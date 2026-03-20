@@ -107,6 +107,7 @@ def scrape_set(
 
     from src.db import init_db, upsert_listing, mark_disappeared, log_rejection
     from src.analysis.condition_classifier import classify_condition
+    from src.analysis.content_filters import is_replica, is_accessory
 
     init_db()
     today = datetime.now().date().isoformat()
@@ -154,6 +155,26 @@ def scrape_set(
                 log_rejection(
                     "marktplaats", set_number, listing_id, title, price,
                     "low_confidence", f"'{set_number}' not found in title"
+                )
+                continue
+
+            # Replica / namaak LEGO
+            flagged, kw = is_replica(title, description)
+            if flagged:
+                log_rejection(
+                    "marktplaats", set_number, listing_id, title, price,
+                    "replica", f"namaak-signaal: '{kw}'"
+                )
+                continue
+
+            # Accessoire (verlichtingskit, display-box, etc.) — wél loggen met URL
+            flagged, kw = is_accessory(title)
+            if flagged:
+                log_rejection(
+                    "marktplaats", set_number, listing_id, title, price,
+                    "accessory", f"accessoire-signaal: '{kw}'",
+                    image_url=image_url,
+                    url=url,
                 )
                 continue
 
