@@ -452,7 +452,6 @@ function setCondition(cond) {
     renderBucketChart(set, idx);
     renderActiveListings(set, idx);
   });
-  updateCompactSummaries();
 }
 
 function renderAll(data) {
@@ -576,7 +575,7 @@ function buildSetCard(set, idx) {
         </div>
       </div>
       <div class="compact-stats" id="set-stats-${idx}">
-        ${buildCompactStats(set, activeCondition)}
+        ${buildCompactStats(set)}
       </div>
       <div class="set-expand-arrow">▼</div>
     </div>
@@ -838,30 +837,24 @@ function toggleSetCard(header) {
   }
 }
 
-function buildCompactStats(set, cond) {
-  const mp = ((set.platforms['marktplaats'] || {})[cond] || {});
-  const vt = ((set.platforms['vinted_nl'] || {})[cond] || {});
-  const mpP50 = mp.p50 != null ? `€${mp.p50.toFixed(0)}` : '—';
-  const vtP50 = vt.p50 != null ? `€${vt.p50.toFixed(0)}` : '—';
-  const mpCount = mp.active_count || 0;
-  const vtCount = vt.active_count || 0;
-  return `
-    <div class="compact-stat">
-      <div class="cstat-label">Marktplaats</div>
-      <div class="cstat-val">${mpP50} <span style="color:var(--muted);font-weight:400;font-size:11px">(${mpCount})</span></div>
-    </div>
-    <div class="compact-stat">
-      <div class="cstat-label">Vinted</div>
-      <div class="cstat-val">${vtP50} <span style="color:var(--muted);font-weight:400;font-size:11px">(${vtCount})</span></div>
-    </div>`;
-}
+function buildCompactStats(set) {
+  const mp = set.platforms['marktplaats'] || {};
+  const vt = set.platforms['vinted_nl'] || {};
 
-function updateCompactSummaries() {
-  if (!dashData) return;
-  dashData.sets.forEach((set, idx) => {
-    const el = document.getElementById(`set-stats-${idx}`);
-    if (el) el.innerHTML = buildCompactStats(set, activeCondition);
-  });
+  const fmt = (pd) => {
+    const p50 = pd.p50 != null ? `€${pd.p50.toFixed(0)}` : '—';
+    const n = pd.active_count || 0;
+    return `${p50}&thinsp;<span style="color:var(--muted);font-weight:400">(${n})</span>`;
+  };
+
+  const condRow = (cond, color) => `
+    <div style="display:flex;gap:12px;align-items:baseline;font-size:12px;font-weight:600;color:${color}">
+      <span style="font-size:10px;font-weight:700;opacity:.75;min-width:26px">${cond}</span>
+      <span>MP:&nbsp;${fmt(mp[cond] || {})}</span>
+      <span>Vt:&nbsp;${fmt(vt[cond] || {})}</span>
+    </div>`;
+
+  return condRow('NIB', 'var(--green)') + condRow('CIB', 'var(--accent)');
 }
 
 function renderHistoryChart(set, idx) {
