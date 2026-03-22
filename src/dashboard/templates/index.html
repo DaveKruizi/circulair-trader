@@ -89,9 +89,9 @@
   .stat-card .breakdown { color: var(--muted); font-size: 10px; margin-top: 4px; line-height: 1.6; }
 
   .sets-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(680px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
 
   .set-card {
@@ -99,14 +99,20 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
+    transition: border-color .15s;
   }
+  .set-card:hover { border-color: #3a3d4a; }
 
   .set-header {
     display: flex;
     gap: 16px;
-    padding: 16px;
+    padding: 12px 16px;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+  .set-card.expanded .set-header {
     border-bottom: 1px solid var(--border);
-    align-items: flex-start;
   }
 
   .set-img {
@@ -137,7 +143,42 @@
   .badge-cib     { background: #3b82f622; color: #60a5fa; border: 1px solid #3b82f644; }
   .badge-mp      { background: #f59e0b22; color: #fbbf24; border: 1px solid #f59e0b44; }
 
-  .set-body { padding: 16px; }
+  .set-body { padding: 16px; display: none; }
+  .set-card.expanded .set-body { display: block; }
+
+  .set-expand-arrow {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 13px;
+    flex-shrink: 0;
+    transition: transform .2s;
+  }
+  .set-card.expanded .set-expand-arrow { transform: rotate(180deg); }
+
+  .compact-stats {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .compact-stat {
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+    text-align: right;
+  }
+  .compact-stat .cstat-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: 1px;
+  }
+  .compact-stat .cstat-val {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 13px;
+  }
 
   .condition-panel { display: none; }
   .condition-panel.visible { display: block; }
@@ -310,9 +351,9 @@
   }
 
   @media (max-width: 720px) {
-    .sets-grid { grid-template-columns: 1fr; }
     .charts-row { grid-template-columns: 1fr; }
     .listings-cols { grid-template-columns: 1fr; }
+    .compact-stats { display: none; }
   }
 </style>
 </head>
@@ -411,6 +452,7 @@ function setCondition(cond) {
     renderBucketChart(set, idx);
     renderActiveListings(set, idx);
   });
+  updateCompactSummaries();
 }
 
 function renderAll(data) {
@@ -422,6 +464,7 @@ function renderAll(data) {
   renderSummary(data);
   renderRejections(data.rejection_summary_7d);
 
+  data.sets.sort((a, b) => a.name.localeCompare(b.name, 'nl'));
   const grid = document.getElementById('sets-grid');
   grid.innerHTML = '';
   data.sets.forEach((set, idx) => {
@@ -520,18 +563,22 @@ function buildSetCard(set, idx) {
   const mv = set.market_value_new ? `Marktwaarde: €${set.market_value_new.toFixed(0)}` : '';
 
   card.innerHTML = `
-    <div class="set-header">
+    <div class="set-header" onclick="toggleSetCard(this)">
       <img class="set-img" src="${escHtml(set.image_url)}" alt="${escHtml(set.name)}"
            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2260%22><rect width=%2280%22 height=%2260%22 fill=%22%23222%22/></svg>'">
       <div class="set-meta">
         <div class="set-name">${escHtml(set.name)}</div>
         <div class="set-sub">#${set.set_number} · ${set.theme} · ${set.piece_count || '?'} stenen · ${set.release_year || ''}</div>
-        <div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <div style="margin-top:4px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
           ${retired}
           <span style="color:var(--muted);font-size:12px">Retail: ${retail}</span>
           ${mv ? `<span style="color:var(--muted);font-size:12px">${mv}</span>` : ''}
         </div>
       </div>
+      <div class="compact-stats" id="set-stats-${idx}">
+        ${buildCompactStats(set, activeCondition)}
+      </div>
+      <div class="set-expand-arrow">▼</div>
     </div>
     <div class="set-body">
       ${buildConditionPanel(set, 'NIB', idx)}
@@ -777,6 +824,44 @@ function toggleExpand(panelId, btnId, total) {
   btn.querySelector('span').textContent = isOpen ? '▲' : '▼';
   btn.childNodes[btn.childNodes.length - 1].textContent = isOpen
     ? ` Inklappen` : ` Bekijk alles (${total})`;
+}
+
+function toggleSetCard(header) {
+  const card = header.closest('.set-card');
+  card.classList.toggle('expanded');
+  if (card.classList.contains('expanded')) {
+    setTimeout(() => {
+      card.querySelectorAll('.js-plotly-plot').forEach(el => {
+        try { Plotly.Plots.resize(el); } catch(e) {}
+      });
+    }, 50);
+  }
+}
+
+function buildCompactStats(set, cond) {
+  const mp = ((set.platforms['marktplaats'] || {})[cond] || {});
+  const vt = ((set.platforms['vinted_nl'] || {})[cond] || {});
+  const mpP50 = mp.p50 != null ? `€${mp.p50.toFixed(0)}` : '—';
+  const vtP50 = vt.p50 != null ? `€${vt.p50.toFixed(0)}` : '—';
+  const mpCount = mp.active_count || 0;
+  const vtCount = vt.active_count || 0;
+  return `
+    <div class="compact-stat">
+      <div class="cstat-label">Marktplaats</div>
+      <div class="cstat-val">${mpP50} <span style="color:var(--muted);font-weight:400;font-size:11px">(${mpCount})</span></div>
+    </div>
+    <div class="compact-stat">
+      <div class="cstat-label">Vinted</div>
+      <div class="cstat-val">${vtP50} <span style="color:var(--muted);font-weight:400;font-size:11px">(${vtCount})</span></div>
+    </div>`;
+}
+
+function updateCompactSummaries() {
+  if (!dashData) return;
+  dashData.sets.forEach((set, idx) => {
+    const el = document.getElementById(`set-stats-${idx}`);
+    if (el) el.innerHTML = buildCompactStats(set, activeCondition);
+  });
 }
 
 function renderHistoryChart(set, idx) {
