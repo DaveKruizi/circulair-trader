@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-22",
+  "last_updated": "2026-03-24",
   "sets": [
     {
       "set_number": "10295",
@@ -358,6 +358,36 @@
       "image_url": "https://images.brickset.com/sets/images/10265-1.jpg",
       "search_terms": [
         "lego 10265"
+      ],
+      "category": "vehicle"
+    },
+    {
+      "set_number": "42056",
+      "name": "Porsche 911 GT3 RS",
+      "theme": "Technic",
+      "retail_price": 299.99,
+      "is_retired": true,
+      "market_value_new": 420.0,
+      "release_year": 2016,
+      "piece_count": 2704,
+      "image_url": "https://images.brickset.com/sets/images/42056-1.jpg",
+      "search_terms": [
+        "lego 42056"
+      ],
+      "category": "vehicle"
+    },
+    {
+      "set_number": "42206",
+      "name": "Oracle Red Bull Racing RB18",
+      "theme": "Technic",
+      "retail_price": 249.99,
+      "is_retired": false,
+      "market_value_new": null,
+      "release_year": 2025,
+      "piece_count": 900,
+      "image_url": "https://images.brickset.com/sets/images/42206-1.jpg",
+      "search_terms": [
+        "lego 42206"
       ],
       "category": "vehicle"
     },

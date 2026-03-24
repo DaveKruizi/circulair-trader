@@ -33,6 +33,9 @@ _REPLICA_FULL: tuple[str, ...] = (
     "geen lego",
     "geen origineel",
     "niet origineel",
+    "niet-origineel",
+    "niet-originele",
+    "niet originele",
     "nep lego",
     "nep-lego",
     "replica",
@@ -42,6 +45,14 @@ _REPLICA_FULL: tuple[str, ...] = (
     "knock-off",
     "kopie van lego",
     "off-brand",
+    # Andere talen: niet-origineel
+    "nicht original",       # Duits
+    "nicht originale",      # Duits
+    "non original",         # Engels / Frans
+    "non-original",         # Engels
+    "non originale",        # Italiaans / Frans
+    "no original",          # Spaans
+    "não original",         # Portugees
     # Bekende kloon-merken
     "lepin",
     "mould king",
@@ -140,6 +151,57 @@ _ACCESSORY_TITLE: tuple[str, ...] = (
     "sticker set",
     "sticker sheet",
     "sticker vel",
+    # Figuurtjes / minifiguren als zelfstandig product (niet de set)
+    "figuurtjes",
+    "lego figuurtjes",
+    "lego-figuurtjes",
+    "poppetjes",
+    "minifiguurtjes",
+    "figurines only",       # Engels
+    "minifigures only",     # Engels
+    "minifig only",         # Engels
+    "figuren only",         # Duits/Engels mix
+    # Fotolijst / picture frame
+    "fotolijst",
+    "fotolijstje",
+    "bilderrahmen",         # Duits
+    "cadre photo",          # Frans
+    "picture frame",        # Engels
+    "photo frame",          # Engels
+    "marco de fotos",       # Spaans
+    "portaretrato",         # Spaans
+    "cornice foto",         # Italiaans
+    "cornice portafoto",    # Italiaans
+    "ramka na zdjecia",     # Pools
+    # Muurbeugel / wall mount
+    "muurbeugel",
+    "muursteun",
+    "wandbeugel",
+    "wandhalterung",        # Duits
+    "wandhalter",           # Duits
+    "support mural",        # Frans
+    "fixation murale",      # Frans
+    "wall mount",           # Engels
+    "wall bracket",         # Engels
+    "wall hanger",          # Engels
+    "soporte de pared",     # Spaans
+    "soporte mural",        # Spaans
+    "staffa a parete",      # Italiaans
+    "supporto parete",      # Italiaans
+    "uchwyt scienny",       # Pools
+    # Display-stand / plank (accessoire, niet het model zelf)
+    "display stand",
+    "display plank",
+    "display standaard",
+    "display shelf",
+    "display hanger",
+    "display houder",
+    # Verlichtingsets extra (internationaal)
+    "lighting kit",         # Engels (extra)
+    "beleuchtungsset",      # Duits
+    "beleuchtung set",      # Duits
+    "kit eclairage",        # Frans (zonder accent, lowercase)
+    "kit d'eclairage",      # Frans
 )
 
 

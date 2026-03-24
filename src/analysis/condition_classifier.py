@@ -9,11 +9,39 @@ Classifies text into one of three categories:
 """
 
 NIB_KEYWORDS = [
-    "sealed", "ongeopend", "new in box", "nib", "verzegeld",
+    # Nederlands
+    "sealed", "ongeopend", "geseald", "gesealed", "verzegeld",
     "nooit geopend", "nieuw in verpakking", "nieuw in doos",
-    "factory sealed", "geseald", "origineel verzegeld",
-    "noch nie geöffnet", "versiegelt", "ungeöffnet",  # German
-    "scellé", "jamais ouvert",  # French
+    "origineel verzegeld", "in originele verpakking",
+    "nieuw en ongeopend",
+    # Engels
+    "new in box", "nib", "factory sealed", "brand new sealed",
+    "unopened", "mint in box",
+    # Duits
+    "noch nie geöffnet", "versiegelt", "ungeöffnet",
+    "originalverpackt", "neu und ungeöffnet",
+    # Frans
+    "scellé", "jamais ouvert", "neuf scellé", "non ouvert",
+    # Spaans
+    "precintado", "sin abrir", "sellado", "nuevo precintado",
+    # Italiaans
+    "sigillato", "mai aperto", "nuovo sigillato",
+    # Portugees
+    "selado", "nunca aberto", "fechado de fábrica",
+    # Zweeds
+    "förseglad", "oöppnad",
+    # Deens
+    "forseglet", "uåbnet",
+    # Noors
+    "uåpnet",
+    # Pools
+    "zapieczętowany", "nieotwarty", "fabrycznie zapieczętowany",
+    # Tsjechisch / Slowaaks
+    "zapečetěný", "neotevřený", "zapečatený",
+    # Hongaars
+    "bontatlan", "lezárt gyári",
+    # Roemeens
+    "sigilat", "nedeschis",
 ]
 
 INCOMPLETE_KEYWORDS = [
