@@ -376,6 +376,21 @@
       "category": "vehicle"
     },
     {
+      "set_number": "42207",
+      "name": "Ferrari SF-24 F1 Car",
+      "theme": "Technic",
+      "retail_price": 249.99,
+      "is_retired": false,
+      "market_value_new": null,
+      "release_year": 2025,
+      "piece_count": 952,
+      "image_url": "https://images.brickset.com/sets/images/42207-1.jpg",
+      "search_terms": [
+        "lego 42207"
+      ],
+      "category": "vehicle"
+    },
+    {
       "set_number": "42172",
       "name": "McLaren P1",
       "theme": "Technic",
