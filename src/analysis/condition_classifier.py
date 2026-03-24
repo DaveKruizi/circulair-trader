@@ -9,11 +9,42 @@ Classifies text into one of three categories:
 """
 
 NIB_KEYWORDS = [
-    "sealed", "ongeopend", "new in box", "nib", "verzegeld",
+    # Nederlands
+    "sealed", "ongeopend", "geseald", "gesealed", "verzegeld", "verzegelde",
     "nooit geopend", "nieuw in verpakking", "nieuw in doos",
-    "factory sealed", "geseald", "origineel verzegeld",
-    "noch nie geöffnet", "versiegelt", "ungeöffnet",  # German
-    "scellé", "jamais ouvert",  # French
+    "origineel verzegeld", "in originele verpakking",
+    "nieuw en ongeopend", "ongebruikt", "ongebruikte",
+    # Engels
+    "new in box", "nib", "factory sealed", "brand new sealed",
+    "unopened", "mint in box", "unused",
+    # Duits
+    "noch nie geöffnet", "versiegelt", "versiegelte", "ungeöffnet",
+    "originalverpackt", "neu und ungeöffnet",
+    "unbenutzt", "unbenutzte", "ungebraucht", "ungebrauchte",
+    # Frans
+    "scellé", "scellée", "jamais ouvert", "neuf scellé", "non ouvert",
+    "inutilisé", "inutilisée", "non utilisé",
+    # Spaans
+    "precintado", "precintada", "sin abrir", "sellado", "nuevo precintado",
+    "sin usar",
+    # Italiaans
+    "sigillato", "sigillata", "mai aperto", "nuovo sigillato", "non usato",
+    # Portugees
+    "selado", "nunca aberto", "fechado de fábrica",
+    # Zweeds
+    "förseglad", "oöppnad",
+    # Deens
+    "forseglet", "uåbnet",
+    # Noors
+    "uåpnet",
+    # Pools
+    "zapieczętowany", "nieotwarty", "fabrycznie zapieczętowany",
+    # Tsjechisch / Slowaaks
+    "zapečetěný", "neotevřený", "zapečatený",
+    # Hongaars
+    "bontatlan", "lezárt gyári",
+    # Roemeens
+    "sigilat", "nedeschis",
 ]
 
 INCOMPLETE_KEYWORDS = [

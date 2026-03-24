@@ -150,6 +150,14 @@ def scrape_set(
             if listing_id in seen_ids:
                 continue
 
+            # Catawiki: veilingsite met afwijkende advertenties → uitsluiten
+            if seller_name.lower() == "catawiki":
+                log_rejection(
+                    "marktplaats", set_number, listing_id, title, price,
+                    "catawiki_seller", "verkoper is Catawiki (veilingsite)"
+                )
+                continue
+
             # Set number must be in title
             if set_number not in title:
                 log_rejection(
