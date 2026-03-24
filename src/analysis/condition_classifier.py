@@ -10,22 +10,25 @@ Classifies text into one of three categories:
 
 NIB_KEYWORDS = [
     # Nederlands
-    "sealed", "ongeopend", "geseald", "gesealed", "verzegeld",
+    "sealed", "ongeopend", "geseald", "gesealed", "verzegeld", "verzegelde",
     "nooit geopend", "nieuw in verpakking", "nieuw in doos",
     "origineel verzegeld", "in originele verpakking",
-    "nieuw en ongeopend",
+    "nieuw en ongeopend", "ongebruikt", "ongebruikte",
     # Engels
     "new in box", "nib", "factory sealed", "brand new sealed",
-    "unopened", "mint in box",
+    "unopened", "mint in box", "unused",
     # Duits
-    "noch nie geöffnet", "versiegelt", "ungeöffnet",
+    "noch nie geöffnet", "versiegelt", "versiegelte", "ungeöffnet",
     "originalverpackt", "neu und ungeöffnet",
+    "unbenutzt", "unbenutzte", "ungebraucht", "ungebrauchte",
     # Frans
-    "scellé", "jamais ouvert", "neuf scellé", "non ouvert",
+    "scellé", "scellée", "jamais ouvert", "neuf scellé", "non ouvert",
+    "inutilisé", "inutilisée", "non utilisé",
     # Spaans
-    "precintado", "sin abrir", "sellado", "nuevo precintado",
+    "precintado", "precintada", "sin abrir", "sellado", "nuevo precintado",
+    "sin usar",
     # Italiaans
-    "sigillato", "mai aperto", "nuovo sigillato",
+    "sigillato", "sigillata", "mai aperto", "nuovo sigillato", "non usato",
     # Portugees
     "selado", "nunca aberto", "fechado de fábrica",
     # Zweeds
