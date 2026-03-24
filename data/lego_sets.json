@@ -376,6 +376,21 @@
       "category": "vehicle"
     },
     {
+      "set_number": "42107",
+      "name": "Ducati Panigale V4 R",
+      "theme": "Technic",
+      "retail_price": 69.99,
+      "is_retired": true,
+      "market_value_new": 95.0,
+      "release_year": 2019,
+      "piece_count": 646,
+      "image_url": "https://images.brickset.com/sets/images/42107-1.jpg",
+      "search_terms": [
+        "lego 42107"
+      ],
+      "category": "vehicle"
+    },
+    {
       "set_number": "42207",
       "name": "Ferrari SF-24 F1 Car",
       "theme": "Technic",
