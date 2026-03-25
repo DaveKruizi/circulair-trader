@@ -12,6 +12,12 @@ on:
   # Ook handmatig te starten
   workflow_dispatch:
 
+  # Bij push naar de actieve development branch (forceert direct redeployment)
+  push:
+    branches:
+      - master
+      - claude/separate-ux-scraping-3YZdy
+
 permissions:
   contents: write  # Nodig voor GitHub Pages deployment
 
