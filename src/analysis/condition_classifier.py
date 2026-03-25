@@ -13,7 +13,7 @@ NIB_KEYWORDS = [
     "sealed", "ongeopend", "geseald", "gesealed", "verzegeld", "verzegelde",
     "nooit geopend", "nieuw in verpakking", "nieuw in doos",
     "origineel verzegeld", "in originele verpakking",
-    "nieuw en ongeopend",
+    "nieuw en ongeopend", "ongebruikt", "ongebruikte",
     # Engels
     "new in box", "nib", "factory sealed", "brand new sealed",
     "unopened", "mint in box", "unused",
@@ -45,6 +45,24 @@ NIB_KEYWORDS = [
     "bontatlan", "lezárt gyári",
     # Roemeens
     "sigilat", "nedeschis",
+]
+
+# Signalen die BEWIJZEN dat de set geopend of gebouwd is.
+# Als deze aanwezig zijn naast een NIB-keyword, wint de contradictie —
+# bijv. "ongebruikte onderdelen, exclusief doos" → geen NIB.
+# Gebruik specifieke frasen (niet bare woorden) om false positives te vermijden:
+# "nooit opgebouwd, gesealed" bevat "opgebouwd" maar is WEL NIB.
+NIB_CONTRADICTIONS = [
+    # Doos ontbreekt — een NIB-set zit altijd in de originele doos
+    "exclusief doos", "zonder doos", "geen doos",
+    "ohne box", "ohne karton",          # Duits
+    "no box", "without box",            # Engels
+    "sans boîte", "sans la boîte",      # Frans
+    # Expliciet één keer gebouwd / geassembleerd — niet NIB
+    "eénmaal opgebouwd", "eenmaal opgebouwd", "1x opgebouwd",
+    "eénmaal gebouwd", "eenmaal gebouwd", "1x gebouwd",
+    "display model", "displaymodel",
+    "built once",                       # Engels
 ]
 
 INCOMPLETE_KEYWORDS = [
@@ -96,7 +114,12 @@ def classify_condition(title: str, description: str) -> str:
     text = (title + " " + description).lower()
 
     if any(kw in text for kw in NIB_KEYWORDS):
-        return "NIB"
+        # Controleer of er tegenstrijdige signalen zijn die bewijzen dat de set
+        # wél geopend/gebouwd is. Als dat zo is, geen NIB — doorvallen naar
+        # CIB/incomplete. Voorbeeld: "ongebruikte onderdelen, exclusief doos"
+        # triggert NIB via "ongebruikte", maar "exclusief doos" weerlegt dat.
+        if not any(kw in text for kw in NIB_CONTRADICTIONS):
+            return "NIB"
 
     has_incomplete = any(kw in text for kw in INCOMPLETE_KEYWORDS)
     has_cib = any(kw in text for kw in CIB_KEYWORDS)
