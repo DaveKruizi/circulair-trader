@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-24",  "sets": [
+  "last_updated": "2026-03-25",  "sets": [
     {
       "set_number": "10295",
       "name": "Porsche 911",
@@ -448,6 +448,175 @@
       "search_terms": [
         "lego 42110"
       ],
+      "category": "vehicle"
+    }
+    ,{
+      "set_number": "43179",
+      "name": "Mickey & Minnie Mouse",
+      "theme": "Disney",
+      "retail_price": 19.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2021,
+      "piece_count": null,
+      "image_url": "https://images.brickset.com/sets/images/43179-1.jpg",
+      "search_terms": ["lego 43179", "mickey minnie mouse lego"],
+      "category": "collectible"
+    },
+    {
+      "set_number": "8386",
+      "name": "Ferrari F1 Racer (Technic)",
+      "theme": "Technic",
+      "retail_price": null,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2004,
+      "piece_count": 614,
+      "image_url": "https://images.brickset.com/sets/images/8386-1.jpg",
+      "search_terms": ["lego 8386", "ferrari f1 racer lego technic"],
+      "category": "vehicle"
+    },
+    {
+      "set_number": "30583",
+      "name": "Paashaas",
+      "theme": "Seasonal",
+      "retail_price": 4.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2021,
+      "piece_count": 47,
+      "image_url": "https://images.brickset.com/sets/images/30583-1.jpg",
+      "search_terms": ["lego 30583", "paashaas lego"],
+      "category": "seasonal"
+    },
+    {
+      "set_number": "624210",
+      "name": "Lego House rode stenen",
+      "theme": "Lego House",
+      "retail_price": null,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": null,
+      "piece_count": null,
+      "image_url": "https://images.brickset.com/sets/images/624210-1.jpg",
+      "search_terms": ["lego 624210", "lego house rode stenen"],
+      "category": "collectible"
+    },
+    {
+      "set_number": "40448",
+      "name": "Vintage Car",
+      "theme": "Creator",
+      "retail_price": 9.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2021,
+      "piece_count": 87,
+      "image_url": "https://images.brickset.com/sets/images/40448-1.jpg",
+      "search_terms": ["lego 40448", "lego cabriolet"],
+      "category": "vehicle"
+    },
+    {
+      "set_number": "40409",
+      "name": "Hot Rod",
+      "theme": "Creator",
+      "retail_price": 12.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2020,
+      "piece_count": 172,
+      "image_url": "https://images.brickset.com/sets/images/40409-1.jpg",
+      "search_terms": ["lego 40409", "hot rod lego"],
+      "category": "vehicle"
+    },
+    {
+      "set_number": "40527",
+      "name": "Paaskuikens",
+      "theme": "Seasonal",
+      "retail_price": 4.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2022,
+      "piece_count": 49,
+      "image_url": "https://images.brickset.com/sets/images/40527-1.jpg",
+      "search_terms": ["lego 40527", "paaskuikens lego"],
+      "category": "seasonal"
+    },
+    {
+      "set_number": "40640",
+      "name": "Notenkraker",
+      "theme": "Seasonal",
+      "retail_price": 12.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2022,
+      "piece_count": 107,
+      "image_url": "https://images.brickset.com/sets/images/40640-1.jpg",
+      "search_terms": ["lego 40640", "notenkraker lego"],
+      "category": "seasonal"
+    },
+    {
+      "set_number": "42171",
+      "name": "Mercedes AMG F1 W14e Performance",
+      "theme": "Technic",
+      "retail_price": 199.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2023,
+      "piece_count": 1642,
+      "image_url": "https://images.brickset.com/sets/images/42171-1.jpg",
+      "search_terms": ["lego 42171", "mercedes amg f1 lego"],
+      "category": "vehicle"
+    },
+    {
+      "set_number": "8157",
+      "name": "Ferrari F1 Racers",
+      "theme": "Racers",
+      "retail_price": null,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2008,
+      "piece_count": 147,
+      "image_url": "https://images.brickset.com/sets/images/8157-1.jpg",
+      "search_terms": ["lego 8157", "ferrari f1 racers lego"],
+      "category": "vehicle"
+    },
+    {
+      "set_number": "21319",
+      "name": "Friends Central Perk",
+      "theme": "Ideas",
+      "retail_price": 84.99,
+      "is_retired": true,
+      "market_value_new": 150.0,
+      "release_year": 2019,
+      "piece_count": 1070,
+      "image_url": "https://images.brickset.com/sets/images/21319-1.jpg",
+      "search_terms": ["lego 21319", "central perk lego", "friends lego"],
+      "category": "collectible"
+    },
+    {
+      "set_number": "72032",
+      "name": "Super Mario Standard Kart",
+      "theme": "Super Mario",
+      "retail_price": null,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": null,
+      "piece_count": null,
+      "image_url": "https://images.brickset.com/sets/images/72032-1.jpg",
+      "search_terms": ["lego 72032", "super mario kart lego"],
+      "category": "collectible"
+    },
+    {
+      "set_number": "10330",
+      "name": "McLaren MP4/4 & Ayrton Senna",
+      "theme": "Speed Champions",
+      "retail_price": 44.99,
+      "is_retired": false,
+      "market_value_new": null,
+      "release_year": 2024,
+      "piece_count": 693,
+      "image_url": "https://images.brickset.com/sets/images/10330-1.jpg",
+      "search_terms": ["lego 10330", "mclaren senna lego", "mp4/4 lego"],
       "category": "vehicle"
     }
   ]

@@ -202,6 +202,9 @@ _ACCESSORY_TITLE: tuple[str, ...] = (
     "beleuchtung set",      # Duits
     "kit eclairage",        # Frans (zonder accent, lowercase)
     "kit d'eclairage",      # Frans
+    "kit éclairage",        # Frans (met accent)
+    "kit d'éclairage",      # Frans (met accent + apostrof)
+    "éclairage led",        # Frans variant
 )
 
 
