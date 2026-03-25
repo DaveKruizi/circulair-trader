@@ -13,7 +13,7 @@ NIB_KEYWORDS = [
     "sealed", "ongeopend", "geseald", "gesealed", "verzegeld", "verzegelde",
     "nooit geopend", "nieuw in verpakking", "nieuw in doos",
     "origineel verzegeld", "in originele verpakking",
-    "nieuw en ongeopend", "ongebruikt", "ongebruikte",
+    "nieuw en ongeopend",
     # Engels
     "new in box", "nib", "factory sealed", "brand new sealed",
     "unopened", "mint in box", "unused",
@@ -53,6 +53,7 @@ INCOMPLETE_KEYWORDS = [
     "onderdelen ontbreken", "beschadigd", "kapot",
     "zonder instructies", "geen instructies", "steentjes alleen",
     "doos beschadigd", "handleiding mist", "los van de doos",
+    "exclusief doos",
     "ohne box", "ohne anleitung", "ohne karton", "unvollständig",  # German
     "sans boîte", "incomplet",  # French
     "incomplete", "no box", "missing", "parts only",  # English

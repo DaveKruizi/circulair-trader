@@ -76,17 +76,15 @@ def compute_price_intelligence(
     p25 = _percentile(all_active_prices, 25)
     p50 = _percentile(all_active_prices, 50)
 
-    # sell_price_realistic: median of disappeared listings <21d
-    # (mediaan is eerlijker dan time-weighted avg — verdwenen ≠ verkocht,
-    #  en korte listings zijn niet per se echte verkopen)
-    # Filter: verdwenen listings met prijs > mediaan vraagprijs tellen niet mee —
-    # die zijn waarschijnlijk niet echt verkocht maar bijv. teruggetrokken.
+    # sell_price_realistic: median of ALL disappeared listings <21d
+    # Geen p50-filter meer — die veroorzaakte een neerwaartse bias waardoor
+    # sell_price_realistic lager uitkwam dan sell_price_fast (p20 actief).
+    # Door alle verdwenen listings mee te nemen krijgen we een eerlijker beeld
+    # van de werkelijke transactieprijs op de markt.
     disappeared = db.get_disappeared_listings(set_number, platform, condition, max_days=21)
     sell_price_realistic = None
     if disappeared:
-        valid = [d for d in disappeared if p50 is None or d["price"] <= p50]
-        if valid:
-            sell_price_realistic = _percentile(sorted(d["price"] for d in valid), 50)
+        sell_price_realistic = _percentile([d["price"] for d in disappeared], 50)
 
     # Price distribution in €10 buckets
     buckets: dict[str, int] = {}
