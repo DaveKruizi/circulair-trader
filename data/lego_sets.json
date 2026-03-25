@@ -466,6 +466,22 @@
         "mercedes amg f1 lego"
       ],
       "category": "vehicle"
+    },
+    {
+      "set_number": "77942",
+      "name": "Fiat 500 Blue",
+      "theme": "Icons",
+      "retail_price": 99.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2021,
+      "piece_count": 960,
+      "image_url": "https://images.brickset.com/sets/images/77942-1.jpg",
+      "search_terms": [
+        "lego 77942",
+        "fiat 500 blauw lego"
+      ],
+      "category": "vehicle"
     }
   ]
 }
