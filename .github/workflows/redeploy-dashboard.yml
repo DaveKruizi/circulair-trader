@@ -37,6 +37,9 @@ jobs:
           restore-keys: |
             lego-data-v2-
 
+      - name: Set catalog herstellen vanuit git (overschrijft cache)
+        run: git checkout HEAD -- data/lego_sets.json
+
       - name: Python installeren
         uses: actions/setup-python@v5
         with:
