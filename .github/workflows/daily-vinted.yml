@@ -76,6 +76,7 @@ jobs:
 
           elif [ -n "$SECRET_COOKIE" ]; then
             echo "⚠ Playwright mislukt — gebruik opgeslagen VINTED_SESSION_COOKIE als fallback"
+            echo "::add-mask::${SECRET_COOKIE}"
             echo "VINTED_SESSION_COOKIE=$SECRET_COOKIE" >> $GITHUB_ENV
 
           else
