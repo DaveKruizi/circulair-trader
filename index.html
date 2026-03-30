@@ -546,7 +546,7 @@ function renderRejections(summary) {
   };
   const items = document.getElementById('rejection-items');
   items.innerHTML = Object.entries(summary).map(([reason, count]) =>
-    `<div class="rejection-item"><span class="rej-count">${count}×</span> ${labels[reason] || reason}</div>`
+    `<div class="rejection-item"><span class="rej-count">${count}×</span> ${labels[reason] || escHtml(reason)}</div>`
   ).join('') + `<div class="rejection-item" style="margin-left:auto;color:var(--muted)">Totaal: ${total}</div>`;
 }
 
