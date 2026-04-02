@@ -117,6 +117,10 @@ def scrape_set(
 
     seen_ids: set[str] = set()
     results: list[dict] = []
+    # Verzamel alle ruwe listing-IDs + seller_names die we zien (ook afgekeurde).
+    # Dit wordt gebruikt door scrape_all_sets() om een brede LEGO-telling per
+    # verkoper op te bouwen — ook voor sets die we niet volgen.
+    all_seen_sellers: list[tuple[str, str, str]] = []  # (listing_id, seller_name, title)
 
     query = f"lego {set_number}"
     try:
@@ -134,6 +138,9 @@ def scrape_set(
                 image_url = _get_image_url(raw)
                 seller_name = raw.seller.name if raw.seller else ""
                 location_str = raw.location.city if raw.location else ""
+                # Registreer alle geziene listings voor brede verkoperstelling
+                if seller_name and "lego" in title.lower():
+                    all_seen_sellers.append((listing_id, seller_name, title))
 
                 if raw.date:
                     d = raw.date if isinstance(raw.date, date) else raw.date.date()
@@ -234,6 +241,8 @@ def scrape_set(
                 today=today,
                 match_confidence=0.95,
                 is_reserved=is_reserved,
+                seller_name=seller_name,
+                price_type=price_type,
             )
 
             if is_reserved:
@@ -272,35 +281,49 @@ def scrape_set(
     if disappeared:
         print(f"  [Lifecycle] {disappeared} Marktplaats listings disappeared → sold proxy")
 
-    return results
+    return results, all_seen_sellers
 
 
 def scrape_all_sets(lego_sets: list[dict]) -> dict[str, list[dict]]:
     """
     Scrape all LEGO sets and return dict of set_number -> list of listing dicts.
-    Also saves results to data/marktplaats_deals.json.
+    Also saves results to data/marktplaats_deals.json, including seller_lego_counts:
+    een dict van seller_name -> aantal unieke LEGO-listings gezien over ALLE zoekopdrachten.
+    Dit geeft een brede proxy voor hoeveel LEGO-advertenties een verkoper heeft,
+    ook voor sets die we niet specifiek volgen.
     """
     results: dict[str, list[dict]] = {}
+    # seller_name -> set van listing_ids met 'lego' in de titel
+    seller_lego_seen: dict[str, set] = {}
 
     for i, lego_set in enumerate(lego_sets, 1):
         set_number = lego_set["set_number"]
         name = lego_set["name"]
         retail_price = lego_set.get("retail_price")
         print(f"[Marktplaats] [{i}/{len(lego_sets)}] {set_number}: {name}")
-        listings = scrape_set(set_number, name, retail_price)
+        listings, all_seen = scrape_set(set_number, name, retail_price)
         results[set_number] = listings
         print(f"  → {len(listings)} valid listings found")
+
+        # Verwerk brede verkoperstelling
+        for lid, sname, _title in all_seen:
+            if sname:
+                seller_lego_seen.setdefault(sname, set()).add(lid)
+
         time.sleep(0.5)
 
-    _save_deals_data(results)
+    # Converteer sets naar aantallen
+    seller_lego_counts = {s: len(ids) for s, ids in seller_lego_seen.items()}
+    _save_deals_data(results, seller_lego_counts)
     return results
 
 
-def _save_deals_data(results: dict[str, list[dict]]) -> None:
+def _save_deals_data(results: dict[str, list[dict]], seller_lego_counts: dict | None = None) -> None:
     DEALS_DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "scraped_at": datetime.now().isoformat(),
         "sets": results,
+        "seller_lego_counts": seller_lego_counts or {},
     }
     DEALS_DATA_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
 

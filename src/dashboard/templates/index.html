@@ -350,6 +350,67 @@
     margin-top: 40px;
   }
 
+  /* Hot score badge */
+  .hot-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 12px; font-weight: 700; padding: 3px 9px;
+    border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+  }
+  .hot-0  { background: #1e2130; color: #64748b; border: 1px solid #334155; }
+  .hot-1  { background: #1e2130; color: #94a3b8; border: 1px solid #334155; }
+  .hot-2  { background: #1c2436; color: #60a5fa; border: 1px solid #2563eb44; }
+  .hot-3  { background: #1e2a1a; color: #86efac; border: 1px solid #22c55e44; }
+  .hot-4  { background: #2a1e13; color: #fbbf24; border: 1px solid #f59e0b44; }
+  .hot-5  { background: #2a1212; color: #f87171; border: 1px solid #ef444444; }
+
+  /* Deal badge */
+  .deal-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 12px; font-weight: 700; padding: 3px 9px;
+    border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+    background: #14261a; color: #4ade80; border: 1px solid #22c55e44;
+    cursor: pointer;
+  }
+  .deal-badge:hover { border-color: #22c55e; }
+
+  /* Retirement indicator */
+  .retirement-indicator {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 600; padding: 2px 8px;
+    border-radius: 4px; white-space: nowrap;
+  }
+  .ret-up   { background: #14261a; color: #4ade80; border: 1px solid #22c55e33; }
+  .ret-down { background: #2a1212; color: #f87171; border: 1px solid #ef444433; }
+  .ret-stable { background: #1e2130; color: #94a3b8; border: 1px solid #33415533; }
+
+  /* Deal cards in expanded view */
+  .deals-section {
+    background: #0d1f14; border: 1px solid #22c55e33;
+    border-radius: 8px; padding: 12px 14px; margin-bottom: 16px;
+  }
+  .deals-section h4 {
+    font-size: 11px; color: #4ade80; text-transform: uppercase;
+    letter-spacing: .05em; margin-bottom: 10px;
+  }
+  .deal-cards { display: flex; flex-direction: column; gap: 6px; }
+  .deal-card {
+    display: flex; align-items: center; gap: 10px;
+    background: #0a1a0f; border: 1px solid #22c55e22;
+    border-radius: 6px; padding: 8px 10px; text-decoration: none;
+    color: var(--text); transition: border-color .15s;
+  }
+  .deal-card:hover { border-color: #22c55e; }
+  .deal-card img { width: 36px; height: 36px; object-fit: cover; border-radius: 4px; background: #111; flex-shrink: 0; }
+  .deal-card .dc-info { flex: 1; min-width: 0; }
+  .deal-card .dc-title { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .deal-card .dc-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+  .deal-card .dc-price { font-weight: 700; color: #4ade80; font-size: 14px; white-space: nowrap; }
+  .deal-card .dc-discount {
+    background: #14261a; color: #4ade80; border: 1px solid #22c55e44;
+    font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+
   @media (max-width: 720px) {
     .charts-row { grid-template-columns: 1fr; }
     .listings-cols { grid-template-columns: 1fr; }
@@ -546,7 +607,7 @@ function renderRejections(summary) {
   };
   const items = document.getElementById('rejection-items');
   items.innerHTML = Object.entries(summary).map(([reason, count]) =>
-    `<div class="rejection-item"><span class="rej-count">${count}×</span> ${labels[reason] || reason}</div>`
+    `<div class="rejection-item"><span class="rej-count">${count}×</span> ${labels[reason] || escHtml(reason)}</div>`
   ).join('') + `<div class="rejection-item" style="margin-left:auto;color:var(--muted)">Totaal: ${total}</div>`;
 }
 
@@ -559,7 +620,18 @@ function buildSetCard(set, idx) {
     : '<span class="badge badge-active">Actief</span>';
 
   const retail = set.retail_price ? `€${set.retail_price.toFixed(0)}` : '—';
-  const mv = set.market_value_new ? `Marktwaarde: €${set.market_value_new.toFixed(0)}` : '';
+
+  // Retirement value indicator
+  const ri = set.retirement_indicator;
+  let retHtml = '';
+  if (ri) {
+    if (ri.direction === 'up')
+      retHtml = `<span class="retirement-indicator ret-up" title="NIB mediaan ligt ${ri.pct}% boven laatste retailprijs → set stijgt in waarde">📈 +${ri.pct}% vs retail</span>`;
+    else if (ri.direction === 'down')
+      retHtml = `<span class="retirement-indicator ret-down" title="NIB mediaan ligt ${ri.pct}% onder laatste retailprijs → set daalt in waarde">📉 −${ri.pct}% vs retail</span>`;
+    else
+      retHtml = `<span class="retirement-indicator ret-stable" title="NIB mediaan stabiel rond retailprijs">≈ retail</span>`;
+  }
 
   card.innerHTML = `
     <div class="set-header" onclick="toggleSetCard(this)">
@@ -571,7 +643,7 @@ function buildSetCard(set, idx) {
         <div style="margin-top:4px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
           ${retired}
           <span style="color:var(--muted);font-size:12px">Retail: ${retail}</span>
-          ${mv ? `<span style="color:var(--muted);font-size:12px">${mv}</span>` : ''}
+          ${retHtml}
         </div>
       </div>
       <div class="compact-stats" id="set-stats-${idx}">
@@ -580,6 +652,7 @@ function buildSetCard(set, idx) {
       <div class="set-expand-arrow">▼</div>
     </div>
     <div class="set-body">
+      ${buildDealsSection(set, idx)}
       ${buildConditionPanel(set, 'NIB', idx)}
       ${buildConditionPanel(set, 'CIB', idx)}
       <div class="charts-row">
@@ -607,15 +680,14 @@ function buildConditionPanel(set, cond, idx) {
   let rows = '';
   platforms.forEach(platform => {
     const pd = (set.platforms[platform] || {})[cond] || {};
-    const fast = pd.sell_price_fast != null ? `<span class="price-fast">€${pd.sell_price_fast.toFixed(0)}</span>` : '<span class="price-none">—</span>';
     const real = pd.sell_price_realistic != null ? `<span class="price-real">€${pd.sell_price_realistic.toFixed(0)}</span>` : '<span class="price-none">—</span>';
     const count = pd.active_count || 0;
     const p50 = pd.p50 != null ? `€${pd.p50.toFixed(0)}` : '—';
-    const vel = pd.disappeared_7d > 0 ? `<span style="color:var(--green);font-size:11px">↑${pd.disappeared_7d} verkocht/7d</span>` : '';
+    const dis7 = pd.disappeared_7d || 0;
+    const vel = dis7 > 0 ? `<span style="color:var(--green);font-size:11px">↑${dis7}/7d</span>` : '';
 
     rows += `<tr>
       <td><strong>${labels[platform]}</strong></td>
-      <td>${fast}</td>
       <td>${real}</td>
       <td>${p50}</td>
       <td><span class="count-badge">${count}</span> ${vel}</td>
@@ -632,12 +704,7 @@ function buildConditionPanel(set, cond, idx) {
         <thead>
           <tr>
             <th>Platform</th>
-            <th>
-              <span class="tooltip-hint" title="p20 van actieve, verse listings. Dit is de prijs waarbij je snel verkoopt (~7 dagen).">Snel-verkoopprijs</span>
-            </th>
-            <th>
-              <span class="tooltip-hint" title="Gewogen gemiddelde van verdwenen listings ≤21 dagen actief. Beste proxy voor echte transactieprijs.">Reële verkoopprijs</span>
-            </th>
+            <th><span class="tooltip-hint" title="Mediaan van verdwenen listings ≤21 dagen actief. Beste proxy voor echte transactieprijs.">Reële verkoopprijs</span></th>
             <th>Mediaan vraagprijs</th>
             <th>Actief</th>
           </tr>
@@ -837,24 +904,78 @@ function toggleSetCard(header) {
   }
 }
 
+function hotScoreLabel(score) {
+  if (score === 0)  return { tier: 0, label: '❄ Geen data' };
+  if (score <= 20)  return { tier: 1, label: '❄ Koud' };
+  if (score <= 50)  return { tier: 2, label: '◉ Normaal' };
+  if (score <= 70)  return { tier: 3, label: '● Warm' };
+  if (score <= 85)  return { tier: 4, label: '🔥 Heet' };
+  return              { tier: 5, label: '🔥 Zeer heet' };
+}
+
+function buildDealsSection(set, idx) {
+  const deals = set.deals || [];
+  if (deals.length === 0) return '';
+
+  const condLabels = { NIB: 'Nieuw', CIB: 'Gebruikt' };
+  const cards = deals.map(d => {
+    const imgHtml = d.image_url
+      ? `<img src="${escHtml(d.image_url)}" alt="" loading="lazy" onerror="this.style.display='none'">`
+      : '';
+    const condBadge = `<span class="badge badge-${(d.condition||'').toLowerCase()}">${condLabels[d.condition] || d.condition}</span>`;
+    const typeBadge = d.price_type === 'bidding'
+      ? `<span style="font-size:10px;color:var(--orange)">bod</span>`
+      : '';
+    const traderBadge = d.is_trader
+      ? `<span style="font-size:10px;color:var(--muted)" title="${d.seller_count} LEGO-listings">handelaar</span>`
+      : '';
+    const subParts = [condBadge, typeBadge, traderBadge, `<span style="font-size:10px;color:var(--muted)">mediaan €${d.p50}</span>`].filter(Boolean).join(' ');
+    return `<a class="deal-card" href="${escHtml(d.url)}" target="_blank" rel="noopener">
+      ${imgHtml}
+      <div class="dc-info">
+        <div class="dc-title">${escHtml(d.title)}</div>
+        <div class="dc-sub">${subParts}</div>
+      </div>
+      <div class="dc-price">€${Number(d.price || 0).toFixed(0)}</div>
+      <div class="dc-discount">−${d.discount_pct}%</div>
+    </a>`;
+  }).join('');
+
+  return `<div class="deals-section" id="deals-${idx}">
+    <h4>🛒 Koopkansen op Marktplaats (${deals.length})</h4>
+    <div class="deal-cards">${cards}</div>
+  </div>`;
+}
+
+function expandAndScrollToDeals(badgeEl) {
+  const card = badgeEl.closest('.set-card');
+  if (!card) return;
+  if (!card.classList.contains('expanded')) {
+    card.classList.add('expanded');
+    setTimeout(() => {
+      card.querySelectorAll('.js-plotly-plot').forEach(el => {
+        try { Plotly.Plots.resize(el); } catch(e) {}
+      });
+      const dealsEl = card.querySelector('.deals-section');
+      if (dealsEl) dealsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 80);
+  } else {
+    const dealsEl = card.querySelector('.deals-section');
+    if (dealsEl) dealsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
 function buildCompactStats(set) {
-  const mp = set.platforms['marktplaats'] || {};
-  const vt = set.platforms['vinted_nl'] || {};
+  const score = set.hot_score || 0;
+  const { tier, label } = hotScoreLabel(score);
+  const hotHtml = `<span class="hot-badge hot-${tier}" title="Hot score: ${score}/100">${label} <span style="opacity:.6;font-size:10px">${score}</span></span>`;
 
-  const fmt = (pd) => {
-    const p50 = pd.p50 != null ? `€${pd.p50.toFixed(0)}` : '—';
-    const n = pd.active_count || 0;
-    return `${p50}&thinsp;<span style="color:var(--muted);font-weight:400">(${n})</span>`;
-  };
+  const dealCount = (set.deals || []).length;
+  const dealHtml = dealCount > 0
+    ? `<span class="deal-badge" title="Klik om deals te zien" onclick="event.stopPropagation();expandAndScrollToDeals(this)">🛒 ${dealCount} deal${dealCount > 1 ? 's' : ''}</span>`
+    : '';
 
-  const condRow = (cond, color) => `
-    <div style="display:flex;gap:12px;align-items:baseline;font-size:12px;font-weight:600;color:${color}">
-      <span style="font-size:10px;font-weight:700;opacity:.75;min-width:26px">${cond}</span>
-      <span>MP:&nbsp;${fmt(mp[cond] || {})}</span>
-      <span>Vt:&nbsp;${fmt(vt[cond] || {})}</span>
-    </div>`;
-
-  return condRow('NIB', 'var(--green)') + condRow('CIB', 'var(--accent)');
+  return hotHtml + (dealHtml ? '&nbsp;' + dealHtml : '');
 }
 
 function renderHistoryChart(set, idx) {
@@ -873,26 +994,14 @@ function renderHistoryChart(set, idx) {
     const pts = history.filter(h => h.platform === platform);
     if (pts.length === 0) return;
 
-    const fastPts = pts.filter(h => h.sell_price_fast != null);
-    if (fastPts.length > 0) {
-      traces.push({
-        x: fastPts.map(h => h.date),
-        y: fastPts.map(h => h.sell_price_fast),
-        mode: 'lines+markers',
-        name: `${platformLabels[platform]} snel`,
-        line: { color: colors[platform], width: 2 },
-        marker: { size: 4 },
-      });
-    }
-
     const realPts = pts.filter(h => h.sell_price_realistic != null);
     if (realPts.length > 0) {
       traces.push({
         x: realPts.map(h => h.date),
         y: realPts.map(h => h.sell_price_realistic),
         mode: 'lines+markers',
-        name: `${platformLabels[platform]} reëel`,
-        line: { color: colors[platform], width: 2, dash: 'dot' },
+        name: `${platformLabels[platform]}`,
+        line: { color: colors[platform], width: 2 },
         marker: { size: 4 },
       });
     }
