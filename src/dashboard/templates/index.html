@@ -368,6 +368,40 @@
     margin-top: 40px;
   }
 
+  /* BCG category section headers */
+  .bcg-section { margin-bottom: 28px; }
+  .bcg-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .bcg-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .bcg-count {
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--border);
+    padding: 1px 7px;
+    border-radius: 10px;
+  }
+  .bcg-desc {
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: auto;
+    font-style: italic;
+  }
+  .bcg-star    .bcg-title { color: #fbbf24; }
+  .bcg-cow     .bcg-title { color: #4ade80; }
+  .bcg-qmark   .bcg-title { color: #60a5fa; }
+  .bcg-dog     .bcg-title { color: #94a3b8; }
+
   /* Hot score badge */
   .hot-badge {
     display: inline-flex; align-items: center; gap: 4px;
@@ -526,7 +560,9 @@ function setCondition(cond) {
     panel.classList.toggle('visible', panel.dataset.cond === cond);
   });
   // Re-render combined charts and listings for all cards
-  dashData.sets.forEach((set, idx) => {
+  dashData.sets.forEach(set => {
+    const idx = set._renderIdx;
+    if (idx == null) return;
     renderHistoryChart(set, idx);
     renderBucketChart(set, idx);
     renderActiveListings(set, idx);
@@ -542,15 +578,55 @@ function renderAll(data) {
   renderSummary(data);
   renderRejections(data.rejection_summary_7d);
 
+  // Sort alphabetically within each BCG group
   data.sets.sort((a, b) => a.name.localeCompare(b.name, 'nl'));
+
+  const BCG_ORDER = ['star', 'cash_cow', 'question_mark', 'dog'];
+  const BCG_META = {
+    star:          { icon: '⭐', label: 'Stars',          cls: 'bcg-star',  desc: 'Snel + winstgevend' },
+    cash_cow:      { icon: '💰', label: 'Cash Cows',      cls: 'bcg-cow',   desc: 'Waardevol maar traag' },
+    question_mark: { icon: '❓', label: 'Question Marks', cls: 'bcg-qmark', desc: 'Populair, marge onduidelijk' },
+    dog:           { icon: '🐕', label: 'Dogs',           cls: 'bcg-dog',   desc: 'Traag + geen marge' },
+  };
+
+  const grouped = {};
+  BCG_ORDER.forEach(k => { grouped[k] = []; });
+  data.sets.forEach(set => {
+    const cat = set.bcg_category || 'dog';
+    (grouped[cat] = grouped[cat] || []).push(set);
+  });
+
   const grid = document.getElementById('sets-grid');
   grid.innerHTML = '';
-  data.sets.forEach((set, idx) => {
-    grid.appendChild(buildSetCard(set, idx));
+
+  // Global index for unique chart/listing IDs
+  let globalIdx = 0;
+  BCG_ORDER.forEach(cat => {
+    const sets = grouped[cat];
+    if (!sets || sets.length === 0) return;
+    const meta = BCG_META[cat];
+
+    const section = document.createElement('div');
+    section.className = `bcg-section ${meta.cls}`;
+    section.innerHTML = `<div class="bcg-header">
+      <span style="font-size:18px">${meta.icon}</span>
+      <span class="bcg-title">${meta.label}</span>
+      <span class="bcg-count">${sets.length}</span>
+      <span class="bcg-desc">${meta.desc}</span>
+    </div>
+    <div class="sets-grid" id="sets-grid-${cat}"></div>`;
+    grid.appendChild(section);
+
+    const subgrid = section.querySelector(`#sets-grid-${cat}`);
+    sets.forEach(set => {
+      set._renderIdx = globalIdx++;
+      subgrid.appendChild(buildSetCard(set, set._renderIdx));
+    });
   });
 
   // Render charts + listings after DOM is built
-  data.sets.forEach((set, idx) => {
+  data.sets.forEach(set => {
+    const idx = set._renderIdx;
     renderHistoryChart(set, idx);
     renderBucketChart(set, idx);
     renderActiveListings(set, idx);

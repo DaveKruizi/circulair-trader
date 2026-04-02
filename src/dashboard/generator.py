@@ -24,6 +24,8 @@ PLATFORM_LABELS = {
 
 TRADER_THRESHOLD = 5  # meer dan N actieve LEGO-listings → LEGO-handelaar
 DEAL_DISCOUNT_PCT = 20  # minimaal X% onder mediaan vraagprijs
+BCG_VELOCITY_THRESHOLD = 50   # hot_score >= 50 = hoge snelheid
+BCG_VALUE_THRESHOLD = 1.15    # NIB p50 >= retail * 1.15 = waardestijging
 
 
 def _compute_hot_score(platforms_data: dict) -> int:
@@ -72,6 +74,48 @@ def _compute_retirement_indicator(lego_set: dict, platforms_data: dict) -> Optio
     if avg < retail * 0.95:
         return {"direction": "down", "pct": abs(pct)}
     return {"direction": "stable", "pct": 0}
+
+
+def _compute_bcg_category(lego_set: dict, platforms_data: dict, hot_score: int) -> str:
+    """
+    BCG Matrix voor LEGO-sets vanuit handelsperspectief.
+
+    Snelheids-as  : hot_score >= BCG_VELOCITY_THRESHOLD → snel
+    Waarde-as     : gemiddeld NIB p50 >= retail * BCG_VALUE_THRESHOLD → waardevol
+                    Fallback (geen retailprijs): retirement_indicator 'up' → waardevol
+
+    Star          : snel + waardevol   → kopen en snel doorverkopen
+    Cash Cow      : langzaam + waardevol → kopen en vasthouden
+    Question Mark : snel + niet waardevol (of onvoldoende data)
+    Dog           : langzaam + niet waardevol → vermijden
+    """
+    high_velocity = hot_score >= BCG_VELOCITY_THRESHOLD
+
+    retail = lego_set.get("retail_price")
+    nib_p50s = [
+        pd.get("NIB", {}).get("p50")
+        for pd in platforms_data.values()
+        if pd.get("NIB", {}).get("p50") is not None
+    ]
+
+    if nib_p50s and retail:
+        avg_p50 = sum(nib_p50s) / len(nib_p50s)
+        high_value = avg_p50 >= retail * BCG_VALUE_THRESHOLD
+    elif nib_p50s and not retail:
+        # Geen retailprijs → gebruik retirement indicator als proxy
+        ri = _compute_retirement_indicator(lego_set, platforms_data)
+        high_value = ri is not None and ri.get("direction") == "up"
+    else:
+        high_value = False
+
+    if high_velocity and high_value:
+        return "star"
+    elif not high_velocity and high_value:
+        return "cash_cow"
+    elif high_velocity:
+        return "question_mark"
+    else:
+        return "dog"
 
 
 def _find_deals(platforms_data: dict, seller_lego_counts: dict) -> list[dict]:
@@ -198,6 +242,7 @@ def build_dashboard_data(
         hot_score = _compute_hot_score(platforms_data)
         retirement_indicator = _compute_retirement_indicator(lego_set, platforms_data)
         deals = _find_deals(platforms_data, seller_lego_counts)
+        bcg_category = _compute_bcg_category(lego_set, platforms_data, hot_score)
 
         sets_out.append({
             "set_number": set_number,
@@ -216,6 +261,7 @@ def build_dashboard_data(
             "hot_score": hot_score,
             "retirement_indicator": retirement_indicator,
             "deals": deals,
+            "bcg_category": bcg_category,
         })
 
     total_sold = db.get_total_sold_count()
