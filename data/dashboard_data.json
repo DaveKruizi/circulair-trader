@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-02T11:31:06.428481",
+  "generated_at": "2026-04-02T14:25:34.429510",
   "scraped_at": "2026-03-25T15:07:57.047729",
   "platform_labels": {
     "vinted_nl": "Vinted NL",
@@ -20,6 +20,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 4,
+            "appeared_7d": 1,
             "sell_price_realistic": 149.5,
             "p10": 131.5,
             "p25": 133.75,
@@ -29,6 +30,7 @@
               "140-150": 2
             },
             "disappeared_7d": 2,
+            "total_disappeared": 4,
             "listings": [
               {
                 "title": "Lego 10295 Porsche 911 (Nieuw in doos)",
@@ -70,6 +72,7 @@
           },
           "CIB": {
             "active_count": 29,
+            "appeared_7d": 2,
             "sell_price_realistic": 120.0,
             "p10": 80.0,
             "p25": 105.0,
@@ -88,6 +91,7 @@
               "250-260": 1
             },
             "disappeared_7d": 13,
+            "total_disappeared": 21,
             "listings": [
               {
                 "title": "Lego porche 911 Targa - set 10295",
@@ -397,6 +401,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 16,
+            "appeared_7d": 0,
             "sell_price_realistic": 142.5,
             "p10": 127.5,
             "p25": 136.88,
@@ -411,6 +416,7 @@
               "190-200": 1
             },
             "disappeared_7d": 4,
+            "total_disappeared": 4,
             "listings": [
               {
                 "title": "Lego Icons 10295 Porsche 911 - Nieuw in beschadigde doos!",
@@ -560,6 +566,7 @@
           },
           "CIB": {
             "active_count": 19,
+            "appeared_7d": 0,
             "sell_price_realistic": 80.0,
             "p10": 99.0,
             "p25": 100.0,
@@ -573,6 +580,7 @@
               "150-160": 3
             },
             "disappeared_7d": 4,
+            "total_disappeared": 4,
             "listings": [
               {
                 "title": "Lego Porsche 10295 Creator Expert",
@@ -1252,6 +1260,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 6,
+            "appeared_7d": 2,
             "sell_price_realistic": 99.9,
             "p10": 84.95,
             "p25": 91.25,
@@ -1262,6 +1271,7 @@
               "100-110": 3
             },
             "disappeared_7d": 1,
+            "total_disappeared": 5,
             "listings": [
               {
                 "title": "Lego Vespa 125 1960s Piaggio 10298 sigillata perfetta",
@@ -1321,6 +1331,7 @@
           },
           "CIB": {
             "active_count": 33,
+            "appeared_7d": 3,
             "sell_price_realistic": 77.5,
             "p10": 51.0,
             "p25": 61.99,
@@ -1338,6 +1349,7 @@
               "120-130": 1
             },
             "disappeared_7d": 9,
+            "total_disappeared": 18,
             "listings": [
               {
                 "title": "Lego 10298",
@@ -1647,6 +1659,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 8,
+            "appeared_7d": 0,
             "sell_price_realistic": 70.0,
             "p10": 61.0,
             "p25": 70.0,
@@ -1657,6 +1670,7 @@
               "80-90": 3
             },
             "disappeared_7d": 5,
+            "total_disappeared": 5,
             "listings": [
               {
                 "title": "LEGO Vespa 10298 zgan incl doos en boek",
@@ -1734,6 +1748,7 @@
           },
           "CIB": {
             "active_count": 17,
+            "appeared_7d": 0,
             "sell_price_realistic": 62.5,
             "p10": 48.0,
             "p25": 50.0,
@@ -1746,6 +1761,7 @@
               "80-90": 1
             },
             "disappeared_7d": 6,
+            "total_disappeared": 6,
             "listings": [
               {
                 "title": "Lego Vespa 125 (10298) - Zo goed als nieuw",
@@ -2467,6 +2483,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 7,
+            "appeared_7d": 1,
             "sell_price_realistic": 187.5,
             "p10": 179.59,
             "p25": 182.0,
@@ -2479,6 +2496,7 @@
               "240-250": 1
             },
             "disappeared_7d": 3,
+            "total_disappeared": 4,
             "listings": [
               {
                 "title": "Lego 10300 Novo e selado",
@@ -2547,6 +2565,7 @@
           },
           "CIB": {
             "active_count": 25,
+            "appeared_7d": 6,
             "sell_price_realistic": 162.5,
             "p10": 84.0,
             "p25": 139.0,
@@ -2566,6 +2585,7 @@
               "210-220": 1
             },
             "disappeared_7d": 7,
+            "total_disappeared": 14,
             "listings": [
               {
                 "title": "Figurines Lego set 10300 neuves",
@@ -2875,6 +2895,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 14,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 166.5,
             "p25": 171.25,
@@ -2888,6 +2909,7 @@
               "200-210": 2
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego 10300 nieuw in doos, Back to the future",
@@ -3019,6 +3041,7 @@
           },
           "CIB": {
             "active_count": 1,
+            "appeared_7d": 0,
             "sell_price_realistic": 125.0,
             "p10": 100.0,
             "p25": 100.0,
@@ -3027,6 +3050,7 @@
               "100-110": 1
             },
             "disappeared_7d": 1,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "Lego 10300 Back to the Future DeLorean",
@@ -3574,6 +3598,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 4,
+            "appeared_7d": 1,
             "sell_price_realistic": null,
             "p10": 229.5,
             "p25": 236.25,
@@ -3584,6 +3609,7 @@
               "250-260": 2
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego 10317 LEGO 10317 Land Rover Classic Defender 90 nieuw geseald",
@@ -3625,6 +3651,7 @@
           },
           "CIB": {
             "active_count": 13,
+            "appeared_7d": 2,
             "sell_price_realistic": 189.5,
             "p10": 183.0,
             "p25": 195.0,
@@ -3641,6 +3668,7 @@
               "270-280": 1
             },
             "disappeared_7d": 3,
+            "total_disappeared": 4,
             "listings": [
               {
                 "title": "Lego 10317 range rover",
@@ -3827,6 +3855,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 11,
+            "appeared_7d": 0,
             "sell_price_realistic": 225.0,
             "p10": 199.75,
             "p25": 205.0,
@@ -3840,6 +3869,7 @@
               "240-250": 1
             },
             "disappeared_7d": 3,
+            "total_disappeared": 3,
             "listings": [
               {
                 "title": "Lego 10317 Land Rover Classic Defender 90",
@@ -3944,6 +3974,7 @@
           },
           "CIB": {
             "active_count": 1,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 500.0,
             "p25": 500.0,
@@ -3952,6 +3983,7 @@
               "500-510": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego 10317 Landrover Defender 110 Camel Trophy",
@@ -4450,6 +4482,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 1,
+            "appeared_7d": 1,
             "sell_price_realistic": null,
             "p10": 177.99,
             "p25": 177.99,
@@ -4458,6 +4491,7 @@
               "170-180": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "LEGO Creator Lamborghini Countach 5000 Quattrovalvole, réf. 10337 (neuf scellé)",
@@ -4472,6 +4506,7 @@
           },
           "CIB": {
             "active_count": 7,
+            "appeared_7d": 1,
             "sell_price_realistic": 95.0,
             "p10": 98.0,
             "p25": 112.5,
@@ -4484,6 +4519,7 @@
               "160-170": 2
             },
             "disappeared_7d": 0,
+            "total_disappeared": 3,
             "listings": [
               {
                 "title": "Lego creator Lamborghini countach 10337",
@@ -4610,6 +4646,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 6,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 145.0,
             "p25": 146.25,
@@ -4621,6 +4658,7 @@
               "170-180": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego 10337 Lamborghini Countach 5000 Quattrovalvole",
@@ -4680,6 +4718,7 @@
           },
           "CIB": {
             "active_count": 1,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 100.0,
             "p25": 100.0,
@@ -4688,6 +4727,7 @@
               "100-110": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego 10337 Lamborghini Countach 5000 zgan",
@@ -5048,6 +5088,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 3,
+            "appeared_7d": 0,
             "sell_price_realistic": 340.0,
             "p10": 256.0,
             "p25": 280.0,
@@ -5058,6 +5099,7 @@
               "440-450": 1
             },
             "disappeared_7d": 1,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "LEGO Technic 42115 Lamborghini Sián new / Original versiegelt !",
@@ -5090,6 +5132,7 @@
           },
           "CIB": {
             "active_count": 33,
+            "appeared_7d": 10,
             "sell_price_realistic": 269.5,
             "p10": 167.8,
             "p25": 220.0,
@@ -5118,6 +5161,7 @@
               "450-460": 1
             },
             "disappeared_7d": 22,
+            "total_disappeared": 34,
             "listings": [
               {
                 "title": "LEGO Technic Lamborghini Sian 42115",
@@ -5427,6 +5471,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 5,
+            "appeared_7d": 0,
             "sell_price_realistic": 324.5,
             "p10": 293.6,
             "p25": 299.0,
@@ -5438,6 +5483,7 @@
               "350-360": 1
             },
             "disappeared_7d": 6,
+            "total_disappeared": 6,
             "listings": [
               {
                 "title": "Lego 42115 Lamborghini Sian",
@@ -5488,6 +5534,7 @@
           },
           "CIB": {
             "active_count": 12,
+            "appeared_7d": 0,
             "sell_price_realistic": 220.0,
             "p10": 200.0,
             "p25": 200.0,
@@ -5502,6 +5549,7 @@
               "270-280": 1
             },
             "disappeared_7d": 7,
+            "total_disappeared": 7,
             "listings": [
               {
                 "title": "LEGO Technic Lamborghini Sián FKP37 (42115)",
@@ -6180,6 +6228,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 4,
+            "appeared_7d": 1,
             "sell_price_realistic": 170.0,
             "p10": 128.7,
             "p25": 141.75,
@@ -6191,6 +6240,7 @@
               "170-180": 1
             },
             "disappeared_7d": 5,
+            "total_disappeared": 5,
             "listings": [
               {
                 "title": "LEGO Technic 42125 Ferrari 488 GTE - Sachets Scellés & Neuf",
@@ -6232,6 +6282,7 @@
           },
           "CIB": {
             "active_count": 49,
+            "appeared_7d": 8,
             "sell_price_realistic": 147.0,
             "p10": 75.0,
             "p25": 85.0,
@@ -6252,6 +6303,7 @@
               "270-280": 1
             },
             "disappeared_7d": 21,
+            "total_disappeared": 32,
             "listings": [
               {
                 "title": "Lego Ferrari 488 GTE #51 (42125)",
@@ -6525,6 +6577,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 8,
+            "appeared_7d": 0,
             "sell_price_realistic": 170.0,
             "p10": 157.0,
             "p25": 171.25,
@@ -6538,6 +6591,7 @@
               "200-210": 1
             },
             "disappeared_7d": 9,
+            "total_disappeared": 9,
             "listings": [
               {
                 "title": "Lego 42125 Ferrari 488 GTE",
@@ -6615,6 +6669,7 @@
           },
           "CIB": {
             "active_count": 17,
+            "appeared_7d": 0,
             "sell_price_realistic": 105.0,
             "p10": 93.4,
             "p25": 105.0,
@@ -6628,6 +6683,7 @@
               "200-210": 1
             },
             "disappeared_7d": 8,
+            "total_disappeared": 8,
             "listings": [
               {
                 "title": "Set als nieuw Lego Technic 42125 Ferrari 488 GTE, 1677 stuks",
@@ -7307,6 +7363,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 2,
+            "appeared_7d": 0,
             "sell_price_realistic": 185.0,
             "p10": 187.0,
             "p25": 197.5,
@@ -7316,6 +7373,7 @@
               "250-260": 1
             },
             "disappeared_7d": 2,
+            "total_disappeared": 3,
             "listings": [
               {
                 "title": "Lego 42130 - BMW M 1000 RR - Sigillato",
@@ -7339,6 +7397,7 @@
           },
           "CIB": {
             "active_count": 35,
+            "appeared_7d": 6,
             "sell_price_realistic": 130.0,
             "p10": 90.0,
             "p25": 122.5,
@@ -7361,6 +7420,7 @@
               "210-220": 2
             },
             "disappeared_7d": 11,
+            "total_disappeared": 20,
             "listings": [
               {
                 "title": "BMW M1000RR 42130",
@@ -7670,6 +7730,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 15,
+            "appeared_7d": 0,
             "sell_price_realistic": 165.0,
             "p10": 163.48,
             "p25": 167.0,
@@ -7684,6 +7745,7 @@
               "240-250": 1
             },
             "disappeared_7d": 2,
+            "total_disappeared": 2,
             "listings": [
               {
                 "title": "LEGO Technic BMW M 1000 RR 42130",
@@ -7824,6 +7886,7 @@
           },
           "CIB": {
             "active_count": 15,
+            "appeared_7d": 0,
             "sell_price_realistic": 175.0,
             "p10": 94.0,
             "p25": 120.0,
@@ -7840,6 +7903,7 @@
               "200-210": 1
             },
             "disappeared_7d": 1,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "LEGO Technic 42130 BMW M 1000 RR Motorfiets",
@@ -8542,6 +8606,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 5,
+            "appeared_7d": 1,
             "sell_price_realistic": 450.0,
             "p10": 311.6,
             "p25": 320.0,
@@ -8553,6 +8618,7 @@
               "400-410": 1
             },
             "disappeared_7d": 1,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "Lego Technic 42143 Ferrari Daytona SP3 NEW in Box",
@@ -8603,6 +8669,7 @@
           },
           "CIB": {
             "active_count": 17,
+            "appeared_7d": 2,
             "sell_price_realistic": 274.5,
             "p10": 221.6,
             "p25": 269.0,
@@ -8618,6 +8685,7 @@
               "370-380": 1
             },
             "disappeared_7d": 4,
+            "total_disappeared": 10,
             "listings": [
               {
                 "title": "LEGO Technic Ferrari Daytona SP3 42143",
@@ -8900,6 +8968,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 6,
+            "appeared_7d": 0,
             "sell_price_realistic": 314.5,
             "p10": 292.5,
             "p25": 300.62,
@@ -8911,6 +8980,7 @@
               "320-330": 3
             },
             "disappeared_7d": 4,
+            "total_disappeared": 4,
             "listings": [
               {
                 "title": "Nieuw Lego Technic 42143 Ferrari Daytona",
@@ -8970,6 +9040,7 @@
           },
           "CIB": {
             "active_count": 13,
+            "appeared_7d": 0,
             "sell_price_realistic": 250.0,
             "p10": 221.0,
             "p25": 250.0,
@@ -8983,6 +9054,7 @@
               "750-760": 1
             },
             "disappeared_7d": 7,
+            "total_disappeared": 7,
             "listings": [
               {
                 "title": "LEGO Technic Ferrari Daytona SP3 (setnummer 42143)",
@@ -9672,6 +9744,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 1,
+            "appeared_7d": 0,
             "sell_price_realistic": 39.99,
             "p10": 38.0,
             "p25": 38.0,
@@ -9680,6 +9753,7 @@
               "30-40": 1
             },
             "disappeared_7d": 2,
+            "total_disappeared": 5,
             "listings": [
               {
                 "title": "Lego 42151 Bugatti-Bolide, Neu in ungeöffneter OVP",
@@ -9694,6 +9768,7 @@
           },
           "CIB": {
             "active_count": 45,
+            "appeared_7d": 8,
             "sell_price_realistic": 30.0,
             "p10": 20.0,
             "p25": 23.0,
@@ -9704,6 +9779,7 @@
               "40-50": 2
             },
             "disappeared_7d": 25,
+            "total_disappeared": 39,
             "listings": [
               {
                 "title": "Lego technic 42151",
@@ -9977,6 +10053,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 7,
+            "appeared_7d": 0,
             "sell_price_realistic": 42.0,
             "p10": 29.5,
             "p25": 35.75,
@@ -9987,6 +10064,7 @@
               "40-50": 4
             },
             "disappeared_7d": 3,
+            "total_disappeared": 3,
             "listings": [
               {
                 "title": "Lego Technic Bugatti Bolide 42151 - Nieuw in doos",
@@ -10055,6 +10133,7 @@
           },
           "CIB": {
             "active_count": 21,
+            "appeared_7d": 0,
             "sell_price_realistic": 30.0,
             "p10": 20.0,
             "p25": 25.0,
@@ -10065,6 +10144,7 @@
               "40-50": 4
             },
             "disappeared_7d": 5,
+            "total_disappeared": 5,
             "listings": [
               {
                 "title": "LEGO Technic 42151 Bugatti Bolide",
@@ -10897,6 +10977,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 4,
+            "appeared_7d": 3,
             "sell_price_realistic": 105.0,
             "p10": 78.59,
             "p25": 79.49,
@@ -10907,6 +10988,7 @@
               "130-140": 1
             },
             "disappeared_7d": 1,
+            "total_disappeared": 2,
             "listings": [
               {
                 "title": "LEGO 42154 Technic Ford GT Nieuw in doos",
@@ -10948,6 +11030,7 @@
           },
           "CIB": {
             "active_count": 44,
+            "appeared_7d": 7,
             "sell_price_realistic": 80.0,
             "p10": 50.0,
             "p25": 60.0,
@@ -10962,6 +11045,7 @@
               "100-110": 1
             },
             "disappeared_7d": 16,
+            "total_disappeared": 38,
             "listings": [
               {
                 "title": "Lego technic Ford GT 2022 42154",
@@ -11235,6 +11319,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 3,
+            "appeared_7d": 0,
             "sell_price_realistic": 80.0,
             "p10": 80.0,
             "p25": 80.0,
@@ -11243,6 +11328,7 @@
               "80-90": 3
             },
             "disappeared_7d": 5,
+            "total_disappeared": 5,
             "listings": [
               {
                 "title": "Lego Technic 42154 Ford GT",
@@ -11275,6 +11361,7 @@
           },
           "CIB": {
             "active_count": 17,
+            "appeared_7d": 0,
             "sell_price_realistic": 68.0,
             "p10": 50.0,
             "p25": 50.0,
@@ -11288,6 +11375,7 @@
               "100-110": 1
             },
             "disappeared_7d": 12,
+            "total_disappeared": 12,
             "listings": [
               {
                 "title": "Lego 42154 Ford GT",
@@ -11950,6 +12038,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 1,
+            "appeared_7d": 0,
             "sell_price_realistic": 162.5,
             "p10": 155.0,
             "p25": 155.0,
@@ -11958,6 +12047,7 @@
               "150-160": 1
             },
             "disappeared_7d": 2,
+            "total_disappeared": 2,
             "listings": [
               {
                 "title": "Peugeot 9X8 Lego 42156 24h Mans Hypercar Scellée",
@@ -11972,6 +12062,7 @@
           },
           "CIB": {
             "active_count": 19,
+            "appeared_7d": 2,
             "sell_price_realistic": 110.0,
             "p10": 88.0,
             "p25": 97.0,
@@ -11989,6 +12080,7 @@
               "200-210": 2
             },
             "disappeared_7d": 10,
+            "total_disappeared": 25,
             "listings": [
               {
                 "title": "Lego technic Peugeot hybrid 24H Le Mans 42156",
@@ -12253,6 +12345,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 10,
+            "appeared_7d": 0,
             "sell_price_realistic": 144.75,
             "p10": 139.7,
             "p25": 145.0,
@@ -12263,6 +12356,7 @@
               "150-160": 4
             },
             "disappeared_7d": 2,
+            "total_disappeared": 2,
             "listings": [
               {
                 "title": "Nieuw Lego Technic Peugeot 9x8 24H LeMans Hypercar (42156)",
@@ -12358,6 +12452,7 @@
           },
           "CIB": {
             "active_count": 12,
+            "appeared_7d": 0,
             "sell_price_realistic": 97.5,
             "p10": 81.0,
             "p25": 90.0,
@@ -12372,6 +12467,7 @@
               "130-140": 1
             },
             "disappeared_7d": 4,
+            "total_disappeared": 4,
             "listings": [
               {
                 "title": "Lego 42156 peugeot 24H Le mans",
@@ -13064,16 +13160,19 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 0,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": null,
             "p25": null,
             "p50": null,
             "price_buckets": {},
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": []
           },
           "CIB": {
             "active_count": 14,
+            "appeared_7d": 0,
             "sell_price_realistic": 170.0,
             "p10": 83.0,
             "p25": 136.25,
@@ -13092,6 +13191,7 @@
               "230-240": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "Lego Mt-10 SP 42159",
@@ -13299,6 +13399,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 7,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 178.0,
             "p25": 184.5,
@@ -13311,6 +13412,7 @@
               "270-280": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego 42159 Nieuw in gesealde doos",
@@ -13379,6 +13481,7 @@
           },
           "CIB": {
             "active_count": 3,
+            "appeared_7d": 0,
             "sell_price_realistic": 125.0,
             "p10": 133.0,
             "p25": 145.0,
@@ -13389,6 +13492,7 @@
               "180-190": 1
             },
             "disappeared_7d": 2,
+            "total_disappeared": 2,
             "listings": [
               {
                 "title": "leuke lego motor 42159",
@@ -13854,6 +13958,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 2,
+            "appeared_7d": 2,
             "sell_price_realistic": 85.0,
             "p10": 63.7,
             "p25": 64.75,
@@ -13863,6 +13968,7 @@
               "70-80": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 3,
             "listings": [
               {
                 "title": "LEGO Technic 42162 Bugatti Bolide – Neuf scellé",
@@ -13886,6 +13992,7 @@
           },
           "CIB": {
             "active_count": 12,
+            "appeared_7d": 2,
             "sell_price_realistic": 50.0,
             "p10": 30.25,
             "p25": 34.38,
@@ -13898,6 +14005,7 @@
               "60-70": 2
             },
             "disappeared_7d": 4,
+            "total_disappeared": 23,
             "listings": [
               {
                 "title": "Lego technic 42162",
@@ -14033,6 +14141,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 7,
+            "appeared_7d": 0,
             "sell_price_realistic": 79.0,
             "p10": 65.0,
             "p25": 65.0,
@@ -14043,6 +14152,7 @@
               "80-90": 1
             },
             "disappeared_7d": 1,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "Lego Technic 42162 Bugatti Bolide Agile Blue *SEALED*",
@@ -14111,6 +14221,7 @@
           },
           "CIB": {
             "active_count": 6,
+            "appeared_7d": 0,
             "sell_price_realistic": 40.0,
             "p10": 39.5,
             "p25": 42.5,
@@ -14123,6 +14234,7 @@
               "70-80": 1
             },
             "disappeared_7d": 1,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "Lego Bugatti Bolide Technic 42162",
@@ -14695,16 +14807,19 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 0,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": null,
             "p25": null,
             "p50": null,
             "price_buckets": {},
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": []
           },
           "CIB": {
             "active_count": 13,
+            "appeared_7d": 1,
             "sell_price_realistic": 55.0,
             "p10": 40.0,
             "p25": 45.0,
@@ -14716,6 +14831,7 @@
               "80-90": 1
             },
             "disappeared_7d": 4,
+            "total_disappeared": 4,
             "listings": [
               {
                 "title": "Lego Technic 42170",
@@ -14902,6 +15018,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 5,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 43.6,
             "p25": 49.0,
@@ -14911,6 +15028,7 @@
               "50-60": 3
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego technic 42170",
@@ -14961,6 +15079,7 @@
           },
           "CIB": {
             "active_count": 7,
+            "appeared_7d": 0,
             "sell_price_realistic": 55.0,
             "p10": 40.0,
             "p25": 41.25,
@@ -14971,6 +15090,7 @@
               "100-110": 1
             },
             "disappeared_7d": 1,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "lego technic motor 42170",
@@ -15540,6 +15660,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 4,
+            "appeared_7d": 2,
             "sell_price_realistic": 165.0,
             "p10": 127.49,
             "p25": 138.75,
@@ -15550,6 +15671,7 @@
               "190-200": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 2,
             "listings": [
               {
                 "title": "LEGO 42141 McLaren F1 – Nieuw (zakjes geseald)",
@@ -15591,6 +15713,7 @@
           },
           "CIB": {
             "active_count": 32,
+            "appeared_7d": 7,
             "sell_price_realistic": 115.0,
             "p10": 75.0,
             "p25": 80.0,
@@ -15610,6 +15733,7 @@
               "200-210": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 12,
             "listings": [
               {
                 "title": "LEGO McLaren F1 2022 | 42141",
@@ -15919,6 +16043,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 6,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 120.0,
             "p25": 121.25,
@@ -15929,6 +16054,7 @@
               "150-160": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Mclaren Formula1- 42141",
@@ -15988,6 +16114,7 @@
           },
           "CIB": {
             "active_count": 18,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 78.5,
             "p25": 88.75,
@@ -16002,6 +16129,7 @@
               "150-160": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Technic McLaren F1 42141",
@@ -16699,6 +16827,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 7,
+            "appeared_7d": 2,
             "sell_price_realistic": 114.97,
             "p10": 107.99,
             "p25": 119.54,
@@ -16712,6 +16841,7 @@
               "180-190": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 2,
             "listings": [
               {
                 "title": "LEGO Technic Ducati (42202) Nieuw & ongeopend",
@@ -16780,6 +16910,7 @@
           },
           "CIB": {
             "active_count": 19,
+            "appeared_7d": 3,
             "sell_price_realistic": 80.0,
             "p10": 74.0,
             "p25": 111.0,
@@ -16797,6 +16928,7 @@
               "170-180": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 2,
             "listings": [
               {
                 "title": "Réplique Lego 42202 Ducati V4S",
@@ -17097,6 +17229,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 4,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 124.4,
             "p25": 128.0,
@@ -17108,6 +17241,7 @@
               "160-170": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "NIEUW Lego Technic Ducati Panigale V4S (42202) MISB",
@@ -17149,6 +17283,7 @@
           },
           "CIB": {
             "active_count": 6,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 107.5,
             "p25": 125.0,
@@ -17160,6 +17295,7 @@
               "150-160": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Technic Ducati Panigale V4 R 42202",
@@ -17588,6 +17724,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 5,
+            "appeared_7d": 2,
             "sell_price_realistic": 123.0,
             "p10": 116.8,
             "p25": 118.0,
@@ -17598,6 +17735,7 @@
               "160-170": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "Lego Technic 42214 Lamborghini Revuelto Super Sports Car NEW in Box",
@@ -17648,6 +17786,7 @@
           },
           "CIB": {
             "active_count": 10,
+            "appeared_7d": 2,
             "sell_price_realistic": null,
             "p10": 90.0,
             "p25": 97.0,
@@ -17659,6 +17798,7 @@
               "130-140": 2
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego technic 42214",
@@ -17878,6 +18018,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 12,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 119.1,
             "p25": 120.0,
@@ -17889,6 +18030,7 @@
               "130-140": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Technic - Lamborghini Revuelto supersportwagen - 42214",
@@ -18002,6 +18144,7 @@
           },
           "CIB": {
             "active_count": 7,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 96.0,
             "p25": 110.0,
@@ -18014,6 +18157,7 @@
               "140-150": 2
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Technic 42214 Lamborghini",
@@ -18503,6 +18647,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 2,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 131.5,
             "p25": 133.75,
@@ -18512,6 +18657,7 @@
               "140-150": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "LEGO Icons 10357 Shelby Cobra 427 S/C - New & Sealed - Collector’s Item",
@@ -18535,6 +18681,7 @@
           },
           "CIB": {
             "active_count": 3,
+            "appeared_7d": 0,
             "sell_price_realistic": 120.0,
             "p10": 134.39,
             "p25": 136.5,
@@ -18544,6 +18691,7 @@
               "140-150": 2
             },
             "disappeared_7d": 0,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "Lego 10357 Shelby Cobra",
@@ -18616,6 +18764,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 4,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 129.3,
             "p25": 129.75,
@@ -18627,6 +18776,7 @@
               "290-300": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Icons 10357 Shelby Cobra 427 S/C - Nieuw in doos!",
@@ -18668,6 +18818,7 @@
           },
           "CIB": {
             "active_count": 1,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 35.0,
             "p25": 35.0,
@@ -18676,6 +18827,7 @@
               "30-40": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Shelby Cobra 427 S/C,\n1246 steentjes - 10357, zgan",
@@ -18999,6 +19151,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 2,
+            "appeared_7d": 1,
             "sell_price_realistic": 355.0,
             "p10": 278.5,
             "p25": 283.75,
@@ -19008,6 +19161,7 @@
               "310-320": 1
             },
             "disappeared_7d": 7,
+            "total_disappeared": 10,
             "listings": [
               {
                 "title": "Lego Bugatti Chiron neuf scellé 42083",
@@ -19031,6 +19185,7 @@
           },
           "CIB": {
             "active_count": 31,
+            "appeared_7d": 9,
             "sell_price_realistic": 289.5,
             "p10": 169.0,
             "p25": 200.0,
@@ -19055,6 +19210,7 @@
               "420-430": 1
             },
             "disappeared_7d": 14,
+            "total_disappeared": 32,
             "listings": [
               {
                 "title": "LEGO Technic Bugatti Chiron 42083",
@@ -19364,6 +19520,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 10,
+            "appeared_7d": 0,
             "sell_price_realistic": 385.0,
             "p10": 209.0,
             "p25": 293.5,
@@ -19379,6 +19536,7 @@
               "1320-1330": 1
             },
             "disappeared_7d": 6,
+            "total_disappeared": 6,
             "listings": [
               {
                 "title": "Lego Technic Bugatti Chiron 42083",
@@ -19474,6 +19632,7 @@
           },
           "CIB": {
             "active_count": 12,
+            "appeared_7d": 0,
             "sell_price_realistic": 227.5,
             "p10": 230.0,
             "p25": 230.0,
@@ -19489,6 +19648,7 @@
               "390-400": 1
             },
             "disappeared_7d": 8,
+            "total_disappeared": 8,
             "listings": [
               {
                 "title": "LEGO Technic Bugatti Chiron 42083",
@@ -20212,6 +20372,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 3,
+            "appeared_7d": 1,
             "sell_price_realistic": 159.5,
             "p10": 121.98,
             "p25": 124.95,
@@ -20221,6 +20382,7 @@
               "210-220": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 2,
             "listings": [
               {
                 "title": "LEGO Technic 42096 Porsche 911 RSR - Retired - Nuovo Sigillato - 1580 pezzi",
@@ -20253,6 +20415,7 @@
           },
           "CIB": {
             "active_count": 47,
+            "appeared_7d": 22,
             "sell_price_realistic": 120.0,
             "p10": 65.0,
             "p25": 80.0,
@@ -20274,6 +20437,7 @@
               "170-180": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 21,
             "listings": [
               {
                 "title": "lego technic 42096",
@@ -20535,16 +20699,19 @@
         "marktplaats": {
           "NIB": {
             "active_count": 0,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": null,
             "p25": null,
             "p50": null,
             "price_buckets": {},
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": []
           },
           "CIB": {
             "active_count": 16,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 90.0,
             "p25": 94.38,
@@ -20557,6 +20724,7 @@
               "170-180": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Technic Porsche 911 RSR 42096",
@@ -21141,6 +21309,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 6,
+            "appeared_7d": 1,
             "sell_price_realistic": 110.0,
             "p10": 107.0,
             "p25": 119.12,
@@ -21153,6 +21322,7 @@
               "140-150": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 3,
             "listings": [
               {
                 "title": "Lego Creator \"Fiât 500\" N°10271 en parfait état (Neuf & Scellé)",
@@ -21212,6 +21382,7 @@
           },
           "CIB": {
             "active_count": 42,
+            "appeared_7d": 12,
             "sell_price_realistic": 90.0,
             "p10": 54.99,
             "p25": 76.25,
@@ -21233,6 +21404,7 @@
               "260-270": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 9,
             "listings": [
               {
                 "title": "Piccola teca in plastica a incastro per Lego 500 10271 (15x15,5x33,5)",
@@ -21506,6 +21678,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 8,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 74.0,
             "p25": 91.24,
@@ -21518,6 +21691,7 @@
               "130-140": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Creator Fiat Nuovo 500 10271 - Nieuwstaat!",
@@ -21595,6 +21769,7 @@
           },
           "CIB": {
             "active_count": 16,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 67.5,
             "p25": 74.38,
@@ -21608,6 +21783,7 @@
               "140-150": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Creator expert 10271 Fiat 500",
@@ -22239,6 +22415,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 2,
+            "appeared_7d": 1,
             "sell_price_realistic": 185.0,
             "p10": 171.5,
             "p25": 173.75,
@@ -22248,6 +22425,7 @@
               "180-190": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "LEGO Corvette - 10321 - Boite scellée",
@@ -22271,6 +22449,7 @@
           },
           "CIB": {
             "active_count": 12,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 118.7,
             "p25": 128.75,
@@ -22285,6 +22464,7 @@
               "190-200": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Corvette 10321",
@@ -22486,6 +22666,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 17,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 145.0,
             "p25": 150.0,
@@ -22499,6 +22680,7 @@
               "420-430": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Icon 10321 Chevrolet Corvette C1",
@@ -22657,6 +22839,7 @@
           },
           "CIB": {
             "active_count": 2,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 140.0,
             "p25": 140.0,
@@ -22665,6 +22848,7 @@
               "140-150": 2
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Creator Expert Chevrolet Corvette 10321",
@@ -23120,6 +23304,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 2,
+            "appeared_7d": 1,
             "sell_price_realistic": 179.0,
             "p10": 140.5,
             "p25": 141.25,
@@ -23128,6 +23313,7 @@
               "140-150": 2
             },
             "disappeared_7d": 0,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "Lego creator Ford Mustang 10265 nuova sigillata",
@@ -23151,6 +23337,7 @@
           },
           "CIB": {
             "active_count": 54,
+            "appeared_7d": 13,
             "sell_price_realistic": 125.0,
             "p10": 80.0,
             "p25": 86.25,
@@ -23172,6 +23359,7 @@
               "390-400": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 8,
             "listings": [
               {
                 "title": "Scatola Lego 10265 VUOTA",
@@ -23439,6 +23627,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 12,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 119.1,
             "p25": 127.5,
@@ -23452,6 +23641,7 @@
               "170-180": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "LEGO 10265 Ford Mustang NIEUW VERZEGELD",
@@ -23565,6 +23755,7 @@
           },
           "CIB": {
             "active_count": 17,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 71.0,
             "p25": 85.0,
@@ -23581,6 +23772,7 @@
               "150-160": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego 10265 Ford Mustang",
@@ -24256,6 +24448,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 9,
+            "appeared_7d": 8,
             "sell_price_realistic": null,
             "p10": 224.0,
             "p25": 300.0,
@@ -24272,6 +24465,7 @@
               "890-900": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "LEGO Technic 42056 Porsche 911 GT3 RS - Sachets Scellés d'Origine",
@@ -24358,6 +24552,7 @@
           },
           "CIB": {
             "active_count": 27,
+            "appeared_7d": 7,
             "sell_price_realistic": 350.0,
             "p10": 184.0,
             "p25": 295.0,
@@ -24384,6 +24579,7 @@
               "660-670": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 18,
             "listings": [
               {
                 "title": "Réplique parfaite de Lego Technic Porsche 911 Gt3Rs 1:8 42056",
@@ -24693,6 +24889,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 8,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 579.3,
             "p25": 699.75,
@@ -24705,6 +24902,7 @@
               "750-760": 4
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Technic Porsche GT3 911 rs || 42056 nieuw geseald",
@@ -24782,6 +24980,7 @@
           },
           "CIB": {
             "active_count": 10,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 422.4,
             "p25": 451.25,
@@ -24796,6 +24995,7 @@
               "750-760": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Technic 42056 - Porsche 911 GT3 RS",
@@ -25364,6 +25564,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 2,
+            "appeared_7d": 1,
             "sell_price_realistic": null,
             "p10": 71.0,
             "p25": 72.5,
@@ -25373,6 +25574,7 @@
               "80-90": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Technic Ducatti, 42107, sealed",
@@ -25396,6 +25598,7 @@
           },
           "CIB": {
             "active_count": 54,
+            "appeared_7d": 21,
             "sell_price_realistic": 35.0,
             "p10": 20.0,
             "p25": 27.5,
@@ -25411,6 +25614,7 @@
               "90-100": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 25,
             "listings": [
               {
                 "title": "LEGO Technic Ducati Panigale V4 R 42107– aufgebaut, ideal für Bastler & Fans",
@@ -25666,6 +25870,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 1,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 85.0,
             "p25": 85.0,
@@ -25674,6 +25879,7 @@
               "80-90": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "LEGO - 42107 - NIEUW - Technic - Ducati Panigali V4R",
@@ -25688,6 +25894,7 @@
           },
           "CIB": {
             "active_count": 13,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 40.0,
             "p25": 40.0,
@@ -25701,6 +25908,7 @@
               "80-90": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Tecnic 42107 Ducati motor",
@@ -26327,6 +26535,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 9,
+            "appeared_7d": 2,
             "sell_price_realistic": 162.0,
             "p10": 158.0,
             "p25": 160.0,
@@ -26340,6 +26549,7 @@
               "210-220": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "Lego Technic set 42207 \"F1 Ferrari SF-24\" Neuf scellé",
@@ -26426,6 +26636,7 @@
           },
           "CIB": {
             "active_count": 19,
+            "appeared_7d": 6,
             "sell_price_realistic": 165.0,
             "p10": 83.92,
             "p25": 113.5,
@@ -26446,6 +26657,7 @@
               "210-220": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 5,
             "listings": [
               {
                 "title": "Quadro con ganci per Lego 42207 Ferrari Sf-24",
@@ -26746,6 +26958,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 10,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 152.25,
             "p25": 157.0,
@@ -26758,6 +26971,7 @@
               "330-340": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Technic Ferrari 42207 - Nieuw en Geseald",
@@ -26853,6 +27067,7 @@
           },
           "CIB": {
             "active_count": 8,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 120.98,
             "p25": 137.5,
@@ -26868,6 +27083,7 @@
               "420-430": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Technic 42207 Ferrari SF-24 €99,95",
@@ -27422,6 +27638,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 5,
+            "appeared_7d": 4,
             "sell_price_realistic": 320.0,
             "p10": 289.4,
             "p25": 289.99,
@@ -27433,6 +27650,7 @@
               "320-330": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 7,
             "listings": [
               {
                 "title": "Lego technic 42172 mclaren formule 1 neuf scellé 🏁",
@@ -27483,6 +27701,7 @@
           },
           "CIB": {
             "active_count": 5,
+            "appeared_7d": 2,
             "sell_price_realistic": 295.0,
             "p10": 105.0,
             "p25": 150.0,
@@ -27494,6 +27713,7 @@
               "320-330": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 14,
             "listings": [
               {
                 "title": "Set Lego Technic 42172 McLaren P1",
@@ -27608,6 +27828,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 11,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 300.0,
             "p25": 304.5,
@@ -27620,6 +27841,7 @@
               "330-340": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "LEGO Technic 42172 McLaren P1",
@@ -27724,6 +27946,7 @@
           },
           "CIB": {
             "active_count": 5,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 275.0,
             "p25": 275.0,
@@ -27735,6 +27958,7 @@
               "320-330": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego technic 42172 met doos en boekjes",
@@ -28212,6 +28436,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 2,
+            "appeared_7d": 1,
             "sell_price_realistic": 170.0,
             "p10": 161.0,
             "p25": 162.5,
@@ -28221,6 +28446,7 @@
               "170-180": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "Lego F1 RedBull - 42206 - neuf scellé",
@@ -28244,6 +28470,7 @@
           },
           "CIB": {
             "active_count": 8,
+            "appeared_7d": 4,
             "sell_price_realistic": 80.0,
             "p10": 70.5,
             "p25": 86.25,
@@ -28259,6 +28486,7 @@
               "200-210": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "Set Lego Technic 42206 F1 Oracle Red Bull Racing RB20",
@@ -28460,6 +28688,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 12,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 137.75,
             "p25": 140.0,
@@ -28473,6 +28702,7 @@
               "200-210": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego technic 42206 nieuw in doos, Red Bull racing €135,00!",
@@ -28586,6 +28816,7 @@
           },
           "CIB": {
             "active_count": 15,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 117.0,
             "p25": 122.5,
@@ -28600,6 +28831,7 @@
               "300-310": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "lego 42206",
@@ -29156,6 +29388,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 2,
+            "appeared_7d": 0,
             "sell_price_realistic": 240.0,
             "p10": 279.1,
             "p25": 279.25,
@@ -29165,6 +29398,7 @@
               "280-290": 1
             },
             "disappeared_7d": 3,
+            "total_disappeared": 4,
             "listings": [
               {
                 "title": "Lego Technic 42110 Land Rover Defender neuf et scellé",
@@ -29188,6 +29422,7 @@
           },
           "CIB": {
             "active_count": 48,
+            "appeared_7d": 10,
             "sell_price_realistic": 159.0,
             "p10": 83.5,
             "p25": 104.0,
@@ -29215,6 +29450,7 @@
               "290-300": 1
             },
             "disappeared_7d": 18,
+            "total_disappeared": 29,
             "listings": [
               {
                 "title": "Lego Technic Land Rover Defender 42110",
@@ -29482,6 +29718,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 6,
+            "appeared_7d": 0,
             "sell_price_realistic": 225.0,
             "p10": 187.5,
             "p25": 192.25,
@@ -29494,6 +29731,7 @@
               "230-240": 1
             },
             "disappeared_7d": 3,
+            "total_disappeared": 3,
             "listings": [
               {
                 "title": "Lego 42110 Land Rover Defender *** NIEUW ***",
@@ -29553,6 +29791,7 @@
           },
           "CIB": {
             "active_count": 22,
+            "appeared_7d": 0,
             "sell_price_realistic": 135.0,
             "p10": 125.0,
             "p25": 130.0,
@@ -29569,6 +29808,7 @@
               "200-210": 2
             },
             "disappeared_7d": 8,
+            "total_disappeared": 8,
             "listings": [
               {
                 "title": "Lego Defender 42110 - 2573 Stenen",
@@ -30267,6 +30507,7 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 5,
+            "appeared_7d": 3,
             "sell_price_realistic": 153.0,
             "p10": 127.0,
             "p25": 130.0,
@@ -30278,6 +30519,7 @@
               "200-210": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 1,
             "listings": [
               {
                 "title": "LEGO 42171 Mercedes-AMG F1 W14 E Performance neuf et scellé",
@@ -30328,6 +30570,7 @@
           },
           "CIB": {
             "active_count": 25,
+            "appeared_7d": 8,
             "sell_price_realistic": 123.0,
             "p10": 70.0,
             "p25": 100.0,
@@ -30348,6 +30591,7 @@
               "230-240": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 12,
             "listings": [
               {
                 "title": "Lego Fórmula 1 Mercedes-AMG 42171",
@@ -30645,6 +30889,7 @@
         "marktplaats": {
           "NIB": {
             "active_count": 4,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 142.66,
             "p25": 146.74,
@@ -30656,6 +30901,7 @@
               "160-170": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego technic 42171 nieuw in doos, Mercedes AMG",
@@ -30697,6 +30943,7 @@
           },
           "CIB": {
             "active_count": 17,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 96.0,
             "p25": 110.0,
@@ -30713,6 +30960,7 @@
               "160-170": 1
             },
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": [
               {
                 "title": "Lego Mercedes F1 42171",
@@ -31353,22 +31601,26 @@
         "vinted_nl": {
           "NIB": {
             "active_count": 0,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": null,
             "p25": null,
             "p50": null,
             "price_buckets": {},
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": []
           },
           "CIB": {
             "active_count": 0,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": null,
             "p25": null,
             "p50": null,
             "price_buckets": {},
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": []
           },
           "unknown_listings": []
@@ -31376,22 +31628,26 @@
         "marktplaats": {
           "NIB": {
             "active_count": 0,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": null,
             "p25": null,
             "p50": null,
             "price_buckets": {},
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": []
           },
           "CIB": {
             "active_count": 0,
+            "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": null,
             "p25": null,
             "p50": null,
             "price_buckets": {},
             "disappeared_7d": 0,
+            "total_disappeared": 0,
             "listings": []
           },
           "unknown_listings": []
