@@ -91,6 +91,12 @@ CIB_KEYWORDS = [
     "gebouwd", "opgebouwd", "in elkaar gezet", "gemonteerd",
     "zorgvuldig gebouwd", "1x gebouwd", "eenmalig gebouwd",
     "opnieuw te bouwen", "displaymodel", "display model",
+    "samengesteld", "geassembleerd", "kant-en-klaar gebouwd",
+    "afgebouwd", "al gebouwd", "al opgebouwd",
+    # Duits
+    "zusammengesetzt", "fertig gebaut", "fertig zusammengebaut",
+    # Engels
+    "assembled", "put together", "already built", "already assembled",
     # Duits
     "vollständig", "mit box", "mit anleitung", "komplett",
     "gebaut", "zusammengebaut", "neuwertig", "wie neu",
