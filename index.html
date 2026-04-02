@@ -155,47 +155,90 @@
   }
   .set-card.expanded .set-expand-arrow { transform: rotate(180deg); }
 
+  /* ── Compact stats (ingeklapte kaart) ─────────────────────────────────── */
   .compact-stats {
     flex-shrink: 0;
     margin-left: 8px;
+    display: flex;
+    gap: 6px;
+    align-items: stretch;
   }
-  .compact-stats-grid {
+
+  /* Elk blok: Te koop / Verkopen / Deals */
+  .cs-block {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 3px;
+    background: #13151f;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    min-width: 68px;
+    text-align: center;
+  }
+  .cs-block-label {
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* NIB + CIB naast elkaar binnen een blok */
+  .cs-split {
+    display: flex;
+    gap: 6px;
     align-items: flex-end;
   }
-  .cs-row {
+  .cs-split-item {
     display: flex;
-    gap: 8px;
-    align-items: baseline;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+  }
+  .cs-val {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1;
     white-space: nowrap;
   }
-  .cs-deal-row {
-    margin-top: 2px;
-    display: flex;
-    justify-content: flex-end;
+  .cs-val .cs-delta {
+    font-size: 9px;
+    font-weight: 500;
+    opacity: .7;
+    vertical-align: super;
   }
-  .cs-label {
-    font-size: 10px;
-    color: var(--muted);
+  .cs-cond-label {
+    font-size: 9px;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: .04em;
-    min-width: 54px;
-    text-align: right;
-  }
-  .cs-item {
-    font-size: 13px;
-    font-weight: 600;
-    white-space: nowrap;
+    opacity: .6;
   }
   .cs-nib { color: var(--nib); }
   .cs-cib { color: var(--cib); }
-  .cs-delta {
-    font-size: 10px;
-    font-weight: 500;
-    opacity: .75;
-    margin-left: 1px;
+
+  /* Deal-blok */
+  .cs-deal-block {
+    background: #0a1a0f;
+    border-color: #22c55e55;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+    min-width: 54px;
+  }
+  .cs-deal-block:hover { border-color: #22c55e; background: #0d1f14; }
+  .cs-deal-count {
+    font-size: 22px;
+    font-weight: 700;
+    color: #4ade80;
+    line-height: 1;
+  }
+  .cs-deal-icon {
+    font-size: 11px;
+    color: #4ade80;
+    opacity: .8;
   }
 
   .condition-panel { display: none; }
@@ -1076,26 +1119,36 @@ function buildCompactStats(set) {
     cibDis  += (pd.CIB || {}).disappeared_7d     || 0;
   });
 
-  const d = (n) => n > 0 ? `<span class="cs-delta">+${n}</span>` : '';
+  const delta = (n) => n > 0 ? `<span class="cs-delta">+${n}</span>` : '';
+
+  const splitBlock = (label, nibVal, nibD, cibVal, cibD) => `
+    <div class="cs-block">
+      <div class="cs-block-label">${label}</div>
+      <div class="cs-split">
+        <div class="cs-split-item">
+          <div class="cs-val cs-nib">${nibVal}${delta(nibD)}</div>
+          <div class="cs-cond-label cs-nib">NIB</div>
+        </div>
+        <div class="cs-split-item">
+          <div class="cs-val cs-cib">${cibVal}${delta(cibD)}</div>
+          <div class="cs-cond-label cs-cib">CIB</div>
+        </div>
+      </div>
+    </div>`;
 
   const dealCount = (set.deals || []).length;
-  const dealHtml = dealCount > 0
-    ? `<span class="deal-badge" title="Klik om deals te zien" onclick="event.stopPropagation();expandAndScrollToDeals(this)">🛒 ${dealCount} deal${dealCount > 1 ? 's' : ''}</span>`
-    : '';
+  const dealBlock = dealCount > 0 ? `
+    <div class="cs-block cs-deal-block"
+         title="${dealCount} deal${dealCount > 1 ? 's' : ''} gevonden — klik om te bekijken"
+         onclick="event.stopPropagation();expandAndScrollToDeals(this)">
+      <div class="cs-block-label">Deals</div>
+      <div class="cs-deal-count">${dealCount}</div>
+      <div class="cs-deal-icon">🛒 bekijk</div>
+    </div>` : '';
 
-  return `<div class="compact-stats-grid">
-    <div class="cs-row">
-      <span class="cs-label">Te koop</span>
-      <span class="cs-item cs-nib">${nibAct}${d(nibApp)} NIB</span>
-      <span class="cs-item cs-cib">${cibAct}${d(cibApp)} CIB</span>
-    </div>
-    <div class="cs-row">
-      <span class="cs-label">Verkopen</span>
-      <span class="cs-item cs-nib">${nibSold}${d(nibDis)} NIB</span>
-      <span class="cs-item cs-cib">${cibSold}${d(cibDis)} CIB</span>
-    </div>
-    ${dealHtml ? `<div class="cs-deal-row">${dealHtml}</div>` : ''}
-  </div>`;
+  return splitBlock('Te koop', nibAct, nibApp, cibAct, cibApp)
+       + splitBlock('Verkopen', nibSold, nibDis, cibSold, cibDis)
+       + dealBlock;
 }
 
 function renderHistoryChart(set, idx) {
