@@ -298,6 +298,30 @@ def get_total_sold_count() -> dict[str, int]:
     return {r["condition_category"]: r["cnt"] for r in rows}
 
 
+def get_appeared_count(set_number: str, platform: str, condition: str, days: int = 7) -> int:
+    """Count listings first seen within the last N days (regardless of current status)."""
+    with get_connection() as conn:
+        row = conn.execute(
+            """SELECT COUNT(*) as cnt FROM listings
+               WHERE set_number=? AND platform=? AND condition_category=?
+               AND first_seen >= date('now', ?)""",
+            (set_number, platform, condition, f"-{days} days"),
+        ).fetchone()
+        return row["cnt"] if row else 0
+
+
+def get_total_disappeared_count(set_number: str, platform: str, condition: str) -> int:
+    """Count all listings ever marked as disappeared (all-time sold proxy)."""
+    with get_connection() as conn:
+        row = conn.execute(
+            """SELECT COUNT(*) as cnt FROM listings
+               WHERE set_number=? AND platform=? AND condition_category=?
+               AND status='disappeared'""",
+            (set_number, platform, condition),
+        ).fetchone()
+        return row["cnt"] if row else 0
+
+
 def get_disappeared_listings(
     set_number: str, platform: str, condition: str, max_days: int = 21
 ) -> list[dict]:

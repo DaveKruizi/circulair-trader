@@ -95,6 +95,12 @@ def compute_price_intelligence(
     # Sell velocity: listings that disappeared in last 7 days
     disappeared_7d = db.get_disappeared_listings(set_number, platform, condition, max_days=7)
 
+    # New supply: listings first seen in the last 7 days
+    appeared_7d = db.get_appeared_count(set_number, platform, condition, days=7)
+
+    # All-time sold proxy: total listings ever disappeared
+    total_disappeared = db.get_total_disappeared_count(set_number, platform, condition)
+
     db.save_price_snapshot(
         snapshot_date=today,
         set_number=set_number,
@@ -112,14 +118,14 @@ def compute_price_intelligence(
 
     return {
         "active_count": len(active),
-        # sell_price_fast wordt wel opgeslagen in DB (voor historiek) maar
-        # niet meer getoond in het dashboard (te verwarrend t.o.v. reële prijs)
+        "appeared_7d": appeared_7d,
         "sell_price_realistic": sell_price_realistic,
         "p10": p10,
         "p25": p25,
         "p50": p50,
         "price_buckets": buckets,
         "disappeared_7d": len(disappeared_7d),
+        "total_disappeared": total_disappeared,
     }
 
 
