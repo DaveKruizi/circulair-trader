@@ -10,6 +10,7 @@ import json
 import shutil
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 
 OUTPUT_DIR = Path("output")
 DATA_OUTPUT_DIR = OUTPUT_DIR / "data"
@@ -20,6 +21,106 @@ PLATFORM_LABELS = {
     "vinted_nl": "Vinted NL",
     "marktplaats": "Marktplaats",
 }
+
+TRADER_THRESHOLD = 5  # meer dan N actieve LEGO-listings → LEGO-handelaar
+DEAL_DISCOUNT_PCT = 20  # minimaal X% onder mediaan vraagprijs
+
+
+def _compute_hot_score(platforms_data: dict) -> int:
+    """
+    Score 0–100 op basis van verkoopsnelheid over beide platforms + NIB/CIB.
+    sell_velocity  = verdwenen_7d / (verdwenen_7d + actief)   ← fractie die verkocht
+    demand_druk    = min(verdwenen_7d / max(actief,1), 2) / 2  ← gecapped op 200%
+    hot_score      = round((0.6 * velocity + 0.4 * druk) * 100)
+    """
+    total_dis = 0
+    total_act = 0
+    for platform_data in platforms_data.values():
+        for condition in ("NIB", "CIB"):
+            intel = platform_data.get(condition, {})
+            total_dis += intel.get("disappeared_7d", 0)
+            total_act += intel.get("active_count", 0)
+    pool = total_dis + total_act
+    if pool == 0:
+        return 0
+    velocity = total_dis / pool
+    druk = min(total_dis / max(total_act, 1), 2) / 2
+    return min(round((0.6 * velocity + 0.4 * druk) * 100), 100)
+
+
+def _compute_retirement_indicator(lego_set: dict, platforms_data: dict) -> Optional[dict]:
+    """
+    Alleen voor retired sets: vergelijkt huidige NIB-mediaan (beide platforms)
+    met de officiële retailprijs. Geeft richting + percentage terug.
+    """
+    if not lego_set.get("is_retired"):
+        return None
+    retail = lego_set.get("retail_price")
+    if not retail:
+        return None
+    nib_p50s = [
+        pd.get("NIB", {}).get("p50")
+        for pd in platforms_data.values()
+        if pd.get("NIB", {}).get("p50") is not None
+    ]
+    if not nib_p50s:
+        return None
+    avg = sum(nib_p50s) / len(nib_p50s)
+    pct = round((avg / retail - 1) * 100)
+    if avg > retail * 1.05:
+        return {"direction": "up", "pct": pct}
+    if avg < retail * 0.95:
+        return {"direction": "down", "pct": abs(pct)}
+    return {"direction": "stable", "pct": 0}
+
+
+def _find_deals(platforms_data: dict, seller_lego_counts: dict) -> list[dict]:
+    """
+    Interessante Marktplaats-deals:
+    - Vraagprijs ≥ DEAL_DISCOUNT_PCT% onder mediaan vraagprijs (per conditie)
+    - Vaste prijs: OK ook als verkoper LEGO-handelaar is
+    - Bieding: ALLEEN als verkoper GEEN LEGO-handelaar is (>TRADER_THRESHOLD listings)
+    """
+    deals = []
+    mp_data = platforms_data.get("marktplaats", {})
+
+    for condition in ("NIB", "CIB"):
+        intel = mp_data.get(condition, {})
+        p50 = intel.get("p50")
+        if not p50:
+            continue
+        threshold = p50 * (1 - DEAL_DISCOUNT_PCT / 100)
+
+        for listing in intel.get("listings", []):
+            price = listing.get("price", 0)
+            if not price or price > threshold:
+                continue
+
+            seller_name = listing.get("seller_name", "")
+            price_type = listing.get("price_type", "fixed")
+
+            # Brede LEGO-telling: eerst scrape-data (alle geziene listings),
+            # fallback op DB-telling (alleen gevolgde sets)
+            from src import db as _db
+            seller_count = seller_lego_counts.get(seller_name) \
+                or _db.get_seller_lego_count(seller_name)
+            is_trader = seller_count > TRADER_THRESHOLD
+
+            # Bieding van handelaar-verkoper: overslaan
+            if price_type == "bidding" and is_trader:
+                continue
+
+            deals.append({
+                **listing,
+                "condition": condition,
+                "p50": round(p50, 0),
+                "discount_pct": round((1 - price / p50) * 100),
+                "is_trader": is_trader,
+                "seller_count": seller_count,
+                "price_type": price_type,
+            })
+
+    return sorted(deals, key=lambda d: d["discount_pct"], reverse=True)
 
 
 def build_dashboard_data(
@@ -37,6 +138,9 @@ def build_dashboard_data(
     )
     from src import db
     db.init_db()
+
+    # Brede LEGO-verkoperstelling uit de scrape-run
+    seller_lego_counts: dict = marktplaats_deals.get("seller_lego_counts", {})
 
     # Fetch rejection data upfront so it's available during the sets loop
     rejection_summary = db.get_rejection_summary(days=7)
@@ -65,6 +169,8 @@ def build_dashboard_data(
                         "url": r["url"],
                         "image_url": r["image_url"],
                         "is_reserved": bool(r.get("is_reserved", 0)),
+                        "seller_name": r.get("seller_name", ""),
+                        "price_type": r.get("price_type", "fixed"),
                     }
                     for r in active[:20]  # max 20 per card
                 ]
@@ -88,6 +194,11 @@ def build_dashboard_data(
         # Marktplaats active listings (all conditions, for buying opps section)
         mp_listings = marktplaats_deals.get("sets", {}).get(set_number, [])
 
+        # Nieuwe indicatoren
+        hot_score = _compute_hot_score(platforms_data)
+        retirement_indicator = _compute_retirement_indicator(lego_set, platforms_data)
+        deals = _find_deals(platforms_data, seller_lego_counts)
+
         sets_out.append({
             "set_number": set_number,
             "name": lego_set["name"],
@@ -102,6 +213,9 @@ def build_dashboard_data(
             "price_history": history,
             "mp_listings": mp_listings[:15],
             "price_too_low_7d": ptl_by_set.get(set_number, []),
+            "hot_score": hot_score,
+            "retirement_indicator": retirement_indicator,
+            "deals": deals,
         })
 
     total_sold = db.get_total_sold_count()

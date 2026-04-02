@@ -112,7 +112,8 @@ def compute_price_intelligence(
 
     return {
         "active_count": len(active),
-        "sell_price_fast": sell_price_fast,
+        # sell_price_fast wordt wel opgeslagen in DB (voor historiek) maar
+        # niet meer getoond in het dashboard (te verwarrend t.o.v. reële prijs)
         "sell_price_realistic": sell_price_realistic,
         "p10": p10,
         "p25": p25,

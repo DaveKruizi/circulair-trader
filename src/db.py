@@ -110,6 +110,15 @@ def init_db() -> None:
             conn.execute("ALTER TABLE listings ADD COLUMN is_reserved INTEGER DEFAULT 0")
         except Exception:
             pass  # column already exists
+        # Migrate: seller_name en price_type voor deal-detectie
+        try:
+            conn.execute("ALTER TABLE listings ADD COLUMN seller_name TEXT DEFAULT ''")
+        except Exception:
+            pass
+        try:
+            conn.execute("ALTER TABLE listings ADD COLUMN price_type TEXT DEFAULT 'fixed'")
+        except Exception:
+            pass
 
 
 def upsert_listing(
@@ -126,6 +135,8 @@ def upsert_listing(
     match_confidence: float = 0.95,
     condition_raw: str = "",
     is_reserved: bool = False,
+    seller_name: str = "",
+    price_type: str = "fixed",
 ) -> None:
     with get_connection() as conn:
         existing = conn.execute(
@@ -139,10 +150,10 @@ def upsert_listing(
                 """UPDATE listings
                    SET title=?, price=?, condition_category=?, condition_raw=?,
                        url=?, image_url=?, last_seen=?, status='active',
-                       match_confidence=?, is_reserved=?
+                       match_confidence=?, is_reserved=?, seller_name=?, price_type=?
                    WHERE id=? AND platform=?""",
                 (title, price, condition_category, condition_raw, url, image_url, today,
-                 match_confidence, reserved_int, listing_id, platform),
+                 match_confidence, reserved_int, seller_name, price_type, listing_id, platform),
             )
             if existing["price"] != price:
                 conn.execute(
@@ -154,10 +165,11 @@ def upsert_listing(
                 """INSERT INTO listings
                    (id, platform, set_number, title, price, condition_category, condition_raw,
                     url, image_url, seller_id, first_seen, last_seen, status, match_confidence,
-                    is_reserved)
-                   VALUES (?,?,?,?,?,?,?,?,?,?,?,?,'active',?,?)""",
+                    is_reserved, seller_name, price_type)
+                   VALUES (?,?,?,?,?,?,?,?,?,?,?,?,'active',?,?,?,?)""",
                 (listing_id, platform, set_number, title, price, condition_category, condition_raw,
-                 url, image_url, seller_id, today, today, match_confidence, reserved_int),
+                 url, image_url, seller_id, today, today, match_confidence, reserved_int,
+                 seller_name, price_type),
             )
             conn.execute(
                 "INSERT OR IGNORE INTO price_history VALUES (?,?,?,?)",
@@ -245,13 +257,33 @@ def get_active_listings(set_number: str, platform: str, condition: str) -> list[
     with get_connection() as conn:
         rows = conn.execute(
             """SELECT id, price, first_seen, last_seen, title, url, image_url,
-                      COALESCE(is_reserved, 0) as is_reserved
+                      COALESCE(is_reserved, 0) as is_reserved,
+                      COALESCE(seller_name, '') as seller_name,
+                      COALESCE(price_type, 'fixed') as price_type
                FROM listings
                WHERE set_number=? AND platform=? AND condition_category=? AND status='active'
                ORDER BY price""",
             (set_number, platform, condition),
         ).fetchall()
         return [dict(r) for r in rows]
+
+
+def get_seller_lego_count(seller_name: str) -> int:
+    """
+    Geeft het aantal actieve Marktplaats-listings terug waarbij 'lego' in de
+    titel staat én de verkoper overeenkomt. Dekt alle sets, ook niet-gevolgde,
+    omdat we bij elke scrape alle ruwe resultaten (titel bevat 'lego') bewaren.
+    """
+    if not seller_name:
+        return 0
+    with get_connection() as conn:
+        row = conn.execute(
+            """SELECT COUNT(*) as cnt FROM listings
+               WHERE seller_name=? AND platform='marktplaats'
+               AND status='active' AND LOWER(title) LIKE '%lego%'""",
+            (seller_name,),
+        ).fetchone()
+        return row["cnt"] if row else 0
 
 
 def get_total_sold_count() -> dict[str, int]:
