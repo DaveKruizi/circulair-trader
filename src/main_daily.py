@@ -30,6 +30,23 @@ def run_daily(dry_run: bool = False) -> None:
     start = datetime.now()
     print(f"[Daily] Starting at {start.strftime('%Y-%m-%d %H:%M:%S')}")
 
+    # Step 0: Weekly retail price refresh (max 1x per 7 dagen)
+    try:
+        from src.retail_prices import run_update, should_run_today
+        raw = json.loads(LEGO_SETS_PATH.read_text())
+        if should_run_today(raw):
+            print("[Daily] Retailprijzen bijwerken via lego.com (wekelijks)...")
+            result = run_update(dry_run=dry_run)
+            print(
+                f"[Daily] Retailprijzen: {len(result['updated'])} gewijzigd, "
+                f"{len(result['unchanged'])} ongewijzigd, "
+                f"{len(result['skipped'])} overgeslagen"
+            )
+        else:
+            print("[Daily] Retailprijzen: recent bijgewerkt, overgeslagen")
+    except Exception as e:
+        print(f"[Daily] Retailprijsupdate mislukt (wordt overgeslagen): {e}")
+
     lego_sets = load_lego_sets()
     print(f"[Daily] Loaded {len(lego_sets)} LEGO sets from catalog")
 
