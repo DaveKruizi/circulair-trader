@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-02T14:25:34.429510",
+  "generated_at": "2026-04-02T14:48:03.569595",
   "scraped_at": "2026-03-25T15:07:57.047729",
   "platform_labels": {
     "vinted_nl": "Vinted NL",
@@ -1244,7 +1244,8 @@
         "direction": "stable",
         "pct": 0
       },
-      "deals": []
+      "deals": [],
+      "bcg_category": "dog"
     },
     {
       "set_number": "10298",
@@ -2467,7 +2468,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "10300",
@@ -3582,7 +3584,8 @@
         "direction": "down",
         "pct": 6
       },
-      "deals": []
+      "deals": [],
+      "bcg_category": "dog"
     },
     {
       "set_number": "10317",
@@ -4466,7 +4469,8 @@
       ],
       "hot_score": 14,
       "retirement_indicator": null,
-      "deals": []
+      "deals": [],
+      "bcg_category": "dog"
     },
     {
       "set_number": "10337",
@@ -5072,7 +5076,8 @@
       ],
       "hot_score": 0,
       "retirement_indicator": null,
-      "deals": []
+      "deals": [],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42115",
@@ -6212,7 +6217,8 @@
         "direction": "down",
         "pct": 15
       },
-      "deals": []
+      "deals": [],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42125",
@@ -7347,7 +7353,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42130",
@@ -8590,7 +8597,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42143",
@@ -9728,7 +9736,8 @@
         "direction": "down",
         "pct": 19
       },
-      "deals": []
+      "deals": [],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42151",
@@ -10961,7 +10970,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42154",
@@ -12022,7 +12032,8 @@
         "direction": "stable",
         "pct": 0
       },
-      "deals": []
+      "deals": [],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42156",
@@ -13144,7 +13155,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42159",
@@ -13942,17 +13954,18 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42162",
-      "name": "BMW M 1000 RR",
+      "name": "Bugatti Bolide Agile Blue",
       "theme": "Technic",
-      "retail_price": 79.99,
+      "retail_price": 49.99,
       "market_value_new": null,
-      "is_retired": false,
-      "release_year": 2024,
-      "piece_count": 614,
+      "is_retired": true,
+      "release_year": 2023,
+      "piece_count": 905,
       "image_url": "https://images.brickset.com/sets/images/42162-1.jpg",
       "platforms": {
         "vinted_nl": {
@@ -14761,7 +14774,10 @@
         }
       ],
       "hot_score": 15,
-      "retirement_indicator": null,
+      "retirement_indicator": {
+        "direction": "up",
+        "pct": 37
+      },
       "deals": [
         {
           "title": "Lego Bugatti Bolide Technic 42162",
@@ -14791,7 +14807,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "cash_cow"
     },
     {
       "set_number": "42170",
@@ -15644,7 +15661,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42141",
@@ -16811,7 +16829,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42202",
@@ -17708,7 +17727,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42214",
@@ -18631,7 +18651,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "10357",
@@ -19135,7 +19156,8 @@
       "price_too_low_7d": [],
       "hot_score": 0,
       "retirement_indicator": null,
-      "deals": []
+      "deals": [],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42083",
@@ -20356,7 +20378,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42096",
@@ -21293,7 +21316,8 @@
         "direction": "down",
         "pct": 13
       },
-      "deals": []
+      "deals": [],
+      "bcg_category": "dog"
     },
     {
       "set_number": "10271",
@@ -22399,7 +22423,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "10321",
@@ -23288,7 +23313,8 @@
       ],
       "hot_score": 0,
       "retirement_indicator": null,
-      "deals": []
+      "deals": [],
+      "bcg_category": "dog"
     },
     {
       "set_number": "10265",
@@ -24432,7 +24458,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42056",
@@ -25548,7 +25575,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "cash_cow"
     },
     {
       "set_number": "42107",
@@ -26519,7 +26547,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42207",
@@ -27622,7 +27651,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42172",
@@ -28420,7 +28450,8 @@
       ],
       "hot_score": 0,
       "retirement_indicator": null,
-      "deals": []
+      "deals": [],
+      "bcg_category": "cash_cow"
     },
     {
       "set_number": "42206",
@@ -29372,7 +29403,8 @@
       ],
       "hot_score": 0,
       "retirement_indicator": null,
-      "deals": []
+      "deals": [],
+      "bcg_category": "dog"
     },
     {
       "set_number": "42110",
@@ -30491,7 +30523,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "cash_cow"
     },
     {
       "set_number": "42171",
@@ -31585,7 +31618,8 @@
           "is_trader": false,
           "seller_count": 0
         }
-      ]
+      ],
+      "bcg_category": "dog"
     },
     {
       "set_number": "77942",
@@ -31691,7 +31725,2790 @@
       "price_too_low_7d": [],
       "hot_score": 0,
       "retirement_indicator": null,
-      "deals": []
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "10220",
+      "name": "Volkswagen T1 Camper Van",
+      "theme": "Icons",
+      "retail_price": 99.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2011,
+      "piece_count": 1334,
+      "image_url": "https://images.brickset.com/sets/images/10220-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "10242",
+      "name": "MINI Cooper",
+      "theme": "Icons",
+      "retail_price": 99.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2014,
+      "piece_count": 1077,
+      "image_url": "https://images.brickset.com/sets/images/10242-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "10248",
+      "name": "Ferrari F40",
+      "theme": "Icons",
+      "retail_price": 89.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2015,
+      "piece_count": 1158,
+      "image_url": "https://images.brickset.com/sets/images/10248-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "10252",
+      "name": "Volkswagen Beetle",
+      "theme": "Icons",
+      "retail_price": 89.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2016,
+      "piece_count": 1167,
+      "image_url": "https://images.brickset.com/sets/images/10252-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "10258",
+      "name": "London Bus",
+      "theme": "Icons",
+      "retail_price": 119.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2017,
+      "piece_count": 1686,
+      "image_url": "https://images.brickset.com/sets/images/10258-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "10269",
+      "name": "Harley-Davidson Fat Boy",
+      "theme": "Icons",
+      "retail_price": 89.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2019,
+      "piece_count": 1023,
+      "image_url": "https://images.brickset.com/sets/images/10269-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "10274",
+      "name": "Ghostbusters ECTO-1",
+      "theme": "Icons",
+      "retail_price": 179.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2020,
+      "piece_count": 2352,
+      "image_url": "https://images.brickset.com/sets/images/10274-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "10279",
+      "name": "Volkswagen T2 Camper Van",
+      "theme": "Icons",
+      "retail_price": 179.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2021,
+      "piece_count": 2207,
+      "image_url": "https://images.brickset.com/sets/images/10279-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "10290",
+      "name": "Pickup Truck",
+      "theme": "Icons",
+      "retail_price": 119.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2021,
+      "piece_count": 1677,
+      "image_url": "https://images.brickset.com/sets/images/10290-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "10304",
+      "name": "Chevrolet Camaro Z28",
+      "theme": "Icons",
+      "retail_price": 199.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2023,
+      "piece_count": 1456,
+      "image_url": "https://images.brickset.com/sets/images/10304-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "10330",
+      "name": "McLaren MP4/4 & Ayrton Senna",
+      "theme": "Icons",
+      "retail_price": 49.99,
+      "market_value_new": null,
+      "is_retired": false,
+      "release_year": 2024,
+      "piece_count": 693,
+      "image_url": "https://images.brickset.com/sets/images/10330-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "42111",
+      "name": "Dom's Dodge Charger",
+      "theme": "Technic",
+      "retail_price": 99.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2020,
+      "piece_count": 1077,
+      "image_url": "https://images.brickset.com/sets/images/42111-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "42126",
+      "name": "Ford F-150 Raptor",
+      "theme": "Technic",
+      "retail_price": 99.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2021,
+      "piece_count": 1379,
+      "image_url": "https://images.brickset.com/sets/images/42126-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "42127",
+      "name": "The Batman Batmobile",
+      "theme": "Technic",
+      "retail_price": 59.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2022,
+      "piece_count": 1360,
+      "image_url": "https://images.brickset.com/sets/images/42127-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "42128",
+      "name": "Heavy-Duty Tow Truck",
+      "theme": "Technic",
+      "retail_price": 149.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2021,
+      "piece_count": 2017,
+      "image_url": "https://images.brickset.com/sets/images/42128-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "42138",
+      "name": "Ford Mustang Shelby GT500",
+      "theme": "Technic",
+      "retail_price": 49.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2022,
+      "piece_count": 672,
+      "image_url": "https://images.brickset.com/sets/images/42138-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "42160",
+      "name": "Audi RS Q e-tron",
+      "theme": "Technic",
+      "retail_price": 59.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2023,
+      "piece_count": 914,
+      "image_url": "https://images.brickset.com/sets/images/42160-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "42161",
+      "name": "Lamborghini Huracán Tecnica",
+      "theme": "Technic",
+      "retail_price": 49.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2023,
+      "piece_count": 806,
+      "image_url": "https://images.brickset.com/sets/images/42161-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "42093",
+      "name": "Chevrolet Corvette ZR1",
+      "theme": "Technic",
+      "retail_price": 49.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2019,
+      "piece_count": 579,
+      "image_url": "https://images.brickset.com/sets/images/42093-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "42098",
+      "name": "Car Transporter",
+      "theme": "Technic",
+      "retail_price": 149.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2019,
+      "piece_count": 2493,
+      "image_url": "https://images.brickset.com/sets/images/42098-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "42077",
+      "name": "Rally Car",
+      "theme": "Technic",
+      "retail_price": 89.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2017,
+      "piece_count": 1005,
+      "image_url": "https://images.brickset.com/sets/images/42077-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "42039",
+      "name": "24 Hours Race Car",
+      "theme": "Technic",
+      "retail_price": 89.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2015,
+      "piece_count": 1219,
+      "image_url": "https://images.brickset.com/sets/images/42039-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "42000",
+      "name": "Grand Prix Racer",
+      "theme": "Technic",
+      "retail_price": 89.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2013,
+      "piece_count": 1141,
+      "image_url": "https://images.brickset.com/sets/images/42000-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "8070",
+      "name": "Supercar",
+      "theme": "Technic",
+      "retail_price": 99.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 2011,
+      "piece_count": 1281,
+      "image_url": "https://images.brickset.com/sets/images/8070-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "8448",
+      "name": "Super Street Sensation",
+      "theme": "Technic",
+      "retail_price": 109.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 1999,
+      "piece_count": 1413,
+      "image_url": "https://images.brickset.com/sets/images/8448-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
+    },
+    {
+      "set_number": "8880",
+      "name": "Super Car",
+      "theme": "Technic",
+      "retail_price": 89.99,
+      "market_value_new": null,
+      "is_retired": true,
+      "release_year": 1994,
+      "piece_count": 1343,
+      "image_url": "https://images.brickset.com/sets/images/8880-1.jpg",
+      "platforms": {
+        "vinted_nl": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        },
+        "marktplaats": {
+          "NIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "CIB": {
+            "active_count": 0,
+            "appeared_7d": 0,
+            "sell_price_realistic": null,
+            "p10": null,
+            "p25": null,
+            "p50": null,
+            "price_buckets": {},
+            "disappeared_7d": 0,
+            "total_disappeared": 0,
+            "listings": []
+          },
+          "unknown_listings": []
+        }
+      },
+      "price_history": [
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "vinted_nl",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "NIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        },
+        {
+          "date": "2026-04-02",
+          "platform": "marktplaats",
+          "condition": "CIB",
+          "sell_price_fast": null,
+          "sell_price_realistic": null,
+          "active_count": 0
+        }
+      ],
+      "mp_listings": [],
+      "price_too_low_7d": [],
+      "hot_score": 0,
+      "retirement_indicator": null,
+      "deals": [],
+      "bcg_category": "dog"
     }
   ],
   "rejection_summary_7d": {
