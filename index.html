@@ -890,11 +890,9 @@ function buildSetCard(set, idx) {
 
   let statusBadge;
   if (set.retiring_soon) {
-    const yrLabel = set.retiring_year ? ` ${set.retiring_year}` : '';
-    statusBadge = `<span class="badge badge-retiring-soon" title="LEGO heeft aangekondigd dat dit set binnenkort uit productie gaat — koopkans">🔔 Retiring Soon${yrLabel}</span>`;
+    statusBadge = '<span class="badge badge-retiring-soon" title="LEGO heeft aangekondigd dat dit set binnenkort uit productie gaat — koopkans">🔔 Retiring Soon</span>';
   } else if (set.is_retired) {
-    const yrLabel = set.retired_year ? ` ${set.retired_year}` : '';
-    statusBadge = `<span class="badge badge-retired">Retired${yrLabel}</span>`;
+    statusBadge = '<span class="badge badge-retired">Retired</span>';
   } else {
     statusBadge = '<span class="badge badge-active">Actief</span>';
   }
@@ -1265,26 +1263,39 @@ function expandAndScrollToDeals(badgeEl) {
 
 function buildCompactStats(set) {
   const plats = ['vinted_nl', 'marktplaats'];
-  const cond = currentMode;
-  let act = 0, app = 0, sold = 0, dis = 0;
+  let nibAct = 0, nibApp = 0, nibSold = 0, nibDis = 0;
+  let cibAct = 0, cibApp = 0, cibSold = 0, cibDis = 0;
 
   plats.forEach(p => {
-    const pd = (set.platforms[p] || {})[cond] || {};
-    act  += pd.active_count      || 0;
-    app  += pd.appeared_7d       || 0;
-    sold += pd.total_disappeared || 0;
-    dis  += pd.disappeared_7d    || 0;
+    const pd = set.platforms[p] || {};
+    nibAct  += (pd.NIB || {}).active_count      || 0;
+    nibApp  += (pd.NIB || {}).appeared_7d        || 0;
+    nibSold += (pd.NIB || {}).total_disappeared  || 0;
+    nibDis  += (pd.NIB || {}).disappeared_7d     || 0;
+    cibAct  += (pd.CIB || {}).active_count      || 0;
+    cibApp  += (pd.CIB || {}).appeared_7d        || 0;
+    cibSold += (pd.CIB || {}).total_disappeared  || 0;
+    cibDis  += (pd.CIB || {}).disappeared_7d     || 0;
   });
 
   const delta = (n) => n > 0 ? `<span class="cs-delta">+${n}</span>` : '';
 
-  const singleBlock = (label, val, d) => `
+  const splitBlock = (label, nibVal, nibD, cibVal, cibD) => `
     <div class="cs-block">
       <div class="cs-block-label">${label}</div>
-      <div class="cs-val">${val}${delta(d)}</div>
+      <div class="cs-split">
+        <div class="cs-split-item">
+          <div class="cs-val cs-nib">${nibVal}${delta(nibD)}</div>
+          <div class="cs-cond-label cs-nib">NIB</div>
+        </div>
+        <div class="cs-split-item">
+          <div class="cs-val cs-cib">${cibVal}${delta(cibD)}</div>
+          <div class="cs-cond-label cs-cib">CIB</div>
+        </div>
+      </div>
     </div>`;
 
-  const dealCount = (set.deals || []).filter(d => d.condition === cond).length;
+  const dealCount = (set.deals || []).length;
   const dealBlock = dealCount > 0 ? `
     <div class="cs-deal-block"
          title="${dealCount} deal${dealCount > 1 ? 's' : ''} gevonden — klik om te bekijken"
@@ -1293,8 +1304,8 @@ function buildCompactStats(set) {
       <div class="cs-deal-icon">deals</div>
     </div>` : '';
 
-  return singleBlock('Te koop', act, app)
-       + singleBlock('Verkopen', sold, dis)
+  return splitBlock('Te koop', nibAct, nibApp, cibAct, cibApp)
+       + splitBlock('Verkopen', nibSold, nibDis, cibSold, cibDis)
        + dealBlock;
 }
 
