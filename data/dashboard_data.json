@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-03T10:40:45.819046",
+  "generated_at": "2026-04-03T14:29:58.711145",
   "scraped_at": "2026-03-25T15:07:57.047729",
   "platform_labels": {
     "vinted_nl": "Vinted NL",
@@ -1351,100 +1351,11 @@
         "pct": 0,
         "annual_return_pct": -0.3
       },
-      "deals": [
-        {
-          "title": "Lego Icons 10295 Porsche 911 - Nieuw in beschadigde doos!",
-          "price": 120.0,
-          "url": "https://link.marktplaats.nl/m2378874842",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/0c1e58a1-b54b-4ebf-b1cf-8fc837106d2b?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "NIB",
-          "p50": 140.0,
-          "discount_pct": 14,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "steal"
-        },
-        {
-          "title": "Lego Porsche 911 (10295) - Nieuw in gesealde verpakking",
-          "price": 125.0,
-          "url": "https://link.marktplaats.nl/m2378736872",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/15b556c5-e66e-42b3-a459-4962ad9bb3c8?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "NIB",
-          "p50": 140.0,
-          "discount_pct": 11,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "steal"
-        },
-        {
-          "title": "Lego set 10295, nieuw in doos",
-          "price": 130.0,
-          "url": "https://link.marktplaats.nl/m2356341553",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/25/257007be-ba10-4836-9981-13f9abc44685?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "NIB",
-          "p50": 140.0,
-          "discount_pct": 7,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "steal"
-        },
-        {
-          "title": "Lego 10295 Porsche 911 (Nieuw in doos)",
-          "price": 135.0,
-          "url": "https://link.marktplaats.nl/m2375338733",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/450c3a0e-d530-4f1d-9248-efb32b08ae39?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "NIB",
-          "p50": 140.0,
-          "discount_pct": 4,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "steal"
-        },
-        {
-          "title": "Lego Icons Porsche 911 Targa 10295 - NIEUW",
-          "price": 137.5,
-          "url": "https://link.marktplaats.nl/m2378534779",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/3b85d7a9-558d-4411-bfe8-668d3e19449a?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "NIB",
-          "p50": 140.0,
-          "discount_pct": 2,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "steal"
-        },
-        {
-          "title": "Lego Icons 10295 Porsche 911 -Nieuw MISB in ongeopende doos!",
-          "price": 139.95,
-          "url": "https://link.marktplaats.nl/m2378629433",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/5678d008-dac0-45b7-a055-ac88d60b69a1?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "NIB",
-          "p50": 140.0,
-          "discount_pct": 0,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "steal"
-        }
-      ],
+      "deals": [],
       "bcg_nib": "dog",
-      "bcg_cib": "dog"
+      "bcg_cib": "dog",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10298",
@@ -2791,40 +2702,12 @@
           "is_trader": false,
           "seller_count": 0,
           "category": "steal"
-        },
-        {
-          "title": "Lego Vespa 125 (10298) - Zo goed als nieuw",
-          "price": 40.0,
-          "url": "https://link.marktplaats.nl/m2377500049",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/f16bd4ac-9071-481d-9197-9c098f7e91f1?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 60.0,
-          "discount_pct": 33,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        },
-        {
-          "title": "Lego Vespa 10298 - Compleet met doos en instructies",
-          "price": 45.0,
-          "url": "https://link.marktplaats.nl/m2377778929",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/2bacdaa0-4c7f-48e7-8b6a-a0d58c29d30c?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 60.0,
-          "discount_pct": 25,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
         }
       ],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10300",
@@ -4095,7 +3978,9 @@
       },
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10317",
@@ -5042,7 +4927,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10337",
@@ -5811,7 +5698,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42115",
@@ -7181,7 +7070,9 @@
       },
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42125",
@@ -8319,40 +8210,11 @@
         "pct": 20,
         "annual_return_pct": -7.2
       },
-      "deals": [
-        {
-          "title": "Set als nieuw Lego Technic 42125 Ferrari 488 GTE, 1677 stuks",
-          "price": 80.0,
-          "url": "https://link.marktplaats.nl/m2379733374",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/4e6eb5d0-5297-4d58-9f28-e847d638e98e?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 110.0,
-          "discount_pct": 27,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        },
-        {
-          "title": "technic Lego 42125 Ferrari 488 GTE",
-          "price": 85.0,
-          "url": "https://link.marktplaats.nl/m2379283359",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/034635aa-4d2f-4249-85aa-d2b2091c3ca5?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 110.0,
-          "discount_pct": 23,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        }
-      ],
+      "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42130",
@@ -9635,25 +9497,12 @@
           "is_trader": false,
           "seller_count": 0,
           "category": "deal"
-        },
-        {
-          "title": "Bmw m1000rr lego 42130.  Gebruikt",
-          "price": 100.0,
-          "url": "https://link.marktplaats.nl/m2380844418",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/b997dbef-f6e1-4307-aa96-52fb96cb087f?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 125.0,
-          "discount_pct": 20,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
         }
       ],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42143",
@@ -11126,7 +10975,9 @@
       },
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42151",
@@ -12565,85 +12416,11 @@
         "pct": 60,
         "annual_return_pct": -60.5
       },
-      "deals": [
-        {
-          "title": "Lego Technic Bugatti Bolide 42151 - Nieuw in doos",
-          "price": 25.0,
-          "url": "https://link.marktplaats.nl/m2374824791",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/fa49c71d-a3e4-430c-b34b-e025223ac86d?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "NIB",
-          "p50": 40.0,
-          "discount_pct": 38,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "steal"
-        },
-        {
-          "title": "LEGO Technic 42151 Bugatti Bolide",
-          "price": 20.0,
-          "url": "https://link.marktplaats.nl/m2354512185",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/04/0457226b-d9d1-40d0-b30e-93b3a852e2be?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 25.0,
-          "discount_pct": 20,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        },
-        {
-          "title": "Lego technic Bugatti Bolide 42151 (zwart/geel)",
-          "price": 20.0,
-          "url": "https://link.marktplaats.nl/m2358261526",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/9a/9af1684a-fc53-4ec6-9899-4daef6870fa2?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 25.0,
-          "discount_pct": 20,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        },
-        {
-          "title": "Lego Technic Bugatti 42151",
-          "price": 20.0,
-          "url": "https://link.marktplaats.nl/m2343587030",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/b8/b8637b77-2cfa-4fba-b222-0a1dce7547b5?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 25.0,
-          "discount_pct": 20,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        },
-        {
-          "title": "Lego Technic Bugatti Bolide 42151 - Zo goed als nieuw",
-          "price": 20.0,
-          "url": "https://link.marktplaats.nl/m2380281027",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/089c120f-42d8-4ed5-8d67-80040ed344e4?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 25.0,
-          "discount_pct": 20,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        }
-      ],
+      "deals": [],
       "bcg_nib": "dog",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42154",
@@ -13791,7 +13568,9 @@
       },
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42156",
@@ -15003,40 +14782,11 @@
         "pct": 15,
         "annual_return_pct": -15.4
       },
-      "deals": [
-        {
-          "title": "Lego 42156 peugeot 24H Le mans",
-          "price": 70.0,
-          "url": "https://link.marktplaats.nl/m2363400851",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/91/910e94b7-9274-4bf5-9c8d-54e733c72be4?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 100.0,
-          "discount_pct": 30,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        },
-        {
-          "title": "Lego Technic Peugeot 9X8 42156",
-          "price": 80.0,
-          "url": "https://link.marktplaats.nl/m2361311615",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/fb/fbb48bb7-a5e4-4ca4-b2c5-8931ef6097b6?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 100.0,
-          "discount_pct": 20,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        }
-      ],
+      "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42159",
@@ -15961,7 +15711,9 @@
         }
       ],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42162",
@@ -16974,40 +16726,11 @@
         "pct": 48,
         "annual_return_pct": 21.5
       },
-      "deals": [
-        {
-          "title": "Lego Bugatti Bolide Technic 42162",
-          "price": 39.0,
-          "url": "https://link.marktplaats.nl/m2341408926",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/8b/8bd20c47-ec26-4f60-8649-c1a4573496c2?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 50.0,
-          "discount_pct": 22,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        },
-        {
-          "title": "Lego Technic 42162 Bugatti Bolide Agile Blue",
-          "price": 40.0,
-          "url": "https://link.marktplaats.nl/m2371522097",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/22341bfa-fd4e-42d1-a500-272a55ec7913?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 50.0,
-          "discount_pct": 20,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        }
-      ],
+      "deals": [],
       "bcg_nib": "star",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42170",
@@ -18046,25 +17769,11 @@
       "hot_score_nib": 0,
       "hot_score_cib": 17,
       "retirement_indicator": null,
-      "deals": [
-        {
-          "title": "Lego technic 42170",
-          "price": 40.0,
-          "url": "https://link.marktplaats.nl/m2377296964",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/49274501-236f-4966-b15f-4f5fa61840b2?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "NIB",
-          "p50": 52.0,
-          "discount_pct": 24,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        }
-      ],
+      "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42141",
@@ -19391,70 +19100,11 @@
         "pct": 21,
         "annual_return_pct": -21.1
       },
-      "deals": [
-        {
-          "title": "Lego Technic McLaren F1 42141",
-          "price": 75.0,
-          "url": "https://link.marktplaats.nl/m2371740095",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/4ea314ce-7e63-466b-90d0-8c32d260f713?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 100.0,
-          "discount_pct": 25,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        },
-        {
-          "title": "Lego technic 42141 McLaren formula 1 racewagen €75,00",
-          "price": 75.0,
-          "url": "https://link.marktplaats.nl/m2373437139",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/e2d56bd2-81ba-4f99-a08b-dce3fb3b8f23?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 100.0,
-          "discount_pct": 25,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        },
-        {
-          "title": "Lego 42141 compleet",
-          "price": 80.0,
-          "url": "https://link.marktplaats.nl/m2378423468",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/75a54b8b-e5bd-49c5-86aa-6df3278c47de?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 100.0,
-          "discount_pct": 20,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        },
-        {
-          "title": "Lego 42141 compleet met reserve onderdelen",
-          "price": 80.0,
-          "url": "https://link.marktplaats.nl/m2379169088",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/4f66c64f-930d-43f2-8e9a-9cd5a0a577c8?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 100.0,
-          "discount_pct": 20,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        }
-      ],
+      "deals": [],
       "bcg_nib": "dog",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42202",
@@ -20406,7 +20056,9 @@
         }
       ],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42214",
@@ -21325,25 +20977,12 @@
           "is_trader": false,
           "seller_count": 0,
           "category": "deal"
-        },
-        {
-          "title": "LEGO Technic 42214 Lamborghini Revuelto",
-          "price": 100.0,
-          "url": "https://link.marktplaats.nl/m2369402610",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/50/509135d0-5fe0-42f2-a506-cb70660dcdc9?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 125.0,
-          "discount_pct": 20,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
         }
       ],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10357",
@@ -21874,7 +21513,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42083",
@@ -23319,7 +22960,9 @@
         }
       ],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42096",
@@ -24404,7 +24047,9 @@
       },
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10271",
@@ -25656,25 +25301,12 @@
           "is_trader": false,
           "seller_count": 0,
           "category": "steal"
-        },
-        {
-          "title": "Lego Creator expert 10271 Fiat 500",
-          "price": 60.0,
-          "url": "https://link.marktplaats.nl/m2373333031",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/400c579c-b03d-479b-9227-922819dd3a53?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 77.0,
-          "discount_pct": 22,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
         }
       ],
       "bcg_nib": "dog",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10321",
@@ -26629,7 +26261,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10265",
@@ -27900,40 +27534,12 @@
           "is_trader": false,
           "seller_count": 0,
           "category": "deal"
-        },
-        {
-          "title": "Lego 10265 Mustang.",
-          "price": 75.0,
-          "url": "https://link.marktplaats.nl/m2378939751",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/f28fdb1a-ff64-42fc-9979-af7842fdba75?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 100.0,
-          "discount_pct": 25,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        },
-        {
-          "title": "Lego Creator, Ford Mustang 10265",
-          "price": 75.0,
-          "url": "https://link.marktplaats.nl/m2376399685",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/1df50b88-7a08-4fa6-8e47-c31d8502110e?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 100.0,
-          "discount_pct": 25,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
         }
       ],
       "bcg_nib": "dog",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42056",
@@ -29183,7 +28789,9 @@
         }
       ],
       "bcg_nib": "cash_cow",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42107",
@@ -30211,70 +29819,11 @@
         "pct": 14,
         "annual_return_pct": 4.6
       },
-      "deals": [
-        {
-          "title": "Lego Tecnic 42107 Ducati motor",
-          "price": 35.0,
-          "url": "https://link.marktplaats.nl/m2363832858",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/13/13d9e728-ab78-4d4a-b811-794d430d2471?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 50.0,
-          "discount_pct": 30,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        },
-        {
-          "title": "Lego  Technic  42107.",
-          "price": 40.0,
-          "url": "https://link.marktplaats.nl/m2345732054",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/2a/2a581fcf-8ddd-4a4d-9365-bdc6636d5882?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 50.0,
-          "discount_pct": 20,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        },
-        {
-          "title": "Lego technic ducati 42107",
-          "price": 40.0,
-          "url": "https://link.marktplaats.nl/m2358883274",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/71/716e6c74-eca4-40bb-bfdc-056c045ace08?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 50.0,
-          "discount_pct": 20,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        },
-        {
-          "title": "Lego Technic 42107 Ducati Panigale V4 R - Complete Set",
-          "price": 40.0,
-          "url": "https://link.marktplaats.nl/m2375121843",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/a5de39e5-ed22-4407-837f-a98e676c3d80?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 50.0,
-          "discount_pct": 20,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
-        }
-      ],
+      "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42207",
@@ -31448,7 +30997,9 @@
         }
       ],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42172",
@@ -32583,7 +32134,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42206",
@@ -33579,7 +33132,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42110",
@@ -34749,51 +34304,6 @@
       },
       "deals": [
         {
-          "title": "Lego 42110 Land Rover Defender *** NIEUW ***",
-          "price": 185.0,
-          "url": "https://link.marktplaats.nl/m2380743362",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/2c1ce9b7-00d4-47f1-b427-c6750ce18cda?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "NIB",
-          "p50": 204.0,
-          "discount_pct": 10,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "steal"
-        },
-        {
-          "title": "LEGO Technic 42110 Land Rover Defender - Nieuw!",
-          "price": 190.0,
-          "url": "https://link.marktplaats.nl/m2349058120",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/ab/ab151c87-55a9-4ef2-b375-cc0168487a32?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "NIB",
-          "p50": 204.0,
-          "discount_pct": 7,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "steal"
-        },
-        {
-          "title": "LEGO Technic 42110 Land Rover Defender",
-          "price": 199.0,
-          "url": "https://link.marktplaats.nl/m2376965029",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/ae283f16-c976-40a6-8175-215947435186?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "NIB",
-          "p50": 204.0,
-          "discount_pct": 3,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "steal"
-        },
-        {
           "title": "Lego Defender 42110 - 2573 Stenen",
           "price": 100.0,
           "url": "https://link.marktplaats.nl/m2379625689",
@@ -34810,7 +34320,9 @@
         }
       ],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42171",
@@ -36033,25 +35545,12 @@
           "is_trader": false,
           "seller_count": 0,
           "category": "deal"
-        },
-        {
-          "title": "Lego #42171 Mercedes-AMG F1 W14 E Performance",
-          "price": 90.0,
-          "url": "https://link.marktplaats.nl/m2373296972",
-          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/79619e57-4803-4f80-ac8a-cf3c70b5145a?rule=ecg_mp_eps$_82.jpg",
-          "is_reserved": false,
-          "seller_name": "",
-          "price_type": "fixed",
-          "condition": "CIB",
-          "p50": 120.0,
-          "discount_pct": 25,
-          "is_trader": false,
-          "seller_count": 0,
-          "category": "deal"
         }
       ],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "77942",
@@ -36162,7 +35661,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10220",
@@ -36273,7 +35774,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10242",
@@ -36384,7 +35887,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10248",
@@ -36495,7 +36000,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10252",
@@ -36606,7 +36113,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10258",
@@ -36717,7 +36226,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10269",
@@ -36828,7 +36339,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10274",
@@ -36939,7 +36452,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10279",
@@ -37050,7 +36565,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10290",
@@ -37161,7 +36678,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10304",
@@ -37272,7 +36791,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "10330",
@@ -37383,7 +36904,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42111",
@@ -37494,7 +37017,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42126",
@@ -37605,7 +37130,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42127",
@@ -37716,7 +37243,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42128",
@@ -37827,7 +37356,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42138",
@@ -37938,7 +37469,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42160",
@@ -38049,7 +37582,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42161",
@@ -38160,7 +37695,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42093",
@@ -38271,7 +37808,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42098",
@@ -38382,7 +37921,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42077",
@@ -38493,7 +38034,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42039",
@@ -38604,7 +38147,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "42000",
@@ -38715,7 +38260,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "8070",
@@ -38826,7 +38373,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "8448",
@@ -38937,7 +38486,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     },
     {
       "set_number": "8880",
@@ -39048,7 +38599,9 @@
       "retirement_indicator": null,
       "deals": [],
       "bcg_nib": "question_mark",
-      "bcg_cib": "question_mark"
+      "bcg_cib": "question_mark",
+      "price_trend_nib": null,
+      "price_trend_cib": null
     }
   ],
   "rejection_summary_7d": {

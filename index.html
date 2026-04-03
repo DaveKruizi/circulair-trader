@@ -549,6 +549,56 @@
   .cagr-low    { background: #1e2130; color: #94a3b8; border: 1px solid #33415533; }
   .cagr-neg    { background: #2a1212; color: #f87171; border: 1px solid #ef444433; }
 
+  /* Prijstrend badge */
+  .trend-badge {
+    display: inline-flex; align-items: center; gap: 3px;
+    font-size: 10px; font-weight: 700; padding: 2px 6px;
+    border-radius: 4px; white-space: nowrap;
+  }
+  .trend-up     { background: #14261a; color: #4ade80; border: 1px solid #22c55e33; }
+  .trend-stable { background: #1e2130; color: #94a3b8; border: 1px solid #33415533; }
+  .trend-down   { background: #2a1212; color: #f87171; border: 1px solid #ef444433; }
+
+  /* Portfolio sectie */
+  #portfolio-section {
+    max-width: 1400px; margin: 0 auto 24px; padding: 0 24px;
+  }
+  .portfolio-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+  }
+  .portfolio-header h2 {
+    font-size: 15px; font-weight: 700; color: var(--text); margin: 0;
+  }
+  .portfolio-summary {
+    display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px;
+  }
+  .pf-stat {
+    background: #161b2e; border: 1px solid #2a3048;
+    border-radius: 8px; padding: 10px 16px; min-width: 120px;
+  }
+  .pf-stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing:.05em; }
+  .pf-stat-value { font-size: 20px; font-weight: 800; color: var(--text); line-height: 1.2; }
+  .pf-stat-value.positive { color: #4ade80; }
+  .pf-stat-value.negative { color: #f87171; }
+  .portfolio-table {
+    width: 100%; border-collapse: collapse; font-size: 12px;
+  }
+  .portfolio-table th {
+    text-align: left; padding: 6px 10px; color: var(--muted);
+    border-bottom: 1px solid #2a3048; font-weight: 600;
+    font-size: 10px; text-transform: uppercase; letter-spacing: .05em;
+  }
+  .portfolio-table td { padding: 8px 10px; border-bottom: 1px solid #1e2535; }
+  .portfolio-table tr:hover td { background: #161b2e; }
+  .pf-open  td { color: var(--text); }
+  .pf-sold  td { color: var(--muted); }
+  .pf-pnl-pos { color: #4ade80; font-weight: 700; }
+  .pf-pnl-neg { color: #f87171; font-weight: 700; }
+  #portfolio-unlock {
+    background: #161b2e; border: 1px solid #2a3048; border-radius: 12px;
+    padding: 20px 24px; display: flex; align-items: center; gap: 12px;
+  }
+
   /* Deal cards in expanded view */
   .deals-section {
     background: #0d1f14; border: 1px solid #22c55e33;
@@ -649,6 +699,27 @@
   </div>
 </header>
 
+<!-- Portfolio sectie (alleen zichtbaar als PORTFOLIO_URL is ingesteld) -->
+<div id="portfolio-section" style="display:none">
+  <div class="portfolio-header">
+    <span style="font-size:20px">💼</span>
+    <h2>Mijn Portfolio</h2>
+    <span id="pf-gen-time" style="font-size:11px;color:var(--muted)"></span>
+  </div>
+  <div class="portfolio-summary" id="pf-summary"></div>
+  <table class="portfolio-table">
+    <thead>
+      <tr>
+        <th>ID</th><th>Set</th><th>Conditie</th><th>Stuks</th>
+        <th>Inkoopprijs</th><th>Ingekocht op</th>
+        <th>Marktwaarde (p50)</th><th>P&amp;L €</th><th>P&amp;L %</th>
+        <th>Verkoop</th><th>Notities</th>
+      </tr>
+    </thead>
+    <tbody id="pf-table-body"></tbody>
+  </table>
+</div>
+
 <div class="filter-bar">
   <div class="filter-group">
     <span class="filter-group-label">BCG</span>
@@ -686,6 +757,7 @@ let bcgFilter = 'all';     // 'all' | 'star' | 'cash_cow' | 'question_mark' | 'd
 let statusFilter = 'all';  // 'all' | 'retiring_soon' | 'recent_retired' | 'retired' | 'active'
 
 const CURRENT_YEAR = new Date().getFullYear();
+const PORTFOLIO_URL = '';  // ingevuld bij dashboard-generatie
 const BCG_BADGE_LABEL = { star:'⭐ Star', cash_cow:'💰 Cash Cow', question_mark:'❓ Mark', dog:'🐕 Dog' };
 const BCG_BADGE_STYLE = {
   star:          'background:#854d0e;color:#fde68a;border:1px solid #d9770655',
@@ -705,6 +777,14 @@ fetch('./data/dashboard_data.json')
       '<div class="no-data">Fout bij laden data. Probeer later opnieuw.</div>';
   });
 
+// Portfolio laden als PORTFOLIO_URL is ingesteld
+if (PORTFOLIO_URL) {
+  fetch(PORTFOLIO_URL)
+    .then(r => r.json())
+    .then(pf => renderPortfolio(pf))
+    .catch(() => console.warn('Portfolio data niet beschikbaar'));
+}
+
 function getSetStatus(set) {
   if (set.retiring_soon) return 'retiring_soon';
   if (!set.is_retired) return 'active';
@@ -721,9 +801,6 @@ function setMode(mode) {
   ['NIB','CIB'].forEach(m => {
     document.getElementById('mode-' + m).classList.toggle('active', m === mode);
   });
-  // Cash Cow chip only relevant in NIB mode
-  document.getElementById('chip-cow').style.display = mode === 'CIB' ? 'none' : '';
-  if (mode === 'CIB' && bcgFilter === 'cash_cow') setBcgFilter('all');
   // Sync active condition panels in expanded cards
   document.querySelectorAll('.condition-panel').forEach(panel => {
     panel.classList.toggle('visible', panel.dataset.cond === mode);
@@ -753,10 +830,60 @@ function setCondition(cond) { setMode(cond); }
 const BCG_ORDER = ['star', 'cash_cow', 'question_mark', 'dog'];
 const BCG_META = {
   star:          { icon: '⭐', label: 'Stars',          cls: 'bcg-star',  descNIB: 'Hoge CAGR + boven retail',       descCIB: 'Hoge velocity + goede spread' },
-  cash_cow:      { icon: '💰', label: 'Cash Cows',      cls: 'bcg-cow',   descNIB: 'Boven retail, bewaren & wachten', descCIB: '' },
+  cash_cow:      { icon: '💰', label: 'Cash Cows',      cls: 'bcg-cow',   descNIB: 'Boven retail, bewaren & wachten', descCIB: 'Hoge velocity, dunne spread — betrouwbaar maar lage marge' },
   question_mark: { icon: '❓', label: 'Question Marks', cls: 'bcg-qmark', descNIB: 'Onzeker — te vroeg of geen data', descCIB: 'Onzeker — te vroeg of geen data' },
   dog:           { icon: '🐕', label: 'Dogs',           cls: 'bcg-dog',   descNIB: 'Slecht rendement',                descCIB: 'Trage markt, dunne marge' },
 };
+
+function buildTrendBadge(trend) {
+  if (!trend) return '';
+  const map = { up: ['trend-up', '↑ Stijgend'], stable: ['trend-stable', '→ Stabiel'], down: ['trend-down', '↓ Dalend'] };
+  const [cls, label] = map[trend] || ['trend-stable', '→'];
+  return `<span class="trend-badge ${cls}" title="Prijstrend afgelopen 60 dagen">${label}</span>`;
+}
+
+function renderPortfolio(pf) {
+  const section = document.getElementById('portfolio-section');
+  section.style.display = '';
+
+  const gen = new Date(pf.generated_at);
+  document.getElementById('pf-gen-time').textContent =
+    'bijgewerkt ' + gen.toLocaleString('nl-NL', {day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+
+  const s = pf.summary;
+  const pnlCls = s.unrealized_pnl >= 0 ? 'positive' : 'negative';
+  const pnlSign = s.unrealized_pnl >= 0 ? '+' : '';
+  const realSign = s.realized_pnl >= 0 ? '+' : '';
+  document.getElementById('pf-summary').innerHTML = `
+    <div class="pf-stat"><div class="pf-stat-label">Belegd</div><div class="pf-stat-value">€${s.total_invested.toFixed(0)}</div></div>
+    <div class="pf-stat"><div class="pf-stat-label">Marktwaarde</div><div class="pf-stat-value">€${s.total_market_value.toFixed(0)}</div></div>
+    <div class="pf-stat"><div class="pf-stat-label">Ongerealiseerd</div><div class="pf-stat-value ${pnlCls}">${pnlSign}€${s.unrealized_pnl.toFixed(0)} (${pnlSign}${s.unrealized_pnl_pct}%)</div></div>
+    <div class="pf-stat"><div class="pf-stat-label">Gerealiseerd</div><div class="pf-stat-value ${s.realized_pnl >= 0 ? 'positive' : 'negative'}">${realSign}€${s.realized_pnl.toFixed(0)}</div></div>
+  `;
+
+  const tbody = document.getElementById('pf-table-body');
+  tbody.innerHTML = pf.positions.map(p => {
+    const isSold = p.sold_price != null;
+    const rowCls = isSold ? 'pf-sold' : 'pf-open';
+    const upnl = p.unrealized_pnl;
+    const pnlHtml = isSold
+      ? `<td class="${p.realized_pnl >= 0 ? 'pf-pnl-pos' : 'pf-pnl-neg'}">${p.realized_pnl >= 0 ? '+' : ''}€${p.realized_pnl?.toFixed(0) ?? '—'}</td><td>—</td>`
+      : `<td class="${upnl != null ? (upnl >= 0 ? 'pf-pnl-pos' : 'pf-pnl-neg') : ''}">${upnl != null ? (upnl >= 0 ? '+' : '') + '€' + upnl.toFixed(0) : '—'}</td>
+         <td class="${upnl != null ? (upnl >= 0 ? 'pf-pnl-pos' : 'pf-pnl-neg') : ''}">${p.unrealized_pnl_pct != null ? (p.unrealized_pnl_pct >= 0 ? '+' : '') + p.unrealized_pnl_pct + '%' : '—'}</td>`;
+    return `<tr class="${rowCls}">
+      <td style="color:var(--muted);font-size:10px">#${p.id}</td>
+      <td><strong>${escHtml(p.set_number)}</strong> ${escHtml(p.set_name || '')}</td>
+      <td><span class="badge badge-${(p.condition||'').toLowerCase()}">${p.condition}</span></td>
+      <td>${p.quantity}×</td>
+      <td>€${p.purchase_price.toFixed(2)}</td>
+      <td style="color:var(--muted)">${p.purchase_date}</td>
+      <td>${p.current_p50 != null ? '€' + p.current_p50.toFixed(0) : '—'}</td>
+      ${pnlHtml}
+      <td style="color:var(--muted)">${isSold ? '€' + p.sold_price.toFixed(2) + ' op ' + p.sold_date : '—'}</td>
+      <td style="color:var(--muted);font-size:10px">${escHtml(p.notes || '')}</td>
+    </tr>`;
+  }).join('');
+}
 
 function renderAll(data) {
   const gen = new Date(data.generated_at);
@@ -812,8 +939,6 @@ function redraw() {
     BCG_ORDER.forEach(cat => {
       const sets = grouped[cat];
       if (!sets || sets.length === 0) return;
-      // Hide Cash Cow section in CIB mode
-      if (cat === 'cash_cow' && currentMode === 'CIB') return;
       const meta = BCG_META[cat];
       const desc = currentMode === 'NIB' ? meta.descNIB : meta.descCIB;
 
@@ -967,6 +1092,7 @@ function buildSetCard(set, idx) {
         <div style="margin-top:4px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
           ${retired}
           ${bcgBadge}
+          ${buildTrendBadge(currentMode === 'NIB' ? set.price_trend_nib : set.price_trend_cib)}
           <span style="color:var(--muted);font-size:12px">Retail: ${retail}</span>
           ${retHtml}
         </div>
