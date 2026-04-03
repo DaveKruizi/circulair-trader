@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-03T09:41:19.717549",
+  "generated_at": "2026-04-03T09:45:55.395361",
   "scraped_at": "2026-03-25T15:07:57.047729",
   "platform_labels": {
     "vinted_nl": "Vinted NL",
@@ -13,6 +13,8 @@
       "retail_price": 139.99,
       "market_value_new": 195.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2023,
       "release_year": 2021,
       "piece_count": 1458,
       "image_url": "https://images.brickset.com/sets/images/10295-1.jpg",
@@ -1326,6 +1328,8 @@
       "retail_price": 99.99,
       "market_value_new": 135.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2025,
       "release_year": 2022,
       "piece_count": 1106,
       "image_url": "https://images.brickset.com/sets/images/10298-1.jpg",
@@ -2646,7 +2650,7 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_category": "question_mark"
     },
     {
       "set_number": "10300",
@@ -2655,6 +2659,8 @@
       "retail_price": 199.99,
       "market_value_new": 260.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2025,
       "release_year": 2022,
       "piece_count": 1872,
       "image_url": "https://images.brickset.com/sets/images/10300-1.jpg",
@@ -3887,7 +3893,7 @@
         "annual_return_pct": -8.7
       },
       "deals": [],
-      "bcg_category": "dog"
+      "bcg_category": "question_mark"
     },
     {
       "set_number": "10317",
@@ -3896,6 +3902,8 @@
       "retail_price": 239.99,
       "market_value_new": null,
       "is_retired": false,
+      "retiring_soon": true,
+      "retired_year": null,
       "release_year": 2023,
       "piece_count": 2336,
       "image_url": "https://images.brickset.com/sets/images/10317-1.jpg",
@@ -4810,7 +4818,7 @@
       "hot_score": 14,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "dog"
+      "bcg_category": "question_mark"
     },
     {
       "set_number": "10337",
@@ -4819,6 +4827,8 @@
       "retail_price": 179.99,
       "market_value_new": null,
       "is_retired": false,
+      "retiring_soon": false,
+      "retired_year": null,
       "release_year": 2024,
       "piece_count": 1506,
       "image_url": "https://images.brickset.com/sets/images/10337-1.jpg",
@@ -5540,6 +5550,8 @@
       "retail_price": 379.99,
       "market_value_new": 480.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2025,
       "release_year": 2020,
       "piece_count": 3696,
       "image_url": "https://images.brickset.com/sets/images/42115-1.jpg",
@@ -6758,7 +6770,7 @@
         "annual_return_pct": -12.5
       },
       "deals": [],
-      "bcg_category": "dog"
+      "bcg_category": "question_mark"
     },
     {
       "set_number": "42125",
@@ -6767,6 +6779,8 @@
       "retail_price": 199.99,
       "market_value_new": 260.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2023,
       "release_year": 2021,
       "piece_count": 1677,
       "image_url": "https://images.brickset.com/sets/images/42125-1.jpg",
@@ -7942,6 +7956,8 @@
       "retail_price": 249.99,
       "market_value_new": 290.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2025,
       "release_year": 2022,
       "piece_count": 1920,
       "image_url": "https://images.brickset.com/sets/images/42130-1.jpg",
@@ -9193,7 +9209,7 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_category": "question_mark"
     },
     {
       "set_number": "42143",
@@ -9202,6 +9218,8 @@
       "retail_price": 399.99,
       "market_value_new": 490.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2025,
       "release_year": 2022,
       "piece_count": 3778,
       "image_url": "https://images.brickset.com/sets/images/42143-1.jpg",
@@ -10540,7 +10558,7 @@
         "annual_return_pct": -18.6
       },
       "deals": [],
-      "bcg_category": "dog"
+      "bcg_category": "question_mark"
     },
     {
       "set_number": "42151",
@@ -10549,6 +10567,8 @@
       "retail_price": 99.99,
       "market_value_new": 130.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2025,
       "release_year": 2022,
       "piece_count": 905,
       "image_url": "https://images.brickset.com/sets/images/42151-1.jpg",
@@ -11977,7 +11997,7 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_category": "question_mark"
     },
     {
       "set_number": "42154",
@@ -11986,6 +12006,8 @@
       "retail_price": 79.99,
       "market_value_new": 105.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2025,
       "release_year": 2023,
       "piece_count": 1466,
       "image_url": "https://images.brickset.com/sets/images/42154-1.jpg",
@@ -13099,7 +13121,7 @@
         "annual_return_pct": 3.1
       },
       "deals": [],
-      "bcg_category": "dog"
+      "bcg_category": "question_mark"
     },
     {
       "set_number": "42156",
@@ -13108,6 +13130,8 @@
       "retail_price": 179.99,
       "market_value_new": 225.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2025,
       "release_year": 2023,
       "piece_count": 1775,
       "image_url": "https://images.brickset.com/sets/images/42156-1.jpg",
@@ -14310,7 +14334,7 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_category": "question_mark"
     },
     {
       "set_number": "42159",
@@ -14319,6 +14343,8 @@
       "retail_price": 199.99,
       "market_value_new": null,
       "is_retired": false,
+      "retiring_soon": true,
+      "retired_year": null,
       "release_year": 2023,
       "piece_count": 1478,
       "image_url": "https://images.brickset.com/sets/images/42159-1.jpg",
@@ -15197,7 +15223,7 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_category": "question_mark"
     },
     {
       "set_number": "42162",
@@ -15206,6 +15232,8 @@
       "retail_price": 49.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2024,
       "release_year": 2023,
       "piece_count": 905,
       "image_url": "https://images.brickset.com/sets/images/42162-1.jpg",
@@ -16235,6 +16263,8 @@
       "retail_price": 179.99,
       "market_value_new": null,
       "is_retired": false,
+      "retiring_soon": false,
+      "retired_year": null,
       "release_year": 2024,
       "piece_count": 1383,
       "image_url": "https://images.brickset.com/sets/images/42170-1.jpg",
@@ -17221,6 +17251,8 @@
       "retail_price": 179.99,
       "market_value_new": 220.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2025,
       "release_year": 2022,
       "piece_count": 1432,
       "image_url": "https://images.brickset.com/sets/images/42141-1.jpg",
@@ -18483,7 +18515,7 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_category": "question_mark"
     },
     {
       "set_number": "42202",
@@ -18492,6 +18524,8 @@
       "retail_price": 199.99,
       "market_value_new": null,
       "is_retired": false,
+      "retiring_soon": false,
+      "retired_year": null,
       "release_year": 2025,
       "piece_count": 1603,
       "image_url": "https://images.brickset.com/sets/images/42202-1.jpg",
@@ -19408,6 +19442,8 @@
       "retail_price": 179.99,
       "market_value_new": null,
       "is_retired": false,
+      "retiring_soon": false,
+      "retired_year": null,
       "release_year": 2025,
       "piece_count": 1135,
       "image_url": "https://images.brickset.com/sets/images/42214-1.jpg",
@@ -20358,6 +20394,8 @@
       "retail_price": 149.99,
       "market_value_new": null,
       "is_retired": false,
+      "retiring_soon": false,
+      "retired_year": null,
       "release_year": 2025,
       "piece_count": 1241,
       "image_url": "https://images.brickset.com/sets/images/10357-1.jpg",
@@ -20885,6 +20923,8 @@
       "retail_price": 449.99,
       "market_value_new": 620.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2022,
       "release_year": 2018,
       "piece_count": 3599,
       "image_url": "https://images.brickset.com/sets/images/42083-1.jpg",
@@ -22267,6 +22307,8 @@
       "retail_price": 149.99,
       "market_value_new": 200.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2024,
       "release_year": 2019,
       "piece_count": 1580,
       "image_url": "https://images.brickset.com/sets/images/42096-1.jpg",
@@ -23289,7 +23331,7 @@
         "annual_return_pct": -6.9
       },
       "deals": [],
-      "bcg_category": "dog"
+      "bcg_category": "question_mark"
     },
     {
       "set_number": "10271",
@@ -23298,6 +23340,8 @@
       "retail_price": 99.99,
       "market_value_new": 140.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2022,
       "release_year": 2020,
       "piece_count": 960,
       "image_url": "https://images.brickset.com/sets/images/10271-1.jpg",
@@ -24488,6 +24532,8 @@
       "retail_price": 199.99,
       "market_value_new": null,
       "is_retired": false,
+      "retiring_soon": true,
+      "retired_year": null,
       "release_year": 2023,
       "piece_count": 1210,
       "image_url": "https://images.brickset.com/sets/images/10321-1.jpg",
@@ -25417,6 +25463,8 @@
       "retail_price": 149.99,
       "market_value_new": 200.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2023,
       "release_year": 2019,
       "piece_count": 1471,
       "image_url": "https://images.brickset.com/sets/images/10265-1.jpg",
@@ -26672,6 +26720,8 @@
       "retail_price": 299.99,
       "market_value_new": 420.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2018,
       "release_year": 2016,
       "piece_count": 2704,
       "image_url": "https://images.brickset.com/sets/images/42056-1.jpg",
@@ -27894,6 +27944,8 @@
       "retail_price": 69.99,
       "market_value_new": 95.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2023,
       "release_year": 2019,
       "piece_count": 646,
       "image_url": "https://images.brickset.com/sets/images/42107-1.jpg",
@@ -28938,6 +28990,8 @@
       "retail_price": 229.99,
       "market_value_new": null,
       "is_retired": false,
+      "retiring_soon": false,
+      "retired_year": null,
       "release_year": 2025,
       "piece_count": 952,
       "image_url": "https://images.brickset.com/sets/images/42207-1.jpg",
@@ -29910,6 +29964,8 @@
       "retail_price": 449.99,
       "market_value_new": null,
       "is_retired": false,
+      "retiring_soon": false,
+      "retired_year": null,
       "release_year": 2024,
       "piece_count": 3893,
       "image_url": "https://images.brickset.com/sets/images/42172-1.jpg",
@@ -31017,6 +31073,8 @@
       "retail_price": 229.99,
       "market_value_new": null,
       "is_retired": false,
+      "retiring_soon": false,
+      "retired_year": null,
       "release_year": 2025,
       "piece_count": 1639,
       "image_url": "https://images.brickset.com/sets/images/42206-1.jpg",
@@ -31986,6 +32044,8 @@
       "retail_price": 199.99,
       "market_value_new": 265.0,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2022,
       "release_year": 2019,
       "piece_count": 2573,
       "image_url": "https://images.brickset.com/sets/images/42110-1.jpg",
@@ -33145,6 +33205,8 @@
       "retail_price": 199.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2025,
       "release_year": 2023,
       "piece_count": 1642,
       "image_url": "https://images.brickset.com/sets/images/42171-1.jpg",
@@ -34291,7 +34353,7 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_category": "question_mark"
     },
     {
       "set_number": "77942",
@@ -34300,6 +34362,8 @@
       "retail_price": 99.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2022,
       "release_year": 2021,
       "piece_count": 960,
       "image_url": "https://images.brickset.com/sets/images/77942-1.jpg",
@@ -34407,6 +34471,8 @@
       "retail_price": 99.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2020,
       "release_year": 2011,
       "piece_count": 1334,
       "image_url": "https://images.brickset.com/sets/images/10220-1.jpg",
@@ -34514,6 +34580,8 @@
       "retail_price": 99.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2015,
       "release_year": 2014,
       "piece_count": 1077,
       "image_url": "https://images.brickset.com/sets/images/10242-1.jpg",
@@ -34621,6 +34689,8 @@
       "retail_price": 89.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2017,
       "release_year": 2015,
       "piece_count": 1158,
       "image_url": "https://images.brickset.com/sets/images/10248-1.jpg",
@@ -34728,6 +34798,8 @@
       "retail_price": 89.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2020,
       "release_year": 2016,
       "piece_count": 1167,
       "image_url": "https://images.brickset.com/sets/images/10252-1.jpg",
@@ -34835,6 +34907,8 @@
       "retail_price": 119.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2021,
       "release_year": 2017,
       "piece_count": 1686,
       "image_url": "https://images.brickset.com/sets/images/10258-1.jpg",
@@ -34942,6 +35016,8 @@
       "retail_price": 89.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2021,
       "release_year": 2019,
       "piece_count": 1023,
       "image_url": "https://images.brickset.com/sets/images/10269-1.jpg",
@@ -35049,6 +35125,8 @@
       "retail_price": 179.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2024,
       "release_year": 2020,
       "piece_count": 2352,
       "image_url": "https://images.brickset.com/sets/images/10274-1.jpg",
@@ -35156,6 +35234,8 @@
       "retail_price": 179.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2022,
       "release_year": 2021,
       "piece_count": 2207,
       "image_url": "https://images.brickset.com/sets/images/10279-1.jpg",
@@ -35263,6 +35343,8 @@
       "retail_price": 129.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2023,
       "release_year": 2021,
       "piece_count": 1677,
       "image_url": "https://images.brickset.com/sets/images/10290-1.jpg",
@@ -35370,6 +35452,8 @@
       "retail_price": 169.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2024,
       "release_year": 2022,
       "piece_count": 1456,
       "image_url": "https://images.brickset.com/sets/images/10304-1.jpg",
@@ -35477,6 +35561,8 @@
       "retail_price": 79.99,
       "market_value_new": null,
       "is_retired": false,
+      "retiring_soon": false,
+      "retired_year": null,
       "release_year": 2024,
       "piece_count": 693,
       "image_url": "https://images.brickset.com/sets/images/10330-1.jpg",
@@ -35584,6 +35670,8 @@
       "retail_price": 99.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2023,
       "release_year": 2020,
       "piece_count": 1077,
       "image_url": "https://images.brickset.com/sets/images/42111-1.jpg",
@@ -35691,6 +35779,8 @@
       "retail_price": 99.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2022,
       "release_year": 2021,
       "piece_count": 1379,
       "image_url": "https://images.brickset.com/sets/images/42126-1.jpg",
@@ -35798,6 +35888,8 @@
       "retail_price": 99.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2023,
       "release_year": 2022,
       "piece_count": 1360,
       "image_url": "https://images.brickset.com/sets/images/42127-1.jpg",
@@ -35905,6 +35997,8 @@
       "retail_price": 149.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2023,
       "release_year": 2021,
       "piece_count": 2017,
       "image_url": "https://images.brickset.com/sets/images/42128-1.jpg",
@@ -36012,6 +36106,8 @@
       "retail_price": 49.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2024,
       "release_year": 2022,
       "piece_count": 672,
       "image_url": "https://images.brickset.com/sets/images/42138-1.jpg",
@@ -36119,6 +36215,8 @@
       "retail_price": 59.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2023,
       "release_year": 2023,
       "piece_count": 914,
       "image_url": "https://images.brickset.com/sets/images/42160-1.jpg",
@@ -36226,6 +36324,8 @@
       "retail_price": 49.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2025,
       "release_year": 2023,
       "piece_count": 806,
       "image_url": "https://images.brickset.com/sets/images/42161-1.jpg",
@@ -36333,6 +36433,8 @@
       "retail_price": 39.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2021,
       "release_year": 2019,
       "piece_count": 579,
       "image_url": "https://images.brickset.com/sets/images/42093-1.jpg",
@@ -36440,6 +36542,8 @@
       "retail_price": 149.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2020,
       "release_year": 2019,
       "piece_count": 2493,
       "image_url": "https://images.brickset.com/sets/images/42098-1.jpg",
@@ -36547,6 +36651,8 @@
       "retail_price": 99.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2019,
       "release_year": 2017,
       "piece_count": 1005,
       "image_url": "https://images.brickset.com/sets/images/42077-1.jpg",
@@ -36654,6 +36760,8 @@
       "retail_price": 99.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2016,
       "release_year": 2015,
       "piece_count": 1219,
       "image_url": "https://images.brickset.com/sets/images/42039-1.jpg",
@@ -36761,6 +36869,8 @@
       "retail_price": 99.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2014,
       "release_year": 2013,
       "piece_count": 1141,
       "image_url": "https://images.brickset.com/sets/images/42000-1.jpg",
@@ -36868,6 +36978,8 @@
       "retail_price": 119.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2012,
       "release_year": 2011,
       "piece_count": 1281,
       "image_url": "https://images.brickset.com/sets/images/8070-1.jpg",
@@ -36975,6 +37087,8 @@
       "retail_price": 109.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 2000,
       "release_year": 1999,
       "piece_count": 1413,
       "image_url": "https://images.brickset.com/sets/images/8448-1.jpg",
@@ -37082,6 +37196,8 @@
       "retail_price": 89.99,
       "market_value_new": null,
       "is_retired": true,
+      "retiring_soon": false,
+      "retired_year": 1997,
       "release_year": 1994,
       "piece_count": 1343,
       "image_url": "https://images.brickset.com/sets/images/8880-1.jpg",
