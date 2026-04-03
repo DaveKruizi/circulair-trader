@@ -252,19 +252,21 @@
   .cs-cib { color: var(--cib); }
 
   /* Deal-blok — opvallend: groene border + glow */
-  .cs-deal-block {
+  .cs-deal-block, .cs-steal-block {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3px;
-    background: #0a1a0f;
-    border: 1.5px solid #22c55e77;
     border-radius: 10px;
     padding: 8px 20px;
     min-width: 72px;
     cursor: pointer;
     transition: border-color .15s, background .15s, box-shadow .15s;
     text-align: center;
+  }
+  .cs-deal-block {
+    background: #0a1a0f;
+    border: 1.5px solid #22c55e77;
     box-shadow: 0 0 12px #22c55e1a;
   }
   .cs-deal-block:hover {
@@ -272,12 +274,23 @@
     background: #0d2116;
     box-shadow: 0 0 20px #22c55e35;
   }
+  .cs-steal-block {
+    background: #1c1000;
+    border: 1.5px solid #f59e0b99;
+    box-shadow: 0 0 14px #f59e0b2a;
+  }
+  .cs-steal-block:hover {
+    border-color: #f59e0b;
+    background: #221500;
+    box-shadow: 0 0 24px #f59e0b45;
+  }
   .cs-deal-count {
     font-size: 28px;
     font-weight: 800;
     color: #4ade80;
     line-height: 1;
   }
+  .cs-steal-block .cs-deal-count { color: #fb923c; }
   .cs-deal-icon {
     font-size: 10px;
     color: #4ade80;
@@ -286,6 +299,7 @@
     font-weight: 600;
     text-transform: uppercase;
   }
+  .cs-steal-block .cs-deal-icon { color: #fb923c; }
 
   .condition-panel { display: none; }
   .condition-panel.visible { display: block; }
@@ -543,6 +557,19 @@
   .deals-section h4 {
     font-size: 11px; color: #4ade80; text-transform: uppercase;
     letter-spacing: .05em; margin-bottom: 10px;
+  }
+  .steals-section {
+    background: #1c1000; border: 1px solid #f59e0b55;
+    box-shadow: 0 0 16px #f59e0b10;
+  }
+  .steals-section h4 { color: #fb923c; }
+  .steals-section .deal-card {
+    background: #211500; border-color: #f59e0b22;
+  }
+  .steals-section .deal-card:hover { border-color: #f59e0b; }
+  .steals-section .dc-price { color: #fb923c !important; }
+  .steals-section .dc-discount {
+    background: #2c1a00; color: #fb923c; border-color: #f59e0b44;
   }
   .deal-cards { display: flex; flex-direction: column; gap: 6px; }
   .deal-card {
@@ -1212,22 +1239,23 @@ function hotScoreLabel(score) {
 }
 
 function buildDealsSection(set, idx) {
-  const deals = set.deals || [];
-  if (deals.length === 0) return '';
+  const allDeals = (set.deals || []).filter(d => d.condition === currentMode);
+  if (allDeals.length === 0) return '';
 
-  const condLabels = { NIB: 'Nieuw', CIB: 'Gebruikt' };
-  const cards = deals.map(d => {
+  const steals = allDeals.filter(d => d.category === 'steal');
+  const deals  = allDeals.filter(d => d.category === 'deal');
+
+  const renderCard = (d) => {
     const imgHtml = d.image_url
       ? `<img src="${escHtml(d.image_url)}" alt="" loading="lazy" onerror="this.style.display='none'">`
       : '';
-    const condBadge = `<span class="badge badge-${(d.condition||'').toLowerCase()}">${condLabels[d.condition] || d.condition}</span>`;
     const typeBadge = d.price_type === 'bidding'
       ? `<span style="font-size:10px;color:var(--orange)">bod</span>`
       : '';
     const traderBadge = d.is_trader
       ? `<span style="font-size:10px;color:var(--muted)" title="${d.seller_count} LEGO-listings">handelaar</span>`
       : '';
-    const subParts = [condBadge, typeBadge, traderBadge, `<span style="font-size:10px;color:var(--muted)">mediaan €${d.p50}</span>`].filter(Boolean).join(' ');
+    const subParts = [typeBadge, traderBadge, `<span style="font-size:10px;color:var(--muted)">mediaan €${d.p50}</span>`].filter(Boolean).join(' ');
     return `<a class="deal-card" href="${escHtml(d.url)}" target="_blank" rel="noopener">
       ${imgHtml}
       <div class="dc-info">
@@ -1237,12 +1265,22 @@ function buildDealsSection(set, idx) {
       <div class="dc-price">€${Number(d.price || 0).toFixed(0)}</div>
       <div class="dc-discount">−${d.discount_pct}%</div>
     </a>`;
-  }).join('');
+  };
 
-  return `<div class="deals-section" id="deals-${idx}">
-    <h4>🛒 Koopkansen op Marktplaats (${deals.length})</h4>
-    <div class="deal-cards">${cards}</div>
-  </div>`;
+  let html = '';
+  if (steals.length > 0) {
+    html += `<div class="deals-section steals-section" id="deals-${idx}">
+      <h4>🔥 Steals op Marktplaats (${steals.length})</h4>
+      <div class="deal-cards">${steals.map(renderCard).join('')}</div>
+    </div>`;
+  }
+  if (deals.length > 0) {
+    html += `<div class="deals-section${steals.length === 0 ? ` id="deals-${idx}"` : ''}">
+      <h4>🛒 Koopkansen op Marktplaats (${deals.length})</h4>
+      <div class="deal-cards">${deals.map(renderCard).join('')}</div>
+    </div>`;
+  }
+  return html;
 }
 
 function expandAndScrollToDeals(badgeEl) {
@@ -1284,7 +1322,18 @@ function buildCompactStats(set) {
       <div class="cs-val">${val}${delta(d)}</div>
     </div>`;
 
-  const dealCount = (set.deals || []).filter(d => d.condition === cond).length;
+  const modeDeals = (set.deals || []).filter(d => d.condition === cond);
+  const stealCount = modeDeals.filter(d => d.category === 'steal').length;
+  const dealCount  = modeDeals.filter(d => d.category === 'deal').length;
+
+  const stealBlock = stealCount > 0 ? `
+    <div class="cs-steal-block"
+         title="${stealCount} steal${stealCount > 1 ? 's' : ''} — extreme korting, direct toeslaan!"
+         onclick="event.stopPropagation();expandAndScrollToDeals(this)">
+      <div class="cs-deal-count">${stealCount}</div>
+      <div class="cs-deal-icon">🔥 steals</div>
+    </div>` : '';
+
   const dealBlock = dealCount > 0 ? `
     <div class="cs-deal-block"
          title="${dealCount} deal${dealCount > 1 ? 's' : ''} gevonden — klik om te bekijken"
@@ -1295,6 +1344,7 @@ function buildCompactStats(set) {
 
   return singleBlock('Te koop', act, app)
        + singleBlock('Verkopen', sold, dis)
+       + stealBlock
        + dealBlock;
 }
 

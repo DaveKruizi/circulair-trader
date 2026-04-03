@@ -23,7 +23,8 @@ PLATFORM_LABELS = {
 }
 
 TRADER_THRESHOLD = 5  # meer dan N actieve LEGO-listings → LEGO-handelaar
-DEAL_DISCOUNT_PCT = 20  # minimaal X% onder mediaan vraagprijs
+DEAL_DISCOUNT_PCT = 20   # minimaal X% onder mediaan vraagprijs → deal
+STEAL_DISCOUNT_PCT = 35  # ≥X% onder mediaan vraagprijs → steal
 BCG_VELOCITY_THRESHOLD = 50   # hot_score >= 50 = hoge snelheid
 BCG_VALUE_THRESHOLD = 1.15    # NIB p50 >= retail * 1.15 = waardestijging (NIB-modus)
 BCG_CIB_SPREAD_THRESHOLD = 1.30  # NIB p50 >= CIB p50 * 1.30 = goede handelsmarge (CIB-modus)
@@ -203,10 +204,13 @@ def _compute_bcg_cib(lego_set: dict, platforms_data: dict, hot_score_cib: int, c
     return "question_mark"
 
 
-def _find_deals(platforms_data: dict, seller_lego_counts: dict) -> list[dict]:
+def _find_deals(
+    platforms_data: dict, seller_lego_counts: dict, retail_price: float | None
+) -> list[dict]:
     """
-    Interessante Marktplaats-deals:
-    - Vraagprijs ≥ DEAL_DISCOUNT_PCT% onder mediaan vraagprijs (per conditie)
+    Interessante Marktplaats-deals, gecategoriseerd als 'steal' of 'deal':
+    - Steal: ≥STEAL_DISCOUNT_PCT% onder p50, OF NIB-prijs onder retailprijs terwijl p50 > retail
+    - Deal: ≥DEAL_DISCOUNT_PCT% onder p50 (maar geen steal)
     - Vaste prijs: OK ook als verkoper LEGO-handelaar is
     - Bieding: ALLEEN als verkoper GEEN LEGO-handelaar is (>TRADER_THRESHOLD listings)
     """
@@ -218,11 +222,23 @@ def _find_deals(platforms_data: dict, seller_lego_counts: dict) -> list[dict]:
         p50 = intel.get("p50")
         if not p50:
             continue
-        threshold = p50 * (1 - DEAL_DISCOUNT_PCT / 100)
+
+        deal_threshold = p50 * (1 - DEAL_DISCOUNT_PCT / 100)
 
         for listing in intel.get("listings", []):
             price = listing.get("price", 0)
-            if not price or price > threshold:
+            if not price:
+                continue
+
+            # NIB-prijs onder retail terwijl markt boven retail staat → steal-kandidaat
+            nib_below_retail = (
+                condition == "NIB"
+                and retail_price is not None
+                and price < retail_price
+                and p50 > retail_price
+            )
+
+            if price > deal_threshold and not nib_below_retail:
                 continue
 
             seller_name = listing.get("seller_name", "")
@@ -239,17 +255,23 @@ def _find_deals(platforms_data: dict, seller_lego_counts: dict) -> list[dict]:
             if price_type == "bidding" and is_trader:
                 continue
 
+            discount_pct = round((1 - price / p50) * 100)
+            is_steal = discount_pct >= STEAL_DISCOUNT_PCT or nib_below_retail
+            category = "steal" if is_steal else "deal"
+
             deals.append({
                 **listing,
                 "condition": condition,
                 "p50": round(p50, 0),
-                "discount_pct": round((1 - price / p50) * 100),
+                "discount_pct": discount_pct,
                 "is_trader": is_trader,
                 "seller_count": seller_count,
                 "price_type": price_type,
+                "category": category,
             })
 
-    return sorted(deals, key=lambda d: d["discount_pct"], reverse=True)
+    # Steals eerst, daarna deals; binnen categorie op korting aflopend
+    return sorted(deals, key=lambda d: (d["category"] != "steal", -d["discount_pct"]))
 
 
 def build_dashboard_data(
@@ -329,7 +351,7 @@ def build_dashboard_data(
         hot_score_nib = _compute_hot_score_condition(platforms_data, "NIB")
         hot_score_cib = _compute_hot_score_condition(platforms_data, "CIB")
         retirement_indicator = _compute_retirement_indicator(lego_set, platforms_data, current_year)
-        deals = _find_deals(platforms_data, seller_lego_counts)
+        deals = _find_deals(platforms_data, seller_lego_counts, lego_set.get("retail_price"))
         bcg_nib = _compute_bcg_nib(lego_set, platforms_data, hot_score_nib, current_year)
         bcg_cib = _compute_bcg_cib(lego_set, platforms_data, hot_score_cib, current_year)
 
