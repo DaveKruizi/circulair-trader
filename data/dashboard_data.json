@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-03T09:48:28.591799",
+  "generated_at": "2026-04-03T10:03:58.114390",
   "scraped_at": "2026-03-25T15:07:57.047729",
   "platform_labels": {
     "vinted_nl": "Vinted NL",
@@ -1313,13 +1313,16 @@
         }
       ],
       "hot_score": 22,
+      "hot_score_nib": 20,
+      "hot_score_cib": 22,
       "retirement_indicator": {
         "direction": "stable",
         "pct": 0,
         "annual_return_pct": -0.3
       },
       "deals": [],
-      "bcg_category": "dog"
+      "bcg_nib": "dog",
+      "bcg_cib": "dog"
     },
     {
       "set_number": "10298",
@@ -2601,6 +2604,8 @@
         }
       ],
       "hot_score": 23,
+      "hot_score_nib": 36,
+      "hot_score_cib": 18,
       "retirement_indicator": {
         "direction": "down",
         "pct": 13,
@@ -2650,7 +2655,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10300",
@@ -3887,13 +3893,16 @@
         }
       ],
       "hot_score": 22,
+      "hot_score_nib": 10,
+      "hot_score_cib": 32,
       "retirement_indicator": {
         "direction": "down",
         "pct": 9,
         "annual_return_pct": -8.7
       },
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10317",
@@ -4816,9 +4825,12 @@
         }
       ],
       "hot_score": 14,
+      "hot_score_nib": 14,
+      "hot_score_cib": 15,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10337",
@@ -5539,9 +5551,12 @@
         }
       ],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42115",
@@ -6764,13 +6779,16 @@
         }
       ],
       "hot_score": 42,
+      "hot_score_nib": 34,
+      "hot_score_cib": 45,
       "retirement_indicator": {
         "direction": "down",
         "pct": 12,
         "annual_return_pct": -12.5
       },
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42125",
@@ -7912,6 +7930,8 @@
         }
       ],
       "hot_score": 35,
+      "hot_score_nib": 59,
+      "hot_score_cib": 30,
       "retirement_indicator": {
         "direction": "down",
         "pct": 16,
@@ -7947,7 +7967,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42130",
@@ -9146,6 +9167,8 @@
         }
       ],
       "hot_score": 16,
+      "hot_score_nib": 14,
+      "hot_score_cib": 16,
       "retirement_indicator": {
         "direction": "down",
         "pct": 30,
@@ -9209,7 +9232,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_nib": "dog",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42143",
@@ -10552,13 +10576,16 @@
         }
       ],
       "hot_score": 24,
+      "hot_score_nib": 28,
+      "hot_score_cib": 22,
       "retirement_indicator": {
         "direction": "down",
         "pct": 19,
         "annual_return_pct": -18.6
       },
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42151",
@@ -11920,6 +11947,8 @@
         }
       ],
       "hot_score": 31,
+      "hot_score_nib": 33,
+      "hot_score_cib": 31,
       "retirement_indicator": {
         "direction": "down",
         "pct": 60,
@@ -11997,7 +12026,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_nib": "dog",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42154",
@@ -13115,13 +13145,16 @@
         }
       ],
       "hot_score": 32,
+      "hot_score_nib": 50,
+      "hot_score_cib": 30,
       "retirement_indicator": {
         "direction": "stable",
         "pct": 0,
         "annual_return_pct": 3.1
       },
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42156",
@@ -14299,6 +14332,8 @@
         }
       ],
       "hot_score": 25,
+      "hot_score_nib": 18,
+      "hot_score_cib": 28,
       "retirement_indicator": {
         "direction": "down",
         "pct": 15,
@@ -14334,7 +14369,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42159",
@@ -15206,6 +15242,8 @@
         }
       ],
       "hot_score": 6,
+      "hot_score_nib": 0,
+      "hot_score_cib": 9,
       "retirement_indicator": null,
       "deals": [
         {
@@ -15223,7 +15261,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42162",
@@ -16219,6 +16258,8 @@
         }
       ],
       "hot_score": 5,
+      "hot_score_nib": 7,
+      "hot_score_cib": 4,
       "retirement_indicator": {
         "direction": "up",
         "pct": 48,
@@ -16254,7 +16295,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "star"
+      "bcg_nib": "star",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42170",
@@ -17225,6 +17267,8 @@
         }
       ],
       "hot_score": 14,
+      "hot_score_nib": 0,
+      "hot_score_cib": 17,
       "retirement_indicator": null,
       "deals": [
         {
@@ -17242,7 +17286,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42141",
@@ -18452,6 +18497,8 @@
         }
       ],
       "hot_score": 10,
+      "hot_score_nib": 0,
+      "hot_score_cib": 12,
       "retirement_indicator": {
         "direction": "down",
         "pct": 15,
@@ -18515,7 +18562,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42202",
@@ -19416,6 +19464,8 @@
         }
       ],
       "hot_score": 4,
+      "hot_score_nib": 14,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [
         {
@@ -19433,7 +19483,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42214",
@@ -20354,6 +20405,8 @@
       ],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [
         {
@@ -20385,7 +20438,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10357",
@@ -20912,9 +20966,12 @@
       ],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42083",
@@ -22235,6 +22292,8 @@
         }
       ],
       "hot_score": 36,
+      "hot_score_nib": 50,
+      "hot_score_cib": 31,
       "retirement_indicator": {
         "direction": "down",
         "pct": 24,
@@ -22298,7 +22357,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42096",
@@ -23325,13 +23385,16 @@
         }
       ],
       "hot_score": 14,
+      "hot_score_nib": 0,
+      "hot_score_cib": 14,
       "retirement_indicator": {
         "direction": "down",
         "pct": 13,
         "annual_return_pct": -6.9
       },
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10271",
@@ -24488,6 +24551,8 @@
         }
       ],
       "hot_score": 8,
+      "hot_score_nib": 13,
+      "hot_score_cib": 7,
       "retirement_indicator": {
         "direction": "up",
         "pct": 7,
@@ -24523,7 +24588,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_nib": "dog",
+      "bcg_cib": "dog"
     },
     {
       "set_number": "10321",
@@ -25452,9 +25518,12 @@
         }
       ],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10265",
@@ -26634,6 +26703,8 @@
         }
       ],
       "hot_score": 5,
+      "hot_score_nib": 5,
+      "hot_score_cib": 6,
       "retirement_indicator": {
         "direction": "down",
         "pct": 6,
@@ -26711,7 +26782,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_nib": "dog",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42056",
@@ -27914,6 +27986,8 @@
         }
       ],
       "hot_score": 1,
+      "hot_score_nib": 0,
+      "hot_score_cib": 2,
       "retirement_indicator": {
         "direction": "up",
         "pct": 100,
@@ -27935,7 +28009,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "cash_cow"
+      "bcg_nib": "cash_cow",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42107",
@@ -28918,6 +28993,8 @@
         }
       ],
       "hot_score": 7,
+      "hot_score_nib": 0,
+      "hot_score_cib": 8,
       "retirement_indicator": {
         "direction": "up",
         "pct": 14,
@@ -28981,7 +29058,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42207",
@@ -29938,6 +30016,8 @@
         }
       ],
       "hot_score": 8,
+      "hot_score_nib": 0,
+      "hot_score_cib": 13,
       "retirement_indicator": null,
       "deals": [
         {
@@ -29955,7 +30035,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42172",
@@ -31062,9 +31143,12 @@
         }
       ],
       "hot_score": 2,
+      "hot_score_nib": 0,
+      "hot_score_cib": 4,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42206",
@@ -32033,9 +32117,12 @@
         }
       ],
       "hot_score": 2,
+      "hot_score_nib": 6,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42110",
@@ -33175,6 +33262,8 @@
         }
       ],
       "hot_score": 26,
+      "hot_score_nib": 50,
+      "hot_score_cib": 24,
       "retirement_indicator": {
         "direction": "stable",
         "pct": 0,
@@ -33196,7 +33285,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42171",
@@ -34318,6 +34408,8 @@
         }
       ],
       "hot_score": 3,
+      "hot_score_nib": 0,
+      "hot_score_cib": 4,
       "retirement_indicator": {
         "direction": "down",
         "pct": 24,
@@ -34353,7 +34445,8 @@
           "seller_count": 0
         }
       ],
-      "bcg_category": "dog"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "77942",
@@ -34460,9 +34553,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10220",
@@ -34569,9 +34665,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10242",
@@ -34678,9 +34777,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10248",
@@ -34787,9 +34889,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10252",
@@ -34896,9 +35001,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10258",
@@ -35005,9 +35113,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10269",
@@ -35114,9 +35225,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10274",
@@ -35223,9 +35337,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10279",
@@ -35332,9 +35449,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10290",
@@ -35441,9 +35561,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10304",
@@ -35550,9 +35673,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "10330",
@@ -35659,9 +35785,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42111",
@@ -35768,9 +35897,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42126",
@@ -35877,9 +36009,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42127",
@@ -35986,9 +36121,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42128",
@@ -36095,9 +36233,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42138",
@@ -36204,9 +36345,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42160",
@@ -36313,9 +36457,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42161",
@@ -36422,9 +36569,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42093",
@@ -36531,9 +36681,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42098",
@@ -36640,9 +36793,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42077",
@@ -36749,9 +36905,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42039",
@@ -36858,9 +37017,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "42000",
@@ -36967,9 +37129,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "8070",
@@ -37076,9 +37241,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "8448",
@@ -37185,9 +37353,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     },
     {
       "set_number": "8880",
@@ -37294,9 +37465,12 @@
       "mp_listings": [],
       "price_too_low_7d": [],
       "hot_score": 0,
+      "hot_score_nib": 0,
+      "hot_score_cib": 0,
       "retirement_indicator": null,
       "deals": [],
-      "bcg_category": "question_mark"
+      "bcg_nib": "question_mark",
+      "bcg_cib": "question_mark"
     }
   ],
   "rejection_summary_7d": {
