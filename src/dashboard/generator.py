@@ -156,8 +156,16 @@ def _compute_bcg_category(lego_set: dict, platforms_data: dict, hot_score: int) 
         # Recently retired of retiring soon → ook Question Mark (premiumvorming op gang).
         no_velocity_data = hot_score == 0
         no_value_data = not nib_p50s
-        if no_velocity_data or no_value_data or recently_retired or retiring_soon:
+        if no_velocity_data or no_value_data:
             return "question_mark"
+        if recently_retired:
+            # Recent retired: Question Mark tenzij >20% onder retail → dan toch Dog
+            if retail and nib_p50s:
+                avg_p50 = sum(nib_p50s) / len(nib_p50s)
+                deep_discount = avg_p50 < retail * 0.80
+            else:
+                deep_discount = False
+            return "dog" if deep_discount else "question_mark"
         return "dog"
 
 
