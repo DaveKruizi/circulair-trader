@@ -31,6 +31,15 @@ BCG_RECENT_RETIRED_YEARS = 2  # ≤ N jaar retired = "recently retired"
 BCG_RECENT_RETIRED_DEEP_DISCOUNT = 0.80  # >20% onder retail → toch Dog
 
 
+def _p50s(platforms_data: dict, condition: str) -> list[float]:
+    """Haal alle beschikbare p50-waarden op voor één conditie over alle platforms."""
+    return [
+        pd[condition]["p50"]
+        for pd in platforms_data.values()
+        if pd.get(condition, {}).get("p50") is not None
+    ]
+
+
 def _compute_hot_score_condition(platforms_data: dict, condition: str) -> int:
     """Score 0–100 voor één conditie (NIB of CIB) over alle platforms."""
     total_dis = 0
@@ -51,8 +60,8 @@ def _compute_hot_score(platforms_data: dict) -> int:
     """Gecombineerde hot score over NIB + CIB (voor algemeen gebruik)."""
     total_dis = 0
     total_act = 0
-    for platform_data in platforms_data.values():
-        for condition in ("NIB", "CIB"):
+    for condition in ("NIB", "CIB"):
+        for platform_data in platforms_data.values():
             intel = platform_data.get(condition, {})
             total_dis += intel.get("disappeared_7d", 0)
             total_act += intel.get("active_count", 0)
@@ -64,7 +73,7 @@ def _compute_hot_score(platforms_data: dict) -> int:
     return min(round((0.6 * velocity + 0.4 * druk) * 100), 100)
 
 
-def _compute_retirement_indicator(lego_set: dict, platforms_data: dict) -> Optional[dict]:
+def _compute_retirement_indicator(lego_set: dict, platforms_data: dict, current_year: int) -> Optional[dict]:
     """
     Alleen voor retired sets: vergelijkt huidige NIB-mediaan (beide platforms)
     met de officiële retailprijs. Geeft richting, totaal percentage en CAGR terug.
@@ -74,11 +83,7 @@ def _compute_retirement_indicator(lego_set: dict, platforms_data: dict) -> Optio
     retail = lego_set.get("retail_price")
     if not retail:
         return None
-    nib_p50s = [
-        pd.get("NIB", {}).get("p50")
-        for pd in platforms_data.values()
-        if pd.get("NIB", {}).get("p50") is not None
-    ]
+    nib_p50s = _p50s(platforms_data, "NIB")
     if not nib_p50s:
         return None
     avg = sum(nib_p50s) / len(nib_p50s)
@@ -92,7 +97,7 @@ def _compute_retirement_indicator(lego_set: dict, platforms_data: dict) -> Optio
     release_year = lego_set.get("release_year")
     base_year = retired_year or release_year
     if base_year:
-        years = max(datetime.now().year - base_year, 0.5)
+        years = max(current_year - base_year, 0.5)
         annual_return_pct = round(((avg / retail) ** (1 / years) - 1) * 100, 1)
 
     if avg > retail * 1.05:
@@ -102,16 +107,16 @@ def _compute_retirement_indicator(lego_set: dict, platforms_data: dict) -> Optio
     return {"direction": "stable", "pct": 0, "annual_return_pct": annual_return_pct}
 
 
-def _recently_retired(lego_set: dict) -> bool:
+def _recently_retired(lego_set: dict, current_year: int) -> bool:
     retired_year = lego_set.get("retired_year")
     return (
         lego_set.get("is_retired", False)
         and retired_year is not None
-        and (datetime.now().year - retired_year) <= BCG_RECENT_RETIRED_YEARS
+        and (current_year - retired_year) <= BCG_RECENT_RETIRED_YEARS
     )
 
 
-def _compute_bcg_nib(lego_set: dict, platforms_data: dict, hot_score_nib: int) -> str:
+def _compute_bcg_nib(lego_set: dict, platforms_data: dict, hot_score_nib: int, current_year: int) -> str:
     """
     BCG voor NIB (beleggingsstrategie: bewaren en waardeontwikkeling volgen).
 
@@ -127,26 +132,20 @@ def _compute_bcg_nib(lego_set: dict, platforms_data: dict, hot_score_nib: int) -
     if not is_retired:
         return "question_mark"
 
-    recently_ret = _recently_retired(lego_set)
+    recently_ret = _recently_retired(lego_set, current_year)
     high_velocity = hot_score_nib >= BCG_VELOCITY_THRESHOLD
 
     retail = lego_set.get("retail_price")
-    nib_p50s = [
-        pd.get("NIB", {}).get("p50")
-        for pd in platforms_data.values()
-        if pd.get("NIB", {}).get("p50") is not None
-    ]
+    nib_p50s = _p50s(platforms_data, "NIB")
+    avg_p50 = sum(nib_p50s) / len(nib_p50s) if nib_p50s else None
 
     if nib_p50s and retail:
-        avg_p50 = sum(nib_p50s) / len(nib_p50s)
         high_value = avg_p50 >= retail * BCG_VALUE_THRESHOLD
     elif nib_p50s and not retail:
-        ri = _compute_retirement_indicator(lego_set, platforms_data)
+        ri = _compute_retirement_indicator(lego_set, platforms_data, current_year)
         high_value = ri is not None and ri.get("direction") == "up"
-        avg_p50 = sum(nib_p50s) / len(nib_p50s) if nib_p50s else None
     else:
         high_value = False
-        avg_p50 = None
 
     if (high_velocity and high_value) or (recently_ret and high_value):
         return "star"
@@ -164,7 +163,7 @@ def _compute_bcg_nib(lego_set: dict, platforms_data: dict, hot_score_nib: int) -
     return "dog"
 
 
-def _compute_bcg_cib(lego_set: dict, platforms_data: dict, hot_score_cib: int) -> str:
+def _compute_bcg_cib(lego_set: dict, platforms_data: dict, hot_score_cib: int, current_year: int) -> str:
     """
     BCG voor CIB (handelsstrategie: actief kopen en snel doorverkopen).
 
@@ -180,19 +179,11 @@ def _compute_bcg_cib(lego_set: dict, platforms_data: dict, hot_score_cib: int) -
     if not is_retired:
         return "question_mark"
 
-    recently_ret = _recently_retired(lego_set)
+    recently_ret = _recently_retired(lego_set, current_year)
     high_velocity = hot_score_cib >= BCG_VELOCITY_THRESHOLD
 
-    nib_p50s = [
-        pd.get("NIB", {}).get("p50")
-        for pd in platforms_data.values()
-        if pd.get("NIB", {}).get("p50") is not None
-    ]
-    cib_p50s = [
-        pd.get("CIB", {}).get("p50")
-        for pd in platforms_data.values()
-        if pd.get("CIB", {}).get("p50") is not None
-    ]
+    nib_p50s = _p50s(platforms_data, "NIB")
+    cib_p50s = _p50s(platforms_data, "CIB")
 
     if nib_p50s and cib_p50s:
         avg_nib = sum(nib_p50s) / len(nib_p50s)
@@ -277,6 +268,8 @@ def build_dashboard_data(
     from src import db
     db.init_db()
 
+    current_year = datetime.now().year
+
     # Brede LEGO-verkoperstelling uit de scrape-run
     seller_lego_counts: dict = marktplaats_deals.get("seller_lego_counts", {})
 
@@ -333,13 +326,12 @@ def build_dashboard_data(
         mp_listings = marktplaats_deals.get("sets", {}).get(set_number, [])
 
         # Indicatoren
-        hot_score = _compute_hot_score(platforms_data)
         hot_score_nib = _compute_hot_score_condition(platforms_data, "NIB")
         hot_score_cib = _compute_hot_score_condition(platforms_data, "CIB")
-        retirement_indicator = _compute_retirement_indicator(lego_set, platforms_data)
+        retirement_indicator = _compute_retirement_indicator(lego_set, platforms_data, current_year)
         deals = _find_deals(platforms_data, seller_lego_counts)
-        bcg_nib = _compute_bcg_nib(lego_set, platforms_data, hot_score_nib)
-        bcg_cib = _compute_bcg_cib(lego_set, platforms_data, hot_score_cib)
+        bcg_nib = _compute_bcg_nib(lego_set, platforms_data, hot_score_nib, current_year)
+        bcg_cib = _compute_bcg_cib(lego_set, platforms_data, hot_score_cib, current_year)
 
         sets_out.append({
             "set_number": set_number,
@@ -357,7 +349,6 @@ def build_dashboard_data(
             "price_history": history,
             "mp_listings": mp_listings[:15],
             "price_too_low_7d": ptl_by_set.get(set_number, []),
-            "hot_score": hot_score,
             "hot_score_nib": hot_score_nib,
             "hot_score_cib": hot_score_cib,
             "retirement_indicator": retirement_indicator,

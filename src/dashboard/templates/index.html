@@ -659,6 +659,13 @@ let bcgFilter = 'all';     // 'all' | 'star' | 'cash_cow' | 'question_mark' | 'd
 let statusFilter = 'all';  // 'all' | 'retiring_soon' | 'recent_retired' | 'retired' | 'active'
 
 const CURRENT_YEAR = new Date().getFullYear();
+const BCG_BADGE_LABEL = { star:'⭐ Star', cash_cow:'💰 Cash Cow', question_mark:'❓ Mark', dog:'🐕 Dog' };
+const BCG_BADGE_STYLE = {
+  star:          'background:#854d0e;color:#fde68a;border:1px solid #d9770655',
+  cash_cow:      'background:#14532d;color:#bbf7d0;border:1px solid #16a34a55',
+  question_mark: 'background:#1e3a5f;color:#bfdbfe;border:1px solid #3b82f655',
+  dog:           'background:#1e293b;color:#94a3b8;border:1px solid #47556955',
+};
 
 fetch('./data/dashboard_data.json')
   .then(r => r.json())
@@ -903,7 +910,7 @@ function buildSetCard(set, idx) {
       const cagrCls = ar >= 20 ? 'cagr-high' : ar >= 8 ? 'cagr-mid' : ar >= 0 ? 'cagr-low' : 'cagr-neg';
       const cagrSign = ar >= 0 ? '+' : '';
       const baseYear = set.retired_year || set.release_year;
-      const years = baseYear ? (new Date().getFullYear() - baseYear) : null;
+      const years = baseYear ? (CURRENT_YEAR - baseYear) : null;
       const baseLabel = set.retired_year ? `retired ${set.retired_year}` : `release ${set.release_year}`;
       const yrsLabel = years ? ` — ${years}jr sinds ${baseLabel}` : '';
       cagrHtml = ` <span class="cagr-badge ${cagrCls}" title="Jaarlijks rendement (CAGR)${yrsLabel}: ${cagrSign}${ar}%/jr">${cagrSign}${ar}%<span style="font-weight:400;opacity:.7;font-size:9px">/jr</span></span>`;
@@ -917,15 +924,8 @@ function buildSetCard(set, idx) {
   }
 
   const bcgForCard = getSetBcg(set);
-  const BCG_BADGE = { star:'⭐ Star', cash_cow:'💰 Cash Cow', question_mark:'❓ Mark', dog:'🐕 Dog' };
-  const BCG_BADGE_STYLE = {
-    star:          'background:#854d0e;color:#fde68a;border:1px solid #d9770655',
-    cash_cow:      'background:#14532d;color:#bbf7d0;border:1px solid #16a34a55',
-    question_mark: 'background:#1e3a5f;color:#bfdbfe;border:1px solid #3b82f655',
-    dog:           'background:#1e293b;color:#94a3b8;border:1px solid #47556955',
-  };
   const bcgBadge = bcgForCard
-    ? `<span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;${BCG_BADGE_STYLE[bcgForCard]}">${BCG_BADGE[bcgForCard]}</span>`
+    ? `<span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;${BCG_BADGE_STYLE[bcgForCard]}">${BCG_BADGE_LABEL[bcgForCard]}</span>`
     : '';
 
   card.innerHTML = `
@@ -1014,7 +1014,7 @@ function renderActiveListings(set, idx) {
   const container = document.getElementById(`active-listings-${idx}`);
   if (!container) return;
 
-  const cond = activeCondition;
+  const cond = currentMode;
   const mpExtra = {};
   (set.mp_listings || []).forEach(l => { if (l.url) mpExtra[l.url] = l; });
 
@@ -1313,7 +1313,7 @@ function renderHistoryChart(set, idx) {
   const el = document.getElementById(`chart-hist-${idx}`);
   if (!el) return;
 
-  const cond = activeCondition;
+  const cond = currentMode;
   const history = (set.price_history || []).filter(h => h.condition === cond);
 
   const platforms = ['vinted_nl', 'marktplaats'];
@@ -1359,7 +1359,7 @@ function renderBucketChart(set, idx) {
   const el = document.getElementById(`chart-bucket-${idx}`);
   if (!el) return;
 
-  const cond = activeCondition;
+  const cond = currentMode;
   const platforms = ['vinted_nl', 'marktplaats'];
   const platformLabels = {'vinted_nl':'Vinted NL','marktplaats':'Marktplaats'};
   const colors = {'vinted_nl':'#3b82f6aa','marktplaats':'#f59e0baa'};
