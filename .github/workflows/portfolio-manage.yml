@@ -1,0 +1,133 @@
+name: Portfolio Beheer
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SECURITY CHECKLIST
+# ─────────────────────────────────────────────────────────────────────────────
+# [✓] Portfolio data leeft uitsluitend in data/trading.db (GitHub Actions cache)
+#     → staat in .gitignore, wordt NOOIT gecommit naar de publieke repo
+# [✓] PORTFOLIO_TOKEN is een GitHub Secret — nooit in code of logs zichtbaar
+#     → portfolio JSON is bereikbaar via ./data/pf_{TOKEN}.json
+#     → wie de URL niet kent, kan de data niet inzien
+# [✓] Toegang tot dit workflow vereist GitHub-authenticatie
+#     → alleen jij (en repo-collaborators) kunnen posities toevoegen/verkopen
+# [✓] PORTFOLIO_TOKEN staat NIET in de gegenereerde HTML — alleen als URL-fragment
+# [!] Beveiliging is 'security by obscurity': de token-URL is niet gokbaar,
+#     maar wie de URL weet (bijv. via browser history) kan de JSON lezen.
+#     Acceptabel voor persoonlijk gebruik; geen bankbeveiliging.
+# [!] GitHub Actions cache verloopt na 30 dagen inactiviteit. Omdat de dagelijkse
+#     scrape de cache ververst, is verlies in de praktijk niet waarschijnlijk.
+#     Aanbeveling: maak periodiek een lokale backup via:
+#       gh run download <run-id> --name lego-data-v2
+# ─────────────────────────────────────────────────────────────────────────────
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Actie'
+        required: true
+        type: choice
+        options:
+          - kopen
+          - verkopen
+      set_number:
+        description: 'Set nummer (bijv. 42096)'
+        required: true
+      condition:
+        description: 'Conditie'
+        required: true
+        type: choice
+        options:
+          - NIB
+          - CIB
+      quantity:
+        description: 'Aantal stuks (default: 1)'
+        required: false
+        default: '1'
+      purchase_price:
+        description: 'Aankoopprijs per stuk in € (bijv. 119.99) — verplicht bij kopen'
+        required: false
+      purchase_date:
+        description: 'Aankoopdatum YYYY-MM-DD (bijv. 2025-03-15) — verplicht bij kopen'
+        required: false
+      sold_price:
+        description: 'Verkoopprijs per stuk in € — verplicht bij verkopen'
+        required: false
+      sold_date:
+        description: 'Verkoopdatum YYYY-MM-DD — verplicht bij verkopen'
+        required: false
+      position_id:
+        description: 'Positie ID om te verkopen (zie dashboard) — verplicht bij verkopen'
+        required: false
+      notes:
+        description: 'Notities (optioneel)'
+        required: false
+
+jobs:
+  manage-portfolio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code ophalen
+        uses: actions/checkout@v4
+
+      - name: Data cache herstellen
+        uses: actions/cache@v4
+        with:
+          path: data/
+          key: lego-data-v2-${{ github.run_id }}
+          restore-keys: |
+            lego-data-v2-
+
+      - name: Set catalog herstellen vanuit git (overschrijft cache)
+        run: git checkout HEAD -- data/lego_sets.json
+
+      - name: Python installeren
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Dependencies installeren
+        run: pip install -r requirements.txt
+
+      - name: Positie verwerken
+        env:
+          PYTHONPATH: "."
+          ACTION: ${{ inputs.action }}
+          SET_NUMBER: ${{ inputs.set_number }}
+          CONDITION: ${{ inputs.condition }}
+          QUANTITY: ${{ inputs.quantity }}
+          PURCHASE_PRICE: ${{ inputs.purchase_price }}
+          PURCHASE_DATE: ${{ inputs.purchase_date }}
+          SOLD_PRICE: ${{ inputs.sold_price }}
+          SOLD_DATE: ${{ inputs.sold_date }}
+          POSITION_ID: ${{ inputs.position_id }}
+          NOTES: ${{ inputs.notes }}
+        run: python tools/portfolio_manage.py
+
+      - name: Data cache opslaan
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/
+          key: lego-data-v2-${{ github.run_id }}
+
+      - name: Dashboard opnieuw genereren
+        env:
+          PYTHONPATH: "."
+          PORTFOLIO_TOKEN: ${{ secrets.PORTFOLIO_TOKEN }}
+        run: python src/main_daily.py --dry-run
+
+      - name: Dashboard online zetten
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
+          keep_files: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Portfolio update ${{ github.run_id }}'
