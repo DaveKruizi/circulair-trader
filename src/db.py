@@ -91,6 +91,20 @@ def init_db() -> None:
                 ON price_snapshots(set_number, snapshot_date);
             CREATE INDEX IF NOT EXISTS idx_rejection_date
                 ON rejection_log(log_date, set_number);
+
+            -- Portfolio: gekochte/verkochte posities (persoonlijk, NIET publiek)
+            CREATE TABLE IF NOT EXISTS portfolio_positions (
+                id              INTEGER PRIMARY KEY AUTOINCREMENT,
+                set_number      TEXT NOT NULL,
+                condition       TEXT NOT NULL CHECK(condition IN ('NIB', 'CIB')),
+                quantity        INTEGER NOT NULL DEFAULT 1,
+                purchase_price  REAL NOT NULL,
+                purchase_date   TEXT NOT NULL,
+                sold_price      REAL,
+                sold_date       TEXT,
+                notes           TEXT,
+                created_at      TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
         """)
         # Migrate existing DBs that predate image_url/url columns
         for col, default in [("image_url", "''"), ("url", "''")] :
@@ -420,3 +434,48 @@ def get_rejection_summary(days: int = 7) -> dict:
             (f"-{days} days",),
         ).fetchall()
         return {r["reason"]: r["count"] for r in rows}
+
+
+# ── Portfolio CRUD ─────────────────────────────────────────────────────────────
+
+def get_portfolio_positions() -> list[dict]:
+    """Alle portfolio-posities, nieuwste eerst."""
+    with get_connection() as conn:
+        rows = conn.execute(
+            """SELECT id, set_number, condition, quantity, purchase_price, purchase_date,
+                      sold_price, sold_date, notes, created_at
+               FROM portfolio_positions
+               ORDER BY sold_date IS NULL DESC, purchase_date DESC"""
+        ).fetchall()
+        return [dict(r) for r in rows]
+
+
+def add_portfolio_position(
+    set_number: str,
+    condition: str,
+    quantity: int,
+    purchase_price: float,
+    purchase_date: str,
+    notes: str = "",
+) -> int:
+    """Voeg een nieuwe positie toe. Geeft het nieuwe id terug."""
+    with get_connection() as conn:
+        cur = conn.execute(
+            """INSERT INTO portfolio_positions
+               (set_number, condition, quantity, purchase_price, purchase_date, notes)
+               VALUES (?,?,?,?,?,?)""",
+            (set_number, condition, quantity, purchase_price, purchase_date, notes or ""),
+        )
+        return cur.lastrowid
+
+
+def sell_portfolio_position(position_id: int, sold_price: float, sold_date: str) -> bool:
+    """Markeer een open positie als verkocht. Geeft True als de rij gevonden is."""
+    with get_connection() as conn:
+        cur = conn.execute(
+            """UPDATE portfolio_positions
+               SET sold_price=?, sold_date=?
+               WHERE id=? AND sold_date IS NULL""",
+            (sold_price, sold_date, position_id),
+        )
+        return cur.rowcount > 0

@@ -7,6 +7,7 @@ Produces:
 """
 
 import json
+import os
 import shutil
 from datetime import datetime
 from pathlib import Path
@@ -22,9 +23,10 @@ PLATFORM_LABELS = {
     "marktplaats": "Marktplaats",
 }
 
-TRADER_THRESHOLD = 5  # meer dan N actieve LEGO-listings → LEGO-handelaar
-DEAL_DISCOUNT_PCT = 20   # minimaal X% onder mediaan vraagprijs → deal
-STEAL_DISCOUNT_PCT = 35  # ≥X% onder mediaan vraagprijs → steal
+TRADER_THRESHOLD = 5       # meer dan N actieve LEGO-listings → LEGO-handelaar
+DEAL_DISCOUNT_PCT = 20     # minimaal X% onder mediaan vraagprijs → deal
+STEAL_DISCOUNT_PCT = 35    # ≥X% onder mediaan vraagprijs → steal
+MIN_FLIP_MARGIN_EUR = 31   # p50 - aankoopprijs moet ≥ €31 (€25 netto + €6 verzending)
 BCG_VELOCITY_THRESHOLD = 50   # hot_score >= 50 = hoge snelheid
 BCG_VALUE_THRESHOLD = 1.15    # NIB p50 >= retail * 1.15 = waardestijging (NIB-modus)
 BCG_CIB_SPREAD_THRESHOLD = 1.30  # NIB p50 >= CIB p50 * 1.30 = goede handelsmarge (CIB-modus)
@@ -171,10 +173,10 @@ def _compute_bcg_cib(lego_set: dict, platforms_data: dict, hot_score_cib: int, c
     Marge-as  : NIB p50 >= CIB p50 * 1.30 (30% spread = goede flip-marge)
     Snelheid  : CIB hot score >= 50
 
-    Star       : hoge CIB velocity + goede spread → actief handelen
+    Star       : hoge velocity + goede spread → snelle flip met marge
+    Cash Cow   : hoge velocity + dunne spread → betrouwbaar, lage marge maar snel weg
     Question Mark: één as ontbreekt, recent retired, of actief/retiring_soon
     Dog        : lage velocity + dunne spread + voldoende data
-    Cash Cow bestaat niet: CIB bewaar je niet.
     """
     is_retired = lego_set.get("is_retired", False)
     if not is_retired:
@@ -197,11 +199,46 @@ def _compute_bcg_cib(lego_set: dict, platforms_data: dict, hot_score_cib: int, c
 
     if high_velocity and good_spread:
         return "star"
+    if high_velocity and not good_spread:
+        return "cash_cow"
     if no_data or recently_ret:
         return "question_mark"
     if not high_velocity and not good_spread:
         return "dog"
     return "question_mark"
+
+
+def _compute_price_trend(set_number: str, condition: str) -> Optional[str]:
+    """
+    Vergelijk gemiddelde p50 van eerste helft vs tweede helft van de laatste 60 dagen.
+    Geeft 'up', 'stable' of 'down' terug, of None bij onvoldoende data (< 10 snapshots).
+    """
+    from src import db
+
+    all_prices: dict[str, list[float]] = {}
+    for platform in ALL_PLATFORMS:
+        for snap in db.get_price_history(set_number, platform, condition, limit=60):
+            p50 = snap.get("p50_price")
+            if p50 is None:
+                continue
+            all_prices.setdefault(snap["snapshot_date"], []).append(p50)
+
+    if len(all_prices) < 10:
+        return None
+
+    p50s = [sum(v) / len(v) for v in (all_prices[d] for d in sorted(all_prices))]
+    half = len(p50s) // 2
+    early = sum(p50s[:half]) / half
+    late = sum(p50s[half:]) / (len(p50s) - half)
+
+    if early <= 0:
+        return None
+    pct = (late / early - 1) * 100
+    if pct > 5:
+        return "up"
+    if pct < -5:
+        return "down"
+    return "stable"
 
 
 def _find_deals(
@@ -256,6 +293,11 @@ def _find_deals(
                 continue
 
             discount_pct = round((1 - price / p50) * 100)
+
+            # Absolute minimummarge: moet ≥ €31 overhouden (€25 netto + €6 verzending)
+            if p50 - price < MIN_FLIP_MARGIN_EUR:
+                continue
+
             is_steal = discount_pct >= STEAL_DISCOUNT_PCT or nib_below_retail
             category = "steal" if is_steal else "deal"
 
@@ -354,6 +396,8 @@ def build_dashboard_data(
         deals = _find_deals(platforms_data, seller_lego_counts, lego_set.get("retail_price"))
         bcg_nib = _compute_bcg_nib(lego_set, platforms_data, hot_score_nib, current_year)
         bcg_cib = _compute_bcg_cib(lego_set, platforms_data, hot_score_cib, current_year)
+        price_trend_nib = _compute_price_trend(set_number, "NIB")
+        price_trend_cib = _compute_price_trend(set_number, "CIB")
 
         sets_out.append({
             "set_number": set_number,
@@ -377,6 +421,8 @@ def build_dashboard_data(
             "deals": deals,
             "bcg_nib": bcg_nib,
             "bcg_cib": bcg_cib,
+            "price_trend_nib": price_trend_nib,
+            "price_trend_cib": price_trend_cib,
         })
 
     total_sold = db.get_total_sold_count()
@@ -397,7 +443,7 @@ def generate_dashboard(
     marktplaats_deals: dict,
     scraped_at: str,
 ) -> str:
-    """Generate dashboard_data.json and copy index.html to output/."""
+    """Generate dashboard_data.json and index.html to output/."""
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     DATA_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -408,13 +454,106 @@ def generate_dashboard(
     json_path = DATA_OUTPUT_DIR / "dashboard_data.json"
     json_path.write_text(json.dumps(data, ensure_ascii=False, indent=2))
 
-    # Copy static HTML shell
+    # Portfolio: generate private JSON at token-based URL if PORTFOLIO_TOKEN is set
+    portfolio_url = _build_portfolio_json(lego_sets, data)
+
+    # Render HTML template (replace {{PORTFOLIO_URL}} placeholder)
     html_dest = OUTPUT_DIR / "index.html"
-    shutil.copy(str(TEMPLATE_PATH), str(html_dest))
+    html = TEMPLATE_PATH.read_text(encoding="utf-8")
+    html = html.replace("{{PORTFOLIO_URL}}", portfolio_url)
+    html_dest.write_text(html, encoding="utf-8")
 
     # Ensure .nojekyll for GitHub Pages
     (OUTPUT_DIR / ".nojekyll").touch()
 
     print(f"[Dashboard] Written to {html_dest}")
     print(f"[Dashboard] Data JSON: {json_path} ({json_path.stat().st_size // 1024}KB)")
+    if portfolio_url:
+        print(f"[Dashboard] Portfolio JSON: {portfolio_url}")
     return str(html_dest)
+
+
+def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
+    """
+    Als PORTFOLIO_TOKEN is gezet: bouw portfolio_data.json op een token-gebaseerde URL.
+    Geeft de relatieve URL terug (''), of lege string als token ontbreekt.
+    """
+    token = os.environ.get("PORTFOLIO_TOKEN", "").strip()
+    if not token:
+        return ""
+
+    from src import db as _db
+    positions = _db.get_portfolio_positions()
+    if not positions:
+        return ""
+
+    # Bouw lookup: set_number → huidige p50 per conditie
+    p50_lookup: dict[str, dict[str, Optional[float]]] = {}
+    for s in dashboard_data.get("sets", []):
+        sn = s["set_number"]
+        p50_lookup[sn] = {}
+        for cond in ("NIB", "CIB"):
+            vals = [
+                pd.get(cond, {}).get("p50")
+                for pd in s.get("platforms", {}).values()
+                if pd.get(cond, {}).get("p50") is not None
+            ]
+            p50_lookup[sn][cond] = round(sum(vals) / len(vals), 2) if vals else None
+
+    # Verrijk posities met huidige marktwaarde
+    set_names = {s["set_number"]: s["name"] for s in dashboard_data.get("sets", [])}
+    enriched = []
+    total_invested = 0.0
+    total_market = 0.0
+    realized_pnl = 0.0
+
+    for pos in positions:
+        sn = pos["set_number"]
+        cond = pos["condition"]
+        qty = pos["quantity"]
+        buy_price = pos["purchase_price"]
+        invested = round(buy_price * qty, 2)
+        total_invested += invested
+
+        current_p50 = p50_lookup.get(sn, {}).get(cond)
+        if pos["sold_price"] is not None:
+            # Gesloten positie
+            pnl = round((pos["sold_price"] - buy_price) * qty, 2)
+            realized_pnl += pnl
+            enriched.append({**pos, "set_name": set_names.get(sn, sn),
+                              "current_p50": None, "unrealized_pnl": None,
+                              "unrealized_pnl_pct": None, "invested": invested,
+                              "realized_pnl": pnl})
+        else:
+            # Open positie
+            if current_p50 is not None:
+                market_val = round(current_p50 * qty, 2)
+                total_market += market_val
+                upnl = round(market_val - invested, 2)
+                upnl_pct = round((current_p50 / buy_price - 1) * 100, 1) if buy_price else None
+            else:
+                market_val = None
+                upnl = None
+                upnl_pct = None
+            enriched.append({**pos, "set_name": set_names.get(sn, sn),
+                              "current_p50": current_p50, "market_value": market_val,
+                              "unrealized_pnl": upnl, "unrealized_pnl_pct": upnl_pct,
+                              "invested": invested})
+
+    portfolio_data = {
+        "generated_at": datetime.now().isoformat(),
+        "positions": enriched,
+        "summary": {
+            "total_invested": round(total_invested, 2),
+            "total_market_value": round(total_market, 2),
+            "unrealized_pnl": round(total_market - total_invested, 2),
+            "unrealized_pnl_pct": round(
+                (total_market / total_invested - 1) * 100, 1
+            ) if total_invested else 0,
+            "realized_pnl": round(realized_pnl, 2),
+        },
+    }
+
+    pf_path = DATA_OUTPUT_DIR / f"pf_{token}.json"
+    pf_path.write_text(json.dumps(portfolio_data, ensure_ascii=False, indent=2))
+    return f"./data/pf_{token}.json"

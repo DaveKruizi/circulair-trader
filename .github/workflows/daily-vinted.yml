@@ -4,9 +4,9 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
-  # 02:00 UTC = 03:00 NL wintertijd — vóór de Marktplaats run om 04:00
+  # 05:30 UTC = 07:30 CEST (zomer) / 06:30 CET (winter) — ochtendrun
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '30 5 * * *'
 
   # Handmatig starten
   workflow_dispatch:

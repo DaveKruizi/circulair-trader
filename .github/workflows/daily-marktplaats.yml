@@ -4,10 +4,14 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
-  # Automatisch starten zodra de Vinted-run klaar is
+  # Ochtendrun: automatisch starten zodra de Vinted-run klaar is (~07:30 AMS)
   workflow_run:
     workflows: ["Dagelijkse Vinted Prijsanalyse"]
     types: [completed]
+
+  # Avondrun: 17:30 UTC = 19:30 CEST (zomer) / 18:30 CET (winter) — alleen Marktplaats
+  schedule:
+    - cron: '30 17 * * *'
 
   # Handmatig starten via GitHub Actions (bijv. voor eerste deploy)
   workflow_dispatch:
@@ -54,6 +58,7 @@ jobs:
         timeout-minutes: 20
         env:
           PYTHONPATH: "."
+          PORTFOLIO_TOKEN: ${{ secrets.PORTFOLIO_TOKEN }}
         run: python src/main_daily.py 2>&1 | tee output_log.txt; exit ${PIPESTATUS[0]}
 
       - name: Log tonen
