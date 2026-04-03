@@ -99,8 +99,21 @@ def _compute_bcg_category(lego_set: dict, platforms_data: dict, hot_score: int) 
     Star          : snel + waardevol   → kopen en snel doorverkopen
     Cash Cow      : langzaam + waardevol → kopen en vasthouden
     Question Mark : snel + niet waardevol (of onvoldoende data)
+                    ook: recently retired (≤2jr) of retiring_soon → te vroeg om te oordelen
     Dog           : langzaam + niet waardevol → vermijden
     """
+    current_year = datetime.now().year
+
+    # Sets die net retired zijn (≤2 jaar) of binnenkort gaan retiren worden nooit Dog:
+    # de premiumvorming is nog op gang aan het komen.
+    retired_year = lego_set.get("retired_year")
+    recently_retired = (
+        lego_set.get("is_retired")
+        and retired_year is not None
+        and (current_year - retired_year) <= 2
+    )
+    retiring_soon = bool(lego_set.get("retiring_soon"))
+
     high_velocity = hot_score >= BCG_VELOCITY_THRESHOLD
 
     retail = lego_set.get("retail_price")
@@ -128,11 +141,11 @@ def _compute_bcg_category(lego_set: dict, platforms_data: dict, hot_score: int) 
         return "question_mark"
     else:
         # Langzaam + lage waarde — maar is het echt een Dog of gewoon geen data?
-        # Alleen Dog als we voldoende marktdata hebben om het zeker te weten.
         # Zonder data (nog niet gescraped of te weinig listings) → Question Mark.
+        # Recently retired of retiring soon → ook Question Mark (premiumvorming op gang).
         no_velocity_data = hot_score == 0
         no_value_data = not nib_p50s
-        if no_velocity_data or no_value_data:
+        if no_velocity_data or no_value_data or recently_retired or retiring_soon:
             return "question_mark"
         return "dog"
 
@@ -270,6 +283,8 @@ def build_dashboard_data(
             "retail_price": retail_price,
             "market_value_new": lego_set.get("market_value_new"),
             "is_retired": lego_set.get("is_retired", False),
+            "retiring_soon": lego_set.get("retiring_soon", False),
+            "retired_year": lego_set.get("retired_year"),
             "release_year": lego_set.get("release_year"),
             "piece_count": lego_set.get("piece_count"),
             "image_url": lego_set.get("image_url", ""),

@@ -62,7 +62,8 @@
       "search_terms": [
         "lego 10317"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retiring_soon": true
     },
     {
       "set_number": "10337",
@@ -204,7 +205,8 @@
       "search_terms": [
         "lego 42159"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retiring_soon": true
     },
     {
       "set_number": "42162",
@@ -359,7 +361,8 @@
       "search_terms": [
         "lego 10321"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retiring_soon": true
     },
     {
       "set_number": "10265",
