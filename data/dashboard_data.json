@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-03T09:40:47.970949",
+  "generated_at": "2026-04-03T09:41:19.717549",
   "scraped_at": "2026-03-25T15:07:57.047729",
   "platform_labels": {
     "vinted_nl": "Vinted NL",
@@ -1314,7 +1314,7 @@
       "retirement_indicator": {
         "direction": "stable",
         "pct": 0,
-        "annual_return_pct": -0.2
+        "annual_return_pct": -0.3
       },
       "deals": [],
       "bcg_category": "dog"
@@ -2600,7 +2600,7 @@
       "retirement_indicator": {
         "direction": "down",
         "pct": 13,
-        "annual_return_pct": -3.5
+        "annual_return_pct": -13.1
       },
       "deals": [
         {
@@ -3884,7 +3884,7 @@
       "retirement_indicator": {
         "direction": "down",
         "pct": 9,
-        "annual_return_pct": -2.3
+        "annual_return_pct": -8.7
       },
       "deals": [],
       "bcg_category": "dog"
@@ -6755,7 +6755,7 @@
       "retirement_indicator": {
         "direction": "down",
         "pct": 12,
-        "annual_return_pct": -2.2
+        "annual_return_pct": -12.5
       },
       "deals": [],
       "bcg_category": "dog"
@@ -7901,7 +7901,7 @@
       "retirement_indicator": {
         "direction": "down",
         "pct": 16,
-        "annual_return_pct": -3.5
+        "annual_return_pct": -5.8
       },
       "deals": [
         {
@@ -9133,7 +9133,7 @@
       "retirement_indicator": {
         "direction": "down",
         "pct": 30,
-        "annual_return_pct": -8.5
+        "annual_return_pct": -30.0
       },
       "deals": [
         {
@@ -10537,7 +10537,7 @@
       "retirement_indicator": {
         "direction": "down",
         "pct": 19,
-        "annual_return_pct": -5.0
+        "annual_return_pct": -18.6
       },
       "deals": [],
       "bcg_category": "dog"
@@ -11903,7 +11903,7 @@
       "retirement_indicator": {
         "direction": "down",
         "pct": 60,
-        "annual_return_pct": -20.7
+        "annual_return_pct": -60.5
       },
       "deals": [
         {
@@ -13096,7 +13096,7 @@
       "retirement_indicator": {
         "direction": "stable",
         "pct": 0,
-        "annual_return_pct": 1.0
+        "annual_return_pct": 3.1
       },
       "deals": [],
       "bcg_category": "dog"
@@ -14278,7 +14278,7 @@
       "retirement_indicator": {
         "direction": "down",
         "pct": 15,
-        "annual_return_pct": -5.4
+        "annual_return_pct": -15.4
       },
       "deals": [
         {
@@ -16194,7 +16194,7 @@
       "retirement_indicator": {
         "direction": "up",
         "pct": 48,
-        "annual_return_pct": 13.8
+        "annual_return_pct": 21.5
       },
       "deals": [
         {
@@ -18423,7 +18423,7 @@
       "retirement_indicator": {
         "direction": "down",
         "pct": 15,
-        "annual_return_pct": -4.1
+        "annual_return_pct": -15.3
       },
       "deals": [
         {
@@ -22198,7 +22198,7 @@
       "retirement_indicator": {
         "direction": "down",
         "pct": 24,
-        "annual_return_pct": -3.4
+        "annual_return_pct": -6.7
       },
       "deals": [
         {
@@ -23286,7 +23286,7 @@
       "retirement_indicator": {
         "direction": "down",
         "pct": 13,
-        "annual_return_pct": -2.0
+        "annual_return_pct": -6.9
       },
       "deals": [],
       "bcg_category": "dog"
@@ -24447,7 +24447,7 @@
       "retirement_indicator": {
         "direction": "up",
         "pct": 7,
-        "annual_return_pct": 1.2
+        "annual_return_pct": 1.8
       },
       "deals": [
         {
@@ -26589,7 +26589,7 @@
       "retirement_indicator": {
         "direction": "down",
         "pct": 6,
-        "annual_return_pct": -0.9
+        "annual_return_pct": -2.0
       },
       "deals": [
         {
@@ -27867,7 +27867,7 @@
       "retirement_indicator": {
         "direction": "up",
         "pct": 100,
-        "annual_return_pct": 7.2
+        "annual_return_pct": 9.1
       },
       "deals": [
         {
@@ -28869,7 +28869,7 @@
       "retirement_indicator": {
         "direction": "up",
         "pct": 14,
-        "annual_return_pct": 1.9
+        "annual_return_pct": 4.6
       },
       "deals": [
         {
@@ -33118,7 +33118,7 @@
       "retirement_indicator": {
         "direction": "stable",
         "pct": 0,
-        "annual_return_pct": 0.3
+        "annual_return_pct": 0.6
       },
       "deals": [
         {
@@ -34259,7 +34259,7 @@
       "retirement_indicator": {
         "direction": "down",
         "pct": 24,
-        "annual_return_pct": -8.9
+        "annual_return_pct": -24.5
       },
       "deals": [
         {
