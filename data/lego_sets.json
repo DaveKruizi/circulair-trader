@@ -14,7 +14,8 @@
       "search_terms": [
         "lego 10295"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2023
     },
     {
       "set_number": "10298",
@@ -29,7 +30,8 @@
       "search_terms": [
         "lego 10298"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2025
     },
     {
       "set_number": "10300",
@@ -44,7 +46,8 @@
       "search_terms": [
         "lego 10300"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2025
     },
     {
       "set_number": "10317",
@@ -59,7 +62,8 @@
       "search_terms": [
         "lego 10317"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retiring_soon": true
     },
     {
       "set_number": "10337",
@@ -89,7 +93,8 @@
       "search_terms": [
         "lego 42115"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2025
     },
     {
       "set_number": "42125",
@@ -104,7 +109,8 @@
       "search_terms": [
         "lego 42125"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2023
     },
     {
       "set_number": "42130",
@@ -119,7 +125,8 @@
       "search_terms": [
         "lego 42130"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2025
     },
     {
       "set_number": "42143",
@@ -134,7 +141,8 @@
       "search_terms": [
         "lego 42143"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2025
     },
     {
       "set_number": "42151",
@@ -149,7 +157,8 @@
       "search_terms": [
         "lego 42151"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2025
     },
     {
       "set_number": "42154",
@@ -164,7 +173,8 @@
       "search_terms": [
         "lego 42154"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2025
     },
     {
       "set_number": "42156",
@@ -179,7 +189,8 @@
       "search_terms": [
         "lego 42156"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2025
     },
     {
       "set_number": "42159",
@@ -194,7 +205,8 @@
       "search_terms": [
         "lego 42159"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retiring_soon": true
     },
     {
       "set_number": "42162",
@@ -209,7 +221,8 @@
       "search_terms": [
         "lego 42162"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2024
     },
     {
       "set_number": "42170",
@@ -239,7 +252,8 @@
       "search_terms": [
         "lego 42141"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2025
     },
     {
       "set_number": "42202",
@@ -299,7 +313,8 @@
       "search_terms": [
         "lego 42083"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2022
     },
     {
       "set_number": "42096",
@@ -314,7 +329,8 @@
       "search_terms": [
         "lego 42096"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2024
     },
     {
       "set_number": "10271",
@@ -329,7 +345,8 @@
       "search_terms": [
         "lego 10271"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2022
     },
     {
       "set_number": "10321",
@@ -344,7 +361,8 @@
       "search_terms": [
         "lego 10321"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retiring_soon": true
     },
     {
       "set_number": "10265",
@@ -359,7 +377,8 @@
       "search_terms": [
         "lego 10265"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2023
     },
     {
       "set_number": "42056",
@@ -374,7 +393,8 @@
       "search_terms": [
         "lego 42056"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2018
     },
     {
       "set_number": "42107",
@@ -389,7 +409,8 @@
       "search_terms": [
         "lego 42107"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2023
     },
     {
       "set_number": "42207",
@@ -449,7 +470,8 @@
       "search_terms": [
         "lego 42110"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2022
     },
     {
       "set_number": "42171",
@@ -465,7 +487,8 @@
         "lego 42171",
         "mercedes amg f1 lego"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2025
     },
     {
       "set_number": "77942",
@@ -481,7 +504,8 @@
         "lego 77942",
         "fiat 500 blauw lego"
       ],
-      "category": "vehicle"
+      "category": "vehicle",
+      "retired_year": 2022
     },
     {
       "set_number": "10220",
@@ -493,8 +517,11 @@
       "release_year": 2011,
       "piece_count": 1334,
       "image_url": "https://images.brickset.com/sets/images/10220-1.jpg",
-      "search_terms": ["lego 10220"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 10220"
+      ],
+      "category": "vehicle",
+      "retired_year": 2020
     },
     {
       "set_number": "10242",
@@ -506,8 +533,11 @@
       "release_year": 2014,
       "piece_count": 1077,
       "image_url": "https://images.brickset.com/sets/images/10242-1.jpg",
-      "search_terms": ["lego 10242"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 10242"
+      ],
+      "category": "vehicle",
+      "retired_year": 2015
     },
     {
       "set_number": "10248",
@@ -519,8 +549,11 @@
       "release_year": 2015,
       "piece_count": 1158,
       "image_url": "https://images.brickset.com/sets/images/10248-1.jpg",
-      "search_terms": ["lego 10248"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 10248"
+      ],
+      "category": "vehicle",
+      "retired_year": 2017
     },
     {
       "set_number": "10252",
@@ -532,8 +565,11 @@
       "release_year": 2016,
       "piece_count": 1167,
       "image_url": "https://images.brickset.com/sets/images/10252-1.jpg",
-      "search_terms": ["lego 10252"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 10252"
+      ],
+      "category": "vehicle",
+      "retired_year": 2020
     },
     {
       "set_number": "10258",
@@ -545,8 +581,11 @@
       "release_year": 2017,
       "piece_count": 1686,
       "image_url": "https://images.brickset.com/sets/images/10258-1.jpg",
-      "search_terms": ["lego 10258"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 10258"
+      ],
+      "category": "vehicle",
+      "retired_year": 2021
     },
     {
       "set_number": "10269",
@@ -558,8 +597,11 @@
       "release_year": 2019,
       "piece_count": 1023,
       "image_url": "https://images.brickset.com/sets/images/10269-1.jpg",
-      "search_terms": ["lego 10269"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 10269"
+      ],
+      "category": "vehicle",
+      "retired_year": 2021
     },
     {
       "set_number": "10274",
@@ -571,8 +613,11 @@
       "release_year": 2020,
       "piece_count": 2352,
       "image_url": "https://images.brickset.com/sets/images/10274-1.jpg",
-      "search_terms": ["lego 10274"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 10274"
+      ],
+      "category": "vehicle",
+      "retired_year": 2024
     },
     {
       "set_number": "10279",
@@ -584,8 +629,11 @@
       "release_year": 2021,
       "piece_count": 2207,
       "image_url": "https://images.brickset.com/sets/images/10279-1.jpg",
-      "search_terms": ["lego 10279"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 10279"
+      ],
+      "category": "vehicle",
+      "retired_year": 2022
     },
     {
       "set_number": "10290",
@@ -597,8 +645,11 @@
       "release_year": 2021,
       "piece_count": 1677,
       "image_url": "https://images.brickset.com/sets/images/10290-1.jpg",
-      "search_terms": ["lego 10290"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 10290"
+      ],
+      "category": "vehicle",
+      "retired_year": 2023
     },
     {
       "set_number": "10304",
@@ -610,8 +661,11 @@
       "release_year": 2022,
       "piece_count": 1456,
       "image_url": "https://images.brickset.com/sets/images/10304-1.jpg",
-      "search_terms": ["lego 10304"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 10304"
+      ],
+      "category": "vehicle",
+      "retired_year": 2024
     },
     {
       "set_number": "10330",
@@ -623,7 +677,9 @@
       "release_year": 2024,
       "piece_count": 693,
       "image_url": "https://images.brickset.com/sets/images/10330-1.jpg",
-      "search_terms": ["lego 10330"],
+      "search_terms": [
+        "lego 10330"
+      ],
       "category": "vehicle"
     },
     {
@@ -636,8 +692,11 @@
       "release_year": 2020,
       "piece_count": 1077,
       "image_url": "https://images.brickset.com/sets/images/42111-1.jpg",
-      "search_terms": ["lego 42111"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 42111"
+      ],
+      "category": "vehicle",
+      "retired_year": 2023
     },
     {
       "set_number": "42126",
@@ -649,8 +708,11 @@
       "release_year": 2021,
       "piece_count": 1379,
       "image_url": "https://images.brickset.com/sets/images/42126-1.jpg",
-      "search_terms": ["lego 42126"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 42126"
+      ],
+      "category": "vehicle",
+      "retired_year": 2022
     },
     {
       "set_number": "42127",
@@ -662,8 +724,11 @@
       "release_year": 2022,
       "piece_count": 1360,
       "image_url": "https://images.brickset.com/sets/images/42127-1.jpg",
-      "search_terms": ["lego 42127"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 42127"
+      ],
+      "category": "vehicle",
+      "retired_year": 2023
     },
     {
       "set_number": "42128",
@@ -675,8 +740,11 @@
       "release_year": 2021,
       "piece_count": 2017,
       "image_url": "https://images.brickset.com/sets/images/42128-1.jpg",
-      "search_terms": ["lego 42128"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 42128"
+      ],
+      "category": "vehicle",
+      "retired_year": 2023
     },
     {
       "set_number": "42138",
@@ -688,8 +756,11 @@
       "release_year": 2022,
       "piece_count": 672,
       "image_url": "https://images.brickset.com/sets/images/42138-1.jpg",
-      "search_terms": ["lego 42138"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 42138"
+      ],
+      "category": "vehicle",
+      "retired_year": 2024
     },
     {
       "set_number": "42160",
@@ -701,8 +772,11 @@
       "release_year": 2023,
       "piece_count": 914,
       "image_url": "https://images.brickset.com/sets/images/42160-1.jpg",
-      "search_terms": ["lego 42160"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 42160"
+      ],
+      "category": "vehicle",
+      "retired_year": 2023
     },
     {
       "set_number": "42161",
@@ -714,8 +788,11 @@
       "release_year": 2023,
       "piece_count": 806,
       "image_url": "https://images.brickset.com/sets/images/42161-1.jpg",
-      "search_terms": ["lego 42161"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 42161"
+      ],
+      "category": "vehicle",
+      "retired_year": 2025
     },
     {
       "set_number": "42093",
@@ -727,8 +804,11 @@
       "release_year": 2019,
       "piece_count": 579,
       "image_url": "https://images.brickset.com/sets/images/42093-1.jpg",
-      "search_terms": ["lego 42093"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 42093"
+      ],
+      "category": "vehicle",
+      "retired_year": 2021
     },
     {
       "set_number": "42098",
@@ -740,8 +820,11 @@
       "release_year": 2019,
       "piece_count": 2493,
       "image_url": "https://images.brickset.com/sets/images/42098-1.jpg",
-      "search_terms": ["lego 42098"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 42098"
+      ],
+      "category": "vehicle",
+      "retired_year": 2020
     },
     {
       "set_number": "42077",
@@ -753,8 +836,11 @@
       "release_year": 2017,
       "piece_count": 1005,
       "image_url": "https://images.brickset.com/sets/images/42077-1.jpg",
-      "search_terms": ["lego 42077"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 42077"
+      ],
+      "category": "vehicle",
+      "retired_year": 2019
     },
     {
       "set_number": "42039",
@@ -766,8 +852,11 @@
       "release_year": 2015,
       "piece_count": 1219,
       "image_url": "https://images.brickset.com/sets/images/42039-1.jpg",
-      "search_terms": ["lego 42039"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 42039"
+      ],
+      "category": "vehicle",
+      "retired_year": 2016
     },
     {
       "set_number": "42000",
@@ -779,8 +868,11 @@
       "release_year": 2013,
       "piece_count": 1141,
       "image_url": "https://images.brickset.com/sets/images/42000-1.jpg",
-      "search_terms": ["lego 42000"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 42000"
+      ],
+      "category": "vehicle",
+      "retired_year": 2014
     },
     {
       "set_number": "8070",
@@ -792,8 +884,11 @@
       "release_year": 2011,
       "piece_count": 1281,
       "image_url": "https://images.brickset.com/sets/images/8070-1.jpg",
-      "search_terms": ["lego 8070"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 8070"
+      ],
+      "category": "vehicle",
+      "retired_year": 2012
     },
     {
       "set_number": "8448",
@@ -805,8 +900,11 @@
       "release_year": 1999,
       "piece_count": 1413,
       "image_url": "https://images.brickset.com/sets/images/8448-1.jpg",
-      "search_terms": ["lego 8448"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 8448"
+      ],
+      "category": "vehicle",
+      "retired_year": 2000
     },
     {
       "set_number": "8880",
@@ -818,8 +916,11 @@
       "release_year": 1994,
       "piece_count": 1343,
       "image_url": "https://images.brickset.com/sets/images/8880-1.jpg",
-      "search_terms": ["lego 8880"],
-      "category": "vehicle"
+      "search_terms": [
+        "lego 8880"
+      ],
+      "category": "vehicle",
+      "retired_year": 1997
     }
   ]
 }
