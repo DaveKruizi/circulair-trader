@@ -104,15 +104,22 @@ def _compute_bcg_category(lego_set: dict, platforms_data: dict, hot_score: int) 
     """
     current_year = datetime.now().year
 
-    # Sets die net retired zijn (≤2 jaar) of binnenkort gaan retiren worden nooit Dog:
+    is_retired = lego_set.get("is_retired", False)
+    retiring_soon = bool(lego_set.get("retiring_soon"))
+
+    # Actieve sets (niet retired, niet retiring soon) zijn altijd Question Mark:
+    # ze handelen op of rond retailprijs — geen premiumvorming mogelijk.
+    if not is_retired and not retiring_soon:
+        return "question_mark"
+
+    # Sets die net retired zijn (≤2 jaar) worden nooit Dog:
     # de premiumvorming is nog op gang aan het komen.
     retired_year = lego_set.get("retired_year")
     recently_retired = (
-        lego_set.get("is_retired")
+        is_retired
         and retired_year is not None
         and (current_year - retired_year) <= 2
     )
-    retiring_soon = bool(lego_set.get("retiring_soon"))
 
     high_velocity = hot_score >= BCG_VELOCITY_THRESHOLD
 
