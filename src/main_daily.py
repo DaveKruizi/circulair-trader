@@ -35,7 +35,7 @@ def run_daily(dry_run: bool = False) -> None:
         from src.retail_prices import run_update, should_run_today
         raw = json.loads(LEGO_SETS_PATH.read_text())
         if should_run_today(raw):
-            print("[Daily] Retailprijzen bijwerken via lego.com (wekelijks)...")
+            print("[Daily] Retailprijzen bijwerken via lego.com (maandelijks)...")
             result = run_update(dry_run=dry_run)
             print(
                 f"[Daily] Retailprijzen: {len(result['updated'])} gewijzigd, "

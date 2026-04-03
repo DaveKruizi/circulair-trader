@@ -141,4 +141,4 @@ def should_run_today(data: dict) -> bool:
     if not last:
         return True
     delta = (date.today() - date.fromisoformat(last)).days
-    return delta >= 7
+    return delta >= 30
