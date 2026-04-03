@@ -46,27 +46,59 @@
   header h1 { font-size: 18px; font-weight: 700; }
   header .subtitle { color: var(--muted); font-size: 12px; }
 
-  .filter-row {
+  /* Mode toggle (NIB / CIB) */
+  .mode-toggle {
     display: flex;
-    gap: 8px;
-    align-items: center;
     margin-left: auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .mode-btn {
+    padding: 7px 20px;
+    border-radius: 8px;
+    border: none;
+    background: none;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s;
+    white-space: nowrap;
+  }
+  .mode-btn.active { background: var(--accent); color: #fff; }
+  .mode-btn:not(.active):hover { color: var(--text); }
+
+  /* Filter bar */
+  .filter-bar {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 10px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
     flex-wrap: wrap;
   }
-
-  .filter-btn {
-    background: var(--border);
-    border: 1px solid var(--border);
-    color: var(--muted);
-    padding: 6px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 500;
-    transition: all .15s;
+  .filter-group { display: flex; align-items: center; gap: 6px; }
+  .filter-group-label {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--muted); white-space: nowrap;
   }
-  .filter-btn:hover { border-color: var(--accent); color: var(--text); }
-  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .filter-chip {
+    padding: 4px 12px; border-radius: 20px;
+    border: 1px solid var(--border); background: none;
+    color: var(--muted); font-size: 12px; font-weight: 500;
+    cursor: pointer; transition: all .12s; white-space: nowrap;
+  }
+  .filter-chip:hover { border-color: var(--accent); color: var(--text); }
+  .filter-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .filter-chip.chip-star.active    { background: #854d0e; border-color: #d97706; color: #fde68a; }
+  .filter-chip.chip-cow.active     { background: #14532d; border-color: #16a34a; color: #bbf7d0; }
+  .filter-chip.chip-qmark.active   { background: #1e3a5f; border-color: #3b82f6; color: #bfdbfe; }
+  .filter-chip.chip-dog.active     { background: #1e293b; border-color: #64748b; color: #cbd5e1; }
+  .filter-chip.chip-retiring.active { background: #431407; border-color: #f59e0b; color: #fde68a; }
 
   .main { padding: 24px; max-width: 1400px; margin: 0 auto; }
 
@@ -88,7 +120,7 @@
   .stat-card .value { font-size: 22px; font-weight: 700; margin-top: 2px; }
   .stat-card .breakdown { color: var(--muted); font-size: 10px; margin-top: 4px; line-height: 1.6; }
 
-  .sets-grid {
+  .sets-grid, .sets-subgrid {
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -584,12 +616,30 @@
       <div class="subtitle" id="gen-time">Laden...</div>
     </div>
   </div>
-  <div class="filter-row">
-    <span style="color:var(--muted);font-size:12px">Filter:</span>
-    <button class="filter-btn active" onclick="setCondition('NIB')" id="btn-NIB">Nieuw</button>
-    <button class="filter-btn" onclick="setCondition('CIB')" id="btn-CIB">Gebruikt</button>
+  <div class="mode-toggle">
+    <button class="mode-btn active" id="mode-NIB" onclick="setMode('NIB')">💎 Nieuw (NIB)</button>
+    <button class="mode-btn"        id="mode-CIB" onclick="setMode('CIB')">🔧 Gebruikt (CIB)</button>
   </div>
 </header>
+
+<div class="filter-bar">
+  <div class="filter-group">
+    <span class="filter-group-label">BCG</span>
+    <button class="filter-chip active"          data-bcg="all"           onclick="setBcgFilter('all')">Alle</button>
+    <button class="filter-chip chip-star"       data-bcg="star"          onclick="setBcgFilter('star')">⭐ Stars</button>
+    <button class="filter-chip chip-cow"        data-bcg="cash_cow"      onclick="setBcgFilter('cash_cow')" id="chip-cow">💰 Cash Cows</button>
+    <button class="filter-chip chip-qmark"      data-bcg="question_mark" onclick="setBcgFilter('question_mark')">❓ Question Marks</button>
+    <button class="filter-chip chip-dog"        data-bcg="dog"           onclick="setBcgFilter('dog')">🐕 Dogs</button>
+  </div>
+  <div class="filter-group">
+    <span class="filter-group-label">Status</span>
+    <button class="filter-chip active"          data-status="all"            onclick="setStatusFilter('all')">Alle</button>
+    <button class="filter-chip chip-retiring"   data-status="retiring_soon"  onclick="setStatusFilter('retiring_soon')">🔔 Retiring Soon</button>
+    <button class="filter-chip"                 data-status="recent_retired" onclick="setStatusFilter('recent_retired')">🆕 Recent Retired</button>
+    <button class="filter-chip"                 data-status="retired"        onclick="setStatusFilter('retired')">Retired</button>
+    <button class="filter-chip"                 data-status="active"         onclick="setStatusFilter('active')">Actief</button>
+  </div>
+</div>
 
 <div class="main">
   <div id="summary-bar" class="summary-bar"></div>
@@ -604,7 +654,11 @@
 
 <script>
 let dashData = null;
-let activeCondition = 'NIB';
+let currentMode = 'NIB';   // 'NIB' | 'CIB'
+let bcgFilter = 'all';     // 'all' | 'star' | 'cash_cow' | 'question_mark' | 'dog'
+let statusFilter = 'all';  // 'all' | 'retiring_soon' | 'recent_retired' | 'retired' | 'active'
+
+const CURRENT_YEAR = new Date().getFullYear();
 
 fetch('./data/dashboard_data.json')
   .then(r => r.json())
@@ -612,97 +666,147 @@ fetch('./data/dashboard_data.json')
     dashData = data;
     renderAll(data);
   })
-  .catch(err => {
+  .catch(() => {
     document.getElementById('sets-grid').innerHTML =
       '<div class="no-data">Fout bij laden data. Probeer later opnieuw.</div>';
   });
 
-function setCondition(cond) {
-  activeCondition = cond;
-  ['NIB','CIB'].forEach(c => {
-    document.getElementById('btn-' + c).classList.toggle('active', c === cond);
-  });
-  if (!dashData) return;
-  // Show/hide price table panels
-  document.querySelectorAll('.condition-panel').forEach(panel => {
-    panel.classList.toggle('visible', panel.dataset.cond === cond);
-  });
-  // Re-render combined charts and listings for all cards
-  dashData.sets.forEach(set => {
-    const idx = set._renderIdx;
-    if (idx == null) return;
-    renderHistoryChart(set, idx);
-    renderBucketChart(set, idx);
-    renderActiveListings(set, idx);
-  });
+function getSetStatus(set) {
+  if (set.retiring_soon) return 'retiring_soon';
+  if (!set.is_retired) return 'active';
+  if (set.retired_year && (CURRENT_YEAR - set.retired_year) <= 2) return 'recent_retired';
+  return 'retired';
 }
+
+function getSetBcg(set) {
+  return currentMode === 'NIB' ? set.bcg_nib : set.bcg_cib;
+}
+
+function setMode(mode) {
+  currentMode = mode;
+  ['NIB','CIB'].forEach(m => {
+    document.getElementById('mode-' + m).classList.toggle('active', m === mode);
+  });
+  // Cash Cow chip only relevant in NIB mode
+  document.getElementById('chip-cow').style.display = mode === 'CIB' ? 'none' : '';
+  if (mode === 'CIB' && bcgFilter === 'cash_cow') setBcgFilter('all');
+  // Sync active condition panels in expanded cards
+  document.querySelectorAll('.condition-panel').forEach(panel => {
+    panel.classList.toggle('visible', panel.dataset.cond === mode);
+  });
+  if (dashData) redraw();
+}
+
+function setBcgFilter(val) {
+  bcgFilter = val;
+  document.querySelectorAll('[data-bcg]').forEach(el => {
+    el.classList.toggle('active', el.dataset.bcg === val);
+  });
+  if (dashData) redraw();
+}
+
+function setStatusFilter(val) {
+  statusFilter = val;
+  document.querySelectorAll('[data-status]').forEach(el => {
+    el.classList.toggle('active', el.dataset.status === val);
+  });
+  if (dashData) redraw();
+}
+
+// Legacy alias — called from expanded price panel tabs if they exist
+function setCondition(cond) { setMode(cond); }
+
+const BCG_ORDER = ['star', 'cash_cow', 'question_mark', 'dog'];
+const BCG_META = {
+  star:          { icon: '⭐', label: 'Stars',          cls: 'bcg-star',  descNIB: 'Hoge CAGR + boven retail',       descCIB: 'Hoge velocity + goede spread' },
+  cash_cow:      { icon: '💰', label: 'Cash Cows',      cls: 'bcg-cow',   descNIB: 'Boven retail, bewaren & wachten', descCIB: '' },
+  question_mark: { icon: '❓', label: 'Question Marks', cls: 'bcg-qmark', descNIB: 'Onzeker — te vroeg of geen data', descCIB: 'Onzeker — te vroeg of geen data' },
+  dog:           { icon: '🐕', label: 'Dogs',           cls: 'bcg-dog',   descNIB: 'Slecht rendement',                descCIB: 'Trage markt, dunne marge' },
+};
 
 function renderAll(data) {
   const gen = new Date(data.generated_at);
   document.getElementById('gen-time').textContent =
     'Bijgewerkt: ' + gen.toLocaleDateString('nl-NL', {day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});
   document.getElementById('footer-time').textContent = gen.toLocaleString('nl-NL');
-
   renderSummary(data);
   renderRejections(data.rejection_summary_7d);
-
-  // Sort alphabetically within each BCG group
   data.sets.sort((a, b) => a.name.localeCompare(b.name, 'nl'));
 
-  const BCG_ORDER = ['star', 'cash_cow', 'question_mark', 'dog'];
-  const BCG_META = {
-    star:          { icon: '⭐', label: 'Stars',          cls: 'bcg-star',  desc: 'Snel + winstgevend' },
-    cash_cow:      { icon: '💰', label: 'Cash Cows',      cls: 'bcg-cow',   desc: 'Waardevol maar traag' },
-    question_mark: { icon: '❓', label: 'Question Marks', cls: 'bcg-qmark', desc: 'Populair, marge onduidelijk' },
-    dog:           { icon: '🐕', label: 'Dogs',           cls: 'bcg-dog',   desc: 'Traag + geen marge' },
-  };
+  // Assign stable render indices once
+  let globalIdx = 0;
+  data.sets.forEach(set => { set._renderIdx = globalIdx++; });
 
-  const grouped = {};
-  BCG_ORDER.forEach(k => { grouped[k] = []; });
-  data.sets.forEach(set => {
-    const cat = set.bcg_category || 'dog';
-    (grouped[cat] = grouped[cat] || []).push(set);
-  });
+  redraw();
+}
 
+function redraw() {
+  const data = dashData;
   const grid = document.getElementById('sets-grid');
   grid.innerHTML = '';
 
-  // Global index for unique chart/listing IDs
-  let globalIdx = 0;
-  BCG_ORDER.forEach(cat => {
-    const sets = grouped[cat];
-    if (!sets || sets.length === 0) return;
-    const meta = BCG_META[cat];
-
-    const section = document.createElement('div');
-    section.className = `bcg-section ${meta.cls}`;
-    section.innerHTML = `<div class="bcg-header">
-      <span style="font-size:18px">${meta.icon}</span>
-      <span class="bcg-title">${meta.label}</span>
-      <span class="bcg-count">${sets.length}</span>
-      <span class="bcg-desc">${meta.desc}</span>
-    </div>
-    <div class="sets-grid" id="sets-grid-${cat}"></div>`;
-    grid.appendChild(section);
-
-    const subgrid = section.querySelector(`#sets-grid-${cat}`);
-    sets.forEach(set => {
-      set._renderIdx = globalIdx++;
-      subgrid.appendChild(buildSetCard(set, set._renderIdx));
-    });
+  // Filter sets
+  const filtered = data.sets.filter(set => {
+    const bcg = getSetBcg(set);
+    const status = getSetStatus(set);
+    if (bcgFilter !== 'all' && bcg !== bcgFilter) return false;
+    if (statusFilter !== 'all' && status !== statusFilter) return false;
+    return true;
   });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="no-data">Geen sets gevonden met deze filters.</div>';
+    return;
+  }
+
+  const renderSet = (set, container) => {
+    container.appendChild(buildSetCard(set, set._renderIdx));
+  };
+
+  if (bcgFilter !== 'all') {
+    // Flat list when filtering on specific BCG
+    filtered.forEach(set => renderSet(set, grid));
+  } else {
+    // Grouped by BCG category
+    const grouped = {};
+    BCG_ORDER.forEach(k => { grouped[k] = []; });
+    filtered.forEach(set => {
+      const cat = getSetBcg(set) || 'question_mark';
+      (grouped[cat] = grouped[cat] || []).push(set);
+    });
+
+    BCG_ORDER.forEach(cat => {
+      const sets = grouped[cat];
+      if (!sets || sets.length === 0) return;
+      // Hide Cash Cow section in CIB mode
+      if (cat === 'cash_cow' && currentMode === 'CIB') return;
+      const meta = BCG_META[cat];
+      const desc = currentMode === 'NIB' ? meta.descNIB : meta.descCIB;
+
+      const section = document.createElement('div');
+      section.className = `bcg-section ${meta.cls}`;
+      section.innerHTML = `<div class="bcg-header">
+        <span style="font-size:18px">${meta.icon}</span>
+        <span class="bcg-title">${meta.label}</span>
+        <span class="bcg-count">${sets.length}</span>
+        <span class="bcg-desc">${desc}</span>
+      </div><div class="sets-subgrid" id="sets-grid-${cat}"></div>`;
+      grid.appendChild(section);
+
+      const subgrid = section.querySelector(`#sets-grid-${cat}`);
+      sets.forEach(set => renderSet(set, subgrid));
+    });
+  }
 
   // Render charts + listings after DOM is built
-  data.sets.forEach(set => {
-    const idx = set._renderIdx;
-    renderHistoryChart(set, idx);
-    renderBucketChart(set, idx);
-    renderActiveListings(set, idx);
+  filtered.forEach(set => {
+    renderHistoryChart(set, set._renderIdx);
+    renderBucketChart(set, set._renderIdx);
+    renderActiveListings(set, set._renderIdx);
   });
 
-  // Apply initial condition filter to price panels
   document.querySelectorAll('.condition-panel').forEach(panel => {
-    panel.classList.toggle('visible', panel.dataset.cond === activeCondition);
+    panel.classList.toggle('visible', panel.dataset.cond === currentMode);
   });
 }
 
@@ -812,6 +916,18 @@ function buildSetCard(set, idx) {
       retHtml = `<span class="retirement-indicator ret-stable" title="NIB mediaan stabiel rond retailprijs">≈ retail</span>${cagrHtml}`;
   }
 
+  const bcgForCard = getSetBcg(set);
+  const BCG_BADGE = { star:'⭐ Star', cash_cow:'💰 Cash Cow', question_mark:'❓ Mark', dog:'🐕 Dog' };
+  const BCG_BADGE_STYLE = {
+    star:          'background:#854d0e;color:#fde68a;border:1px solid #d9770655',
+    cash_cow:      'background:#14532d;color:#bbf7d0;border:1px solid #16a34a55',
+    question_mark: 'background:#1e3a5f;color:#bfdbfe;border:1px solid #3b82f655',
+    dog:           'background:#1e293b;color:#94a3b8;border:1px solid #47556955',
+  };
+  const bcgBadge = bcgForCard
+    ? `<span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;${BCG_BADGE_STYLE[bcgForCard]}">${BCG_BADGE[bcgForCard]}</span>`
+    : '';
+
   card.innerHTML = `
     <div class="set-header" onclick="toggleSetCard(this)">
       <img class="set-img" src="${escHtml(set.image_url)}" alt="${escHtml(set.name)}"
@@ -821,6 +937,7 @@ function buildSetCard(set, idx) {
         <div class="set-sub">#${set.set_number} · ${set.theme} · ${set.piece_count || '?'} stenen · ${set.release_year || ''}</div>
         <div style="margin-top:4px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
           ${retired}
+          ${bcgBadge}
           <span style="color:var(--muted);font-size:12px">Retail: ${retail}</span>
           ${retHtml}
         </div>
