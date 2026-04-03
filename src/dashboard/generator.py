@@ -107,9 +107,10 @@ def _compute_bcg_category(lego_set: dict, platforms_data: dict, hot_score: int) 
     is_retired = lego_set.get("is_retired", False)
     retiring_soon = bool(lego_set.get("retiring_soon"))
 
-    # Actieve sets (niet retired, niet retiring soon) zijn altijd Question Mark:
-    # ze handelen op of rond retailprijs — geen premiumvorming mogelijk.
-    if not is_retired and not retiring_soon:
+    # Niet-retired sets zijn altijd Question Mark: ze handelen op of rond
+    # retailprijs — geen premiumvorming mogelijk. Ook retiring_soon valt
+    # hieronder: de upside is nog speculatief, niet aangetoond.
+    if not is_retired:
         return "question_mark"
 
     # Sets die net retired zijn (≤2 jaar) worden nooit Dog:
