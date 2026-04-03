@@ -115,6 +115,13 @@ def _compute_bcg_category(lego_set: dict, platforms_data: dict, hot_score: int) 
     elif high_velocity:
         return "question_mark"
     else:
+        # Langzaam + lage waarde — maar is het echt een Dog of gewoon geen data?
+        # Alleen Dog als we voldoende marktdata hebben om het zeker te weten.
+        # Zonder data (nog niet gescraped of te weinig listings) → Question Mark.
+        no_velocity_data = hot_score == 0
+        no_value_data = not nib_p50s
+        if no_velocity_data or no_value_data:
+            return "question_mark"
         return "dog"
 
 
