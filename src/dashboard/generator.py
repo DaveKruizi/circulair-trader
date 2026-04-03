@@ -53,7 +53,7 @@ def _compute_hot_score(platforms_data: dict) -> int:
 def _compute_retirement_indicator(lego_set: dict, platforms_data: dict) -> Optional[dict]:
     """
     Alleen voor retired sets: vergelijkt huidige NIB-mediaan (beide platforms)
-    met de officiële retailprijs. Geeft richting + percentage terug.
+    met de officiële retailprijs. Geeft richting, totaal percentage en CAGR terug.
     """
     if not lego_set.get("is_retired"):
         return None
@@ -69,11 +69,19 @@ def _compute_retirement_indicator(lego_set: dict, platforms_data: dict) -> Optio
         return None
     avg = sum(nib_p50s) / len(nib_p50s)
     pct = round((avg / retail - 1) * 100)
+
+    # CAGR: jaarlijks geannualiseerd rendement t.o.v. retailprijs
+    annual_return_pct = None
+    release_year = lego_set.get("release_year")
+    if release_year:
+        years = max(datetime.now().year - release_year, 0.5)
+        annual_return_pct = round(((avg / retail) ** (1 / years) - 1) * 100, 1)
+
     if avg > retail * 1.05:
-        return {"direction": "up", "pct": pct}
+        return {"direction": "up", "pct": pct, "annual_return_pct": annual_return_pct}
     if avg < retail * 0.95:
-        return {"direction": "down", "pct": abs(pct)}
-    return {"direction": "stable", "pct": 0}
+        return {"direction": "down", "pct": abs(pct), "annual_return_pct": annual_return_pct}
+    return {"direction": "stable", "pct": 0, "annual_return_pct": annual_return_pct}
 
 
 def _compute_bcg_category(lego_set: dict, platforms_data: dict, hot_score: int) -> str:

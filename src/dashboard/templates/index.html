@@ -490,6 +490,17 @@
   .ret-down { background: #2a1212; color: #f87171; border: 1px solid #ef444433; }
   .ret-stable { background: #1e2130; color: #94a3b8; border: 1px solid #33415533; }
 
+  /* CAGR badge */
+  .cagr-badge {
+    display: inline-flex; align-items: center;
+    font-size: 11px; font-weight: 600; padding: 2px 7px;
+    border-radius: 4px; white-space: nowrap;
+  }
+  .cagr-high   { background: #14261a; color: #4ade80; border: 1px solid #22c55e33; }
+  .cagr-mid    { background: #2a1e0a; color: #fb923c; border: 1px solid #f9731633; }
+  .cagr-low    { background: #1e2130; color: #94a3b8; border: 1px solid #33415533; }
+  .cagr-neg    { background: #2a1212; color: #f87171; border: 1px solid #ef444433; }
+
   /* Deal cards in expanded view */
   .deals-section {
     background: #0d1f14; border: 1px solid #22c55e33;
@@ -770,16 +781,25 @@ function buildSetCard(set, idx) {
 
   const retail = set.retail_price ? `€${set.retail_price.toFixed(0)}` : '—';
 
-  // Retirement value indicator
+  // Retirement value indicator + CAGR
   const ri = set.retirement_indicator;
   let retHtml = '';
   if (ri) {
+    const ar = ri.annual_return_pct;
+    let cagrHtml = '';
+    if (ar != null) {
+      const cagrCls = ar >= 20 ? 'cagr-high' : ar >= 8 ? 'cagr-mid' : ar >= 0 ? 'cagr-low' : 'cagr-neg';
+      const cagrSign = ar >= 0 ? '+' : '';
+      const years = set.release_year ? (new Date().getFullYear() - set.release_year) : null;
+      const yrsLabel = years ? ` over ${years}jr` : '';
+      cagrHtml = ` <span class="cagr-badge ${cagrCls}" title="Jaarlijks rendement (CAGR)${yrsLabel}: ${cagrSign}${ar}%/jr">${cagrSign}${ar}%<span style="font-weight:400;opacity:.7;font-size:9px">/jr</span></span>`;
+    }
     if (ri.direction === 'up')
-      retHtml = `<span class="retirement-indicator ret-up" title="NIB mediaan ligt ${ri.pct}% boven laatste retailprijs → set stijgt in waarde">📈 +${ri.pct}% vs retail</span>`;
+      retHtml = `<span class="retirement-indicator ret-up" title="NIB mediaan ligt ${ri.pct}% boven laatste retailprijs → set stijgt in waarde">📈 +${ri.pct}% vs retail</span>${cagrHtml}`;
     else if (ri.direction === 'down')
-      retHtml = `<span class="retirement-indicator ret-down" title="NIB mediaan ligt ${ri.pct}% onder laatste retailprijs → set daalt in waarde">📉 −${ri.pct}% vs retail</span>`;
+      retHtml = `<span class="retirement-indicator ret-down" title="NIB mediaan ligt ${ri.pct}% onder laatste retailprijs → set daalt in waarde">📉 −${ri.pct}% vs retail</span>${cagrHtml}`;
     else
-      retHtml = `<span class="retirement-indicator ret-stable" title="NIB mediaan stabiel rond retailprijs">≈ retail</span>`;
+      retHtml = `<span class="retirement-indicator ret-stable" title="NIB mediaan stabiel rond retailprijs">≈ retail</span>${cagrHtml}`;
   }
 
   card.innerHTML = `
