@@ -158,30 +158,27 @@
   /* ── Compact stats (ingeklapte kaart) ─────────────────────────────────── */
   .compact-stats {
     flex-shrink: 0;
-    margin-left: 8px;
+    margin-left: 12px;
     display: flex;
-    gap: 6px;
-    align-items: stretch;
+    gap: 20px;
+    align-items: center;
   }
 
-  /* Elk blok: Te koop / Verkopen / Deals */
+  /* Elk blok: Te koop / Verkopen — geen border, geen achtergrond */
   .cs-block {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3px;
-    background: #13151f;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 6px 10px;
-    min-width: 68px;
+    gap: 5px;
+    padding: 0 8px;
+    min-width: 96px;
     text-align: center;
   }
   .cs-block-label {
     font-size: 9px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: .06em;
+    letter-spacing: .08em;
     color: var(--muted);
     white-space: nowrap;
   }
@@ -189,17 +186,17 @@
   /* NIB + CIB naast elkaar binnen een blok */
   .cs-split {
     display: flex;
-    gap: 6px;
+    gap: 12px;
     align-items: flex-end;
   }
   .cs-split-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1px;
+    gap: 2px;
   }
   .cs-val {
-    font-size: 17px;
+    font-size: 19px;
     font-weight: 700;
     line-height: 1;
     white-space: nowrap;
@@ -215,30 +212,45 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: .04em;
-    opacity: .6;
+    opacity: .55;
   }
   .cs-nib { color: var(--nib); }
   .cs-cib { color: var(--cib); }
 
-  /* Deal-blok */
+  /* Deal-blok — opvallend: groene border + glow */
   .cs-deal-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
     background: #0a1a0f;
-    border-color: #22c55e55;
+    border: 1.5px solid #22c55e77;
+    border-radius: 10px;
+    padding: 8px 20px;
+    min-width: 72px;
     cursor: pointer;
-    transition: border-color .15s, background .15s;
-    min-width: 54px;
+    transition: border-color .15s, background .15s, box-shadow .15s;
+    text-align: center;
+    box-shadow: 0 0 12px #22c55e1a;
   }
-  .cs-deal-block:hover { border-color: #22c55e; background: #0d1f14; }
+  .cs-deal-block:hover {
+    border-color: #22c55e;
+    background: #0d2116;
+    box-shadow: 0 0 20px #22c55e35;
+  }
   .cs-deal-count {
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 28px;
+    font-weight: 800;
     color: #4ade80;
     line-height: 1;
   }
   .cs-deal-icon {
-    font-size: 11px;
+    font-size: 10px;
     color: #4ade80;
-    opacity: .8;
+    opacity: .7;
+    letter-spacing: .05em;
+    font-weight: 600;
+    text-transform: uppercase;
   }
 
   .condition-panel { display: none; }
@@ -1138,12 +1150,11 @@ function buildCompactStats(set) {
 
   const dealCount = (set.deals || []).length;
   const dealBlock = dealCount > 0 ? `
-    <div class="cs-block cs-deal-block"
+    <div class="cs-deal-block"
          title="${dealCount} deal${dealCount > 1 ? 's' : ''} gevonden — klik om te bekijken"
          onclick="event.stopPropagation();expandAndScrollToDeals(this)">
-      <div class="cs-block-label">Deals</div>
       <div class="cs-deal-count">${dealCount}</div>
-      <div class="cs-deal-icon">🛒 bekijk</div>
+      <div class="cs-deal-icon">deals</div>
     </div>` : '';
 
   return splitBlock('Te koop', nibAct, nibApp, cibAct, cibApp)
