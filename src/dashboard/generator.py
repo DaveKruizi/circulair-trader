@@ -135,6 +135,9 @@ def _compute_bcg_category(lego_set: dict, platforms_data: dict, hot_score: int) 
 
     if high_velocity and high_value:
         return "star"
+    elif recently_retired and high_value:
+        # Pas retired + al boven retail = sterke waardestijger, handel snel
+        return "star"
     elif not high_velocity and high_value:
         return "cash_cow"
     elif high_velocity:
