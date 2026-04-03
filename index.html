@@ -158,27 +158,30 @@
   /* ── Compact stats (ingeklapte kaart) ─────────────────────────────────── */
   .compact-stats {
     flex-shrink: 0;
-    margin-left: 12px;
+    margin-left: 8px;
     display: flex;
-    gap: 20px;
-    align-items: center;
+    gap: 6px;
+    align-items: stretch;
   }
 
-  /* Elk blok: Te koop / Verkopen — geen border, geen achtergrond */
+  /* Elk blok: Te koop / Verkopen / Deals */
   .cs-block {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
-    padding: 0 8px;
-    min-width: 96px;
+    gap: 3px;
+    background: #13151f;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    min-width: 68px;
     text-align: center;
   }
   .cs-block-label {
     font-size: 9px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: .08em;
+    letter-spacing: .06em;
     color: var(--muted);
     white-space: nowrap;
   }
@@ -186,17 +189,17 @@
   /* NIB + CIB naast elkaar binnen een blok */
   .cs-split {
     display: flex;
-    gap: 12px;
+    gap: 6px;
     align-items: flex-end;
   }
   .cs-split-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
+    gap: 1px;
   }
   .cs-val {
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 700;
     line-height: 1;
     white-space: nowrap;
@@ -212,45 +215,30 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: .04em;
-    opacity: .55;
+    opacity: .6;
   }
   .cs-nib { color: var(--nib); }
   .cs-cib { color: var(--cib); }
 
-  /* Deal-blok — opvallend: groene border + glow */
+  /* Deal-blok */
   .cs-deal-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
     background: #0a1a0f;
-    border: 1.5px solid #22c55e77;
-    border-radius: 10px;
-    padding: 8px 20px;
-    min-width: 72px;
+    border-color: #22c55e55;
     cursor: pointer;
-    transition: border-color .15s, background .15s, box-shadow .15s;
-    text-align: center;
-    box-shadow: 0 0 12px #22c55e1a;
+    transition: border-color .15s, background .15s;
+    min-width: 54px;
   }
-  .cs-deal-block:hover {
-    border-color: #22c55e;
-    background: #0d2116;
-    box-shadow: 0 0 20px #22c55e35;
-  }
+  .cs-deal-block:hover { border-color: #22c55e; background: #0d1f14; }
   .cs-deal-count {
-    font-size: 28px;
-    font-weight: 800;
+    font-size: 22px;
+    font-weight: 700;
     color: #4ade80;
     line-height: 1;
   }
   .cs-deal-icon {
-    font-size: 10px;
+    font-size: 11px;
     color: #4ade80;
-    opacity: .7;
-    letter-spacing: .05em;
-    font-weight: 600;
-    text-transform: uppercase;
+    opacity: .8;
   }
 
   .condition-panel { display: none; }
@@ -489,17 +477,6 @@
   .ret-up   { background: #14261a; color: #4ade80; border: 1px solid #22c55e33; }
   .ret-down { background: #2a1212; color: #f87171; border: 1px solid #ef444433; }
   .ret-stable { background: #1e2130; color: #94a3b8; border: 1px solid #33415533; }
-
-  /* CAGR badge */
-  .cagr-badge {
-    display: inline-flex; align-items: center;
-    font-size: 11px; font-weight: 600; padding: 2px 7px;
-    border-radius: 4px; white-space: nowrap;
-  }
-  .cagr-high   { background: #14261a; color: #4ade80; border: 1px solid #22c55e33; }
-  .cagr-mid    { background: #2a1e0a; color: #fb923c; border: 1px solid #f9731633; }
-  .cagr-low    { background: #1e2130; color: #94a3b8; border: 1px solid #33415533; }
-  .cagr-neg    { background: #2a1212; color: #f87171; border: 1px solid #ef444433; }
 
   /* Deal cards in expanded view */
   .deals-section {
@@ -781,25 +758,16 @@ function buildSetCard(set, idx) {
 
   const retail = set.retail_price ? `€${set.retail_price.toFixed(0)}` : '—';
 
-  // Retirement value indicator + CAGR
+  // Retirement value indicator
   const ri = set.retirement_indicator;
   let retHtml = '';
   if (ri) {
-    const ar = ri.annual_return_pct;
-    let cagrHtml = '';
-    if (ar != null) {
-      const cagrCls = ar >= 20 ? 'cagr-high' : ar >= 8 ? 'cagr-mid' : ar >= 0 ? 'cagr-low' : 'cagr-neg';
-      const cagrSign = ar >= 0 ? '+' : '';
-      const years = set.release_year ? (new Date().getFullYear() - set.release_year) : null;
-      const yrsLabel = years ? ` over ${years}jr` : '';
-      cagrHtml = ` <span class="cagr-badge ${cagrCls}" title="Jaarlijks rendement (CAGR)${yrsLabel}: ${cagrSign}${ar}%/jr">${cagrSign}${ar}%<span style="font-weight:400;opacity:.7;font-size:9px">/jr</span></span>`;
-    }
     if (ri.direction === 'up')
-      retHtml = `<span class="retirement-indicator ret-up" title="NIB mediaan ligt ${ri.pct}% boven laatste retailprijs → set stijgt in waarde">📈 +${ri.pct}% vs retail</span>${cagrHtml}`;
+      retHtml = `<span class="retirement-indicator ret-up" title="NIB mediaan ligt ${ri.pct}% boven laatste retailprijs → set stijgt in waarde">📈 +${ri.pct}% vs retail</span>`;
     else if (ri.direction === 'down')
-      retHtml = `<span class="retirement-indicator ret-down" title="NIB mediaan ligt ${ri.pct}% onder laatste retailprijs → set daalt in waarde">📉 −${ri.pct}% vs retail</span>${cagrHtml}`;
+      retHtml = `<span class="retirement-indicator ret-down" title="NIB mediaan ligt ${ri.pct}% onder laatste retailprijs → set daalt in waarde">📉 −${ri.pct}% vs retail</span>`;
     else
-      retHtml = `<span class="retirement-indicator ret-stable" title="NIB mediaan stabiel rond retailprijs">≈ retail</span>${cagrHtml}`;
+      retHtml = `<span class="retirement-indicator ret-stable" title="NIB mediaan stabiel rond retailprijs">≈ retail</span>`;
   }
 
   card.innerHTML = `
@@ -1170,11 +1138,12 @@ function buildCompactStats(set) {
 
   const dealCount = (set.deals || []).length;
   const dealBlock = dealCount > 0 ? `
-    <div class="cs-deal-block"
+    <div class="cs-block cs-deal-block"
          title="${dealCount} deal${dealCount > 1 ? 's' : ''} gevonden — klik om te bekijken"
          onclick="event.stopPropagation();expandAndScrollToDeals(this)">
+      <div class="cs-block-label">Deals</div>
       <div class="cs-deal-count">${dealCount}</div>
-      <div class="cs-deal-icon">deals</div>
+      <div class="cs-deal-icon">🛒 bekijk</div>
     </div>` : '';
 
   return splitBlock('Te koop', nibAct, nibApp, cibAct, cibApp)
