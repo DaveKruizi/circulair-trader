@@ -790,8 +790,10 @@ function buildSetCard(set, idx) {
     if (ar != null) {
       const cagrCls = ar >= 20 ? 'cagr-high' : ar >= 8 ? 'cagr-mid' : ar >= 0 ? 'cagr-low' : 'cagr-neg';
       const cagrSign = ar >= 0 ? '+' : '';
-      const years = set.release_year ? (new Date().getFullYear() - set.release_year) : null;
-      const yrsLabel = years ? ` over ${years}jr` : '';
+      const baseYear = set.retired_year || set.release_year;
+      const years = baseYear ? (new Date().getFullYear() - baseYear) : null;
+      const baseLabel = set.retired_year ? `retired ${set.retired_year}` : `release ${set.release_year}`;
+      const yrsLabel = years ? ` — ${years}jr sinds ${baseLabel}` : '';
       cagrHtml = ` <span class="cagr-badge ${cagrCls}" title="Jaarlijks rendement (CAGR)${yrsLabel}: ${cagrSign}${ar}%/jr">${cagrSign}${ar}%<span style="font-weight:400;opacity:.7;font-size:9px">/jr</span></span>`;
     }
     if (ri.direction === 'up')

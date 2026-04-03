@@ -71,10 +71,14 @@ def _compute_retirement_indicator(lego_set: dict, platforms_data: dict) -> Optio
     pct = round((avg / retail - 1) * 100)
 
     # CAGR: jaarlijks geannualiseerd rendement t.o.v. retailprijs
+    # Gebruik retired_year als startpunt (= laatste jaar te koop bij retail).
+    # Fallback: release_year (conservatiever — overschat de periode).
     annual_return_pct = None
+    retired_year = lego_set.get("retired_year")
     release_year = lego_set.get("release_year")
-    if release_year:
-        years = max(datetime.now().year - release_year, 0.5)
+    base_year = retired_year or release_year
+    if base_year:
+        years = max(datetime.now().year - base_year, 0.5)
         annual_return_pct = round(((avg / retail) ** (1 / years) - 1) * 100, 1)
 
     if avg > retail * 1.05:
