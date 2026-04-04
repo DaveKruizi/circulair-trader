@@ -163,6 +163,9 @@ def _compute_bcg_nib(lego_set: dict, platforms_data: dict, hot_score_nib: int, c
     if recently_ret:
         deep_discount = retail and avg_p50 is not None and avg_p50 < retail * BCG_RECENT_RETIRED_DEEP_DISCOUNT
         return "dog" if deep_discount else "question_mark"
+    # Boven retail maar onder de 1.15× drempel → geen dog, hooguit question_mark
+    if retail and avg_p50 is not None and avg_p50 >= retail:
+        return "question_mark"
     return "dog"
 
 

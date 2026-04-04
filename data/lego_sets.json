@@ -15,7 +15,7 @@
         "lego 10295"
       ],
       "category": "vehicle",
-      "retired_year": 2023
+      "retired_year": 2025
     },
     {
       "set_number": "10298",
@@ -209,22 +209,6 @@
       "retiring_soon": true
     },
     {
-      "set_number": "42162",
-      "name": "Bugatti Bolide Agile Blue",
-      "theme": "Technic",
-      "retail_price": 49.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 905,
-      "image_url": "https://images.brickset.com/sets/images/42162-1.jpg",
-      "search_terms": [
-        "lego 42162"
-      ],
-      "category": "vehicle",
-      "retired_year": 2024
-    },
-    {
       "set_number": "42170",
       "name": "Kawasaki Ninja H2R Motorcycle",
       "theme": "Technic",
@@ -395,22 +379,6 @@
       ],
       "category": "vehicle",
       "retired_year": 2018
-    },
-    {
-      "set_number": "42107",
-      "name": "Ducati Panigale",
-      "theme": "Technic",
-      "retail_price": 69.99,
-      "is_retired": true,
-      "market_value_new": 95.0,
-      "release_year": 2019,
-      "piece_count": 646,
-      "image_url": "https://images.brickset.com/sets/images/42107-1.jpg",
-      "search_terms": [
-        "lego 42107"
-      ],
-      "category": "vehicle",
-      "retired_year": 2023
     },
     {
       "set_number": "42207",
@@ -745,70 +713,6 @@
       ],
       "category": "vehicle",
       "retired_year": 2023
-    },
-    {
-      "set_number": "42138",
-      "name": "Ford Mustang Shelby GT500",
-      "theme": "Technic",
-      "retail_price": 49.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2022,
-      "piece_count": 672,
-      "image_url": "https://images.brickset.com/sets/images/42138-1.jpg",
-      "search_terms": [
-        "lego 42138"
-      ],
-      "category": "vehicle",
-      "retired_year": 2024
-    },
-    {
-      "set_number": "42160",
-      "name": "Audi RS Q e-tron",
-      "theme": "Technic",
-      "retail_price": 59.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 914,
-      "image_url": "https://images.brickset.com/sets/images/42160-1.jpg",
-      "search_terms": [
-        "lego 42160"
-      ],
-      "category": "vehicle",
-      "retired_year": 2023
-    },
-    {
-      "set_number": "42161",
-      "name": "Lamborghini Huracán Tecnica",
-      "theme": "Technic",
-      "retail_price": 49.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 806,
-      "image_url": "https://images.brickset.com/sets/images/42161-1.jpg",
-      "search_terms": [
-        "lego 42161"
-      ],
-      "category": "vehicle",
-      "retired_year": 2025
-    },
-    {
-      "set_number": "42093",
-      "name": "Chevrolet Corvette ZR1",
-      "theme": "Technic",
-      "retail_price": 39.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2019,
-      "piece_count": 579,
-      "image_url": "https://images.brickset.com/sets/images/42093-1.jpg",
-      "search_terms": [
-        "lego 42093"
-      ],
-      "category": "vehicle",
-      "retired_year": 2021
     },
     {
       "set_number": "42098",
