@@ -38,7 +38,7 @@
       "name": "Back to the Future Time Machine",
       "theme": "Icons",
       "retail_price": 199.99,
-      "is_retired": true,
+      "is_retired": false,
       "market_value_new": 260.0,
       "release_year": 2022,
       "piece_count": 1872,
@@ -47,7 +47,7 @@
         "lego 10300"
       ],
       "category": "vehicle",
-      "retired_year": 2025
+      "retiring_soon": false
     },
     {
       "set_number": "10317",
@@ -117,7 +117,7 @@
       "name": "BMW M 1000 RR",
       "theme": "Technic",
       "retail_price": 249.99,
-      "is_retired": true,
+      "is_retired": false,
       "market_value_new": 290.0,
       "release_year": 2022,
       "piece_count": 1920,
@@ -126,7 +126,8 @@
         "lego 42130"
       ],
       "category": "vehicle",
-      "retired_year": 2025
+      "retiring_soon": true,
+      "retiring_year": 2026
     },
     {
       "set_number": "42143",
@@ -446,7 +447,7 @@
       "name": "Mercedes AMG F1 W14e Performance",
       "theme": "Technic",
       "retail_price": 199.99,
-      "is_retired": true,
+      "is_retired": false,
       "market_value_new": null,
       "release_year": 2023,
       "piece_count": 1642,
@@ -456,7 +457,8 @@
         "mercedes amg f1 lego"
       ],
       "category": "vehicle",
-      "retired_year": 2025
+      "retiring_soon": true,
+      "retiring_year": 2026
     },
     {
       "set_number": "77942",
