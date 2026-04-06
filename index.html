@@ -694,8 +694,8 @@
     </div>
   </div>
   <div class="mode-toggle">
-    <button class="mode-btn active" id="mode-NIB" onclick="setMode('NIB')">💎 Nieuw (NIB)</button>
-    <button class="mode-btn"        id="mode-CIB" onclick="setMode('CIB')">🔧 Gebruikt (CIB)</button>
+    <button class="mode-btn active" id="mode-NIB" onclick="setMode('NIB')">💎 Beleggen (NIB)</button>
+    <button class="mode-btn"        id="mode-CIB" onclick="setMode('CIB')">🔧 Handelen (CIB)</button>
   </div>
 </header>
 
@@ -1371,17 +1371,19 @@ function buildDealsSection(set, idx) {
   const steals = allDeals.filter(d => d.category === 'steal');
   const deals  = allDeals.filter(d => d.category === 'deal');
 
+  const condLabels = { NIB: 'Nieuw', CIB: 'Gebruikt' };
   const renderCard = (d) => {
     const imgHtml = d.image_url
       ? `<img src="${escHtml(d.image_url)}" alt="" loading="lazy" onerror="this.style.display='none'">`
       : '';
+    const condBadge = `<span class="badge badge-${(d.condition||'').toLowerCase()}">${condLabels[d.condition] || d.condition}</span>`;
     const typeBadge = d.price_type === 'bidding'
       ? `<span style="font-size:10px;color:var(--orange)">bod</span>`
       : '';
     const traderBadge = d.is_trader
       ? `<span style="font-size:10px;color:var(--muted)" title="${d.seller_count} LEGO-listings">handelaar</span>`
       : '';
-    const subParts = [typeBadge, traderBadge, `<span style="font-size:10px;color:var(--muted)">mediaan €${d.p50}</span>`].filter(Boolean).join(' ');
+    const subParts = [condBadge, typeBadge, traderBadge, `<span style="font-size:10px;color:var(--muted)">mediaan €${d.p50}</span>`].filter(Boolean).join(' ');
     return `<a class="deal-card" href="${escHtml(d.url)}" target="_blank" rel="noopener">
       ${imgHtml}
       <div class="dc-info">
