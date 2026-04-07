@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-07T07:13:06.055362",
+  "generated_at": "2026-04-07T07:17:43.963086",
   "scraped_at": "2026-03-25T15:07:57.047729",
   "platform_labels": {
     "vinted_nl": "Vinted NL",
@@ -404,8 +404,8 @@
             "active_count": 16,
             "appeared_7d": 0,
             "sell_price_realistic": 142.5,
-            "p10": 127.5,
-            "p25": 136.88,
+            "p10": 127.0,
+            "p25": 136.25,
             "p50": 140.0,
             "price_buckets": {
               "120-130": 2,
@@ -5850,9 +5850,9 @@
             "active_count": 35,
             "appeared_7d": 14,
             "sell_price_realistic": 270.0,
-            "p10": 167.0,
-            "p25": 217.5,
-            "p50": 250.0,
+            "p10": 166.5,
+            "p25": 216.25,
+            "p50": 245.0,
             "price_buckets": {
               "90-100": 1,
               "130-140": 1,
@@ -7582,8 +7582,8 @@
             "active_count": 17,
             "appeared_7d": 0,
             "sell_price_realistic": 105.0,
-            "p10": 93.4,
-            "p25": 105.0,
+            "p10": 92.0,
+            "p25": 103.75,
             "p50": 110.0,
             "price_buckets": {
               "80-90": 2,
@@ -8708,9 +8708,9 @@
             "active_count": 15,
             "appeared_7d": 0,
             "sell_price_realistic": 165.0,
-            "p10": 163.48,
-            "p25": 167.0,
-            "p50": 174.99,
+            "p10": 164.95,
+            "p25": 168.0,
+            "p50": 174.97,
             "price_buckets": {
               "120-130": 1,
               "160-170": 5,
@@ -9642,9 +9642,9 @@
             "active_count": 5,
             "appeared_7d": 1,
             "sell_price_realistic": 450.0,
-            "p10": 311.6,
-            "p25": 320.0,
-            "p50": 330.0,
+            "p10": 310.2,
+            "p25": 316.5,
+            "p50": 325.0,
             "price_buckets": {
               "300-310": 1,
               "320-330": 1,
@@ -9705,9 +9705,9 @@
             "active_count": 19,
             "appeared_7d": 4,
             "sell_price_realistic": 239.5,
-            "p10": 257.2,
+            "p10": 264.0,
             "p25": 280.0,
-            "p50": 287.0,
+            "p50": 286.0,
             "price_buckets": {
               "150-160": 1,
               "250-260": 2,
@@ -10059,8 +10059,8 @@
             "active_count": 13,
             "appeared_7d": 0,
             "sell_price_realistic": 250.0,
-            "p10": 221.0,
-            "p25": 250.0,
+            "p10": 220.5,
+            "p25": 243.75,
             "p50": 250.0,
             "price_buckets": {
               "220-230": 3,
@@ -11107,7 +11107,7 @@
       "retirement_indicator": {
         "direction": "down",
         "pct": 19,
-        "annual_return_pct": -18.6
+        "annual_return_pct": -19.2
       },
       "deals": [],
       "bcg_nib": "question_mark",
@@ -11538,7 +11538,7 @@
             "appeared_7d": 0,
             "sell_price_realistic": 30.0,
             "p10": 20.0,
-            "p25": 25.0,
+            "p25": 23.38,
             "p50": 25.0,
             "price_buckets": {
               "20-30": 16,
@@ -15235,9 +15235,9 @@
             "active_count": 7,
             "appeared_7d": 0,
             "sell_price_realistic": null,
-            "p10": 178.0,
-            "p25": 184.5,
-            "p50": 190.0,
+            "p10": 177.5,
+            "p25": 182.25,
+            "p50": 189.5,
             "price_buckets": {
               "170-180": 1,
               "180-190": 2,
@@ -16992,8 +16992,8 @@
             "active_count": 5,
             "appeared_7d": 5,
             "sell_price_realistic": 184.97,
-            "p10": 129.99,
-            "p25": 145.0,
+            "p10": 145.8,
+            "p25": 147.0,
             "p50": 149.0,
             "price_buckets": {
               "110-120": 1,
@@ -19594,9 +19594,9 @@
             "active_count": 12,
             "appeared_7d": 0,
             "sell_price_realistic": null,
-            "p10": 119.1,
+            "p10": 119.99,
             "p25": 120.0,
-            "p50": 122.5,
+            "p50": 123.0,
             "price_buckets": {
               "100-110": 1,
               "110-120": 2,
@@ -21178,9 +21178,9 @@
             "active_count": 10,
             "appeared_7d": 0,
             "sell_price_realistic": 385.0,
-            "p10": 209.0,
-            "p25": 293.5,
-            "p50": 382.5,
+            "p10": 208.0,
+            "p25": 275.0,
+            "p50": 365.0,
             "price_buckets": {
               "200-210": 1,
               "210-220": 1,
@@ -22173,8 +22173,8 @@
       "hot_score_cib": 32,
       "retirement_indicator": {
         "direction": "down",
-        "pct": 24,
-        "annual_return_pct": -6.7
+        "pct": 26,
+        "annual_return_pct": -7.3
       },
       "deals": [
         {
@@ -22186,8 +22186,8 @@
           "seller_name": "",
           "price_type": "fixed",
           "condition": "NIB",
-          "p50": 382.0,
-          "discount_pct": 48,
+          "p50": 365.0,
+          "discount_pct": 45,
           "is_trader": false,
           "seller_count": 0,
           "category": "steal"
@@ -22201,8 +22201,8 @@
           "seller_name": "",
           "price_type": "fixed",
           "condition": "NIB",
-          "p50": 382.0,
-          "discount_pct": 45,
+          "p50": 365.0,
+          "discount_pct": 42,
           "is_trader": false,
           "seller_count": 0,
           "category": "steal"
@@ -22216,8 +22216,8 @@
           "seller_name": "",
           "price_type": "fixed",
           "condition": "NIB",
-          "p50": 382.0,
-          "discount_pct": 28,
+          "p50": 365.0,
+          "discount_pct": 25,
           "is_trader": false,
           "seller_count": 0,
           "category": "deal"
@@ -22606,8 +22606,8 @@
             "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 90.0,
-            "p25": 94.38,
-            "p50": 97.0,
+            "p25": 93.75,
+            "p50": 95.0,
             "price_buckets": {
               "80-90": 1,
               "90-100": 8,
@@ -23437,8 +23437,8 @@
             "active_count": 40,
             "appeared_7d": 16,
             "sell_price_realistic": 90.0,
-            "p10": 58.6,
-            "p25": 78.75,
+            "p10": 58.2,
+            "p25": 77.5,
             "p50": 90.0,
             "price_buckets": {
               "20-30": 2,
@@ -23821,9 +23821,9 @@
             "active_count": 16,
             "appeared_7d": 0,
             "sell_price_realistic": null,
-            "p10": 67.5,
-            "p25": 74.38,
-            "p50": 77.0,
+            "p10": 67.0,
+            "p25": 73.75,
+            "p50": 75.0,
             "price_buckets": {
               "60-70": 2,
               "70-80": 8,
@@ -24879,7 +24879,7 @@
             "appeared_7d": 0,
             "sell_price_realistic": null,
             "p10": 145.0,
-            "p25": 150.0,
+            "p25": 149.0,
             "p50": 150.0,
             "price_buckets": {
               "140-150": 4,
@@ -27355,9 +27355,9 @@
             "active_count": 8,
             "appeared_7d": 0,
             "sell_price_realistic": null,
-            "p10": 579.3,
-            "p25": 699.75,
-            "p50": 737.5,
+            "p10": 699.6,
+            "p25": 712.5,
+            "p50": 750.0,
             "price_buckets": {
               "300-310": 1,
               "690-700": 1,
@@ -27446,9 +27446,9 @@
             "active_count": 10,
             "appeared_7d": 0,
             "sell_price_realistic": null,
-            "p10": 422.4,
-            "p25": 451.25,
-            "p50": 467.0,
+            "p10": 419.8,
+            "p25": 450.0,
+            "p50": 459.0,
             "price_buckets": {
               "390-400": 1,
               "420-430": 1,
@@ -28127,8 +28127,8 @@
       "hot_score_cib": 4,
       "retirement_indicator": {
         "direction": "up",
-        "pct": 100,
-        "annual_return_pct": 9.1
+        "pct": 103,
+        "annual_return_pct": 9.2
       },
       "deals": [
         {
@@ -28140,8 +28140,8 @@
           "seller_name": "",
           "price_type": "fixed",
           "condition": "NIB",
-          "p50": 738.0,
-          "discount_pct": 59,
+          "p50": 750.0,
+          "discount_pct": 60,
           "is_trader": false,
           "seller_count": 0,
           "category": "steal"
@@ -28565,9 +28565,9 @@
             "active_count": 10,
             "appeared_7d": 0,
             "sell_price_realistic": null,
-            "p10": 152.25,
-            "p25": 157.0,
-            "p50": 169.47,
+            "p10": 152.0,
+            "p25": 156.0,
+            "p50": 169.0,
             "price_buckets": {
               "150-160": 3,
               "160-170": 4,
@@ -28674,9 +28674,9 @@
             "active_count": 8,
             "appeared_7d": 0,
             "sell_price_realistic": null,
-            "p10": 120.98,
-            "p25": 137.5,
-            "p50": 155.0,
+            "p10": 117.98,
+            "p25": 135.0,
+            "p50": 150.0,
             "price_buckets": {
               "90-100": 1,
               "130-140": 1,
@@ -29332,11 +29332,11 @@
           "seller_name": "",
           "price_type": "fixed",
           "condition": "CIB",
-          "p50": 155.0,
-          "discount_pct": 36,
+          "p50": 150.0,
+          "discount_pct": 33,
           "is_trader": false,
           "seller_count": 0,
-          "category": "steal"
+          "category": "deal"
         }
       ],
       "bcg_nib": "question_mark",
@@ -29362,9 +29362,9 @@
             "active_count": 10,
             "appeared_7d": 7,
             "sell_price_realistic": 315.0,
-            "p10": 271.29,
-            "p25": 289.25,
-            "p50": 302.0,
+            "p10": 288.2,
+            "p25": 289.99,
+            "p50": 309.0,
             "price_buckets": {
               "140-150": 1,
               "280-290": 3,
@@ -30885,9 +30885,9 @@
             "active_count": 15,
             "appeared_7d": 0,
             "sell_price_realistic": null,
-            "p10": 117.0,
-            "p25": 122.5,
-            "p50": 130.0,
+            "p10": 116.5,
+            "p25": 121.25,
+            "p50": 127.5,
             "price_buckets": {
               "110-120": 2,
               "120-130": 5,
