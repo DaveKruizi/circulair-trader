@@ -650,76 +650,6 @@
     .listings-cols { grid-template-columns: 1fr; }
     .compact-stats { display: none; }
   }
-
-  /* ── Portfolio modaal ──────────────────────────────────────────────────── */
-  .pf-btn {
-    background: none; border: 1px solid var(--border); border-radius: 6px;
-    color: var(--muted); font-size: 12px; cursor: pointer;
-    padding: 5px 12px; display: inline-flex; align-items: center; gap: 5px;
-    transition: all .15s; white-space: nowrap;
-  }
-  .pf-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .pf-btn-primary {
-    background: var(--accent); border-color: var(--accent); color: #0d1117;
-    font-weight: 700;
-  }
-  .pf-btn-primary:hover { background: #f0b800; border-color: #f0b800; color: #0d1117; }
-
-  .modal-overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,.65); z-index: 500;
-    align-items: center; justify-content: center;
-  }
-  .modal-overlay.open { display: flex; }
-  .modal {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 14px; padding: 28px 32px;
-    width: 100%; max-width: 480px; max-height: 90vh;
-    overflow-y: auto; position: relative;
-  }
-  .modal h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
-  .modal-close {
-    position: absolute; top: 16px; right: 18px;
-    background: none; border: none; color: var(--muted);
-    font-size: 20px; cursor: pointer; line-height: 1;
-  }
-  .modal-close:hover { color: var(--text); }
-
-  .form-row { margin-bottom: 16px; }
-  .form-row label {
-    display: block; font-size: 11px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: .05em;
-    color: var(--muted); margin-bottom: 6px;
-  }
-  .form-row input, .form-row select, .form-row textarea {
-    width: 100%; background: var(--bg); border: 1px solid var(--border);
-    border-radius: 6px; color: var(--text); font-size: 14px;
-    padding: 8px 12px; outline: none; font-family: inherit;
-  }
-  .form-row input:focus, .form-row select:focus {
-    border-color: var(--accent);
-  }
-  .form-row select option { background: var(--card); }
-  .form-row .hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
-
-  .form-actions {
-    display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px;
-  }
-  .modal-status {
-    margin-top: 14px; padding: 10px 14px; border-radius: 6px;
-    font-size: 13px; display: none;
-  }
-  .modal-status.ok  { background: #0d2016; color: #3fb950; border: 1px solid #23863644; display: block; }
-  .modal-status.err { background: #3a1212; color: #da3633; border: 1px solid #da363344; display: block; }
-  .modal-status.loading { background: #161b22; color: var(--muted); border: 1px solid var(--border); display: block; }
-
-  .action-tabs { display: flex; gap: 6px; margin-bottom: 20px; }
-  .action-tab {
-    flex: 1; padding: 8px; border-radius: 6px; border: 1px solid var(--border);
-    background: none; color: var(--muted); font-size: 13px; font-weight: 600;
-    cursor: pointer; text-align: center; transition: all .12s;
-  }
-  .action-tab.active { background: var(--accent); border-color: var(--accent); color: #0d1117; }
 </style>
 </head>
 <body>
@@ -772,7 +702,6 @@
     <button class="mode-btn active" id="mode-NIB" onclick="setMode('NIB')">💎 Beleggen (NIB)</button>
     <button class="mode-btn"        id="mode-CIB" onclick="setMode('CIB')">🔧 Handelen (CIB)</button>
   </div>
-  <button class="pf-btn" onclick="openPatModal()" title="GitHub toegangstoken instellen">⚙️ Instellingen</button>
 </header>
 
 <!-- Portfolio sectie (alleen zichtbaar als PORTFOLIO_URL is ingesteld) -->
@@ -781,7 +710,6 @@
     <span style="font-size:20px">💼</span>
     <h2>Mijn Portfolio</h2>
     <span id="pf-gen-time" style="font-size:11px;color:var(--muted)"></span>
-    <button class="pf-btn pf-btn-primary" style="margin-left:auto" onclick="openPositionModal()">+ Positie</button>
   </div>
   <div class="portfolio-summary" id="pf-summary"></div>
   <table class="portfolio-table">
@@ -827,102 +755,6 @@
 
 <footer id="footer">Gegenereerd op <span id="footer-time"></span></footer>
 
-<!-- ── Portfolio modaal ─────────────────────────────────────────────────── -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBackdrop(event)">
-
-  <!-- PAT-instellingen modaal -->
-  <div class="modal" id="modal-pat" style="display:none">
-    <button class="modal-close" onclick="closeModal()">×</button>
-    <h3>⚙️ GitHub toegangstoken</h3>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6">
-      Om posities te registreren stuurt het dashboard een opdracht naar GitHub.
-      Daarvoor heb je eenmalig een persoonlijk toegangstoken (PAT) nodig.<br><br>
-      <strong style="color:var(--text)">Aanmaken in 3 stappen:</strong><br>
-      1. Ga naar <a href="https://github.com/settings/tokens/new" target="_blank" style="color:var(--accent)">github.com/settings/tokens/new</a><br>
-      2. Geef het een naam (bijv. "Lego dashboard") en vink <code style="background:var(--bg);padding:1px 5px;border-radius:3px">workflow</code> aan<br>
-      3. Klik <em>Generate token</em> en plak het hieronder
-    </p>
-    <div class="form-row">
-      <label>Persoonlijk toegangstoken (PAT)</label>
-      <input type="password" id="pat-input" placeholder="ghp_..." autocomplete="off">
-      <div class="hint">Wordt alleen lokaal opgeslagen in je browser. Nooit verstuurd naar anderen.</div>
-    </div>
-    <div class="form-actions">
-      <button class="pf-btn" onclick="closeModal()">Annuleren</button>
-      <button class="pf-btn pf-btn-primary" onclick="savePat()">Opslaan</button>
-    </div>
-    <div class="modal-status" id="pat-status"></div>
-  </div>
-
-  <!-- Positie toevoegen/verkopen modaal -->
-  <div class="modal" id="modal-position" style="display:none">
-    <button class="modal-close" onclick="closeModal()">×</button>
-    <h3>💼 Positie registreren</h3>
-
-    <div class="action-tabs">
-      <button class="action-tab active" id="tab-kopen"   onclick="setActionTab('kopen')">🛒 Kopen</button>
-      <button class="action-tab"        id="tab-verkopen" onclick="setActionTab('verkopen')">✅ Verkopen</button>
-    </div>
-
-    <div class="form-row">
-      <label>Set nummer</label>
-      <input type="text" id="pf-set-number" placeholder="bijv. 10295" list="pf-set-list">
-      <datalist id="pf-set-list"></datalist>
-    </div>
-    <div class="form-row">
-      <label>Conditie</label>
-      <select id="pf-condition">
-        <option value="NIB">NIB — Nieuw in doos</option>
-        <option value="CIB">CIB — Gebruikt compleet</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label>Aantal</label>
-      <input type="number" id="pf-quantity" value="1" min="1">
-    </div>
-
-    <!-- Kopen-velden -->
-    <div id="kopen-fields">
-      <div class="form-row">
-        <label>Aankoopprijs per stuk (€)</label>
-        <input type="number" id="pf-purchase-price" placeholder="bijv. 89.99" step="0.01" min="0">
-      </div>
-      <div class="form-row">
-        <label>Aankoopdatum</label>
-        <input type="date" id="pf-purchase-date">
-      </div>
-    </div>
-
-    <!-- Verkopen-velden -->
-    <div id="verkopen-fields" style="display:none">
-      <div class="form-row">
-        <label>Positie ID <span style="font-weight:400;text-transform:none">(zie # kolom in portfolio)</span></label>
-        <input type="number" id="pf-position-id" placeholder="bijv. 3" min="1">
-      </div>
-      <div class="form-row">
-        <label>Verkoopprijs per stuk (€)</label>
-        <input type="number" id="pf-sold-price" placeholder="bijv. 129.99" step="0.01" min="0">
-      </div>
-      <div class="form-row">
-        <label>Verkoopdatum</label>
-        <input type="date" id="pf-sold-date">
-      </div>
-    </div>
-
-    <div class="form-row">
-      <label>Notities <span style="font-weight:400;text-transform:none">(optioneel)</span></label>
-      <input type="text" id="pf-notes" placeholder="bijv. gekocht op Marktplaats">
-    </div>
-
-    <div class="form-actions">
-      <button class="pf-btn" onclick="closeModal()">Annuleren</button>
-      <button class="pf-btn pf-btn-primary" id="pf-submit-btn" onclick="submitPosition()">Registreren</button>
-    </div>
-    <div class="modal-status" id="position-status"></div>
-  </div>
-
-</div>
-
 <script>
 let dashData = null;
 let currentMode = 'NIB';   // 'NIB' | 'CIB'
@@ -943,7 +775,6 @@ fetch('./data/dashboard_data.json')
   .then(r => r.json())
   .then(data => {
     dashData = data;
-    window.__dashData = data;
     renderAll(data);
   })
   .catch(() => {
@@ -1758,146 +1589,6 @@ function escHtml(str) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
-}
-
-// ── Portfolio modaal ──────────────────────────────────────────────────────
-
-const GH_REPO = 'DaveKruizi/circulair-trader';
-const GH_WORKFLOW = 'portfolio-manage.yml';
-let pfAction = 'kopen';
-
-function openPatModal() {
-  document.getElementById('modal-pat').style.display = 'block';
-  document.getElementById('modal-position').style.display = 'none';
-  document.getElementById('modal-overlay').classList.add('open');
-  const stored = localStorage.getItem('gh_pat') || '';
-  document.getElementById('pat-input').value = stored ? '••••••••••••••••' : '';
-  document.getElementById('pat-status').className = 'modal-status';
-}
-
-function openPositionModal() {
-  const pat = localStorage.getItem('gh_pat');
-  if (!pat) { openPatModal(); return; }
-  document.getElementById('modal-position').style.display = 'block';
-  document.getElementById('modal-pat').style.display = 'none';
-  document.getElementById('modal-overlay').classList.add('open');
-  // Vul vandaag in als standaarddatum
-  const today = new Date().toISOString().slice(0, 10);
-  document.getElementById('pf-purchase-date').value = today;
-  document.getElementById('pf-sold-date').value = today;
-  // Vul autocomplete met setnummers
-  const dl = document.getElementById('pf-set-list');
-  if (dl.children.length === 0 && window.__dashData) {
-    window.__dashData.sets.forEach(s => {
-      const opt = document.createElement('option');
-      opt.value = s.set_number;
-      opt.label = `${s.set_number} — ${s.name}`;
-      dl.appendChild(opt);
-    });
-  }
-  setStatus('position-status', '', '');
-}
-
-function closeModal() {
-  document.getElementById('modal-overlay').classList.remove('open');
-}
-
-function closeModalOnBackdrop(e) {
-  if (e.target === document.getElementById('modal-overlay')) closeModal();
-}
-
-function savePat() {
-  const val = document.getElementById('pat-input').value.trim();
-  if (!val || val.startsWith('•')) {
-    setStatus('pat-status', 'err', 'Voer een geldig token in.');
-    return;
-  }
-  localStorage.setItem('gh_pat', val);
-  setStatus('pat-status', 'ok', 'Token opgeslagen. Je kunt nu posities registreren.');
-  setTimeout(() => { closeModal(); openPositionModal(); }, 1200);
-}
-
-function setActionTab(action) {
-  pfAction = action;
-  document.getElementById('tab-kopen').classList.toggle('active', action === 'kopen');
-  document.getElementById('tab-verkopen').classList.toggle('active', action === 'verkopen');
-  document.getElementById('kopen-fields').style.display = action === 'kopen' ? 'block' : 'none';
-  document.getElementById('verkopen-fields').style.display = action === 'verkopen' ? 'block' : 'none';
-}
-
-function setStatus(id, type, msg) {
-  const el = document.getElementById(id);
-  el.className = 'modal-status' + (type ? ' ' + type : '');
-  el.textContent = msg;
-}
-
-async function submitPosition() {
-  const pat = localStorage.getItem('gh_pat');
-  if (!pat) { openPatModal(); return; }
-
-  const setNumber = document.getElementById('pf-set-number').value.trim();
-  const condition = document.getElementById('pf-condition').value;
-  const quantity  = document.getElementById('pf-quantity').value || '1';
-  const notes     = document.getElementById('pf-notes').value.trim();
-
-  if (!setNumber) { setStatus('position-status', 'err', 'Vul een setnummer in.'); return; }
-
-  let inputs = { action: pfAction, set_number: setNumber, condition, quantity, notes };
-
-  if (pfAction === 'kopen') {
-    const price = document.getElementById('pf-purchase-price').value.trim();
-    const date  = document.getElementById('pf-purchase-date').value;
-    if (!price || !date) { setStatus('position-status', 'err', 'Vul aankoopprijs en -datum in.'); return; }
-    inputs.purchase_price = price;
-    inputs.purchase_date  = date;
-  } else {
-    const posId     = document.getElementById('pf-position-id').value.trim();
-    const soldPrice = document.getElementById('pf-sold-price').value.trim();
-    const soldDate  = document.getElementById('pf-sold-date').value;
-    if (!posId || !soldPrice || !soldDate) {
-      setStatus('position-status', 'err', 'Vul positie ID, verkoopprijs en -datum in.');
-      return;
-    }
-    inputs.position_id = posId;
-    inputs.sold_price  = soldPrice;
-    inputs.sold_date   = soldDate;
-  }
-
-  const btn = document.getElementById('pf-submit-btn');
-  btn.disabled = true;
-  setStatus('position-status', 'loading', '⏳ Wordt verstuurd naar GitHub...');
-
-  try {
-    const res = await fetch(
-      `https://api.github.com/repos/${GH_REPO}/actions/workflows/${GH_WORKFLOW}/dispatches`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${pat}`,
-          'Accept': 'application/vnd.github+json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ref: 'master', inputs }),
-      }
-    );
-
-    if (res.status === 204) {
-      setStatus('position-status', 'ok',
-        '✅ Gelukt! GitHub verwerkt de positie nu (~1 minuut). Herlaad het dashboard daarna.');
-      document.getElementById('pf-set-number').value = '';
-      document.getElementById('pf-notes').value = '';
-    } else if (res.status === 401) {
-      setStatus('position-status', 'err', '❌ Token ongeldig. Ga naar Instellingen en voer een nieuw token in.');
-      localStorage.removeItem('gh_pat');
-    } else {
-      const body = await res.text();
-      setStatus('position-status', 'err', `❌ Fout ${res.status}: ${body.slice(0, 120)}`);
-    }
-  } catch (e) {
-    setStatus('position-status', 'err', `❌ Netwerkfout: ${e.message}`);
-  } finally {
-    btn.disabled = false;
-  }
 }
 </script>
 </body>
