@@ -7,21 +7,21 @@
 <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 <style>
   :root {
-    --bg:     #0d1117;   /* GitHub dark — rustiger dan pure zwart */
-    --card:   #161b22;
-    --border: #21262d;
-    --text:   #c9d1d9;
-    --muted:  #8b949e;
+    --bg:     #f6f8fa;   /* GitHub light */
+    --card:   #ffffff;
+    --border: #d0d7de;
+    --text:   #1f2328;
+    --muted:  #656d76;
 
-    --accent: #d4a017;   /* LEGO geel — enige interactieve kleur */
+    --accent: #b38600;   /* LEGO geel — donkerder voor lichte achtergrond */
 
-    --green:  #3fb950;   /* positief: winst, NIB, omhoog */
-    --amber:  #d29922;   /* waarschuwing: CIB, retiring, matig */
-    --red:    #da3633;   /* risico: verlies, dalend */
-    --blue:   #58a6ff;   /* informatief: NIB-modus, neutraal */
+    --green:  #1a7f37;   /* positief: winst, NIB, omhoog */
+    --amber:  #9a6700;   /* waarschuwing: CIB, retiring, matig */
+    --red:    #d1242f;   /* risico: verlies, dalend */
+    --blue:   #0969da;   /* informatief: NIB-modus, neutraal */
 
-    --nib:    #58a6ff;   /* NIB = lange termijn beleggen */
-    --cib:    #d29922;   /* CIB = handelen, marge */
+    --nib:    #0969da;   /* NIB = lange termijn beleggen */
+    --cib:    #9a6700;   /* CIB = handelen, marge */
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -72,7 +72,7 @@
     transition: all .15s;
     white-space: nowrap;
   }
-  .mode-btn.active { background: var(--accent); color: #0d1117; }
+  .mode-btn.active { background: var(--accent); color: #fff; }
   .mode-btn:not(.active):hover { color: var(--text); }
 
   /* Filter bar */
@@ -97,12 +97,12 @@
     cursor: pointer; transition: all .12s; white-space: nowrap;
   }
   .filter-chip:hover { border-color: var(--accent); color: var(--text); }
-  .filter-chip.active { background: var(--accent); border-color: var(--accent); color: #0d1117; }
-  .filter-chip.chip-star.active    { background: #2d2200; border-color: #d4a017; color: #ffd700; }
-  .filter-chip.chip-cow.active     { background: #0d2016; border-color: #238636; color: #3fb950; }
-  .filter-chip.chip-qmark.active   { background: #0d1f3c; border-color: #1f6feb; color: #58a6ff; }
-  .filter-chip.chip-dog.active     { background: #161b22; border-color: #30363d; color: #8b949e; }
-  .filter-chip.chip-retiring.active { background: #2d2000; border-color: #d29922; color: #d29922; }
+  .filter-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .filter-chip.chip-star.active    { background: #fff8c5; border-color: #b38600; color: #7d4e00; }
+  .filter-chip.chip-cow.active     { background: #dafbe1; border-color: #1a7f37; color: #1a7f37; }
+  .filter-chip.chip-qmark.active   { background: #ddf4ff; border-color: #0969da; color: #0969da; }
+  .filter-chip.chip-dog.active     { background: #f6f8fa; border-color: #8c959f; color: #57606a; }
+  .filter-chip.chip-retiring.active { background: #fff8c5; border-color: #9a6700; color: #7d4e00; }
 
   .main { padding: 24px; max-width: 1400px; margin: 0 auto; }
 
@@ -137,7 +137,7 @@
     overflow: hidden;
     transition: border-color .15s;
   }
-  .set-card:hover { border-color: #30363d; }
+  .set-card:hover { border-color: #b38600; }
 
   .set-header {
     display: flex;
@@ -156,7 +156,7 @@
     height: 60px;
     object-fit: contain;
     border-radius: 6px;
-    background: #0d1117;
+    background: #f6f8fa;
     flex-shrink: 0;
   }
 
@@ -173,13 +173,13 @@
     text-transform: uppercase;
     letter-spacing: .04em;
   }
-  .badge-retired       { background: #1c1e2a; color: #8b949e; border: 1px solid #30363d; }
-  .badge-active        { background: #0d2016; color: #3fb950; border: 1px solid #238636; }
-  .badge-retiring-soon { background: #2d2000; color: #d29922; border: 1px solid #d2992255; }
-  .set-card.retiring-soon-card { border-color: #d2992244; }
-  .badge-nib     { background: #0d1f3c; color: #58a6ff; border: 1px solid #1f6feb55; }
-  .badge-cib     { background: #2d2000; color: #d29922; border: 1px solid #d2992255; }
-  .badge-mp      { background: #2d2000; color: #d29922; border: 1px solid #d2992244; }
+  .badge-retired       { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de; }
+  .badge-active        { background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3755; }
+  .badge-retiring-soon { background: #fff8c5; color: #7d4e00; border: 1px solid #9a670055; }
+  .set-card.retiring-soon-card { border-color: #9a670033; }
+  .badge-nib     { background: #ddf4ff; color: #0969da; border: 1px solid #0969da55; }
+  .badge-cib     { background: #fff8c5; color: #7d4e00; border: 1px solid #9a670055; }
+  .badge-mp      { background: #fff8c5; color: #7d4e00; border: 1px solid #9a670044; }
 
   .set-body { padding: 16px; display: none; }
   .set-card.expanded .set-body { display: block; }
@@ -269,41 +269,41 @@
     text-align: center;
   }
   .cs-deal-block {
-    background: #0d2016;
-    border: 1px solid #21262d;
-    border-left: 3px solid #3fb950;
+    background: #dafbe1;
+    border: 1px solid #d0d7de;
+    border-left: 3px solid #1a7f37;
   }
   .cs-deal-block:hover {
-    border-color: #21262d;
-    border-left-color: #3fb950;
-    background: #112b1c;
+    border-color: #d0d7de;
+    border-left-color: #1a7f37;
+    background: #c6f6d5;
   }
   .cs-steal-block {
-    background: #2d2000;
-    border: 1px solid #21262d;
-    border-left: 3px solid #d29922;
+    background: #fff8c5;
+    border: 1px solid #d0d7de;
+    border-left: 3px solid #9a6700;
   }
   .cs-steal-block:hover {
-    border-color: #21262d;
-    border-left-color: #d29922;
-    background: #382800;
+    border-color: #d0d7de;
+    border-left-color: #9a6700;
+    background: #fef08a;
   }
   .cs-deal-count {
     font-size: 28px;
     font-weight: 800;
-    color: #3fb950;
+    color: #1a7f37;
     line-height: 1;
   }
-  .cs-steal-block .cs-deal-count { color: #d29922; }
+  .cs-steal-block .cs-deal-count { color: #7d4e00; }
   .cs-deal-icon {
     font-size: 10px;
-    color: #3fb950;
-    opacity: .8;
+    color: #1a7f37;
+    opacity: .9;
     letter-spacing: .05em;
     font-weight: 600;
     text-transform: uppercase;
   }
-  .cs-steal-block .cs-deal-icon { color: #d29922; }
+  .cs-steal-block .cs-deal-icon { color: #7d4e00; }
 
   .condition-panel { display: none; }
   .condition-panel.visible { display: block; }
@@ -344,7 +344,7 @@
   }
 
   .chart-box {
-    background: #0d1117;
+    background: #f6f8fa;
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 10px;
@@ -379,14 +379,14 @@
     font-size: 13px;
   }
   .active-listing:last-child { border-bottom: none; }
-  .active-listing img { width: 40px; height: 40px; object-fit: cover; border-radius: 4px; background: #0d1117; flex-shrink: 0; }
+  .active-listing img { width: 40px; height: 40px; object-fit: cover; border-radius: 4px; background: #f6f8fa; flex-shrink: 0; }
   .active-listing .al-title { flex: 1; min-width: 0; }
   .active-listing .al-title a { color: var(--text); text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
   .active-listing .al-title a:hover { color: var(--accent); }
   .active-listing .al-title .al-sub { color: var(--muted); font-size: 11px; }
   .active-listing .al-price { font-weight: 700; white-space: nowrap; color: var(--green); }
   .price-unknown { color: var(--muted); }
-  .reserved-badge { display: inline-block; font-size: 10px; font-weight: 600; background: #0d1f3c; color: #58a6ff; border: 1px solid #1f6feb55; border-radius: 4px; padding: 1px 5px; margin-left: 4px; vertical-align: middle; white-space: nowrap; }
+  .reserved-badge { display: inline-block; font-size: 10px; font-weight: 600; background: #ddf4ff; color: #0969da; border: 1px solid #0969da55; border-radius: 4px; padding: 1px 5px; margin-left: 4px; vertical-align: middle; white-space: nowrap; }
 
   .expand-btn {
     background: none;
@@ -448,11 +448,11 @@
   }
   .ptl-card:hover { border-color: var(--accent); }
   .ptl-card img {
-    width: 100%; aspect-ratio: 1/1; object-fit: cover; background: #0d1117;
+    width: 100%; aspect-ratio: 1/1; object-fit: cover; background: #f6f8fa;
     display: block;
   }
   .ptl-card .ptl-img-placeholder {
-    width: 100%; aspect-ratio: 1/1; background: #0d1117;
+    width: 100%; aspect-ratio: 1/1; background: #f6f8fa;
     display: flex; align-items: center; justify-content: center;
     color: var(--muted); font-size: 22px;
   }
@@ -504,10 +504,10 @@
     margin-left: auto;
     font-style: italic;
   }
-  .bcg-star    .bcg-title { color: #d4a017; }
-  .bcg-cow     .bcg-title { color: #3fb950; }
-  .bcg-qmark   .bcg-title { color: #58a6ff; }
-  .bcg-dog     .bcg-title { color: #8b949e; }
+  .bcg-star    .bcg-title { color: #7d4e00; }
+  .bcg-cow     .bcg-title { color: #1a7f37; }
+  .bcg-qmark   .bcg-title { color: #0969da; }
+  .bcg-dog     .bcg-title { color: #57606a; }
 
   /* Hot score badge */
   .hot-badge {
@@ -515,22 +515,22 @@
     font-size: 12px; font-weight: 700; padding: 3px 9px;
     border-radius: 20px; white-space: nowrap; flex-shrink: 0;
   }
-  .hot-0  { background: #161b22; color: #8b949e; border: 1px solid #21262d; }
-  .hot-1  { background: #161b22; color: #8b949e; border: 1px solid #21262d; }
-  .hot-2  { background: #0d1f3c; color: #58a6ff; border: 1px solid #1f6feb44; }
-  .hot-3  { background: #0d2016; color: #3fb950; border: 1px solid #23863644; }
-  .hot-4  { background: #2d2000; color: #d29922; border: 1px solid #d2992244; }
-  .hot-5  { background: #3a1212; color: #da3633; border: 1px solid #da363344; }
+  .hot-0  { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de; }
+  .hot-1  { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de; }
+  .hot-2  { background: #ddf4ff; color: #0969da; border: 1px solid #0969da44; }
+  .hot-3  { background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3744; }
+  .hot-4  { background: #fff8c5; color: #7d4e00; border: 1px solid #9a670044; }
+  .hot-5  { background: #ffebe9; color: #d1242f; border: 1px solid #d1242f44; }
 
   /* Deal badge */
   .deal-badge {
     display: inline-flex; align-items: center; gap: 4px;
     font-size: 12px; font-weight: 700; padding: 3px 9px;
     border-radius: 20px; white-space: nowrap; flex-shrink: 0;
-    background: #0d2016; color: #3fb950; border: 1px solid #23863644;
+    background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3744;
     cursor: pointer;
   }
-  .deal-badge:hover { border-color: #3fb950; }
+  .deal-badge:hover { border-color: #1a7f37; }
 
   /* Retirement indicator */
   .retirement-indicator {
@@ -538,9 +538,9 @@
     font-size: 11px; font-weight: 600; padding: 2px 8px;
     border-radius: 4px; white-space: nowrap;
   }
-  .ret-up     { background: #0d2016; color: #3fb950; border: 1px solid #23863633; }
-  .ret-down   { background: #3a1212; color: #da3633; border: 1px solid #da363333; }
-  .ret-stable { background: #161b22; color: #8b949e; border: 1px solid #30363d33; }
+  .ret-up     { background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3733; }
+  .ret-down   { background: #ffebe9; color: #d1242f; border: 1px solid #d1242f33; }
+  .ret-stable { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de33; }
 
   /* CAGR badge */
   .cagr-badge {
@@ -548,10 +548,10 @@
     font-size: 11px; font-weight: 600; padding: 2px 7px;
     border-radius: 4px; white-space: nowrap;
   }
-  .cagr-high   { background: #0d2016; color: #3fb950; border: 1px solid #23863633; }
-  .cagr-mid    { background: #2d2000; color: #d29922; border: 1px solid #d2992233; }
-  .cagr-low    { background: #161b22; color: #8b949e; border: 1px solid #30363d33; }
-  .cagr-neg    { background: #3a1212; color: #da3633; border: 1px solid #da363333; }
+  .cagr-high   { background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3733; }
+  .cagr-mid    { background: #fff8c5; color: #7d4e00; border: 1px solid #9a670033; }
+  .cagr-low    { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de33; }
+  .cagr-neg    { background: #ffebe9; color: #d1242f; border: 1px solid #d1242f33; }
 
   /* Prijstrend badge */
   .trend-badge {
@@ -559,9 +559,9 @@
     font-size: 10px; font-weight: 700; padding: 2px 6px;
     border-radius: 4px; white-space: nowrap;
   }
-  .trend-up     { background: #0d2016; color: #3fb950; border: 1px solid #23863633; }
-  .trend-stable { background: #161b22; color: #8b949e; border: 1px solid #30363d33; }
-  .trend-down   { background: #3a1212; color: #da3633; border: 1px solid #da363333; }
+  .trend-up     { background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3733; }
+  .trend-stable { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de33; }
+  .trend-down   { background: #ffebe9; color: #d1242f; border: 1px solid #d1242f33; }
 
   /* Portfolio sectie */
   #portfolio-section {
@@ -582,8 +582,8 @@
   }
   .pf-stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing:.05em; }
   .pf-stat-value { font-size: 20px; font-weight: 800; color: var(--text); line-height: 1.2; }
-  .pf-stat-value.positive { color: #3fb950; }
-  .pf-stat-value.negative { color: #da3633; }
+  .pf-stat-value.positive { color: #1a7f37; }
+  .pf-stat-value.negative { color: #d1242f; }
   .portfolio-table {
     width: 100%; border-collapse: collapse; font-size: 12px;
   }
@@ -596,8 +596,8 @@
   .portfolio-table tr:hover td { background: var(--card); }
   .pf-open  td { color: var(--text); }
   .pf-sold  td { color: var(--muted); }
-  .pf-pnl-pos { color: #3fb950; font-weight: 700; }
-  .pf-pnl-neg { color: #da3633; font-weight: 700; }
+  .pf-pnl-pos { color: #1a7f37; font-weight: 700; }
+  .pf-pnl-neg { color: #d1242f; font-weight: 700; }
   #portfolio-unlock {
     background: var(--card); border: 1px solid var(--border); border-radius: 12px;
     padding: 20px 24px; display: flex; align-items: center; gap: 12px;
@@ -605,42 +605,43 @@
 
   /* Deal cards in expanded view */
   .deals-section {
-    background: var(--card); border: 1px solid var(--border);
-    border-left: 3px solid #3fb950;
+    background: #f0fdf4; border: 1px solid #d0d7de;
+    border-left: 3px solid #1a7f37;
     border-radius: 8px; padding: 12px 14px; margin-bottom: 16px;
   }
   .deals-section h4 {
-    font-size: 11px; color: #3fb950; text-transform: uppercase;
+    font-size: 11px; color: #1a7f37; text-transform: uppercase;
     letter-spacing: .05em; margin-bottom: 10px;
   }
   .steals-section {
-    border-left-color: #d29922;
+    background: #fffbeb;
+    border-left-color: #9a6700;
   }
-  .steals-section h4 { color: #d29922; }
+  .steals-section h4 { color: #7d4e00; }
   .steals-section .deal-card {
-    border-left-color: #d2992244;
+    border-left-color: #9a670044;
   }
-  .steals-section .deal-card:hover { border-left-color: #d29922; }
-  .steals-section .dc-price { color: #d29922 !important; }
+  .steals-section .deal-card:hover { border-left-color: #9a6700; }
+  .steals-section .dc-price { color: #7d4e00 !important; }
   .steals-section .dc-discount {
-    background: #2d2000; color: #d29922; border-color: #d2992244;
+    background: #fff8c5; color: #7d4e00; border-color: #9a670044;
   }
   .deal-cards { display: flex; flex-direction: column; gap: 6px; }
   .deal-card {
     display: flex; align-items: center; gap: 10px;
-    background: var(--bg); border: 1px solid var(--border);
-    border-left: 3px solid #3fb95044;
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 3px solid #1a7f3744;
     border-radius: 6px; padding: 8px 10px; text-decoration: none;
     color: var(--text); transition: border-color .15s;
   }
-  .deal-card:hover { border-left-color: #3fb950; }
-  .deal-card img { width: 36px; height: 36px; object-fit: cover; border-radius: 4px; background: #0d1117; flex-shrink: 0; }
+  .deal-card:hover { border-left-color: #1a7f37; }
+  .deal-card img { width: 36px; height: 36px; object-fit: cover; border-radius: 4px; background: #f6f8fa; flex-shrink: 0; }
   .deal-card .dc-info { flex: 1; min-width: 0; }
   .deal-card .dc-title { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .deal-card .dc-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
-  .deal-card .dc-price { font-weight: 700; color: #3fb950; font-size: 14px; white-space: nowrap; }
+  .deal-card .dc-price { font-weight: 700; color: #1a7f37; font-size: 14px; white-space: nowrap; }
   .deal-card .dc-discount {
-    background: #0d2016; color: #3fb950; border: 1px solid #23863644;
+    background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3744;
     font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
     white-space: nowrap; flex-shrink: 0;
   }
@@ -650,6 +651,76 @@
     .listings-cols { grid-template-columns: 1fr; }
     .compact-stats { display: none; }
   }
+
+  /* ── Portfolio modaal ──────────────────────────────────────────────────── */
+  .pf-btn {
+    background: none; border: 1px solid var(--border); border-radius: 6px;
+    color: var(--muted); font-size: 12px; cursor: pointer;
+    padding: 5px 12px; display: inline-flex; align-items: center; gap: 5px;
+    transition: all .15s; white-space: nowrap;
+  }
+  .pf-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .pf-btn-primary {
+    background: var(--accent); border-color: var(--accent); color: #fff;
+    font-weight: 700;
+  }
+  .pf-btn-primary:hover { background: #f0b800; border-color: #f0b800; color: #fff; }
+
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,.65); z-index: 500;
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 28px 32px;
+    width: 100%; max-width: 480px; max-height: 90vh;
+    overflow-y: auto; position: relative;
+  }
+  .modal h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
+  .modal-close {
+    position: absolute; top: 16px; right: 18px;
+    background: none; border: none; color: var(--muted);
+    font-size: 20px; cursor: pointer; line-height: 1;
+  }
+  .modal-close:hover { color: var(--text); }
+
+  .form-row { margin-bottom: 16px; }
+  .form-row label {
+    display: block; font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .05em;
+    color: var(--muted); margin-bottom: 6px;
+  }
+  .form-row input, .form-row select, .form-row textarea {
+    width: 100%; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 6px; color: var(--text); font-size: 14px;
+    padding: 8px 12px; outline: none; font-family: inherit;
+  }
+  .form-row input:focus, .form-row select:focus {
+    border-color: var(--accent);
+  }
+  .form-row select option { background: var(--card); }
+  .form-row .hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  .form-actions {
+    display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px;
+  }
+  .modal-status {
+    margin-top: 14px; padding: 10px 14px; border-radius: 6px;
+    font-size: 13px; display: none;
+  }
+  .modal-status.ok  { background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3744; display: block; }
+  .modal-status.err { background: #ffebe9; color: #d1242f; border: 1px solid #d1242f44; display: block; }
+  .modal-status.loading { background: #f6f8fa; color: var(--muted); border: 1px solid var(--border); display: block; }
+
+  .action-tabs { display: flex; gap: 6px; margin-bottom: 20px; }
+  .action-tab {
+    flex: 1; padding: 8px; border-radius: 6px; border: 1px solid var(--border);
+    background: none; color: var(--muted); font-size: 13px; font-weight: 600;
+    cursor: pointer; text-align: center; transition: all .12s;
+  }
+  .action-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 </style>
 </head>
 <body>
@@ -658,7 +729,7 @@
   <div style="display:flex;align-items:center;gap:12px">
     <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <!-- achtergrond -->
-      <rect width="36" height="36" rx="9" fill="#161b22" stroke="#21262d" stroke-width="1"/>
+      <rect width="36" height="36" rx="9" fill="#fff8c5" stroke="#d0d7de" stroke-width="1"/>
       <!-- grijs haar (bun + zijkanten) -->
       <ellipse cx="18" cy="10" rx="9" ry="7" fill="#9ca3af"/>
       <ellipse cx="9.5" cy="15" rx="3.5" ry="5" fill="#9ca3af"/>
@@ -702,6 +773,7 @@
     <button class="mode-btn active" id="mode-NIB" onclick="setMode('NIB')">💎 Beleggen (NIB)</button>
     <button class="mode-btn"        id="mode-CIB" onclick="setMode('CIB')">🔧 Handelen (CIB)</button>
   </div>
+  <button class="pf-btn" onclick="openPatModal()" title="GitHub toegangstoken instellen">⚙️ Instellingen</button>
 </header>
 
 <!-- Portfolio sectie (alleen zichtbaar als PORTFOLIO_URL is ingesteld) -->
@@ -710,6 +782,7 @@
     <span style="font-size:20px">💼</span>
     <h2>Mijn Portfolio</h2>
     <span id="pf-gen-time" style="font-size:11px;color:var(--muted)"></span>
+    <button class="pf-btn pf-btn-primary" style="margin-left:auto" onclick="openPositionModal()">+ Positie</button>
   </div>
   <div class="portfolio-summary" id="pf-summary"></div>
   <table class="portfolio-table">
@@ -755,6 +828,102 @@
 
 <footer id="footer">Gegenereerd op <span id="footer-time"></span></footer>
 
+<!-- ── Portfolio modaal ─────────────────────────────────────────────────── -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBackdrop(event)">
+
+  <!-- PAT-instellingen modaal -->
+  <div class="modal" id="modal-pat" style="display:none">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h3>⚙️ GitHub toegangstoken</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6">
+      Om posities te registreren stuurt het dashboard een opdracht naar GitHub.
+      Daarvoor heb je eenmalig een persoonlijk toegangstoken (PAT) nodig.<br><br>
+      <strong style="color:var(--text)">Aanmaken in 3 stappen:</strong><br>
+      1. Ga naar <a href="https://github.com/settings/tokens/new" target="_blank" style="color:var(--accent)">github.com/settings/tokens/new</a><br>
+      2. Geef het een naam (bijv. "Lego dashboard") en vink <code style="background:var(--bg);padding:1px 5px;border-radius:3px">workflow</code> aan<br>
+      3. Klik <em>Generate token</em> en plak het hieronder
+    </p>
+    <div class="form-row">
+      <label>Persoonlijk toegangstoken (PAT)</label>
+      <input type="password" id="pat-input" placeholder="ghp_..." autocomplete="off">
+      <div class="hint">Wordt alleen lokaal opgeslagen in je browser. Nooit verstuurd naar anderen.</div>
+    </div>
+    <div class="form-actions">
+      <button class="pf-btn" onclick="closeModal()">Annuleren</button>
+      <button class="pf-btn pf-btn-primary" onclick="savePat()">Opslaan</button>
+    </div>
+    <div class="modal-status" id="pat-status"></div>
+  </div>
+
+  <!-- Positie toevoegen/verkopen modaal -->
+  <div class="modal" id="modal-position" style="display:none">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h3>💼 Positie registreren</h3>
+
+    <div class="action-tabs">
+      <button class="action-tab active" id="tab-kopen"   onclick="setActionTab('kopen')">🛒 Kopen</button>
+      <button class="action-tab"        id="tab-verkopen" onclick="setActionTab('verkopen')">✅ Verkopen</button>
+    </div>
+
+    <div class="form-row">
+      <label>Set nummer</label>
+      <input type="text" id="pf-set-number" placeholder="bijv. 10295" list="pf-set-list">
+      <datalist id="pf-set-list"></datalist>
+    </div>
+    <div class="form-row">
+      <label>Conditie</label>
+      <select id="pf-condition">
+        <option value="NIB">NIB — Nieuw in doos</option>
+        <option value="CIB">CIB — Gebruikt compleet</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label>Aantal</label>
+      <input type="number" id="pf-quantity" value="1" min="1">
+    </div>
+
+    <!-- Kopen-velden -->
+    <div id="kopen-fields">
+      <div class="form-row">
+        <label>Aankoopprijs per stuk (€)</label>
+        <input type="number" id="pf-purchase-price" placeholder="bijv. 89.99" step="0.01" min="0">
+      </div>
+      <div class="form-row">
+        <label>Aankoopdatum</label>
+        <input type="date" id="pf-purchase-date">
+      </div>
+    </div>
+
+    <!-- Verkopen-velden -->
+    <div id="verkopen-fields" style="display:none">
+      <div class="form-row">
+        <label>Positie ID <span style="font-weight:400;text-transform:none">(zie # kolom in portfolio)</span></label>
+        <input type="number" id="pf-position-id" placeholder="bijv. 3" min="1">
+      </div>
+      <div class="form-row">
+        <label>Verkoopprijs per stuk (€)</label>
+        <input type="number" id="pf-sold-price" placeholder="bijv. 129.99" step="0.01" min="0">
+      </div>
+      <div class="form-row">
+        <label>Verkoopdatum</label>
+        <input type="date" id="pf-sold-date">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label>Notities <span style="font-weight:400;text-transform:none">(optioneel)</span></label>
+      <input type="text" id="pf-notes" placeholder="bijv. gekocht op Marktplaats">
+    </div>
+
+    <div class="form-actions">
+      <button class="pf-btn" onclick="closeModal()">Annuleren</button>
+      <button class="pf-btn pf-btn-primary" id="pf-submit-btn" onclick="submitPosition()">Registreren</button>
+    </div>
+    <div class="modal-status" id="position-status"></div>
+  </div>
+
+</div>
+
 <script>
 let dashData = null;
 let currentMode = 'NIB';   // 'NIB' | 'CIB'
@@ -765,16 +934,17 @@ const CURRENT_YEAR = new Date().getFullYear();
 const PORTFOLIO_URL = '';  // ingevuld bij dashboard-generatie
 const BCG_BADGE_LABEL = { star:'⭐ Star', cash_cow:'💰 Cash Cow', question_mark:'❓ Mark', dog:'🐕 Dog' };
 const BCG_BADGE_STYLE = {
-  star:          'background:#2d2200;color:#d4a017;border:1px solid #d4a01755',
-  cash_cow:      'background:#0d2016;color:#3fb950;border:1px solid #23863655',
-  question_mark: 'background:#0d1f3c;color:#58a6ff;border:1px solid #1f6feb55',
-  dog:           'background:#161b22;color:#8b949e;border:1px solid #30363d55',
+  star:          'background:#fff8c5;color:#7d4e00;border:1px solid #b3860055',
+  cash_cow:      'background:#dafbe1;color:#1a7f37;border:1px solid #1a7f3755',
+  question_mark: 'background:#ddf4ff;color:#0969da;border:1px solid #0969da55',
+  dog:           'background:#f6f8fa;color:#57606a;border:1px solid #8c959f55',
 };
 
 fetch('./data/dashboard_data.json')
   .then(r => r.json())
   .then(data => {
     dashData = data;
+    window.__dashData = data;
     renderAll(data);
   })
   .catch(() => {
@@ -1490,7 +1660,7 @@ function renderHistoryChart(set, idx) {
 
   const platforms = ['vinted_nl', 'marktplaats'];
   const platformLabels = {'vinted_nl':'Vinted NL','marktplaats':'Marktplaats'};
-  const colors = {'vinted_nl':'#58a6ff','marktplaats':'#d29922'};
+  const colors = {'vinted_nl':'#0969da','marktplaats':'#9a6700'};
 
   const traces = [];
   platforms.forEach(platform => {
@@ -1518,9 +1688,9 @@ function renderHistoryChart(set, idx) {
   Plotly.newPlot(el, traces, {
     paper_bgcolor: 'transparent',
     plot_bgcolor: 'transparent',
-    font: { color: '#8b949e', size: 10 },
-    xaxis: { gridcolor: '#21262d', tickfont: { size: 9 }, showgrid: true },
-    yaxis: { gridcolor: '#21262d', tickprefix: '€', tickfont: { size: 9 }, showgrid: true },
+    font: { color: '#656d76', size: 10 },
+    xaxis: { gridcolor: '#d0d7de', tickfont: { size: 9 }, showgrid: true },
+    yaxis: { gridcolor: '#d0d7de', tickprefix: '€', tickfont: { size: 9 }, showgrid: true },
     legend: { font: { size: 9 }, bgcolor: 'transparent' },
     margin: { l: 44, r: 8, t: 8, b: 28 },
     showlegend: true,
@@ -1534,7 +1704,7 @@ function renderBucketChart(set, idx) {
   const cond = currentMode;
   const platforms = ['vinted_nl', 'marktplaats'];
   const platformLabels = {'vinted_nl':'Vinted NL','marktplaats':'Marktplaats'};
-  const colors = {'vinted_nl':'#58a6ffaa','marktplaats':'#d29922aa'};
+  const colors = {'vinted_nl':'#0969daaa','marktplaats':'#9a6700aa'};
 
   const allKeys = new Set();
   platforms.forEach(platform => {
@@ -1571,9 +1741,9 @@ function renderBucketChart(set, idx) {
   Plotly.newPlot(el, traces, {
     paper_bgcolor: 'transparent',
     plot_bgcolor: 'transparent',
-    font: { color: '#8b949e', size: 10 },
-    xaxis: { gridcolor: '#21262d', tickfont: { size: 8 }, showgrid: false },
-    yaxis: { gridcolor: '#21262d', tickfont: { size: 9 }, showgrid: true, dtick: 1 },
+    font: { color: '#656d76', size: 10 },
+    xaxis: { gridcolor: '#d0d7de', tickfont: { size: 8 }, showgrid: false },
+    yaxis: { gridcolor: '#d0d7de', tickfont: { size: 9 }, showgrid: true, dtick: 1 },
     legend: { font: { size: 9 }, bgcolor: 'transparent' },
     margin: { l: 30, r: 8, t: 8, b: 40 },
     barmode: 'group',
@@ -1589,6 +1759,146 @@ function escHtml(str) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
+}
+
+// ── Portfolio modaal ──────────────────────────────────────────────────────
+
+const GH_REPO = 'DaveKruizi/circulair-trader';
+const GH_WORKFLOW = 'portfolio-manage.yml';
+let pfAction = 'kopen';
+
+function openPatModal() {
+  document.getElementById('modal-pat').style.display = 'block';
+  document.getElementById('modal-position').style.display = 'none';
+  document.getElementById('modal-overlay').classList.add('open');
+  const stored = localStorage.getItem('gh_pat') || '';
+  document.getElementById('pat-input').value = stored ? '••••••••••••••••' : '';
+  document.getElementById('pat-status').className = 'modal-status';
+}
+
+function openPositionModal() {
+  const pat = localStorage.getItem('gh_pat');
+  if (!pat) { openPatModal(); return; }
+  document.getElementById('modal-position').style.display = 'block';
+  document.getElementById('modal-pat').style.display = 'none';
+  document.getElementById('modal-overlay').classList.add('open');
+  // Vul vandaag in als standaarddatum
+  const today = new Date().toISOString().slice(0, 10);
+  document.getElementById('pf-purchase-date').value = today;
+  document.getElementById('pf-sold-date').value = today;
+  // Vul autocomplete met setnummers
+  const dl = document.getElementById('pf-set-list');
+  if (dl.children.length === 0 && window.__dashData) {
+    window.__dashData.sets.forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s.set_number;
+      opt.label = `${s.set_number} — ${s.name}`;
+      dl.appendChild(opt);
+    });
+  }
+  setStatus('position-status', '', '');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+function closeModalOnBackdrop(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+function savePat() {
+  const val = document.getElementById('pat-input').value.trim();
+  if (!val || val.startsWith('•')) {
+    setStatus('pat-status', 'err', 'Voer een geldig token in.');
+    return;
+  }
+  localStorage.setItem('gh_pat', val);
+  setStatus('pat-status', 'ok', 'Token opgeslagen. Je kunt nu posities registreren.');
+  setTimeout(() => { closeModal(); openPositionModal(); }, 1200);
+}
+
+function setActionTab(action) {
+  pfAction = action;
+  document.getElementById('tab-kopen').classList.toggle('active', action === 'kopen');
+  document.getElementById('tab-verkopen').classList.toggle('active', action === 'verkopen');
+  document.getElementById('kopen-fields').style.display = action === 'kopen' ? 'block' : 'none';
+  document.getElementById('verkopen-fields').style.display = action === 'verkopen' ? 'block' : 'none';
+}
+
+function setStatus(id, type, msg) {
+  const el = document.getElementById(id);
+  el.className = 'modal-status' + (type ? ' ' + type : '');
+  el.textContent = msg;
+}
+
+async function submitPosition() {
+  const pat = localStorage.getItem('gh_pat');
+  if (!pat) { openPatModal(); return; }
+
+  const setNumber = document.getElementById('pf-set-number').value.trim();
+  const condition = document.getElementById('pf-condition').value;
+  const quantity  = document.getElementById('pf-quantity').value || '1';
+  const notes     = document.getElementById('pf-notes').value.trim();
+
+  if (!setNumber) { setStatus('position-status', 'err', 'Vul een setnummer in.'); return; }
+
+  let inputs = { action: pfAction, set_number: setNumber, condition, quantity, notes };
+
+  if (pfAction === 'kopen') {
+    const price = document.getElementById('pf-purchase-price').value.trim();
+    const date  = document.getElementById('pf-purchase-date').value;
+    if (!price || !date) { setStatus('position-status', 'err', 'Vul aankoopprijs en -datum in.'); return; }
+    inputs.purchase_price = price;
+    inputs.purchase_date  = date;
+  } else {
+    const posId     = document.getElementById('pf-position-id').value.trim();
+    const soldPrice = document.getElementById('pf-sold-price').value.trim();
+    const soldDate  = document.getElementById('pf-sold-date').value;
+    if (!posId || !soldPrice || !soldDate) {
+      setStatus('position-status', 'err', 'Vul positie ID, verkoopprijs en -datum in.');
+      return;
+    }
+    inputs.position_id = posId;
+    inputs.sold_price  = soldPrice;
+    inputs.sold_date   = soldDate;
+  }
+
+  const btn = document.getElementById('pf-submit-btn');
+  btn.disabled = true;
+  setStatus('position-status', 'loading', '⏳ Wordt verstuurd naar GitHub...');
+
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${GH_REPO}/actions/workflows/${GH_WORKFLOW}/dispatches`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${pat}`,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ref: 'master', inputs }),
+      }
+    );
+
+    if (res.status === 204) {
+      setStatus('position-status', 'ok',
+        '✅ Gelukt! GitHub verwerkt de positie nu (~1 minuut). Herlaad het dashboard daarna.');
+      document.getElementById('pf-set-number').value = '';
+      document.getElementById('pf-notes').value = '';
+    } else if (res.status === 401) {
+      setStatus('position-status', 'err', '❌ Token ongeldig. Ga naar Instellingen en voer een nieuw token in.');
+      localStorage.removeItem('gh_pat');
+    } else {
+      const body = await res.text();
+      setStatus('position-status', 'err', `❌ Fout ${res.status}: ${body.slice(0, 120)}`);
+    }
+  } catch (e) {
+    setStatus('position-status', 'err', `❌ Netwerkfout: ${e.message}`);
+  } finally {
+    btn.disabled = false;
+  }
 }
 </script>
 </body>
