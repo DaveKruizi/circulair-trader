@@ -84,7 +84,7 @@ CIB_KEYWORDS = [
     "doos aanwezig", "handleiding aanwezig", "complete set",
     "met alle onderdelen", "volledig compleet",
     # Staat van gebruik — gebruikt maar in goede staat (NIET sealed)
-    "nieuwstaat", "nieuw staat", "als nieuw", "zo goed als nieuw",
+    "nieuwstaat", "nieuw staat", "als nieuw", "zo goed als nieuw", "zgan",
     "nagenoeg nieuw", "uitstekende staat", "perfecte staat",
     "goede staat", "zeer goede staat", "nette staat",
     # Gebouwd/gemonteerd — expliciet bewijs dat set geopend is
