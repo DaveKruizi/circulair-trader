@@ -7,27 +7,21 @@
 <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 <style>
   :root {
-    --bg:      #f6f8fa;
-    --card:    #ffffff;
-    --border:  #d0d7de;
-    --text:    #1f2328;
-    --muted:   #4b5563;   /* ondersteunende info: donkergrijs */
+    --bg:     #f6f8fa;   /* GitHub light */
+    --card:   #ffffff;
+    --border: #d0d7de;
+    --text:   #1f2328;
+    --muted:  #656d76;
 
-    /* ── Semantisch kleurensysteem ────────────────────────── */
-    --selected: #ca8a04;  /* geselecteerd / LEGO geel */
-    --gold:     #92400e;  /* Stars — premium, de beste categorie */
-    --green:    #15803d;  /* verdienpotentieel: Cash Cow, groei, winst */
-    --red:      #b91c1c;  /* dalend / oninteressant: Dog, verlies */
-    --orange:   #ea580c;  /* urgentie: Steals, Retiring Soon */
-    --blue:     #1d4ed8;  /* deals (minder urgent dan steals) */
+    --accent: #b38600;   /* LEGO geel — donkerder voor lichte achtergrond */
 
-    /* Mode-kleuren (informatief, geen semantische lading) */
-    --nib:  #0284c7;
-    --cib:  #4b5563;
+    --green:  #1a7f37;   /* positief: winst, NIB, omhoog */
+    --amber:  #9a6700;   /* waarschuwing: CIB, retiring, matig */
+    --red:    #d1242f;   /* risico: verlies, dalend */
+    --blue:   #0969da;   /* informatief: NIB-modus, neutraal */
 
-    /* Alias voor backwards-compat met var(--accent) */
-    --accent: var(--selected);
-    --amber:  var(--orange);
+    --nib:    #0969da;   /* NIB = lange termijn beleggen */
+    --cib:    #9a6700;   /* CIB = handelen, marge */
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -103,12 +97,12 @@
     cursor: pointer; transition: all .12s; white-space: nowrap;
   }
   .filter-chip:hover { border-color: var(--accent); color: var(--text); }
-  .filter-chip.active { background: var(--selected); border-color: var(--selected); color: #fff; }
-  .filter-chip.chip-star.active    { background: #fef3c7; border-color: var(--gold);     color: var(--gold); }
-  .filter-chip.chip-cow.active     { background: #dcfce7; border-color: var(--green);    color: var(--green); }
-  .filter-chip.chip-qmark.active   { background: #f3f4f6; border-color: #6b7280;         color: #374151; }
-  .filter-chip.chip-dog.active     { background: #fee2e2; border-color: var(--red);      color: var(--red); }
-  .filter-chip.chip-retiring.active { background: #ffedd5; border-color: var(--orange);  color: var(--orange); }
+  .filter-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .filter-chip.chip-star.active    { background: #fff8c5; border-color: #b38600; color: #7d4e00; }
+  .filter-chip.chip-cow.active     { background: #dafbe1; border-color: #1a7f37; color: #1a7f37; }
+  .filter-chip.chip-qmark.active   { background: #ddf4ff; border-color: #0969da; color: #0969da; }
+  .filter-chip.chip-dog.active     { background: #f6f8fa; border-color: #8c959f; color: #57606a; }
+  .filter-chip.chip-retiring.active { background: #fff8c5; border-color: #9a6700; color: #7d4e00; }
 
   .main { padding: 24px; max-width: 1400px; margin: 0 auto; }
 
@@ -143,7 +137,7 @@
     overflow: hidden;
     transition: border-color .15s;
   }
-  .set-card:hover { border-color: var(--selected); }
+  .set-card:hover { border-color: #b38600; }
 
   .set-header {
     display: flex;
@@ -179,13 +173,13 @@
     text-transform: uppercase;
     letter-spacing: .04em;
   }
-  .badge-retired       { background: #f3f4f6; color: #4b5563; border: 1px solid #d1d5db; }
-  .badge-active        { background: #dcfce7; color: var(--green); border: 1px solid #bbf7d0; }
-  .badge-retiring-soon { background: #ffedd5; color: var(--orange); border: 1px solid #fed7aa; }
-  .set-card.retiring-soon-card { border-color: #fed7aa; }
-  .badge-nib     { background: #e0f2fe; color: var(--nib); border: 1px solid #bae6fd; }
-  .badge-cib     { background: #f3f4f6; color: #374151;    border: 1px solid #d1d5db; }
-  .badge-mp      { background: #f3f4f6; color: #374151;    border: 1px solid #d1d5db; }
+  .badge-retired       { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de; }
+  .badge-active        { background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3755; }
+  .badge-retiring-soon { background: #fff8c5; color: #7d4e00; border: 1px solid #9a670055; }
+  .set-card.retiring-soon-card { border-color: #9a670033; }
+  .badge-nib     { background: #ddf4ff; color: #0969da; border: 1px solid #0969da55; }
+  .badge-cib     { background: #fff8c5; color: #7d4e00; border: 1px solid #9a670055; }
+  .badge-mp      { background: #fff8c5; color: #7d4e00; border: 1px solid #9a670044; }
 
   .set-body { padding: 16px; display: none; }
   .set-card.expanded .set-body { display: block; }
@@ -275,38 +269,41 @@
     text-align: center;
   }
   .cs-deal-block {
-    background: #eff6ff;
-    border: 1px solid #bfdbfe;
-    border-left: 3px solid var(--blue);
+    background: #dafbe1;
+    border: 1px solid #d0d7de;
+    border-left: 3px solid #1a7f37;
   }
   .cs-deal-block:hover {
-    background: #dbeafe;
-    border-left-color: var(--blue);
+    border-color: #d0d7de;
+    border-left-color: #1a7f37;
+    background: #c6f6d5;
   }
   .cs-steal-block {
-    background: #fff7ed;
-    border: 1px solid #fed7aa;
-    border-left: 4px solid var(--orange);  /* dikker = urgenter */
+    background: #fff8c5;
+    border: 1px solid #d0d7de;
+    border-left: 3px solid #9a6700;
   }
   .cs-steal-block:hover {
-    background: #ffedd5;
-    border-left-color: var(--orange);
+    border-color: #d0d7de;
+    border-left-color: #9a6700;
+    background: #fef08a;
   }
   .cs-deal-count {
     font-size: 28px;
     font-weight: 800;
-    color: var(--blue);
+    color: #1a7f37;
     line-height: 1;
   }
-  .cs-steal-block .cs-deal-count { color: var(--orange); font-size: 32px; }
+  .cs-steal-block .cs-deal-count { color: #7d4e00; }
   .cs-deal-icon {
     font-size: 10px;
-    color: var(--blue);
+    color: #1a7f37;
+    opacity: .9;
     letter-spacing: .05em;
     font-weight: 600;
     text-transform: uppercase;
   }
-  .cs-steal-block .cs-deal-icon { color: var(--orange); font-weight: 700; }
+  .cs-steal-block .cs-deal-icon { color: #7d4e00; }
 
   .condition-panel { display: none; }
   .condition-panel.visible { display: block; }
@@ -507,10 +504,10 @@
     margin-left: auto;
     font-style: italic;
   }
-  .bcg-star    .bcg-title { color: var(--gold); }
-  .bcg-cow     .bcg-title { color: var(--green); }
-  .bcg-qmark   .bcg-title { color: #374151; }
-  .bcg-dog     .bcg-title { color: var(--red); }
+  .bcg-star    .bcg-title { color: #7d4e00; }
+  .bcg-cow     .bcg-title { color: #1a7f37; }
+  .bcg-qmark   .bcg-title { color: #0969da; }
+  .bcg-dog     .bcg-title { color: #57606a; }
 
   /* Hot score badge */
   .hot-badge {
@@ -518,27 +515,22 @@
     font-size: 12px; font-weight: 700; padding: 3px 9px;
     border-radius: 20px; white-space: nowrap; flex-shrink: 0;
   }
-  .hot-0  { background: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db; }
-  .hot-1  { background: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db; }
-  .hot-2  { background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; }
-  .hot-3  { background: #dcfce7; color: var(--green);  border: 1px solid #bbf7d0; }
-  .hot-4  { background: #ffedd5; color: var(--orange); border: 1px solid #fed7aa; }
-  .hot-5  { background: #fee2e2; color: var(--red);    border: 1px solid #fecaca; }
+  .hot-0  { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de; }
+  .hot-1  { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de; }
+  .hot-2  { background: #ddf4ff; color: #0969da; border: 1px solid #0969da44; }
+  .hot-3  { background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3744; }
+  .hot-4  { background: #fff8c5; color: #7d4e00; border: 1px solid #9a670044; }
+  .hot-5  { background: #ffebe9; color: #d1242f; border: 1px solid #d1242f44; }
 
   /* Deal badge */
   .deal-badge {
     display: inline-flex; align-items: center; gap: 4px;
     font-size: 12px; font-weight: 700; padding: 3px 9px;
     border-radius: 20px; white-space: nowrap; flex-shrink: 0;
-    background: #eff6ff; color: var(--blue); border: 1px solid #bfdbfe;
+    background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3744;
     cursor: pointer;
   }
-  .deal-badge:hover { border-color: var(--blue); }
-  .deal-badge.steal-badge {
-    background: #fff7ed; color: var(--orange); border-color: #fed7aa;
-    font-size: 13px;
-  }
-  .deal-badge.steal-badge:hover { border-color: var(--orange); }
+  .deal-badge:hover { border-color: #1a7f37; }
 
   /* Retirement indicator */
   .retirement-indicator {
@@ -546,9 +538,9 @@
     font-size: 11px; font-weight: 600; padding: 2px 8px;
     border-radius: 4px; white-space: nowrap;
   }
-  .ret-up     { background: #dcfce7; color: var(--green);  border: 1px solid #bbf7d0; }
-  .ret-down   { background: #fee2e2; color: var(--red);    border: 1px solid #fecaca; }
-  .ret-stable { background: #f3f4f6; color: #4b5563;       border: 1px solid #d1d5db; }
+  .ret-up     { background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3733; }
+  .ret-down   { background: #ffebe9; color: #d1242f; border: 1px solid #d1242f33; }
+  .ret-stable { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de33; }
 
   /* CAGR badge */
   .cagr-badge {
@@ -556,10 +548,10 @@
     font-size: 11px; font-weight: 600; padding: 2px 7px;
     border-radius: 4px; white-space: nowrap;
   }
-  .cagr-high   { background: #dcfce7; color: var(--green);  border: 1px solid #bbf7d0; }
-  .cagr-mid    { background: #dcfce7; color: var(--green);  border: 1px solid #bbf7d0; }
-  .cagr-low    { background: #f3f4f6; color: #4b5563;       border: 1px solid #d1d5db; }
-  .cagr-neg    { background: #fee2e2; color: var(--red);    border: 1px solid #fecaca; }
+  .cagr-high   { background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3733; }
+  .cagr-mid    { background: #fff8c5; color: #7d4e00; border: 1px solid #9a670033; }
+  .cagr-low    { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de33; }
+  .cagr-neg    { background: #ffebe9; color: #d1242f; border: 1px solid #d1242f33; }
 
   /* Prijstrend badge */
   .trend-badge {
@@ -567,9 +559,9 @@
     font-size: 10px; font-weight: 700; padding: 2px 6px;
     border-radius: 4px; white-space: nowrap;
   }
-  .trend-up     { background: #dcfce7; color: var(--green); border: 1px solid #bbf7d0; }
-  .trend-stable { background: #f3f4f6; color: #4b5563;      border: 1px solid #d1d5db; }
-  .trend-down   { background: #fee2e2; color: var(--red);   border: 1px solid #fecaca; }
+  .trend-up     { background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3733; }
+  .trend-stable { background: #f6f8fa; color: #57606a; border: 1px solid #d0d7de33; }
+  .trend-down   { background: #ffebe9; color: #d1242f; border: 1px solid #d1242f33; }
 
   /* Portfolio sectie */
   #portfolio-section {
@@ -590,8 +582,8 @@
   }
   .pf-stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing:.05em; }
   .pf-stat-value { font-size: 20px; font-weight: 800; color: var(--text); line-height: 1.2; }
-  .pf-stat-value.positive { color: var(--green); }
-  .pf-stat-value.negative { color: var(--red); }
+  .pf-stat-value.positive { color: #1a7f37; }
+  .pf-stat-value.negative { color: #d1242f; }
   .portfolio-table {
     width: 100%; border-collapse: collapse; font-size: 12px;
   }
@@ -604,8 +596,8 @@
   .portfolio-table tr:hover td { background: var(--card); }
   .pf-open  td { color: var(--text); }
   .pf-sold  td { color: var(--muted); }
-  .pf-pnl-pos { color: var(--green); font-weight: 700; }
-  .pf-pnl-neg { color: var(--red);   font-weight: 700; }
+  .pf-pnl-pos { color: #1a7f37; font-weight: 700; }
+  .pf-pnl-neg { color: #d1242f; font-weight: 700; }
   #portfolio-unlock {
     background: var(--card); border: 1px solid var(--border); border-radius: 12px;
     padding: 20px 24px; display: flex; align-items: center; gap: 12px;
@@ -613,43 +605,43 @@
 
   /* Deal cards in expanded view */
   .deals-section {
-    background: #eff6ff; border: 1px solid #bfdbfe;
-    border-left: 3px solid var(--blue);
+    background: #f0fdf4; border: 1px solid #d0d7de;
+    border-left: 3px solid #1a7f37;
     border-radius: 8px; padding: 12px 14px; margin-bottom: 16px;
   }
   .deals-section h4 {
-    font-size: 11px; color: var(--blue); text-transform: uppercase;
+    font-size: 11px; color: #1a7f37; text-transform: uppercase;
     letter-spacing: .05em; margin-bottom: 10px;
   }
   .steals-section {
-    background: #fff7ed; border-color: #fed7aa;
-    border-left: 4px solid var(--orange);  /* dikker = urgenter */
+    background: #fffbeb;
+    border-left-color: #9a6700;
   }
-  .steals-section h4 { color: var(--orange); font-size: 12px; }
+  .steals-section h4 { color: #7d4e00; }
   .steals-section .deal-card {
-    border-left-color: #fed7aa;
+    border-left-color: #9a670044;
   }
-  .steals-section .deal-card:hover { border-left-color: var(--orange); }
-  .steals-section .dc-price { color: var(--orange) !important; }
+  .steals-section .deal-card:hover { border-left-color: #9a6700; }
+  .steals-section .dc-price { color: #7d4e00 !important; }
   .steals-section .dc-discount {
-    background: #ffedd5; color: var(--orange); border-color: #fed7aa;
+    background: #fff8c5; color: #7d4e00; border-color: #9a670044;
   }
   .deal-cards { display: flex; flex-direction: column; gap: 6px; }
   .deal-card {
     display: flex; align-items: center; gap: 10px;
     background: var(--card); border: 1px solid var(--border);
-    border-left: 3px solid #bfdbfe;
+    border-left: 3px solid #1a7f3744;
     border-radius: 6px; padding: 8px 10px; text-decoration: none;
     color: var(--text); transition: border-color .15s;
   }
-  .deal-card:hover { border-left-color: var(--blue); }
+  .deal-card:hover { border-left-color: #1a7f37; }
   .deal-card img { width: 36px; height: 36px; object-fit: cover; border-radius: 4px; background: #f6f8fa; flex-shrink: 0; }
   .deal-card .dc-info { flex: 1; min-width: 0; }
   .deal-card .dc-title { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .deal-card .dc-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
-  .deal-card .dc-price { font-weight: 700; color: var(--blue); font-size: 14px; white-space: nowrap; }
+  .deal-card .dc-price { font-weight: 700; color: #1a7f37; font-size: 14px; white-space: nowrap; }
   .deal-card .dc-discount {
-    background: #dbeafe; color: var(--blue); border: 1px solid #bfdbfe;
+    background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3744;
     font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
     white-space: nowrap; flex-shrink: 0;
   }
@@ -718,8 +710,8 @@
     margin-top: 14px; padding: 10px 14px; border-radius: 6px;
     font-size: 13px; display: none;
   }
-  .modal-status.ok  { background: #dcfce7; color: var(--green); border: 1px solid #bbf7d0; display: block; }
-  .modal-status.err { background: #fee2e2; color: var(--red);   border: 1px solid #fecaca; display: block; }
+  .modal-status.ok  { background: #dafbe1; color: #1a7f37; border: 1px solid #1a7f3744; display: block; }
+  .modal-status.err { background: #ffebe9; color: #d1242f; border: 1px solid #d1242f44; display: block; }
   .modal-status.loading { background: #f6f8fa; color: var(--muted); border: 1px solid var(--border); display: block; }
 
   .action-tabs { display: flex; gap: 6px; margin-bottom: 20px; }
@@ -939,13 +931,13 @@ let bcgFilter = 'all';     // 'all' | 'star' | 'cash_cow' | 'question_mark' | 'd
 let statusFilter = 'all';  // 'all' | 'retiring_soon' | 'recent_retired' | 'retired' | 'active'
 
 const CURRENT_YEAR = new Date().getFullYear();
-const PORTFOLIO_URL = '';  // ingevuld bij dashboard-generatie
+const PORTFOLIO_URL = './data/pf_mijnLego2026xK9pQ3.json';  // ingevuld bij dashboard-generatie
 const BCG_BADGE_LABEL = { star:'⭐ Star', cash_cow:'💰 Cash Cow', question_mark:'❓ Mark', dog:'🐕 Dog' };
 const BCG_BADGE_STYLE = {
-  star:          'background:#fef3c7;color:#92400e;border:1px solid #fcd34d',  /* goud — premium */
-  cash_cow:      'background:#dcfce7;color:#15803d;border:1px solid #bbf7d0',  /* groen — verdienpotentieel */
-  question_mark: 'background:#f3f4f6;color:#374151;border:1px solid #d1d5db',  /* grijs — ondersteunend */
-  dog:           'background:#fee2e2;color:#b91c1c;border:1px solid #fecaca',  /* rood — oninteressant */
+  star:          'background:#fff8c5;color:#7d4e00;border:1px solid #b3860055',
+  cash_cow:      'background:#dafbe1;color:#1a7f37;border:1px solid #1a7f3755',
+  question_mark: 'background:#ddf4ff;color:#0969da;border:1px solid #0969da55',
+  dog:           'background:#f6f8fa;color:#57606a;border:1px solid #8c959f55',
 };
 
 fetch('./data/dashboard_data.json')
@@ -1668,7 +1660,7 @@ function renderHistoryChart(set, idx) {
 
   const platforms = ['vinted_nl', 'marktplaats'];
   const platformLabels = {'vinted_nl':'Vinted NL','marktplaats':'Marktplaats'};
-  const colors = {'vinted_nl':'#0284c7','marktplaats':'#ca8a04'};
+  const colors = {'vinted_nl':'#0969da','marktplaats':'#9a6700'};
 
   const traces = [];
   platforms.forEach(platform => {
@@ -1712,7 +1704,7 @@ function renderBucketChart(set, idx) {
   const cond = currentMode;
   const platforms = ['vinted_nl', 'marktplaats'];
   const platformLabels = {'vinted_nl':'Vinted NL','marktplaats':'Marktplaats'};
-  const colors = {'vinted_nl':'#0284c7aa','marktplaats':'#ca8a04aa'};
+  const colors = {'vinted_nl':'#0969daaa','marktplaats':'#9a6700aa'};
 
   const allKeys = new Set();
   platforms.forEach(platform => {
