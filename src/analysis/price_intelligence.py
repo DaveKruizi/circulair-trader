@@ -32,6 +32,26 @@ def _percentile(values: list[float], pct: float) -> Optional[float]:
     return round(sorted_v[lo] + (idx - lo) * (sorted_v[hi] - sorted_v[lo]), 2)
 
 
+def _iqr_filter(prices: list[float]) -> list[float]:
+    """
+    Verwijder statistische uitschieters via Tukey-fence (factor 2.5×IQR).
+    Behoudt genuïne extreme waarden (zeldzame NIB-sets), filtert alleen
+    onmogelijke uitschieters die de mediaan vertekenen.
+    Vereist minstens 4 prijzen; anders wordt de lijst ongefilterd teruggegeven.
+    """
+    if len(prices) < 4:
+        return prices
+    s = sorted(prices)
+    q1 = s[len(s) // 4]
+    q3 = s[(3 * len(s)) // 4]
+    iqr = q3 - q1
+    if iqr == 0:
+        return prices  # alle prijzen identiek, niets te filteren
+    lo = q1 - 2.5 * iqr
+    hi = q3 + 2.5 * iqr
+    return [p for p in s if lo <= p <= hi]
+
+
 def _price_bucket_key(price: float) -> str:
     low = int(price // BUCKET_SIZE) * BUCKET_SIZE
     return f"{low}-{low + BUCKET_SIZE}"
@@ -72,9 +92,10 @@ def compute_price_intelligence(
     price_pool = fast_prices if len(fast_prices) >= 3 else all_active_prices
 
     sell_price_fast = _percentile(price_pool, 20)
-    p10 = _percentile(all_active_prices, 10)
-    p25 = _percentile(all_active_prices, 25)
-    p50 = _percentile(all_active_prices, 50)
+    filtered_prices = _iqr_filter(all_active_prices)
+    p10 = _percentile(filtered_prices, 10)
+    p25 = _percentile(filtered_prices, 25)
+    p50 = _percentile(filtered_prices, 50)
 
     # sell_price_realistic: median of ALL disappeared listings <21d
     # Geen p50-filter meer — die veroorzaakte een neerwaartse bias waardoor
