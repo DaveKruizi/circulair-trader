@@ -168,12 +168,13 @@ def scrape_set(
                     )
                     continue
 
-                # Titelcheck: bij setnummer-query vereisen we het nummer in de titel.
+                # Titelcheck: bij setnummer-query vereisen we het nummer in titel ÓF
+                # beschrijving. Verkopers zetten het nummer soms alleen in de omschrijving.
                 # Bij naamquery vertrouwen we op de Marktplaats-zoekmachine.
-                if require_number_in_title and set_number not in title:
+                if require_number_in_title and set_number not in title and set_number not in description:
                     log_rejection(
                         "marktplaats", set_number, listing_id, title, price,
-                        "low_confidence", f"'{set_number}' not found in title"
+                        "low_confidence", f"'{set_number}' not found in title or description"
                     )
                     continue
 

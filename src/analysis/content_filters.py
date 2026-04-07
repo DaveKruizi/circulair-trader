@@ -68,6 +68,7 @@ _REPLICA_FULL: tuple[str, ...] = (
     "kazi",
     "enlighten",
     "sluban",
+    "bricks",          # generieke kloon-term ("bricks set", "building bricks") — nooit originele LEGO
 )
 
 # Gecheckt ALLEEN in de titel (in een omschrijving kunnen ze onschuldig zijn)

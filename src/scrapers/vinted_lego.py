@@ -187,6 +187,7 @@ def scrape_set(
                 price = parsed["price"]
 
                 # Titelcheck: bij setnummer-query vereisen we het nummer in de titel.
+                # Vinted search-API geeft geen beschrijving terug, dus alleen titel-check.
                 # Bij naamquery vertrouwen we op de Vinted-zoekmachine.
                 if require_number_in_title and set_number not in title:
                     log_rejection(
