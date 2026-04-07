@@ -160,105 +160,111 @@ def scrape_set(
     results: dict[str, list[dict]] = {}
 
     for platform_url, platform_code in VINTED_PLATFORMS:
-        query = f"lego {set_number}"
-        try:
-            raw_items = _scrape_platform(platform_url, query, max_results=80)
-        except RuntimeError as e:
-            print(f"  [Vinted] SKIP {platform_code} for set {set_number}: {e}")
-            results[platform_code] = []
-            continue
-        time.sleep(1.0)
+        # Twee queries: op setnummer (strikt) én op naam (zonder titelvereiste)
+        queries = [
+            (f"lego {set_number}", True),
+            (f"lego {set_name}", False),
+        ]
 
         seen_ids: set[str] = set()
         valid_listings: list[dict] = []
 
-        for raw in raw_items:
-            parsed = _parse_raw(raw, platform_code)
-            if not parsed or not parsed["id"] or parsed["id"] in seen_ids:
+        for query, require_number_in_title in queries:
+            try:
+                raw_items = _scrape_platform(platform_url, query, max_results=80)
+            except RuntimeError as e:
+                print(f"  [Vinted] SKIP {platform_code} for set {set_number} query '{query}': {e}")
                 continue
+            time.sleep(1.0)
 
-            lid = parsed["id"]
-            title = parsed["title"]
-            price = parsed["price"]
+            for raw in raw_items:
+                parsed = _parse_raw(raw, platform_code)
+                if not parsed or not parsed["id"] or parsed["id"] in seen_ids:
+                    continue
 
-            # Must have set number in title (high-confidence match)
-            if set_number not in title:
-                log_rejection(
-                    platform_code, set_number, lid, title, price,
-                    "low_confidence", f"'{set_number}' not found in title"
-                )
-                continue
+                lid = parsed["id"]
+                title = parsed["title"]
+                price = parsed["price"]
 
-            # Replica / namaak LEGO (Vinted geeft geen beschrijving via search-API)
-            flagged, kw = is_replica(title, "")
-            if flagged:
-                log_rejection(
-                    platform_code, set_number, lid, title, price,
-                    "replica", f"namaak-signaal: '{kw}'"
-                )
-                continue
+                # Titelcheck: bij setnummer-query vereisen we het nummer in de titel.
+                # Bij naamquery vertrouwen we op de Vinted-zoekmachine.
+                if require_number_in_title and set_number not in title:
+                    log_rejection(
+                        platform_code, set_number, lid, title, price,
+                        "low_confidence", f"'{set_number}' not found in title"
+                    )
+                    continue
 
-            # Accessoire (verlichtingskit, display-box, etc.) — wél loggen met URL
-            flagged, kw = is_accessory(title)
-            if flagged:
-                log_rejection(
-                    platform_code, set_number, lid, title, price,
-                    "accessory", f"accessoire-signaal: '{kw}'",
-                    image_url=parsed["image_url"],
+                # Replica / namaak LEGO (Vinted geeft geen beschrijving via search-API)
+                flagged, kw = is_replica(title, "")
+                if flagged:
+                    log_rejection(
+                        platform_code, set_number, lid, title, price,
+                        "replica", f"namaak-signaal: '{kw}'"
+                    )
+                    continue
+
+                # Accessoire (verlichtingskit, display-box, etc.) — wél loggen met URL
+                flagged, kw = is_accessory(title)
+                if flagged:
+                    log_rejection(
+                        platform_code, set_number, lid, title, price,
+                        "accessory", f"accessoire-signaal: '{kw}'",
+                        image_url=parsed["image_url"],
+                        url=parsed["url"],
+                    )
+                    continue
+
+                if price <= 0:
+                    log_rejection(platform_code, set_number, lid, title, price,
+                                  "invalid_price", "price is zero or negative")
+                    continue
+
+                if retail_price and price < min_price:
+                    log_rejection(
+                        platform_code, set_number, lid, title, price,
+                        "price_too_low",
+                        f"€{price:.0f} < {MIN_PRICE_RATIO*100:.0f}% of retail €{retail_price:.0f}",
+                        image_url=parsed["image_url"],
+                        url=parsed["url"],
+                    )
+                    continue
+
+                if retail_price and price > max_price:
+                    log_rejection(
+                        platform_code, set_number, lid, title, price,
+                        "price_too_high",
+                        f"€{price:.0f} > {MAX_PRICE_RATIO*100:.0f}% of retail €{retail_price:.0f}"
+                    )
+                    continue
+
+                condition = _classify_vinted_condition(title, parsed["condition_raw"])
+                if condition == "incomplete":
+                    log_rejection(
+                        platform_code, set_number, lid, title, price,
+                        "incomplete", "condition classified as incomplete (cat C)"
+                    )
+                    continue
+
+                seen_ids.add(lid)
+                upsert_listing(
+                    listing_id=lid,
+                    platform=platform_code,
+                    set_number=set_number,
+                    title=title,
+                    price=price,
+                    condition_category=condition,
+                    condition_raw=parsed["condition_raw"],
                     url=parsed["url"],
-                )
-                continue
-
-            if price <= 0:
-                log_rejection(platform_code, set_number, lid, title, price,
-                              "invalid_price", "price is zero or negative")
-                continue
-
-            if retail_price and price < min_price:
-                log_rejection(
-                    platform_code, set_number, lid, title, price,
-                    "price_too_low",
-                    f"€{price:.0f} < {MIN_PRICE_RATIO*100:.0f}% of retail €{retail_price:.0f}",
                     image_url=parsed["image_url"],
-                    url=parsed["url"],
+                    seller_id=parsed["seller_id"],
+                    today=today,
+                    match_confidence=0.95,
                 )
-                continue
 
-            if retail_price and price > max_price:
-                log_rejection(
-                    platform_code, set_number, lid, title, price,
-                    "price_too_high",
-                    f"€{price:.0f} > {MAX_PRICE_RATIO*100:.0f}% of retail €{retail_price:.0f}"
-                )
-                continue
-
-            condition = _classify_vinted_condition(title, parsed["condition_raw"])
-            if condition == "incomplete":
-                log_rejection(
-                    platform_code, set_number, lid, title, price,
-                    "incomplete", "condition classified as incomplete (cat C)"
-                )
-                continue
-
-            seen_ids.add(lid)
-            upsert_listing(
-                listing_id=lid,
-                platform=platform_code,
-                set_number=set_number,
-                title=title,
-                price=price,
-                condition_category=condition,
-                condition_raw=parsed["condition_raw"],
-                url=parsed["url"],
-                image_url=parsed["image_url"],
-                seller_id=parsed["seller_id"],
-                today=today,
-                match_confidence=0.95,
-            )
-
-            parsed["condition_category"] = condition
-            parsed["is_stale"] = parsed["days_old"] >= STALE_DAYS
-            valid_listings.append(parsed)
+                parsed["condition_category"] = condition
+                parsed["is_stale"] = parsed["days_old"] >= STALE_DAYS
+                valid_listings.append(parsed)
 
         if seen_ids:
             disappeared = mark_disappeared(platform_code, set_number, seen_ids, today)

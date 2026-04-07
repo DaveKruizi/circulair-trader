@@ -98,8 +98,11 @@ def scrape_set(
     retail_price: Optional[float] = None,
 ) -> list[dict]:
     """
-    Scrape Marktplaats for a single LEGO set using 'lego {set_number}' only.
-    Validates, classifies, tracks lifecycle in SQLite, logs rejections.
+    Scrape Marktplaats for a single LEGO set.
+    Runs two queries per set:
+      1. 'lego {set_number}' — vereist setnummer in titel
+      2. 'lego {name}'       — geen titelvereiste (vangt verkopers die alleen de naam gebruiken)
+    Resultaten worden gededupliceerd op listing-ID.
     """
     if not _MARKTPLAATS_AVAILABLE:
         print("[Marktplaats] Package not installed. Run: pip install marktplaats")
@@ -117,159 +120,159 @@ def scrape_set(
 
     seen_ids: set[str] = set()
     results: list[dict] = []
-    # Verzamel alle ruwe listing-IDs + seller_names die we zien (ook afgekeurde).
-    # Dit wordt gebruikt door scrape_all_sets() om een brede LEGO-telling per
-    # verkoper op te bouwen — ook voor sets die we niet volgen.
-    all_seen_sellers: list[tuple[str, str, str]] = []  # (listing_id, seller_name, title)
+    all_seen_sellers: list[tuple[str, str, str]] = []
 
-    query = f"lego {set_number}"
-    try:
-        search = SearchQuery(query, limit=50)
-        raw_listings = search.get_listings() or []
-        time.sleep(1.5)
+    # Query 1: op setnummer (strikt), Query 2: op naam (zonder titelvereiste)
+    queries = [
+        (f"lego {set_number}", True),
+        (f"lego {name}", False),
+    ]
 
-        for raw in raw_listings:
-            try:
-                listing_id = str(raw.id)
-                title = str(raw.title or "")
-                description = str(raw.description or "")[:600]
-                price = float(raw.price or 0)
-                price_type = _get_price_type(raw)
-                image_url = _get_image_url(raw)
-                seller_name = raw.seller.name if raw.seller else ""
-                location_str = raw.location.city if raw.location else ""
-                # Registreer alle geziene listings voor brede verkoperstelling
-                if seller_name and "lego" in title.lower():
-                    all_seen_sellers.append((listing_id, seller_name, title))
+    for query, require_number_in_title in queries:
+        try:
+            search = SearchQuery(query, limit=50)
+            raw_listings = search.get_listings() or []
+            time.sleep(1.5)
 
-                if raw.date:
-                    d = raw.date if isinstance(raw.date, date) else raw.date.date()
-                    date_str = d.isoformat()
-                else:
-                    date_str = ""
-                days = _days_since(raw.date)
-                url = str(raw.link or f"https://www.marktplaats.nl/v/{listing_id}")
+            for raw in raw_listings:
+                try:
+                    listing_id = str(raw.id)
+                    title = str(raw.title or "")
+                    description = str(raw.description or "")[:600]
+                    price = float(raw.price or 0)
+                    price_type = _get_price_type(raw)
+                    image_url = _get_image_url(raw)
+                    seller_name = raw.seller.name if raw.seller else ""
+                    location_str = raw.location.city if raw.location else ""
+                    if seller_name and "lego" in title.lower():
+                        all_seen_sellers.append((listing_id, seller_name, title))
+                    if raw.date:
+                        d = raw.date if isinstance(raw.date, date) else raw.date.date()
+                        date_str = d.isoformat()
+                    else:
+                        date_str = ""
+                    days = _days_since(raw.date)
+                    url = str(raw.link or f"https://www.marktplaats.nl/v/{listing_id}")
+                except Exception as e:
+                    print(f"[Marktplaats] Parse error: {e}")
+                    continue
 
-            except Exception as e:
-                print(f"[Marktplaats] Parse error: {e}")
-                continue
+                if listing_id in seen_ids:
+                    continue
 
-            if listing_id in seen_ids:
-                continue
+                # Catawiki: veilingsite met afwijkende advertenties → uitsluiten
+                if seller_name.lower() == "catawiki":
+                    log_rejection(
+                        "marktplaats", set_number, listing_id, title, price,
+                        "catawiki_seller", "verkoper is Catawiki (veilingsite)"
+                    )
+                    continue
 
-            # Catawiki: veilingsite met afwijkende advertenties → uitsluiten
-            if seller_name.lower() == "catawiki":
-                log_rejection(
-                    "marktplaats", set_number, listing_id, title, price,
-                    "catawiki_seller", "verkoper is Catawiki (veilingsite)"
-                )
-                continue
+                # Titelcheck: bij setnummer-query vereisen we het nummer in de titel.
+                # Bij naamquery vertrouwen we op de Marktplaats-zoekmachine.
+                if require_number_in_title and set_number not in title:
+                    log_rejection(
+                        "marktplaats", set_number, listing_id, title, price,
+                        "low_confidence", f"'{set_number}' not found in title"
+                    )
+                    continue
 
-            # Set number must be in title
-            if set_number not in title:
-                log_rejection(
-                    "marktplaats", set_number, listing_id, title, price,
-                    "low_confidence", f"'{set_number}' not found in title"
-                )
-                continue
+                # Replica / namaak LEGO
+                flagged, kw = is_replica(title, description)
+                if flagged:
+                    log_rejection(
+                        "marktplaats", set_number, listing_id, title, price,
+                        "replica", f"namaak-signaal: '{kw}'"
+                    )
+                    continue
 
-            # Replica / namaak LEGO
-            flagged, kw = is_replica(title, description)
-            if flagged:
-                log_rejection(
-                    "marktplaats", set_number, listing_id, title, price,
-                    "replica", f"namaak-signaal: '{kw}'"
-                )
-                continue
+                # Accessoire (verlichtingskit, display-box, etc.)
+                flagged, kw = is_accessory(title)
+                if flagged:
+                    log_rejection(
+                        "marktplaats", set_number, listing_id, title, price,
+                        "accessory", f"accessoire-signaal: '{kw}'",
+                        image_url=image_url,
+                        url=url,
+                    )
+                    continue
 
-            # Accessoire (verlichtingskit, display-box, etc.) — wél loggen met URL
-            flagged, kw = is_accessory(title)
-            if flagged:
-                log_rejection(
-                    "marktplaats", set_number, listing_id, title, price,
-                    "accessory", f"accessoire-signaal: '{kw}'",
-                    image_url=image_url,
+                if price <= 0 and price_type != "free":
+                    log_rejection("marktplaats", set_number, listing_id, title, price,
+                                  "invalid_price", "price is zero")
+                    continue
+
+                if retail_price and price > 0 and price < min_price:
+                    log_rejection(
+                        "marktplaats", set_number, listing_id, title, price,
+                        "price_too_low",
+                        f"€{price:.0f} < {MIN_PRICE_RATIO*100:.0f}% of retail €{retail_price:.0f}",
+                        image_url=image_url,
+                        url=url,
+                    )
+                    continue
+
+                if retail_price and price > max_price:
+                    log_rejection(
+                        "marktplaats", set_number, listing_id, title, price,
+                        "price_too_high",
+                        f"€{price:.0f} > {MAX_PRICE_RATIO*100:.0f}% of retail €{retail_price:.0f}"
+                    )
+                    continue
+
+                condition = classify_condition(title, description)
+                if condition == "incomplete":
+                    log_rejection(
+                        "marktplaats", set_number, listing_id, title, price,
+                        "incomplete", "condition classified as incomplete (cat C)"
+                    )
+                    continue
+
+                seen_ids.add(listing_id)
+                is_reserved = "gereserveerd" in title.lower() or "gereserveerd" in description.lower()
+
+                upsert_listing(
+                    listing_id=listing_id,
+                    platform="marktplaats",
+                    set_number=set_number,
+                    title=title,
+                    price=price,
+                    condition_category=condition,
                     url=url,
-                )
-                continue
-
-            if price <= 0 and price_type != "free":
-                log_rejection("marktplaats", set_number, listing_id, title, price,
-                              "invalid_price", "price is zero")
-                continue
-
-            if retail_price and price > 0 and price < min_price:
-                log_rejection(
-                    "marktplaats", set_number, listing_id, title, price,
-                    "price_too_low",
-                    f"€{price:.0f} < {MIN_PRICE_RATIO*100:.0f}% of retail €{retail_price:.0f}",
                     image_url=image_url,
-                    url=url,
+                    seller_id="",
+                    today=today,
+                    match_confidence=0.95,
+                    is_reserved=is_reserved,
+                    seller_name=seller_name,
+                    price_type=price_type,
                 )
-                continue
 
-            if retail_price and price > max_price:
-                log_rejection(
-                    "marktplaats", set_number, listing_id, title, price,
-                    "price_too_high",
-                    f"€{price:.0f} > {MAX_PRICE_RATIO*100:.0f}% of retail €{retail_price:.0f}"
-                )
-                continue
+                if is_reserved:
+                    print(f"  [Gereserveerd] {title[:60]}")
 
-            condition = classify_condition(title, description)
-            if condition == "incomplete":
-                log_rejection(
-                    "marktplaats", set_number, listing_id, title, price,
-                    "incomplete", "condition classified as incomplete (cat C)"
-                )
-                continue
+                results.append({
+                    "id": listing_id,
+                    "set_number": set_number,
+                    "title": title,
+                    "price": price,
+                    "price_type": price_type,
+                    "current_bid": None,
+                    "ask_price": price,
+                    "condition_category": condition,
+                    "description": description,
+                    "location": location_str or "",
+                    "url": url,
+                    "image_url": image_url,
+                    "date_posted": date_str,
+                    "days_listed": days,
+                    "seller_name": seller_name or "",
+                    "source": "marktplaats",
+                    "is_reserved": is_reserved,
+                })
 
-            seen_ids.add(listing_id)
-
-            is_reserved = "gereserveerd" in title.lower() or "gereserveerd" in description.lower()
-
-            upsert_listing(
-                listing_id=listing_id,
-                platform="marktplaats",
-                set_number=set_number,
-                title=title,
-                price=price,
-                condition_category=condition,
-                url=url,
-                image_url=image_url,
-                seller_id="",
-                today=today,
-                match_confidence=0.95,
-                is_reserved=is_reserved,
-                seller_name=seller_name,
-                price_type=price_type,
-            )
-
-            if is_reserved:
-                print(f"  [Gereserveerd] {title[:60]}")
-
-            results.append({
-                "id": listing_id,
-                "set_number": set_number,
-                "title": title,
-                "price": price,
-                "price_type": price_type,
-                "current_bid": None,
-                "ask_price": price,
-                "condition_category": condition,
-                "description": description,
-                "location": location_str or "",
-                "url": url,
-                "image_url": image_url,
-                "date_posted": date_str,
-                "days_listed": days,
-                "seller_name": seller_name or "",
-                "source": "marktplaats",
-                "is_reserved": is_reserved,
-            })
-
-    except Exception as e:
-        print(f"[Marktplaats] Error scraping '{query}': {e}")
+        except Exception as e:
+            print(f"[Marktplaats] Error scraping '{query}': {e}")
 
     # Fetch current bids (max 10 per set)
     for item in [r for r in results if r["price_type"] == "bidding"][:10]:
