@@ -120,7 +120,7 @@ jobs:
         env:
           PYTHONPATH: "."
           PORTFOLIO_TOKEN: ${{ secrets.PORTFOLIO_TOKEN }}
-        run: python src/main_daily.py --dry-run
+        run: python tools/regen_dashboard.py
 
       - name: Dashboard online zetten
         uses: peaceiris/actions-gh-pages@v4
