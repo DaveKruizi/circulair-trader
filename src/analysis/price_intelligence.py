@@ -147,6 +147,7 @@ def compute_price_intelligence(
         "price_buckets": buckets,
         "disappeared_7d": len(disappeared_7d),
         "total_disappeared": total_disappeared,
+        "listings": active,  # included to avoid a second DB query in the generator
     }
 
 
@@ -168,7 +169,7 @@ def compute_all_sets(
         result[set_number] = {}
         for platform in platforms:
             result[set_number][platform] = {}
-            for condition in ["NIB", "CIB"]:
+            for condition in ("NIB", "CIB"):
                 intel = compute_price_intelligence(set_number, platform, condition, retail)
                 result[set_number][platform][condition] = intel
     return result
@@ -197,4 +198,8 @@ def get_price_history_for_dashboard(
                     "sell_price_realistic": h["sell_price_realistic"],
                     "active_count": h["active_count"],
                 })
-    return sorted(rows, key=lambda r: r["date"])
+    # get_price_history returns DESC; after appending all platforms the rows are
+    # interleaved but each platform's rows are already oldest→newest after reversal
+    # inside db.get_price_history. A final sort by date gives a clean timeline.
+    rows.sort(key=lambda r: r["date"])
+    return rows

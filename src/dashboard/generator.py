@@ -18,6 +18,7 @@ DATA_OUTPUT_DIR = OUTPUT_DIR / "data"
 TEMPLATE_PATH = Path(__file__).parent / "templates" / "index.html"
 
 ALL_PLATFORMS = ["vinted_nl", "marktplaats"]
+CONDITIONS = ("NIB", "CIB")
 PLATFORM_LABELS = {
     "vinted_nl": "Vinted NL",
     "marktplaats": "Marktplaats",
@@ -43,6 +44,11 @@ def _p50s(platforms_data: dict, condition: str) -> list[float]:
     ]
 
 
+def _safe_avg(values: list[float]) -> Optional[float]:
+    """Gemiddelde van een lijst, of None als de lijst leeg is."""
+    return sum(values) / len(values) if values else None
+
+
 def _compute_hot_score_condition(platforms_data: dict, condition: str) -> int:
     """Score 0–100 voor één conditie (NIB of CIB) over alle platforms."""
     total_dis = 0
@@ -51,23 +57,6 @@ def _compute_hot_score_condition(platforms_data: dict, condition: str) -> int:
         intel = platform_data.get(condition, {})
         total_dis += intel.get("disappeared_7d", 0)
         total_act += intel.get("active_count", 0)
-    pool = total_dis + total_act
-    if pool == 0:
-        return 0
-    velocity = total_dis / pool
-    druk = min(total_dis / max(total_act, 1), 2) / 2
-    return min(round((0.6 * velocity + 0.4 * druk) * 100), 100)
-
-
-def _compute_hot_score(platforms_data: dict) -> int:
-    """Gecombineerde hot score over NIB + CIB (voor algemeen gebruik)."""
-    total_dis = 0
-    total_act = 0
-    for condition in ("NIB", "CIB"):
-        for platform_data in platforms_data.values():
-            intel = platform_data.get(condition, {})
-            total_dis += intel.get("disappeared_7d", 0)
-            total_act += intel.get("active_count", 0)
     pool = total_dis + total_act
     if pool == 0:
         return 0
@@ -89,7 +78,7 @@ def _compute_retirement_indicator(lego_set: dict, platforms_data: dict, current_
     nib_p50s = _p50s(platforms_data, "NIB")
     if not nib_p50s:
         return None
-    avg = sum(nib_p50s) / len(nib_p50s)
+    avg = _safe_avg(nib_p50s)
     pct = round((avg / retail - 1) * 100)
 
     # CAGR: jaarlijks geannualiseerd rendement t.o.v. retailprijs
@@ -140,7 +129,7 @@ def _compute_bcg_nib(lego_set: dict, platforms_data: dict, hot_score_nib: int, c
 
     retail = lego_set.get("retail_price")
     nib_p50s = _p50s(platforms_data, "NIB")
-    avg_p50 = sum(nib_p50s) / len(nib_p50s) if nib_p50s else None
+    avg_p50 = _safe_avg(nib_p50s)
 
     if nib_p50s and retail:
         high_value = avg_p50 >= retail * BCG_VALUE_THRESHOLD
@@ -192,8 +181,8 @@ def _compute_bcg_cib(lego_set: dict, platforms_data: dict, hot_score_cib: int, c
     cib_p50s = _p50s(platforms_data, "CIB")
 
     if nib_p50s and cib_p50s:
-        avg_nib = sum(nib_p50s) / len(nib_p50s)
-        avg_cib = sum(cib_p50s) / len(cib_p50s)
+        avg_nib = _safe_avg(nib_p50s)
+        avg_cib = _safe_avg(cib_p50s)
         good_spread = avg_nib >= avg_cib * BCG_CIB_SPREAD_THRESHOLD
     else:
         good_spread = False
@@ -229,7 +218,7 @@ def _compute_price_trend(set_number: str, condition: str) -> Optional[str]:
     if len(all_prices) < 10:
         return None
 
-    p50s = [sum(v) / len(v) for v in (all_prices[d] for d in sorted(all_prices))]
+    p50s = [_safe_avg(v) for v in (all_prices[d] for d in sorted(all_prices))]
     half = len(p50s) // 2
     early = sum(p50s[:half]) / half
     late = sum(p50s[half:]) / (len(p50s) - half)
@@ -254,10 +243,12 @@ def _find_deals(
     - Vaste prijs: OK ook als verkoper LEGO-handelaar is
     - Bieding: ALLEEN als verkoper GEEN LEGO-handelaar is (>TRADER_THRESHOLD listings)
     """
+    from src import db as _db
+
     deals = []
     mp_data = platforms_data.get("marktplaats", {})
 
-    for condition in ("NIB", "CIB"):
+    for condition in CONDITIONS:
         intel = mp_data.get(condition, {})
         p50 = intel.get("p50")
         if not p50:
@@ -284,9 +275,7 @@ def _find_deals(
             seller_name = listing.get("seller_name", "")
             price_type = listing.get("price_type", "fixed")
 
-            # Brede LEGO-telling: eerst scrape-data (alle geziene listings),
-            # fallback op DB-telling (alleen gevolgde sets)
-            from src import db as _db
+            # Brede LEGO-telling: eerst scrape-data, fallback op DB-telling
             seller_count = seller_lego_counts.get(seller_name) \
                 or _db.get_seller_lego_count(seller_name)
             is_trader = seller_count > TRADER_THRESHOLD
@@ -356,10 +345,9 @@ def build_dashboard_data(
         platforms_data: dict[str, dict] = {}
         for platform in ALL_PLATFORMS:
             platforms_data[platform] = {}
-            for condition in ["NIB", "CIB"]:
+            for condition in CONDITIONS:
                 intel = compute_price_intelligence(set_number, platform, condition, retail_price)
-                # Active listings for this platform+condition (for display)
-                active = db.get_active_listings(set_number, platform, condition)
+                # listings is already fetched inside compute_price_intelligence; reuse it
                 intel["listings"] = [
                     {
                         "title": r["title"],
@@ -370,7 +358,7 @@ def build_dashboard_data(
                         "seller_name": r.get("seller_name", ""),
                         "price_type": r.get("price_type", "fixed"),
                     }
-                    for r in active[:20]  # max 20 per card
+                    for r in intel.pop("listings", [])[:20]  # max 20 per card
                 ]
                 platforms_data[platform][condition] = intel
 
