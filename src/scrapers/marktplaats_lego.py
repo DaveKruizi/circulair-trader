@@ -2,7 +2,7 @@
 Marktplaats.nl LEGO scraper.
 
 Per LEGO set: searches by set number only ("lego {set_number}").
-- Set number must appear in listing title, else rejected + logged
+- Set number must appear in listing title (not just description), else rejected + logged
 - Price outside [20%, 300%] of retail price → rejected + logged
 - Incomplete condition → excluded + logged
 - Tracks listing lifecycle in SQLite to detect disappearances (sold proxy)
@@ -29,6 +29,14 @@ DEALS_DATA_PATH = Path("data/marktplaats_deals.json")
 
 MIN_PRICE_RATIO = 0.20
 MAX_PRICE_RATIO = 3.00
+
+# Detecteer expliciete setnummers in titels (4–6 cijfers, geen jaarnummers zoals 2024)
+_SET_NUMBER_RE = re.compile(r'\b([0-9]{4,6})\b')
+
+
+def _looks_like_set_number(n: str) -> bool:
+    """True als n een LEGO-setnummer is (geen jaar zoals 2024/2023)."""
+    return not re.match(r'^(19|20)\d{2}$', n)
 
 
 def _days_since(dt: Optional[datetime]) -> int:
@@ -100,8 +108,8 @@ def scrape_set(
     """
     Scrape Marktplaats for a single LEGO set.
     Runs two queries per set:
-      1. 'lego {set_number}' — vereist setnummer in titel
-      2. 'lego {name}'       — geen titelvereiste (vangt verkopers die alleen de naam gebruiken)
+      1. 'lego {set_number}' — vereist setnummer in titel (niet alleen beschrijving)
+      2. 'lego {name}'       — geen titelvereiste, maar verwerpt als titel ander setnummer bevat
     Resultaten worden gededupliceerd op listing-ID.
     """
     if not _MARKTPLAATS_AVAILABLE:
@@ -168,15 +176,29 @@ def scrape_set(
                     )
                     continue
 
-                # Titelcheck: bij setnummer-query vereisen we het nummer in titel ÓF
-                # beschrijving. Verkopers zetten het nummer soms alleen in de omschrijving.
-                # Bij naamquery vertrouwen we op de Marktplaats-zoekmachine.
-                if require_number_in_title and set_number not in title and set_number not in description:
+                # Titelcheck: setnummer moet in de TITEL staan — beschrijving telt niet mee,
+                # want verkopers vermelden daar vaak andere sets die ze ook te koop hebben.
+                if require_number_in_title and set_number not in title:
                     log_rejection(
                         "marktplaats", set_number, listing_id, title, price,
                         "low_confidence", f"'{set_number}' not found in title or description"
                     )
                     continue
+
+                # Bij naam-query: als de titel een ander setnummer bevat, is het waarschijnlijk
+                # een ander set (bv. Speed Champions 76895 bij Technic 42099-zoekopdracht).
+                if not require_number_in_title:
+                    title_numbers = {
+                        n for n in _SET_NUMBER_RE.findall(title)
+                        if _looks_like_set_number(n)
+                    }
+                    if title_numbers and set_number not in title_numbers:
+                        other = ", ".join(sorted(title_numbers)[:3])
+                        log_rejection(
+                            "marktplaats", set_number, listing_id, title, price,
+                            "wrong_set", f"titel bevat ander setnummer ({other}), niet {set_number}"
+                        )
+                        continue
 
                 # Replica / namaak LEGO
                 flagged, kw = is_replica(title, description)
