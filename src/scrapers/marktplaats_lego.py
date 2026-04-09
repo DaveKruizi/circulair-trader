@@ -2,7 +2,7 @@
 Marktplaats.nl LEGO scraper.
 
 Per LEGO set: searches by set number only ("lego {set_number}").
-- Set number must appear in listing title, else rejected + logged
+- Set number must appear in listing title (not just description), else rejected + logged
 - Price outside [20%, 300%] of retail price → rejected + logged
 - Incomplete condition → excluded + logged
 - Tracks listing lifecycle in SQLite to detect disappearances (sold proxy)
@@ -108,8 +108,8 @@ def scrape_set(
     """
     Scrape Marktplaats for a single LEGO set.
     Runs two queries per set:
-      1. 'lego {set_number}' — vereist setnummer in titel
-      2. 'lego {name}'       — geen titelvereiste (vangt verkopers die alleen de naam gebruiken)
+      1. 'lego {set_number}' — vereist setnummer in titel (niet alleen beschrijving)
+      2. 'lego {name}'       — geen titelvereiste, maar verwerpt als titel ander setnummer bevat
     Resultaten worden gededupliceerd op listing-ID.
     """
     if not _MARKTPLAATS_AVAILABLE:
@@ -176,8 +176,9 @@ def scrape_set(
                     )
                     continue
 
-                # Titelcheck: bij setnummer-query vereisen we het nummer in titel ÓF beschrijving.
-                if require_number_in_title and set_number not in title and set_number not in description:
+                # Titelcheck: setnummer moet in de TITEL staan — beschrijving telt niet mee,
+                # want verkopers vermelden daar vaak andere sets die ze ook te koop hebben.
+                if require_number_in_title and set_number not in title:
                     log_rejection(
                         "marktplaats", set_number, listing_id, title, price,
                         "low_confidence", f"'{set_number}' not found in title or description"
