@@ -168,6 +168,14 @@ def scrape_set(
                 if listing_id in seen_ids:
                     continue
 
+                # LEGO moet ergens in de advertentie voorkomen
+                if "lego" not in title.lower() and "lego" not in description.lower():
+                    log_rejection(
+                        "marktplaats", set_number, listing_id, title, price,
+                        "no_lego_mention", "woord 'lego' ontbreekt in titel en beschrijving"
+                    )
+                    continue
+
                 # Catawiki: veilingsite met afwijkende advertenties → uitsluiten
                 if seller_name.lower() == "catawiki":
                     log_rejection(

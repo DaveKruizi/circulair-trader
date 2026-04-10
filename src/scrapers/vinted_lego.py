@@ -186,6 +186,14 @@ def scrape_set(
                 title = parsed["title"]
                 price = parsed["price"]
 
+                # LEGO moet in de titel voorkomen (Vinted geeft geen beschrijving)
+                if "lego" not in title.lower():
+                    log_rejection(
+                        platform_code, set_number, lid, title, price,
+                        "no_lego_mention", "woord 'lego' ontbreekt in titel"
+                    )
+                    continue
+
                 # Titelcheck: bij setnummer-query vereisen we het nummer in de titel.
                 # Vinted search-API geeft geen beschrijving terug, dus alleen titel-check.
                 # Bij naamquery vertrouwen we op de Vinted-zoekmachine.
