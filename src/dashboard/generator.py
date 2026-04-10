@@ -25,10 +25,14 @@ PLATFORM_LABELS = {
 }
 
 TRADER_THRESHOLD = 5       # meer dan N actieve LEGO-listings → LEGO-handelaar
-DEAL_DISCOUNT_PCT = 10     # minimaal X% onder marktwaarde (p50 × 0.90) → deal
-STEAL_DISCOUNT_PCT = 25    # ≥X% onder marktwaarde (p50 × 0.90) → steal
 MARKET_VALUE_FACTOR = 0.90 # marktwaarde = p50 × dit factor (onderhandelingskorting)
-MIN_FLIP_MARGIN_EUR = 31   # p50 - aankoopprijs moet ≥ €31 (€25 netto + €6 verzending)
+# NIB — beleggen (percentage-gebaseerd t.o.v. marktwaarde)
+NIB_DEAL_DISCOUNT_PCT = 10   # ≥10% onder marktwaarde → deal
+NIB_STEAL_DISCOUNT_PCT = 25  # ≥25% onder marktwaarde → steal
+NIB_MIN_MARGIN_EUR = 31      # absolute minimummarge (€25 netto + €6 verzending)
+# CIB — handelen (absoluut bedrag t.o.v. marktwaarde)
+CIB_DEAL_MARGIN_EUR = 20     # ≥€20 onder marktwaarde → deal
+CIB_STEAL_MARGIN_EUR = 30    # ≥€30 onder marktwaarde → steal
 BCG_VELOCITY_THRESHOLD = 50   # hot_score >= 50 = hoge snelheid
 BCG_VALUE_THRESHOLD = 1.15    # NIB p50 >= retail * 1.15 = waardestijging (NIB-modus)
 BCG_CIB_SPREAD_THRESHOLD = 1.30  # NIB p50 >= CIB p50 * 1.30 = goede handelsmarge (CIB-modus)
@@ -255,14 +259,15 @@ def _find_deals(
         if not p50:
             continue
 
-        # Marktwaarde = p50 × 0.90; kortingen worden t.o.v. marktwaarde berekend
+        # Marktwaarde = p50 × 0.90
         market_value = p50 * MARKET_VALUE_FACTOR
-        deal_threshold = market_value * (1 - DEAL_DISCOUNT_PCT / 100)
 
         for listing in intel.get("listings_all", intel.get("listings", [])):
             price = listing.get("price", 0)
             if not price:
                 continue
+
+            margin = market_value - price  # positief = listing staat onder marktwaarde
 
             # NIB-prijs onder retail terwijl markt boven retail staat → steal-kandidaat
             nib_below_retail = (
@@ -272,7 +277,25 @@ def _find_deals(
                 and p50 > retail_price
             )
 
-            if price > deal_threshold and not nib_below_retail:
+            # Deal/steal beoordeling per strategie:
+            # NIB (beleggen): percentage t.o.v. marktwaarde
+            # CIB (handelen): absoluut bedrag t.o.v. marktwaarde
+            if condition == "NIB":
+                is_deal_candidate = (
+                    price <= market_value * (1 - NIB_DEAL_DISCOUNT_PCT / 100)
+                    or nib_below_retail
+                )
+                is_steal = (
+                    price <= market_value * (1 - NIB_STEAL_DISCOUNT_PCT / 100)
+                    or nib_below_retail
+                )
+                min_margin = NIB_MIN_MARGIN_EUR
+            else:  # CIB
+                is_deal_candidate = margin >= CIB_DEAL_MARGIN_EUR
+                is_steal = margin >= CIB_STEAL_MARGIN_EUR
+                min_margin = CIB_DEAL_MARGIN_EUR  # al afgedwongen door drempel
+
+            if not is_deal_candidate:
                 continue
 
             seller_name = listing.get("seller_name", "")
@@ -289,11 +312,10 @@ def _find_deals(
 
             discount_pct = round((1 - price / market_value) * 100)
 
-            # Absolute minimummarge: moet ≥ €31 overhouden (€25 netto + €6 verzending)
-            if market_value - price < MIN_FLIP_MARGIN_EUR:
+            # Minimummarge check
+            if margin < min_margin:
                 continue
 
-            is_steal = discount_pct >= STEAL_DISCOUNT_PCT or nib_below_retail
             category = "steal" if is_steal else "deal"
 
             deals.append({
