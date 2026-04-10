@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-10T10:19:54.926424",
+  "generated_at": "2026-04-10T10:20:03.685948",
   "positions": [
     {
       "id": 2,
@@ -57,34 +57,15 @@
       "unrealized_pnl": 55.81,
       "unrealized_pnl_pct": 41.3,
       "invested": 134.99
-    },
-    {
-      "id": 4,
-      "set_number": "10337",
-      "condition": "NIB",
-      "quantity": 1,
-      "purchase_price": 134.99,
-      "purchase_date": "2026-03-28",
-      "sold_price": null,
-      "sold_date": null,
-      "notes": "Winkel",
-      "created_at": "2026-04-10 10:19:51",
-      "set_name": "Lamborghini Countach 5000 QV",
-      "current_p50": 212.0,
-      "effective_price": 190.8,
-      "market_value": 190.8,
-      "unrealized_pnl": 55.81,
-      "unrealized_pnl_pct": 41.3,
-      "invested": 134.99
     }
   ],
   "summary": {
-    "total_invested": 461.26,
-    "total_market_value": 623.7,
-    "unrealized_pnl": 162.44,
-    "unrealized_pnl_pct": 35.2,
+    "total_invested": 326.27,
+    "total_market_value": 432.9,
+    "unrealized_pnl": 106.63,
+    "unrealized_pnl_pct": 32.7,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 162.44,
-    "unrealized_pnl_12m_pct": 35.2
+    "unrealized_pnl_12m": 106.63,
+    "unrealized_pnl_12m_pct": 32.7
   }
 }
