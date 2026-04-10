@@ -1112,7 +1112,7 @@ function renderPortfolio(pf) {
       <td>${p.quantity}×</td>
       <td>€${p.purchase_price.toFixed(2)}</td>
       <td style="color:var(--muted)">${p.purchase_date}</td>
-      <td>${p.current_p50 != null ? '€' + p.current_p50.toFixed(0) : '—'}</td>
+      <td>${p.effective_price != null ? '€' + p.effective_price.toFixed(0) : '—'}</td>
       ${pnlHtml}
       <td style="color:var(--muted)">${isSold ? '€' + p.sold_price.toFixed(2) + ' op ' + p.sold_date : '—'}</td>
       <td style="color:var(--muted);font-size:10px">${escHtml(p.notes || '')}</td>
