@@ -573,13 +573,45 @@
 
   /* Portfolio sectie */
   #portfolio-section {
-    max-width: 1400px; margin: 0 auto 24px; padding: 0 24px;
+    max-width: 1400px; margin: 0 auto 16px; padding: 0 24px;
   }
+  .portfolio-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+  }
+  .portfolio-toggle {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 18px; cursor: pointer; user-select: none;
+    border-bottom: 1px solid transparent; transition: border-color .15s;
+  }
+  .portfolio-toggle:hover { background: #f6f8fa; }
+  .portfolio-toggle.open { border-bottom-color: var(--border); }
+  .portfolio-toggle h2 {
+    font-size: 14px; font-weight: 700; color: var(--text); margin: 0; flex: 1;
+  }
+  .portfolio-chevron {
+    font-size: 12px; color: var(--muted); transition: transform .2s;
+  }
+  .portfolio-toggle.open .portfolio-chevron { transform: rotate(180deg); }
+  .portfolio-body { padding: 16px 18px; display: none; }
+  .portfolio-body.open { display: block; }
   .portfolio-header {
     display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
   }
   .portfolio-header h2 {
     font-size: 15px; font-weight: 700; color: var(--text); margin: 0;
+  }
+  /* Scheidingslijn tussen portfolio en marktinformatie */
+  .section-divider {
+    max-width: 1400px; margin: 8px auto 20px; padding: 0 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-divider-label {
+    font-size: 11px; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .08em; white-space: nowrap;
+  }
+  .section-divider-line {
+    flex: 1; height: 1px; background: var(--border);
   }
   .portfolio-summary {
     display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px;
@@ -786,24 +818,35 @@
 
 <!-- Portfolio sectie (alleen zichtbaar als PORTFOLIO_URL is ingesteld) -->
 <div id="portfolio-section" style="display:none">
-  <div class="portfolio-header">
-    <span style="font-size:20px">💼</span>
-    <h2>Mijn Portfolio</h2>
-    <span id="pf-gen-time" style="font-size:11px;color:var(--muted)"></span>
-    <button class="pf-btn pf-btn-primary" style="margin-left:auto" onclick="openPositionModal()">+ Positie</button>
+  <div class="portfolio-card">
+    <div class="portfolio-toggle" id="pf-toggle" onclick="togglePortfolio()">
+      <span style="font-size:16px">💼</span>
+      <h2>Mijn Portfolio</h2>
+      <span id="pf-gen-time" style="font-size:11px;color:var(--muted)"></span>
+      <button class="pf-btn pf-btn-primary" style="margin-left:8px" onclick="event.stopPropagation();openPositionModal()">+ Positie</button>
+      <span class="portfolio-chevron">▼</span>
+    </div>
+    <div class="portfolio-body" id="pf-body">
+      <div class="portfolio-summary" id="pf-summary"></div>
+      <table class="portfolio-table">
+        <thead>
+          <tr>
+            <th>ID</th><th>Set</th><th>Conditie</th><th>Stuks</th>
+            <th>Inkoopprijs</th><th>Ingekocht op</th>
+            <th>Marktwaarde (p50 −10%)</th><th>P&amp;L €</th><th>P&amp;L %</th>
+            <th>Verkoop</th><th>Notities</th>
+          </tr>
+        </thead>
+        <tbody id="pf-table-body"></tbody>
+      </table>
+    </div>
   </div>
-  <div class="portfolio-summary" id="pf-summary"></div>
-  <table class="portfolio-table">
-    <thead>
-      <tr>
-        <th>ID</th><th>Set</th><th>Conditie</th><th>Stuks</th>
-        <th>Inkoopprijs</th><th>Ingekocht op</th>
-        <th>Marktwaarde (p50)</th><th>P&amp;L €</th><th>P&amp;L %</th>
-        <th>Verkoop</th><th>Notities</th>
-      </tr>
-    </thead>
-    <tbody id="pf-table-body"></tbody>
-  </table>
+</div>
+
+<!-- Scheidingslijn: portfolio → marktinformatie -->
+<div class="section-divider" id="market-section-header" style="display:none">
+  <span class="section-divider-label">Marktinformatie</span>
+  <span class="section-divider-line"></span>
 </div>
 
 <div class="filter-bar">
@@ -1025,9 +1068,19 @@ function buildTrendBadge(trend) {
   return `<span class="trend-badge ${cls}" title="Prijstrend afgelopen 60 dagen">${label}</span>`;
 }
 
+function togglePortfolio() {
+  const toggle = document.getElementById('pf-toggle');
+  const body   = document.getElementById('pf-body');
+  const isOpen = toggle.classList.toggle('open');
+  body.classList.toggle('open', isOpen);
+}
+
 function renderPortfolio(pf) {
   const section = document.getElementById('portfolio-section');
   section.style.display = '';
+  // Scheidingslijn tonen
+  const divider = document.getElementById('market-section-header');
+  if (divider) divider.style.display = '';
 
   const gen = new Date(pf.generated_at);
   document.getElementById('pf-gen-time').textContent =
@@ -1037,10 +1090,14 @@ function renderPortfolio(pf) {
   const pnlCls = s.unrealized_pnl >= 0 ? 'positive' : 'negative';
   const pnlSign = s.unrealized_pnl >= 0 ? '+' : '';
   const realSign = s.realized_pnl >= 0 ? '+' : '';
+  const pnl12m = s.unrealized_pnl_12m ?? 0;
+  const pnl12mSign = pnl12m >= 0 ? '+' : '';
+  const pnl12mCls = pnl12m >= 0 ? 'positive' : 'negative';
   document.getElementById('pf-summary').innerHTML = `
     <div class="pf-stat"><div class="pf-stat-label">Belegd</div><div class="pf-stat-value">€${s.total_invested.toFixed(0)}</div></div>
     <div class="pf-stat"><div class="pf-stat-label">Marktwaarde</div><div class="pf-stat-value">€${s.total_market_value.toFixed(0)}</div></div>
-    <div class="pf-stat"><div class="pf-stat-label">Ongerealiseerd</div><div class="pf-stat-value ${pnlCls}">${pnlSign}€${s.unrealized_pnl.toFixed(0)} (${pnlSign}${s.unrealized_pnl_pct}%)</div></div>
+    <div class="pf-stat"><div class="pf-stat-label">Ongerealiseerd (totaal)</div><div class="pf-stat-value ${pnlCls}">${pnlSign}€${s.unrealized_pnl.toFixed(0)} (${pnlSign}${s.unrealized_pnl_pct}%)</div></div>
+    <div class="pf-stat"><div class="pf-stat-label">Ongerealiseerd (12 mnd)</div><div class="pf-stat-value ${pnl12mCls}">${pnl12mSign}€${pnl12m.toFixed(0)} (${pnl12mSign}${s.unrealized_pnl_12m_pct}%)</div></div>
     <div class="pf-stat"><div class="pf-stat-label">Gerealiseerd</div><div class="pf-stat-value ${s.realized_pnl >= 0 ? 'positive' : 'negative'}">${realSign}€${s.realized_pnl.toFixed(0)}</div></div>
   `;
 
