@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Optional
 
 DB_PATH = Path("data/trading.db")
+PORTFOLIO_DB_PATH = Path("data/portfolio.db")
 
 
 def get_connection() -> sqlite3.Connection:
@@ -24,7 +25,35 @@ def get_connection() -> sqlite3.Connection:
     return conn
 
 
+def get_portfolio_connection() -> sqlite3.Connection:
+    PORTFOLIO_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    conn = sqlite3.connect(str(PORTFOLIO_DB_PATH))
+    conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA journal_mode=WAL")
+    return conn
+
+
+def init_portfolio_db() -> None:
+    """Initialiseer de portfolio-database (apart van de scraping-database)."""
+    with get_portfolio_connection() as conn:
+        conn.executescript("""
+            CREATE TABLE IF NOT EXISTS portfolio_positions (
+                id              INTEGER PRIMARY KEY AUTOINCREMENT,
+                set_number      TEXT NOT NULL,
+                condition       TEXT NOT NULL CHECK(condition IN ('NIB', 'CIB')),
+                quantity        INTEGER NOT NULL DEFAULT 1,
+                purchase_price  REAL NOT NULL,
+                purchase_date   TEXT NOT NULL,
+                sold_price      REAL,
+                sold_date       TEXT,
+                notes           TEXT,
+                created_at      TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+        """)
+
+
 def init_db() -> None:
+    init_portfolio_db()
     with get_connection() as conn:
         conn.executescript("""
             CREATE TABLE IF NOT EXISTS listings (
@@ -92,19 +121,6 @@ def init_db() -> None:
             CREATE INDEX IF NOT EXISTS idx_rejection_date
                 ON rejection_log(log_date, set_number);
 
-            -- Portfolio: gekochte/verkochte posities (persoonlijk, NIET publiek)
-            CREATE TABLE IF NOT EXISTS portfolio_positions (
-                id              INTEGER PRIMARY KEY AUTOINCREMENT,
-                set_number      TEXT NOT NULL,
-                condition       TEXT NOT NULL CHECK(condition IN ('NIB', 'CIB')),
-                quantity        INTEGER NOT NULL DEFAULT 1,
-                purchase_price  REAL NOT NULL,
-                purchase_date   TEXT NOT NULL,
-                sold_price      REAL,
-                sold_date       TEXT,
-                notes           TEXT,
-                created_at      TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-            );
         """)
         # Migrate existing DBs that predate image_url/url columns
         for col, default in [("image_url", "''"), ("url", "''")] :
@@ -440,7 +456,7 @@ def get_rejection_summary(days: int = 7) -> dict:
 
 def get_portfolio_positions() -> list[dict]:
     """Alle portfolio-posities, nieuwste eerst."""
-    with get_connection() as conn:
+    with get_portfolio_connection() as conn:
         rows = conn.execute(
             """SELECT id, set_number, condition, quantity, purchase_price, purchase_date,
                       sold_price, sold_date, notes, created_at
@@ -459,7 +475,7 @@ def add_portfolio_position(
     notes: str = "",
 ) -> int:
     """Voeg een nieuwe positie toe. Geeft het nieuwe id terug."""
-    with get_connection() as conn:
+    with get_portfolio_connection() as conn:
         cur = conn.execute(
             """INSERT INTO portfolio_positions
                (set_number, condition, quantity, purchase_price, purchase_date, notes)
@@ -471,7 +487,7 @@ def add_portfolio_position(
 
 def sell_portfolio_position(position_id: int, sold_price: float, sold_date: str) -> bool:
     """Markeer een open positie als verkocht. Geeft True als de rij gevonden is."""
-    with get_connection() as conn:
+    with get_portfolio_connection() as conn:
         cur = conn.execute(
             """UPDATE portfolio_positions
                SET sold_price=?, sold_date=?
@@ -483,8 +499,7 @@ def sell_portfolio_position(position_id: int, sold_price: float, sold_date: str)
 
 def get_portfolio_position(position_id: int) -> Optional[dict]:
     """Haal één portfoliopositie op op basis van ID."""
-    with get_connection() as conn:
-        conn.row_factory = sqlite3.Row
+    with get_portfolio_connection() as conn:
         row = conn.execute(
             "SELECT * FROM portfolio_positions WHERE id = ?", (position_id,)
         ).fetchone()
@@ -496,7 +511,7 @@ def delete_portfolio_positions(ids: list[int]) -> int:
     if not ids:
         return 0
     placeholders = ",".join("?" * len(ids))
-    with get_connection() as conn:
+    with get_portfolio_connection() as conn:
         cur = conn.execute(
             f"DELETE FROM portfolio_positions WHERE id IN ({placeholders})",
             ids,
