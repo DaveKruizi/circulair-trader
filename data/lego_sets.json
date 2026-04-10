@@ -97,22 +97,6 @@
       "retired_year": 2025
     },
     {
-      "set_number": "42125",
-      "name": "Ferrari 488 GTE",
-      "theme": "Technic",
-      "retail_price": 199.99,
-      "is_retired": true,
-      "market_value_new": 260.0,
-      "release_year": 2021,
-      "piece_count": 1677,
-      "image_url": "https://images.brickset.com/sets/images/42125-1.jpg",
-      "search_terms": [
-        "lego 42125"
-      ],
-      "category": "vehicle",
-      "retired_year": 2023
-    },
-    {
       "set_number": "42130",
       "name": "BMW M 1000 RR",
       "theme": "Technic",
@@ -141,38 +125,6 @@
       "image_url": "https://images.brickset.com/sets/images/42143-1.jpg",
       "search_terms": [
         "lego 42143"
-      ],
-      "category": "vehicle",
-      "retired_year": 2025
-    },
-    {
-      "set_number": "42151",
-      "name": "Bugatti Bolide",
-      "theme": "Technic",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": 130.0,
-      "release_year": 2022,
-      "piece_count": 905,
-      "image_url": "https://images.brickset.com/sets/images/42151-1.jpg",
-      "search_terms": [
-        "lego 42151"
-      ],
-      "category": "vehicle",
-      "retired_year": 2025
-    },
-    {
-      "set_number": "42154",
-      "name": "Ford GT",
-      "theme": "Technic",
-      "retail_price": 79.99,
-      "is_retired": true,
-      "market_value_new": 105.0,
-      "release_year": 2023,
-      "piece_count": 1466,
-      "image_url": "https://images.brickset.com/sets/images/42154-1.jpg",
-      "search_terms": [
-        "lego 42154"
       ],
       "category": "vehicle",
       "retired_year": 2025
@@ -223,22 +175,6 @@
         "lego 42170"
       ],
       "category": "vehicle"
-    },
-    {
-      "set_number": "42141",
-      "name": "McLaren Formula 1 Race Car",
-      "theme": "Technic",
-      "retail_price": 179.99,
-      "is_retired": true,
-      "market_value_new": 220.0,
-      "release_year": 2022,
-      "piece_count": 1432,
-      "image_url": "https://images.brickset.com/sets/images/42141-1.jpg",
-      "search_terms": [
-        "lego 42141"
-      ],
-      "category": "vehicle",
-      "retired_year": 2025
     },
     {
       "set_number": "42202",
@@ -638,21 +574,6 @@
       "retired_year": 2024
     },
     {
-      "set_number": "10330",
-      "name": "McLaren MP4/4 & Ayrton Senna",
-      "theme": "Icons",
-      "retail_price": 79.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2024,
-      "piece_count": 693,
-      "image_url": "https://images.brickset.com/sets/images/10330-1.jpg",
-      "search_terms": [
-        "lego 10330"
-      ],
-      "category": "vehicle"
-    },
-    {
       "set_number": "42111",
       "name": "Dom's Dodge Charger",
       "theme": "Technic",
@@ -717,38 +638,6 @@
       "retired_year": 2023
     },
     {
-      "set_number": "42098",
-      "name": "Car Transporter",
-      "theme": "Technic",
-      "retail_price": 149.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2019,
-      "piece_count": 2493,
-      "image_url": "https://images.brickset.com/sets/images/42098-1.jpg",
-      "search_terms": [
-        "lego 42098"
-      ],
-      "category": "vehicle",
-      "retired_year": 2020
-    },
-    {
-      "set_number": "42077",
-      "name": "Rally Car",
-      "theme": "Technic",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2017,
-      "piece_count": 1005,
-      "image_url": "https://images.brickset.com/sets/images/42077-1.jpg",
-      "search_terms": [
-        "lego 42077"
-      ],
-      "category": "vehicle",
-      "retired_year": 2019
-    },
-    {
       "set_number": "42039",
       "name": "24 Hours Race Car",
       "theme": "Technic",
@@ -779,54 +668,6 @@
       ],
       "category": "vehicle",
       "retired_year": 2014
-    },
-    {
-      "set_number": "8070",
-      "name": "Supercar",
-      "theme": "Technic",
-      "retail_price": 119.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2011,
-      "piece_count": 1281,
-      "image_url": "https://images.brickset.com/sets/images/8070-1.jpg",
-      "search_terms": [
-        "lego 8070"
-      ],
-      "category": "vehicle",
-      "retired_year": 2012
-    },
-    {
-      "set_number": "8448",
-      "name": "Super Street Sensation",
-      "theme": "Technic",
-      "retail_price": 109.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 1999,
-      "piece_count": 1413,
-      "image_url": "https://images.brickset.com/sets/images/8448-1.jpg",
-      "search_terms": [
-        "lego 8448"
-      ],
-      "category": "vehicle",
-      "retired_year": 2000
-    },
-    {
-      "set_number": "8880",
-      "name": "Super Car",
-      "theme": "Technic",
-      "retail_price": 89.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 1994,
-      "piece_count": 1343,
-      "image_url": "https://images.brickset.com/sets/images/8880-1.jpg",
-      "search_terms": [
-        "lego 8880"
-      ],
-      "category": "vehicle",
-      "retired_year": 1997
     }
   ]
 }
