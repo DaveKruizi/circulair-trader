@@ -60,9 +60,24 @@ NIB_CONTRADICTIONS = [
     "sans boîte", "sans la boîte",      # Frans
     # Expliciet één keer gebouwd / geassembleerd — niet NIB
     "eénmaal opgebouwd", "eenmaal opgebouwd", "1x opgebouwd",
+    "één keer opgebouwd", "een keer opgebouwd", "1 keer opgebouwd",
     "eénmaal gebouwd", "eenmaal gebouwd", "1x gebouwd",
+    "één keer gebouwd", "een keer gebouwd", "1 keer gebouwd",
+    "1x in elkaar gezet", "eenmaal in elkaar gezet", "één keer in elkaar gezet",
     "display model", "displaymodel",
     "built once",                       # Engels
+    # Algemene assembly-termen — set is aantoonbaar geopend en gebouwd
+    "in elkaar gezet", "gemonteerd", "geassembleerd", "samengesteld",
+    "bouwwerk",        # "schitterend bouwwerk" → duidelijk gebouwd
+    # Reservestukjes = resterende onderdelen ná het bouwen → aantoonbaar geopend
+    "reservestukjes", "reserve stukjes", "reserve onderdelen", "reserveonderdelen",
+    # "Zo goed als nieuw" beschrijft een gebruikte set in goede staat, niet NIB
+    "zo goed als nieuw", "zgan", "als nieuw", "nieuwstaat", "nieuw staat",
+    # Gestart met bouwen maar niet afgemaakt — duidelijk geopend
+    "started building", "started assembling", "began building",
+    "not fully assembled", "partly assembled", "partially assembled",
+    # Doos ontbreekt (Engelse varianten)
+    "box not included", "no box included", "without the box",
 ]
 
 INCOMPLETE_KEYWORDS = [
@@ -74,7 +89,7 @@ INCOMPLETE_KEYWORDS = [
     "exclusief doos",
     "ohne box", "ohne anleitung", "ohne karton", "unvollständig",  # German
     "sans boîte", "incomplet",  # French
-    "incomplete", "no box", "missing", "parts only",  # English
+    "incomplete", "no box", "box not included", "missing", "parts only",  # English
 ]
 
 CIB_KEYWORDS = [
@@ -90,6 +105,8 @@ CIB_KEYWORDS = [
     # Gebouwd/gemonteerd — expliciet bewijs dat set geopend is
     "gebouwd", "opgebouwd", "in elkaar gezet", "gemonteerd",
     "zorgvuldig gebouwd", "1x gebouwd", "eenmalig gebouwd",
+    "één keer opgebouwd", "een keer opgebouwd", "1 keer opgebouwd",
+    "één keer gebouwd", "een keer gebouwd", "1 keer gebouwd",
     "opnieuw te bouwen", "displaymodel", "display model",
     "samengesteld", "geassembleerd", "kant-en-klaar gebouwd",
     "afgebouwd", "al gebouwd", "al opgebouwd",

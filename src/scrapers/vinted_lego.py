@@ -149,7 +149,7 @@ def scrape_set(
     Also updates SQLite lifecycle tracking and logs rejections.
     """
     from src.db import init_db, upsert_listing, mark_disappeared, log_rejection
-    from src.analysis.content_filters import is_replica, is_accessory
+    from src.analysis.content_filters import is_replica, is_accessory, is_bundle
 
     init_db()
     today = datetime.now().date().isoformat()
@@ -186,6 +186,14 @@ def scrape_set(
                 title = parsed["title"]
                 price = parsed["price"]
 
+                # LEGO moet in de titel voorkomen (Vinted geeft geen beschrijving)
+                if "lego" not in title.lower():
+                    log_rejection(
+                        platform_code, set_number, lid, title, price,
+                        "no_lego_mention", "woord 'lego' ontbreekt in titel"
+                    )
+                    continue
+
                 # Titelcheck: bij setnummer-query vereisen we het nummer in de titel.
                 # Vinted search-API geeft geen beschrijving terug, dus alleen titel-check.
                 # Bij naamquery vertrouwen we op de Vinted-zoekmachine.
@@ -193,6 +201,15 @@ def scrape_set(
                     log_rejection(
                         platform_code, set_number, lid, title, price,
                         "low_confidence", f"'{set_number}' not found in title"
+                    )
+                    continue
+
+                # Bundel van meerdere sets (Vinted: alleen titel beschikbaar)
+                flagged, reason = is_bundle(title, "")
+                if flagged:
+                    log_rejection(
+                        platform_code, set_number, lid, title, price,
+                        "bundle", reason
                     )
                     continue
 

@@ -118,7 +118,7 @@ def scrape_set(
 
     from src.db import init_db, upsert_listing, mark_disappeared, log_rejection
     from src.analysis.condition_classifier import classify_condition
-    from src.analysis.content_filters import is_replica, is_accessory
+    from src.analysis.content_filters import is_replica, is_accessory, is_bundle
 
     init_db()
     today = datetime.now().date().isoformat()
@@ -168,6 +168,14 @@ def scrape_set(
                 if listing_id in seen_ids:
                     continue
 
+                # LEGO moet ergens in de advertentie voorkomen
+                if "lego" not in title.lower() and "lego" not in description.lower():
+                    log_rejection(
+                        "marktplaats", set_number, listing_id, title, price,
+                        "no_lego_mention", "woord 'lego' ontbreekt in titel en beschrijving"
+                    )
+                    continue
+
                 # Catawiki: veilingsite met afwijkende advertenties → uitsluiten
                 if seller_name.lower() == "catawiki":
                     log_rejection(
@@ -199,6 +207,15 @@ def scrape_set(
                             "wrong_set", f"titel bevat ander setnummer ({other}), niet {set_number}"
                         )
                         continue
+
+                # Bundel van meerdere sets — prijs onbruikbaar voor één set
+                flagged, reason = is_bundle(title, description)
+                if flagged:
+                    log_rejection(
+                        "marktplaats", set_number, listing_id, title, price,
+                        "bundle", reason
+                    )
+                    continue
 
                 # Replica / namaak LEGO
                 flagged, kw = is_replica(title, description)
