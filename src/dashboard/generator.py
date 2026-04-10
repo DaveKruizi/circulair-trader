@@ -25,8 +25,9 @@ PLATFORM_LABELS = {
 }
 
 TRADER_THRESHOLD = 5       # meer dan N actieve LEGO-listings → LEGO-handelaar
-DEAL_DISCOUNT_PCT = 20     # minimaal X% onder mediaan vraagprijs → deal
-STEAL_DISCOUNT_PCT = 35    # ≥X% onder mediaan vraagprijs → steal
+DEAL_DISCOUNT_PCT = 15     # minimaal X% onder marktwaarde (p50 × 0.90) → deal
+STEAL_DISCOUNT_PCT = 25    # ≥X% onder marktwaarde (p50 × 0.90) → steal
+MARKET_VALUE_FACTOR = 0.90 # marktwaarde = p50 × dit factor (onderhandelingskorting)
 MIN_FLIP_MARGIN_EUR = 31   # p50 - aankoopprijs moet ≥ €31 (€25 netto + €6 verzending)
 BCG_VELOCITY_THRESHOLD = 50   # hot_score >= 50 = hoge snelheid
 BCG_VALUE_THRESHOLD = 1.15    # NIB p50 >= retail * 1.15 = waardestijging (NIB-modus)
@@ -254,7 +255,9 @@ def _find_deals(
         if not p50:
             continue
 
-        deal_threshold = p50 * (1 - DEAL_DISCOUNT_PCT / 100)
+        # Marktwaarde = p50 × 0.90; kortingen worden t.o.v. marktwaarde berekend
+        market_value = p50 * MARKET_VALUE_FACTOR
+        deal_threshold = market_value * (1 - DEAL_DISCOUNT_PCT / 100)
 
         for listing in intel.get("listings_all", intel.get("listings", [])):
             price = listing.get("price", 0)
@@ -284,10 +287,10 @@ def _find_deals(
             if price_type == "bidding" and is_trader:
                 continue
 
-            discount_pct = round((1 - price / p50) * 100)
+            discount_pct = round((1 - price / market_value) * 100)
 
             # Absolute minimummarge: moet ≥ €31 overhouden (€25 netto + €6 verzending)
-            if p50 - price < MIN_FLIP_MARGIN_EUR:
+            if market_value - price < MIN_FLIP_MARGIN_EUR:
                 continue
 
             is_steal = discount_pct >= STEAL_DISCOUNT_PCT or nib_below_retail
