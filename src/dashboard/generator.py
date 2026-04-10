@@ -256,7 +256,7 @@ def _find_deals(
 
         deal_threshold = p50 * (1 - DEAL_DISCOUNT_PCT / 100)
 
-        for listing in intel.get("listings", []):
+        for listing in intel.get("listings_all", intel.get("listings", [])):
             price = listing.get("price", 0)
             if not price:
                 continue
@@ -347,7 +347,9 @@ def build_dashboard_data(
             platforms_data[platform] = {}
             for condition in CONDITIONS:
                 intel = compute_price_intelligence(set_number, platform, condition, retail_price)
-                # listings is already fetched inside compute_price_intelligence; reuse it
+                # Bewaar alle listings voor de deals-finder; bouw apart een display-versie
+                # (max 20) voor de kaart — anders mist _find_deals() listings 21+.
+                raw_listings = intel.pop("listings", [])
                 intel["listings"] = [
                     {
                         "title": r["title"],
@@ -358,7 +360,20 @@ def build_dashboard_data(
                         "seller_name": r.get("seller_name", ""),
                         "price_type": r.get("price_type", "fixed"),
                     }
-                    for r in intel.pop("listings", [])[:20]  # max 20 per card
+                    for r in raw_listings[:20]  # max 20 voor display
+                ]
+                # Deals-finder heeft alle listings nodig — aparte sleutel
+                intel["listings_all"] = [
+                    {
+                        "price": r["price"],
+                        "url": r["url"],
+                        "image_url": r["image_url"],
+                        "seller_name": r.get("seller_name", ""),
+                        "price_type": r.get("price_type", "fixed"),
+                        "title": r["title"],
+                        "is_reserved": bool(r.get("is_reserved", 0)),
+                    }
+                    for r in raw_listings
                 ]
                 platforms_data[platform][condition] = intel
 
