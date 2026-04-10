@@ -535,12 +535,13 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
                               "unrealized_pnl_pct": None, "invested": invested,
                               "realized_pnl": pnl})
         else:
-            # Open positie
+            # Open positie — marktwaarde is p50 × 0.90 (vraagprijs min ~10% onderhandeling)
             if current_p50 is not None:
-                market_val = round(current_p50 * qty, 2)
+                effective_price = round(current_p50 * 0.90, 2)
+                market_val = round(effective_price * qty, 2)
                 total_market += market_val
                 upnl = round(market_val - invested, 2)
-                upnl_pct = round((current_p50 / buy_price - 1) * 100, 1) if buy_price else None
+                upnl_pct = round((effective_price / buy_price - 1) * 100, 1) if buy_price else None
                 # 12-maands ongerealiseerd: posities gekocht in de afgelopen 12 maanden
                 if pos.get("purchase_date", "") >= cutoff_12m:
                     unrealized_pnl_12m += upnl
@@ -550,7 +551,9 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
                 upnl = None
                 upnl_pct = None
             enriched.append({**pos, "set_name": set_names.get(sn, sn),
-                              "current_p50": current_p50, "market_value": market_val,
+                              "current_p50": current_p50,         # vraagprijs mediaan
+                              "effective_price": effective_price if current_p50 else None,  # p50 × 0.90
+                              "market_value": market_val,
                               "unrealized_pnl": upnl, "unrealized_pnl_pct": upnl_pct,
                               "invested": invested})
 
