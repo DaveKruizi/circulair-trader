@@ -68,6 +68,11 @@ NIB_CONTRADICTIONS = [
     "built once",                       # Engels
     # Algemene assembly-termen — set is aantoonbaar geopend en gebouwd
     "in elkaar gezet", "gemonteerd", "geassembleerd", "samengesteld",
+    "bouwwerk",        # "schitterend bouwwerk" → duidelijk gebouwd
+    # Reservestukjes = resterende onderdelen ná het bouwen → aantoonbaar geopend
+    "reservestukjes", "reserve stukjes", "reserve onderdelen", "reserveonderdelen",
+    # "Zo goed als nieuw" beschrijft een gebruikte set in goede staat, niet NIB
+    "zo goed als nieuw", "zgan", "als nieuw", "nieuwstaat", "nieuw staat",
     # Gestart met bouwen maar niet afgemaakt — duidelijk geopend
     "started building", "started assembling", "began building",
     "not fully assembled", "partly assembled", "partially assembled",
