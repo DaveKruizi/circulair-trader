@@ -82,13 +82,21 @@ jobs:
       - name: Code ophalen
         uses: actions/checkout@v4
 
-      - name: Data cache herstellen
-        uses: actions/cache@v4
+      - name: Data cache herstellen (alleen lezen — scrapers zijn eigenaar)
+        uses: actions/cache/restore@v4
         with:
           path: data/
           key: lego-data-v2-${{ github.run_id }}
           restore-keys: |
             lego-data-v2-
+
+      - name: Portfolio cache herstellen
+        uses: actions/cache@v4
+        with:
+          path: data/portfolio.db
+          key: portfolio-v1-${{ github.run_id }}
+          restore-keys: |
+            portfolio-v1-
 
       - name: Set catalog herstellen vanuit git (overschrijft cache)
         run: git checkout HEAD -- data/lego_sets.json
@@ -117,13 +125,6 @@ jobs:
           NOTES: ${{ inputs.notes }}
           DELETE_IDS: ${{ inputs.delete_ids }}
         run: python tools/portfolio_manage.py
-
-      - name: Data cache opslaan
-        if: always()
-        uses: actions/cache/save@v4
-        with:
-          path: data/
-          key: lego-data-v2-${{ github.run_id }}
 
       - name: Dashboard opnieuw genereren
         env:

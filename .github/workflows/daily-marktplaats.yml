@@ -40,6 +40,14 @@ jobs:
           restore-keys: |
             lego-data-v2-
 
+      - name: Portfolio cache herstellen (alleen lezen)
+        uses: actions/cache/restore@v4
+        with:
+          path: data/portfolio.db
+          key: portfolio-v1-${{ github.run_id }}
+          restore-keys: |
+            portfolio-v1-
+
       - name: Set catalog herstellen vanuit git (overschrijft cache)
         run: git checkout HEAD -- data/lego_sets.json
 
