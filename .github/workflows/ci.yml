@@ -18,7 +18,7 @@ jobs:
           cache: "pip"
 
       - name: Dependencies installeren
-        run: pip install pytest
+        run: pip install pytest httpx beautifulsoup4 lxml
 
       - name: Tests draaien
         run: python -m pytest tests/ -v --tb=short

@@ -490,8 +490,8 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
 
     from src import db as _db
     positions = _db.get_portfolio_positions()
-    if not positions:
-        return ""
+    # Geen early return bij lege positions — de sectie moet altijd zichtbaar zijn
+    # zodat de gebruiker op "+ Positie" kan klikken voor de eerste positie.
 
     # Bouw lookup: set_number → huidige p50 per conditie
     p50_lookup: dict[str, dict[str, Optional[float]]] = {}
