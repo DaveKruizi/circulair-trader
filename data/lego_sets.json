@@ -2,6 +2,198 @@
   "last_updated": "2026-03-25",
   "sets": [
     {
+      "set_number": "10220",
+      "name": "Volkswagen T1 Camper Van",
+      "theme": "Icons",
+      "retail_price": 99.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2011,
+      "piece_count": 1334,
+      "image_url": "https://images.brickset.com/sets/images/10220-1.jpg",
+      "search_terms": [
+        "lego 10220"
+      ],
+      "category": "vehicle",
+      "retired_year": 2020
+    },
+    {
+      "set_number": "10242",
+      "name": "MINI Cooper",
+      "theme": "Icons",
+      "retail_price": 99.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2014,
+      "piece_count": 1077,
+      "image_url": "https://images.brickset.com/sets/images/10242-1.jpg",
+      "search_terms": [
+        "lego 10242"
+      ],
+      "category": "vehicle",
+      "retired_year": 2015
+    },
+    {
+      "set_number": "10248",
+      "name": "Ferrari F40",
+      "theme": "Icons",
+      "retail_price": 89.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2015,
+      "piece_count": 1158,
+      "image_url": "https://images.brickset.com/sets/images/10248-1.jpg",
+      "search_terms": [
+        "lego 10248"
+      ],
+      "category": "vehicle",
+      "retired_year": 2017
+    },
+    {
+      "set_number": "10252",
+      "name": "Volkswagen Beetle",
+      "theme": "Icons",
+      "retail_price": 89.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2016,
+      "piece_count": 1167,
+      "image_url": "https://images.brickset.com/sets/images/10252-1.jpg",
+      "search_terms": [
+        "lego 10252"
+      ],
+      "category": "vehicle",
+      "retired_year": 2020
+    },
+    {
+      "set_number": "10258",
+      "name": "London Bus",
+      "theme": "Icons",
+      "retail_price": 119.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2017,
+      "piece_count": 1686,
+      "image_url": "https://images.brickset.com/sets/images/10258-1.jpg",
+      "search_terms": [
+        "lego 10258"
+      ],
+      "category": "vehicle",
+      "retired_year": 2021
+    },
+    {
+      "set_number": "10262",
+      "name": "James Bond Aston Martin DB5",
+      "theme": "Creator Expert",
+      "retail_price": 149.99,
+      "is_retired": true,
+      "market_value_new": 240.0,
+      "release_year": 2018,
+      "piece_count": 1295,
+      "image_url": "https://images.brickset.com/sets/images/10262-1.jpg",
+      "search_terms": [
+        "lego 10262"
+      ],
+      "category": "vehicle",
+      "retired_year": 2021
+    },
+    {
+      "set_number": "10265",
+      "name": "Ford Mustang",
+      "theme": "Icons",
+      "retail_price": 149.99,
+      "is_retired": true,
+      "market_value_new": 200.0,
+      "release_year": 2019,
+      "piece_count": 1471,
+      "image_url": "https://images.brickset.com/sets/images/10265-1.jpg",
+      "search_terms": [
+        "lego 10265"
+      ],
+      "category": "vehicle",
+      "retired_year": 2023
+    },
+    {
+      "set_number": "10269",
+      "name": "Harley-Davidson Fat Boy",
+      "theme": "Icons",
+      "retail_price": 89.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2019,
+      "piece_count": 1023,
+      "image_url": "https://images.brickset.com/sets/images/10269-1.jpg",
+      "search_terms": [
+        "lego 10269"
+      ],
+      "category": "vehicle",
+      "retired_year": 2021
+    },
+    {
+      "set_number": "10271",
+      "name": "Fiat 500",
+      "theme": "Icons",
+      "retail_price": 99.99,
+      "is_retired": true,
+      "market_value_new": 140.0,
+      "release_year": 2020,
+      "piece_count": 960,
+      "image_url": "https://images.brickset.com/sets/images/10271-1.jpg",
+      "search_terms": [
+        "lego 10271"
+      ],
+      "category": "vehicle",
+      "retired_year": 2022
+    },
+    {
+      "set_number": "10274",
+      "name": "Ghostbusters ECTO-1",
+      "theme": "Icons",
+      "retail_price": 179.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2020,
+      "piece_count": 2352,
+      "image_url": "https://images.brickset.com/sets/images/10274-1.jpg",
+      "search_terms": [
+        "lego 10274"
+      ],
+      "category": "vehicle",
+      "retired_year": 2024
+    },
+    {
+      "set_number": "10279",
+      "name": "Volkswagen T2 Camper Van",
+      "theme": "Icons",
+      "retail_price": 179.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2021,
+      "piece_count": 2207,
+      "image_url": "https://images.brickset.com/sets/images/10279-1.jpg",
+      "search_terms": [
+        "lego 10279"
+      ],
+      "category": "vehicle",
+      "retired_year": 2022
+    },
+    {
+      "set_number": "10290",
+      "name": "Pickup Truck",
+      "theme": "Icons",
+      "retail_price": 129.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2021,
+      "piece_count": 1677,
+      "image_url": "https://images.brickset.com/sets/images/10290-1.jpg",
+      "search_terms": [
+        "lego 10290"
+      ],
+      "category": "vehicle",
+      "retired_year": 2023
+    },
+    {
       "set_number": "10295",
       "name": "Porsche 911",
       "theme": "Icons",
@@ -50,6 +242,22 @@
       "retiring_soon": false
     },
     {
+      "set_number": "10304",
+      "name": "Chevrolet Camaro Z28",
+      "theme": "Icons",
+      "retail_price": 169.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2022,
+      "piece_count": 1456,
+      "image_url": "https://images.brickset.com/sets/images/10304-1.jpg",
+      "search_terms": [
+        "lego 10304"
+      ],
+      "category": "vehicle",
+      "retired_year": 2024
+    },
+    {
       "set_number": "10317",
       "name": "Land Rover Defender 90",
       "theme": "Icons",
@@ -61,6 +269,22 @@
       "image_url": "https://images.brickset.com/sets/images/10317-1.jpg",
       "search_terms": [
         "lego 10317"
+      ],
+      "category": "vehicle",
+      "retiring_soon": true
+    },
+    {
+      "set_number": "10321",
+      "name": "Corvette",
+      "theme": "Icons",
+      "retail_price": 199.99,
+      "is_retired": false,
+      "market_value_new": null,
+      "release_year": 2023,
+      "piece_count": 1210,
+      "image_url": "https://images.brickset.com/sets/images/10321-1.jpg",
+      "search_terms": [
+        "lego 10321"
       ],
       "category": "vehicle",
       "retiring_soon": true
@@ -81,6 +305,133 @@
       "category": "vehicle"
     },
     {
+      "set_number": "10357",
+      "name": "Shelby Cobra 427 S/C",
+      "theme": "Icons",
+      "retail_price": 149.99,
+      "is_retired": false,
+      "market_value_new": null,
+      "release_year": 2025,
+      "piece_count": 1241,
+      "image_url": "https://images.brickset.com/sets/images/10357-1.jpg",
+      "search_terms": [
+        "lego 10357"
+      ],
+      "category": "vehicle"
+    },
+    {
+      "set_number": "42000",
+      "name": "Grand Prix Racer",
+      "theme": "Technic",
+      "retail_price": 99.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2013,
+      "piece_count": 1141,
+      "image_url": "https://images.brickset.com/sets/images/42000-1.jpg",
+      "search_terms": [
+        "lego 42000"
+      ],
+      "category": "vehicle",
+      "retired_year": 2014
+    },
+    {
+      "set_number": "42039",
+      "name": "24 Hours Race Car",
+      "theme": "Technic",
+      "retail_price": 99.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2015,
+      "piece_count": 1219,
+      "image_url": "https://images.brickset.com/sets/images/42039-1.jpg",
+      "search_terms": [
+        "lego 42039"
+      ],
+      "category": "vehicle",
+      "retired_year": 2016
+    },
+    {
+      "set_number": "42056",
+      "name": "Porsche 911 GT3 RS",
+      "theme": "Technic",
+      "retail_price": 299.99,
+      "is_retired": true,
+      "market_value_new": 420.0,
+      "release_year": 2016,
+      "piece_count": 2704,
+      "image_url": "https://images.brickset.com/sets/images/42056-1.jpg",
+      "search_terms": [
+        "lego 42056"
+      ],
+      "category": "vehicle",
+      "retired_year": 2018
+    },
+    {
+      "set_number": "42083",
+      "name": "Bugatti Chiron",
+      "theme": "Technic",
+      "retail_price": 449.99,
+      "is_retired": true,
+      "market_value_new": 620.0,
+      "release_year": 2018,
+      "piece_count": 3599,
+      "image_url": "https://images.brickset.com/sets/images/42083-1.jpg",
+      "search_terms": [
+        "lego 42083"
+      ],
+      "category": "vehicle",
+      "retired_year": 2022
+    },
+    {
+      "set_number": "42096",
+      "name": "Porsche 911 RSR",
+      "theme": "Technic",
+      "retail_price": 149.99,
+      "is_retired": true,
+      "market_value_new": 200.0,
+      "release_year": 2019,
+      "piece_count": 1580,
+      "image_url": "https://images.brickset.com/sets/images/42096-1.jpg",
+      "search_terms": [
+        "lego 42096"
+      ],
+      "category": "vehicle",
+      "retired_year": 2024
+    },
+    {
+      "set_number": "42110",
+      "name": "Land Rover Defender",
+      "theme": "Technic",
+      "retail_price": 199.99,
+      "is_retired": true,
+      "market_value_new": 265.0,
+      "release_year": 2019,
+      "piece_count": 2573,
+      "image_url": "https://images.brickset.com/sets/images/42110-1.jpg",
+      "search_terms": [
+        "lego 42110"
+      ],
+      "category": "vehicle",
+      "retired_year": 2022
+    },
+    {
+      "set_number": "42111",
+      "name": "Dom's Dodge Charger",
+      "theme": "Technic",
+      "retail_price": 99.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2020,
+      "piece_count": 1077,
+      "image_url": "https://images.brickset.com/sets/images/42111-1.jpg",
+      "search_terms": [
+        "lego 42111"
+      ],
+      "category": "vehicle",
+      "retired_year": 2023
+    },
+    {
       "set_number": "42115",
       "name": "Lamborghini Sián FKP 37",
       "theme": "Technic",
@@ -95,6 +446,54 @@
       ],
       "category": "vehicle",
       "retired_year": 2025
+    },
+    {
+      "set_number": "42126",
+      "name": "Ford F-150 Raptor",
+      "theme": "Technic",
+      "retail_price": 99.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2021,
+      "piece_count": 1379,
+      "image_url": "https://images.brickset.com/sets/images/42126-1.jpg",
+      "search_terms": [
+        "lego 42126"
+      ],
+      "category": "vehicle",
+      "retired_year": 2022
+    },
+    {
+      "set_number": "42127",
+      "name": "The Batman Batmobile",
+      "theme": "Technic",
+      "retail_price": 99.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2022,
+      "piece_count": 1360,
+      "image_url": "https://images.brickset.com/sets/images/42127-1.jpg",
+      "search_terms": [
+        "lego 42127"
+      ],
+      "category": "vehicle",
+      "retired_year": 2023
+    },
+    {
+      "set_number": "42128",
+      "name": "Heavy-Duty Tow Truck",
+      "theme": "Technic",
+      "retail_price": 149.99,
+      "is_retired": true,
+      "market_value_new": null,
+      "release_year": 2021,
+      "piece_count": 2017,
+      "image_url": "https://images.brickset.com/sets/images/42128-1.jpg",
+      "search_terms": [
+        "lego 42128"
+      ],
+      "category": "vehicle",
+      "retired_year": 2023
     },
     {
       "set_number": "42130",
@@ -177,160 +576,22 @@
       "category": "vehicle"
     },
     {
-      "set_number": "42202",
-      "name": "Ducati Panigale V4 S",
+      "set_number": "42171",
+      "name": "Mercedes AMG F1 W14e Performance",
       "theme": "Technic",
-      "retail_price": 199.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2025,
-      "piece_count": 1603,
-      "image_url": "https://images.brickset.com/sets/images/42202-1.jpg",
-      "search_terms": [
-        "lego 42202"
-      ],
-      "category": "vehicle"
-    },
-    {
-      "set_number": "42214",
-      "name": "Lamborghini Revuelto",
-      "theme": "Technic",
-      "retail_price": 179.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2025,
-      "piece_count": 1135,
-      "image_url": "https://images.brickset.com/sets/images/42214-1.jpg",
-      "search_terms": [
-        "lego 42214"
-      ],
-      "category": "vehicle"
-    },
-    {
-      "set_number": "10357",
-      "name": "Shelby Cobra 427 S/C",
-      "theme": "Icons",
-      "retail_price": 149.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2025,
-      "piece_count": 1241,
-      "image_url": "https://images.brickset.com/sets/images/10357-1.jpg",
-      "search_terms": [
-        "lego 10357"
-      ],
-      "category": "vehicle"
-    },
-    {
-      "set_number": "42083",
-      "name": "Bugatti Chiron",
-      "theme": "Technic",
-      "retail_price": 449.99,
-      "is_retired": true,
-      "market_value_new": 620.0,
-      "release_year": 2018,
-      "piece_count": 3599,
-      "image_url": "https://images.brickset.com/sets/images/42083-1.jpg",
-      "search_terms": [
-        "lego 42083"
-      ],
-      "category": "vehicle",
-      "retired_year": 2022
-    },
-    {
-      "set_number": "42096",
-      "name": "Porsche 911 RSR",
-      "theme": "Technic",
-      "retail_price": 149.99,
-      "is_retired": true,
-      "market_value_new": 200.0,
-      "release_year": 2019,
-      "piece_count": 1580,
-      "image_url": "https://images.brickset.com/sets/images/42096-1.jpg",
-      "search_terms": [
-        "lego 42096"
-      ],
-      "category": "vehicle",
-      "retired_year": 2024
-    },
-    {
-      "set_number": "10271",
-      "name": "Fiat 500",
-      "theme": "Icons",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": 140.0,
-      "release_year": 2020,
-      "piece_count": 960,
-      "image_url": "https://images.brickset.com/sets/images/10271-1.jpg",
-      "search_terms": [
-        "lego 10271"
-      ],
-      "category": "vehicle",
-      "retired_year": 2022
-    },
-    {
-      "set_number": "10321",
-      "name": "Corvette",
-      "theme": "Icons",
       "retail_price": 199.99,
       "is_retired": false,
       "market_value_new": null,
       "release_year": 2023,
-      "piece_count": 1210,
-      "image_url": "https://images.brickset.com/sets/images/10321-1.jpg",
+      "piece_count": 1642,
+      "image_url": "https://images.brickset.com/sets/images/42171-1.jpg",
       "search_terms": [
-        "lego 10321"
+        "lego 42171",
+        "mercedes amg f1 lego"
       ],
       "category": "vehicle",
-      "retiring_soon": true
-    },
-    {
-      "set_number": "10265",
-      "name": "Ford Mustang",
-      "theme": "Icons",
-      "retail_price": 149.99,
-      "is_retired": true,
-      "market_value_new": 200.0,
-      "release_year": 2019,
-      "piece_count": 1471,
-      "image_url": "https://images.brickset.com/sets/images/10265-1.jpg",
-      "search_terms": [
-        "lego 10265"
-      ],
-      "category": "vehicle",
-      "retired_year": 2023
-    },
-    {
-      "set_number": "42056",
-      "name": "Porsche 911 GT3 RS",
-      "theme": "Technic",
-      "retail_price": 299.99,
-      "is_retired": true,
-      "market_value_new": 420.0,
-      "release_year": 2016,
-      "piece_count": 2704,
-      "image_url": "https://images.brickset.com/sets/images/42056-1.jpg",
-      "search_terms": [
-        "lego 42056"
-      ],
-      "category": "vehicle",
-      "retired_year": 2018
-    },
-    {
-      "set_number": "42207",
-      "name": "Ferrari SF-24 F1 Car",
-      "theme": "Technic",
-      "retail_price": 229.99,
-      "is_retired": false,
-      "market_value_new": null,
-      "release_year": 2025,
-      "piece_count": 952,
-      "image_url": "https://images.brickset.com/sets/images/42207-1.jpg",
-      "search_terms": [
-        "lego 42207"
-      ],
-      "category": "vehicle"
+      "retiring_soon": true,
+      "retiring_year": 2026
     },
     {
       "set_number": "42172",
@@ -344,6 +605,21 @@
       "image_url": "https://images.brickset.com/sets/images/42172-1.jpg",
       "search_terms": [
         "lego 42172"
+      ],
+      "category": "vehicle"
+    },
+    {
+      "set_number": "42202",
+      "name": "Ducati Panigale V4 S",
+      "theme": "Technic",
+      "retail_price": 199.99,
+      "is_retired": false,
+      "market_value_new": null,
+      "release_year": 2025,
+      "piece_count": 1603,
+      "image_url": "https://images.brickset.com/sets/images/42202-1.jpg",
+      "search_terms": [
+        "lego 42202"
       ],
       "category": "vehicle"
     },
@@ -363,38 +639,34 @@
       "category": "vehicle"
     },
     {
-      "set_number": "42110",
-      "name": "Land Rover Defender",
+      "set_number": "42207",
+      "name": "Ferrari SF-24 F1 Car",
       "theme": "Technic",
-      "retail_price": 199.99,
-      "is_retired": true,
-      "market_value_new": 265.0,
-      "release_year": 2019,
-      "piece_count": 2573,
-      "image_url": "https://images.brickset.com/sets/images/42110-1.jpg",
-      "search_terms": [
-        "lego 42110"
-      ],
-      "category": "vehicle",
-      "retired_year": 2022
-    },
-    {
-      "set_number": "42171",
-      "name": "Mercedes AMG F1 W14e Performance",
-      "theme": "Technic",
-      "retail_price": 199.99,
+      "retail_price": 229.99,
       "is_retired": false,
       "market_value_new": null,
-      "release_year": 2023,
-      "piece_count": 1642,
-      "image_url": "https://images.brickset.com/sets/images/42171-1.jpg",
+      "release_year": 2025,
+      "piece_count": 952,
+      "image_url": "https://images.brickset.com/sets/images/42207-1.jpg",
       "search_terms": [
-        "lego 42171",
-        "mercedes amg f1 lego"
+        "lego 42207"
       ],
-      "category": "vehicle",
-      "retiring_soon": true,
-      "retiring_year": 2026
+      "category": "vehicle"
+    },
+    {
+      "set_number": "42214",
+      "name": "Lamborghini Revuelto",
+      "theme": "Technic",
+      "retail_price": 179.99,
+      "is_retired": false,
+      "market_value_new": null,
+      "release_year": 2025,
+      "piece_count": 1135,
+      "image_url": "https://images.brickset.com/sets/images/42214-1.jpg",
+      "search_terms": [
+        "lego 42214"
+      ],
+      "category": "vehicle"
     },
     {
       "set_number": "77942",
@@ -412,262 +684,6 @@
       ],
       "category": "vehicle",
       "retired_year": 2022
-    },
-    {
-      "set_number": "10220",
-      "name": "Volkswagen T1 Camper Van",
-      "theme": "Icons",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2011,
-      "piece_count": 1334,
-      "image_url": "https://images.brickset.com/sets/images/10220-1.jpg",
-      "search_terms": [
-        "lego 10220"
-      ],
-      "category": "vehicle",
-      "retired_year": 2020
-    },
-    {
-      "set_number": "10242",
-      "name": "MINI Cooper",
-      "theme": "Icons",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2014,
-      "piece_count": 1077,
-      "image_url": "https://images.brickset.com/sets/images/10242-1.jpg",
-      "search_terms": [
-        "lego 10242"
-      ],
-      "category": "vehicle",
-      "retired_year": 2015
-    },
-    {
-      "set_number": "10248",
-      "name": "Ferrari F40",
-      "theme": "Icons",
-      "retail_price": 89.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2015,
-      "piece_count": 1158,
-      "image_url": "https://images.brickset.com/sets/images/10248-1.jpg",
-      "search_terms": [
-        "lego 10248"
-      ],
-      "category": "vehicle",
-      "retired_year": 2017
-    },
-    {
-      "set_number": "10252",
-      "name": "Volkswagen Beetle",
-      "theme": "Icons",
-      "retail_price": 89.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2016,
-      "piece_count": 1167,
-      "image_url": "https://images.brickset.com/sets/images/10252-1.jpg",
-      "search_terms": [
-        "lego 10252"
-      ],
-      "category": "vehicle",
-      "retired_year": 2020
-    },
-    {
-      "set_number": "10258",
-      "name": "London Bus",
-      "theme": "Icons",
-      "retail_price": 119.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2017,
-      "piece_count": 1686,
-      "image_url": "https://images.brickset.com/sets/images/10258-1.jpg",
-      "search_terms": [
-        "lego 10258"
-      ],
-      "category": "vehicle",
-      "retired_year": 2021
-    },
-    {
-      "set_number": "10269",
-      "name": "Harley-Davidson Fat Boy",
-      "theme": "Icons",
-      "retail_price": 89.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2019,
-      "piece_count": 1023,
-      "image_url": "https://images.brickset.com/sets/images/10269-1.jpg",
-      "search_terms": [
-        "lego 10269"
-      ],
-      "category": "vehicle",
-      "retired_year": 2021
-    },
-    {
-      "set_number": "10274",
-      "name": "Ghostbusters ECTO-1",
-      "theme": "Icons",
-      "retail_price": 179.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2020,
-      "piece_count": 2352,
-      "image_url": "https://images.brickset.com/sets/images/10274-1.jpg",
-      "search_terms": [
-        "lego 10274"
-      ],
-      "category": "vehicle",
-      "retired_year": 2024
-    },
-    {
-      "set_number": "10279",
-      "name": "Volkswagen T2 Camper Van",
-      "theme": "Icons",
-      "retail_price": 179.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2021,
-      "piece_count": 2207,
-      "image_url": "https://images.brickset.com/sets/images/10279-1.jpg",
-      "search_terms": [
-        "lego 10279"
-      ],
-      "category": "vehicle",
-      "retired_year": 2022
-    },
-    {
-      "set_number": "10290",
-      "name": "Pickup Truck",
-      "theme": "Icons",
-      "retail_price": 129.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2021,
-      "piece_count": 1677,
-      "image_url": "https://images.brickset.com/sets/images/10290-1.jpg",
-      "search_terms": [
-        "lego 10290"
-      ],
-      "category": "vehicle",
-      "retired_year": 2023
-    },
-    {
-      "set_number": "10304",
-      "name": "Chevrolet Camaro Z28",
-      "theme": "Icons",
-      "retail_price": 169.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2022,
-      "piece_count": 1456,
-      "image_url": "https://images.brickset.com/sets/images/10304-1.jpg",
-      "search_terms": [
-        "lego 10304"
-      ],
-      "category": "vehicle",
-      "retired_year": 2024
-    },
-    {
-      "set_number": "42111",
-      "name": "Dom's Dodge Charger",
-      "theme": "Technic",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2020,
-      "piece_count": 1077,
-      "image_url": "https://images.brickset.com/sets/images/42111-1.jpg",
-      "search_terms": [
-        "lego 42111"
-      ],
-      "category": "vehicle",
-      "retired_year": 2023
-    },
-    {
-      "set_number": "42126",
-      "name": "Ford F-150 Raptor",
-      "theme": "Technic",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2021,
-      "piece_count": 1379,
-      "image_url": "https://images.brickset.com/sets/images/42126-1.jpg",
-      "search_terms": [
-        "lego 42126"
-      ],
-      "category": "vehicle",
-      "retired_year": 2022
-    },
-    {
-      "set_number": "42127",
-      "name": "The Batman Batmobile",
-      "theme": "Technic",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2022,
-      "piece_count": 1360,
-      "image_url": "https://images.brickset.com/sets/images/42127-1.jpg",
-      "search_terms": [
-        "lego 42127"
-      ],
-      "category": "vehicle",
-      "retired_year": 2023
-    },
-    {
-      "set_number": "42128",
-      "name": "Heavy-Duty Tow Truck",
-      "theme": "Technic",
-      "retail_price": 149.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2021,
-      "piece_count": 2017,
-      "image_url": "https://images.brickset.com/sets/images/42128-1.jpg",
-      "search_terms": [
-        "lego 42128"
-      ],
-      "category": "vehicle",
-      "retired_year": 2023
-    },
-    {
-      "set_number": "42039",
-      "name": "24 Hours Race Car",
-      "theme": "Technic",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2015,
-      "piece_count": 1219,
-      "image_url": "https://images.brickset.com/sets/images/42039-1.jpg",
-      "search_terms": [
-        "lego 42039"
-      ],
-      "category": "vehicle",
-      "retired_year": 2016
-    },
-    {
-      "set_number": "42000",
-      "name": "Grand Prix Racer",
-      "theme": "Technic",
-      "retail_price": 99.99,
-      "is_retired": true,
-      "market_value_new": null,
-      "release_year": 2013,
-      "piece_count": 1141,
-      "image_url": "https://images.brickset.com/sets/images/42000-1.jpg",
-      "search_terms": [
-        "lego 42000"
-      ],
-      "category": "vehicle",
-      "retired_year": 2014
     }
   ]
 }

@@ -55,7 +55,8 @@ jobs:
         timeout-minutes: 5
         env:
           PYTHONPATH: "."
-        run: python src/main_daily.py --dry-run 2>&1 | tee output_log.txt; exit ${PIPESTATUS[0]}
+          PORTFOLIO_TOKEN: ${{ secrets.PORTFOLIO_TOKEN }}
+        run: python tools/regen_dashboard.py 2>&1 | tee output_log.txt; exit ${PIPESTATUS[0]}
 
       - name: Log tonen
         if: always()

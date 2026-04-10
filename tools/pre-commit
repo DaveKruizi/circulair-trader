@@ -1,0 +1,16 @@
+#!/bin/sh
+# Pre-commit hook: draait tests voordat je kunt committen.
+# Installeren: cp tools/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+
+echo "▶ Tests draaien..."
+python -m pytest tests/ -q --tb=short 2>&1
+
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "✗ Tests gefaald — commit geannuleerd."
+  echo "  Zorg dat alle tests groen zijn voordat je commit."
+  exit 1
+fi
+
+echo "✓ Alle tests geslaagd."
+exit 0
