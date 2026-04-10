@@ -573,7 +573,7 @@
 
   /* Portfolio sectie */
   #portfolio-section {
-    max-width: 1400px; margin: 32px auto 16px; padding: 0 24px;
+    max-width: 1400px; margin: 0 auto 16px; padding: 0 24px;
   }
   .portfolio-card {
     background: var(--card); border: 1px solid var(--border);
@@ -1081,11 +1081,6 @@ function renderPortfolio(pf) {
   // Scheidingslijn tonen
   const divider = document.getElementById('market-section-header');
   if (divider) divider.style.display = '';
-  // Auto-expand als er posities zijn
-  if (pf.positions && pf.positions.length > 0) {
-    document.getElementById('pf-toggle').classList.add('open');
-    document.getElementById('pf-body').classList.add('open');
-  }
 
   const gen = new Date(pf.generated_at);
   document.getElementById('pf-gen-time').textContent =
