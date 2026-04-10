@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-10T12:21:05.948460",
+  "generated_at": "2026-04-10T12:21:36.308037",
   "positions": [
     {
       "id": 5,
@@ -135,6 +135,25 @@
       "invested": 134.99
     },
     {
+      "id": 10,
+      "set_number": "10357",
+      "condition": "NIB",
+      "quantity": 1,
+      "purchase_price": 119.99,
+      "purchase_date": "2026-03-28",
+      "sold_price": null,
+      "sold_date": null,
+      "notes": "Winkel",
+      "created_at": "2026-04-10 12:21:32",
+      "set_name": "Shelby Cobra 427 S/C",
+      "current_p50": 147.5,
+      "effective_price": 132.75,
+      "market_value": 132.75,
+      "unrealized_pnl": 12.76,
+      "unrealized_pnl_pct": 10.6,
+      "invested": 119.99
+    },
+    {
       "id": 6,
       "set_number": "10295",
       "condition": "CIB",
@@ -173,12 +192,12 @@
     }
   ],
   "summary": {
-    "total_invested": 986.97,
-    "total_market_value": 1136.7,
-    "unrealized_pnl": 149.73,
-    "unrealized_pnl_pct": 15.2,
+    "total_invested": 1106.96,
+    "total_market_value": 1269.45,
+    "unrealized_pnl": 162.49,
+    "unrealized_pnl_pct": 14.7,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 269.72,
-    "unrealized_pnl_12m_pct": 31.1
+    "unrealized_pnl_12m": 282.48,
+    "unrealized_pnl_12m_pct": 28.6
   }
 }
