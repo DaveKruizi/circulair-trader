@@ -494,9 +494,18 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
     # zodat de gebruiker op "+ Positie" kan klikken voor de eerste positie.
 
     # Bouw lookup: set_number → huidige p50 per conditie
+    # Voor actieve sets (niet retired): cap p50 op retailprijs — boven retail
+    # koopt niemand secondhand, dus die asking prices zijn irreeel.
+    retail_lookup = {s["set_number"]: s.get("retail_price") for s in dashboard_data.get("sets", [])}
+    retired_lookup = {
+        s["set_number"]: s.get("is_retired", False) or s.get("retiring_soon", False)
+        for s in dashboard_data.get("sets", [])
+    }
     p50_lookup: dict[str, dict[str, Optional[float]]] = {}
     for s in dashboard_data.get("sets", []):
         sn = s["set_number"]
+        retail = retail_lookup.get(sn)
+        is_retired_or_retiring = retired_lookup.get(sn, False)
         p50_lookup[sn] = {}
         for cond in ("NIB", "CIB"):
             vals = [
@@ -504,13 +513,21 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
                 for pd in s.get("platforms", {}).values()
                 if pd.get(cond, {}).get("p50") is not None
             ]
-            p50_lookup[sn][cond] = round(sum(vals) / len(vals), 2) if vals else None
+            if not vals:
+                p50_lookup[sn][cond] = None
+                continue
+            avg = sum(vals) / len(vals)
+            # Cap op retailprijs voor actieve sets
+            if retail and not is_retired_or_retiring:
+                avg = min(avg, retail)
+            p50_lookup[sn][cond] = round(avg, 2)
 
     # Verrijk posities met huidige marktwaarde
     from datetime import timedelta
     set_names = {s["set_number"]: s["name"] for s in dashboard_data.get("sets", [])}
     enriched = []
-    total_invested = 0.0
+    total_invested = 0.0        # alle open posities mét marktwaarde (voor unrealized P&L)
+    total_invested_all = 0.0    # alle posities incl. verkocht (voor display "Belegd")
     total_market = 0.0
     realized_pnl = 0.0
     cutoff_12m = (datetime.now() - timedelta(days=365)).date().isoformat()
@@ -523,9 +540,19 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
         qty = pos["quantity"]
         buy_price = pos["purchase_price"]
         invested = round(buy_price * qty, 2)
-        total_invested += invested
+        total_invested_all += invested
 
+        # Huidige p50: eerst live data, anders meest recente snapshot als fallback
         current_p50 = p50_lookup.get(sn, {}).get(cond)
+        if current_p50 is None:
+            current_p50 = _db.get_latest_p50(sn, cond)
+            # Pas retail-cap ook toe op fallback p50
+            if current_p50 is not None:
+                retail = retail_lookup.get(sn)
+                if retail and not retired_lookup.get(sn, False):
+                    current_p50 = min(current_p50, retail)
+                    current_p50 = round(current_p50, 2)
+
         if pos["sold_price"] is not None:
             # Gesloten positie
             pnl = round((pos["sold_price"] - buy_price) * qty, 2)
@@ -540,6 +567,7 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
                 effective_price = round(current_p50 * 0.90, 2)
                 market_val = round(effective_price * qty, 2)
                 total_market += market_val
+                total_invested += invested   # alleen tellen als we marktwaarde kennen
                 upnl = round(market_val - invested, 2)
                 upnl_pct = round((effective_price / buy_price - 1) * 100, 1) if buy_price else None
                 # 12-maands ongerealiseerd: posities gekocht in de afgelopen 12 maanden
@@ -562,8 +590,9 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
         "generated_at": datetime.now().isoformat(),
         "positions": enriched,
         "summary": {
-            "total_invested": round(total_invested, 2),
+            "total_invested": round(total_invested_all, 2),   # alle open+verkochte posities
             "total_market_value": round(total_market, 2),
+            # unrealized P&L alleen over posities mét marktwaarde (anders klopt de vergelijking niet)
             "unrealized_pnl": round(total_market - total_invested, 2),
             "unrealized_pnl_pct": round(
                 (total_market / total_invested - 1) * 100, 1

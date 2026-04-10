@@ -452,6 +452,28 @@ def get_rejection_summary(days: int = 7) -> dict:
         return {r["reason"]: r["count"] for r in rows}
 
 
+def get_latest_p50(set_number: str, condition: str) -> Optional[float]:
+    """
+    Meest recente p50 uit price_snapshots als fallback wanneer er geen actieve listings zijn.
+    Neemt de meest recente waarde per platform, dan het gemiddelde.
+    """
+    with get_connection() as conn:
+        rows = conn.execute(
+            """SELECT platform, p50_price FROM price_snapshots
+               WHERE set_number=? AND condition_category=? AND p50_price IS NOT NULL
+               ORDER BY snapshot_date DESC
+               LIMIT 20""",
+            (set_number, condition),
+        ).fetchall()
+    if not rows:
+        return None
+    seen: dict[str, float] = {}
+    for r in rows:
+        if r["platform"] not in seen:
+            seen[r["platform"]] = r["p50_price"]
+    return round(sum(seen.values()) / len(seen), 2)
+
+
 # ── Portfolio CRUD ─────────────────────────────────────────────────────────────
 
 def get_portfolio_positions() -> list[dict]:

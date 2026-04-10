@@ -160,10 +160,13 @@ def scrape_set(
     results: dict[str, list[dict]] = {}
 
     for platform_url, platform_code in VINTED_PLATFORMS:
-        # Twee queries: op setnummer (strikt) én op naam (zonder titelvereiste)
+        # Twee queries: op setnummer én op naam — beide vereisen het setnummer in de titel.
+        # Vinted geeft geen beschrijving terug via de search-API, dus de titel is de
+        # enige betrouwbare bron. Verkopers die andere sets vermelden in hun beschrijving
+        # of zelfs in hun titel worden zo buiten gehouden.
         queries = [
             (f"lego {set_number}", True),
-            (f"lego {set_name}", False),
+            (f"lego {set_name}", True),
         ]
 
         seen_ids: set[str] = set()
