@@ -547,12 +547,13 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
                     unrealized_pnl_12m += upnl
                     invested_12m += invested
             else:
+                effective_price = None
                 market_val = None
                 upnl = None
                 upnl_pct = None
             enriched.append({**pos, "set_name": set_names.get(sn, sn),
-                              "current_p50": current_p50,         # vraagprijs mediaan
-                              "effective_price": effective_price if current_p50 else None,  # p50 × 0.90
+                              "current_p50": current_p50,
+                              "effective_price": effective_price,
                               "market_value": market_val,
                               "unrealized_pnl": upnl, "unrealized_pnl_pct": upnl_pct,
                               "invested": invested})
