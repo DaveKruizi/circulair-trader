@@ -494,9 +494,18 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
     # zodat de gebruiker op "+ Positie" kan klikken voor de eerste positie.
 
     # Bouw lookup: set_number → huidige p50 per conditie
+    # Voor actieve sets (niet retired): cap p50 op retailprijs — boven retail
+    # koopt niemand secondhand, dus die asking prices zijn irreeel.
+    retail_lookup = {s["set_number"]: s.get("retail_price") for s in dashboard_data.get("sets", [])}
+    retired_lookup = {
+        s["set_number"]: s.get("is_retired", False) or s.get("retiring_soon", False)
+        for s in dashboard_data.get("sets", [])
+    }
     p50_lookup: dict[str, dict[str, Optional[float]]] = {}
     for s in dashboard_data.get("sets", []):
         sn = s["set_number"]
+        retail = retail_lookup.get(sn)
+        is_retired_or_retiring = retired_lookup.get(sn, False)
         p50_lookup[sn] = {}
         for cond in ("NIB", "CIB"):
             vals = [
@@ -504,7 +513,14 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
                 for pd in s.get("platforms", {}).values()
                 if pd.get(cond, {}).get("p50") is not None
             ]
-            p50_lookup[sn][cond] = round(sum(vals) / len(vals), 2) if vals else None
+            if not vals:
+                p50_lookup[sn][cond] = None
+                continue
+            avg = sum(vals) / len(vals)
+            # Cap op retailprijs voor actieve sets
+            if retail and not is_retired_or_retiring:
+                avg = min(avg, retail)
+            p50_lookup[sn][cond] = round(avg, 2)
 
     # Verrijk posities met huidige marktwaarde
     from datetime import timedelta
