@@ -1,6 +1,25 @@
 {
-  "generated_at": "2026-04-10T10:15:44.068023",
+  "generated_at": "2026-04-10T10:17:19.639810",
   "positions": [
+    {
+      "id": 2,
+      "set_number": "10295",
+      "condition": "NIB",
+      "quantity": 1,
+      "purchase_price": 86.89,
+      "purchase_date": "2026-04-01",
+      "sold_price": null,
+      "sold_date": null,
+      "notes": "Marktplaats",
+      "created_at": "2026-04-10 10:17:15",
+      "set_name": "Porsche 911",
+      "current_p50": 134.5,
+      "effective_price": 121.05,
+      "market_value": 121.05,
+      "unrealized_pnl": 34.16,
+      "unrealized_pnl_pct": 39.3,
+      "invested": 86.89
+    },
     {
       "id": 1,
       "set_number": "10295",
@@ -22,12 +41,12 @@
     }
   ],
   "summary": {
-    "total_invested": 104.39,
-    "total_market_value": 121.05,
-    "unrealized_pnl": 16.66,
-    "unrealized_pnl_pct": 16.0,
+    "total_invested": 191.28,
+    "total_market_value": 242.1,
+    "unrealized_pnl": 50.82,
+    "unrealized_pnl_pct": 26.6,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 16.66,
-    "unrealized_pnl_12m_pct": 16.0
+    "unrealized_pnl_12m": 50.82,
+    "unrealized_pnl_12m_pct": 26.6
   }
 }
