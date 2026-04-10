@@ -25,7 +25,7 @@ PLATFORM_LABELS = {
 }
 
 TRADER_THRESHOLD = 5       # meer dan N actieve LEGO-listings → LEGO-handelaar
-DEAL_DISCOUNT_PCT = 15     # minimaal X% onder marktwaarde (p50 × 0.90) → deal
+DEAL_DISCOUNT_PCT = 10     # minimaal X% onder marktwaarde (p50 × 0.90) → deal
 STEAL_DISCOUNT_PCT = 25    # ≥X% onder marktwaarde (p50 × 0.90) → steal
 MARKET_VALUE_FACTOR = 0.90 # marktwaarde = p50 × dit factor (onderhandelingskorting)
 MIN_FLIP_MARGIN_EUR = 31   # p50 - aankoopprijs moet ≥ €31 (€25 netto + €6 verzending)
