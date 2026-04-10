@@ -69,6 +69,20 @@ _REPLICA_FULL: tuple[str, ...] = (
     "enlighten",
     "sluban",
     "bricks",          # generieke kloon-term ("bricks set", "building bricks") — nooit originele LEGO
+    # "vergelijkbaar met / soortgelijk aan Lego" — verkoper geeft zelf aan dat het geen LEGO is
+    "vergelijkbaar met lego",
+    "soortgelijk als lego",
+    "soortgelijk aan lego",
+    "lijkt op lego",
+    "similar to lego",
+    "comparable to lego",
+    "lego-like",
+    "lego like",
+    "ähnlich wie lego",   # Duits
+    "wie lego",           # Duits: "wie Lego" = "like Lego"
+    "como lego",          # Spaans / Portugees
+    "come lego",          # Italiaans
+    "comme lego",         # Frans
 )
 
 # Gecheckt ALLEEN in de titel (in een omschrijving kunnen ze onschuldig zijn)
