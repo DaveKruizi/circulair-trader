@@ -36,9 +36,14 @@ on:
         options:
           - kopen
           - verkopen
+          - verwijderen
+          - splitsen
+      delete_ids:
+        description: 'Te verwijderen positie-IDs, kommagescheiden (bijv. 1,2,3) — alleen bij verwijderen'
+        required: false
       set_number:
-        description: 'Set nummer (bijv. 42096)'
-        required: true
+        description: 'Set nummer (bijv. 42096) — verplicht bij kopen'
+        required: false
       condition:
         description: 'Conditie'
         required: true
@@ -110,6 +115,7 @@ jobs:
           SOLD_DATE: ${{ inputs.sold_date }}
           POSITION_ID: ${{ inputs.position_id }}
           NOTES: ${{ inputs.notes }}
+          DELETE_IDS: ${{ inputs.delete_ids }}
         run: python tools/portfolio_manage.py
 
       - name: Data cache opslaan

@@ -479,3 +479,26 @@ def sell_portfolio_position(position_id: int, sold_price: float, sold_date: str)
             (sold_price, sold_date, position_id),
         )
         return cur.rowcount > 0
+
+
+def get_portfolio_position(position_id: int) -> Optional[dict]:
+    """Haal één portfoliopositie op op basis van ID."""
+    with get_connection() as conn:
+        conn.row_factory = sqlite3.Row
+        row = conn.execute(
+            "SELECT * FROM portfolio_positions WHERE id = ?", (position_id,)
+        ).fetchone()
+        return dict(row) if row else None
+
+
+def delete_portfolio_positions(ids: list[int]) -> int:
+    """Verwijder posities op basis van een lijst van IDs. Geeft aantal verwijderde rijen terug."""
+    if not ids:
+        return 0
+    placeholders = ",".join("?" * len(ids))
+    with get_connection() as conn:
+        cur = conn.execute(
+            f"DELETE FROM portfolio_positions WHERE id IN ({placeholders})",
+            ids,
+        )
+        return cur.rowcount

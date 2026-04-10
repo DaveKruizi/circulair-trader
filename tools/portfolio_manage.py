@@ -18,6 +18,54 @@ def main() -> None:
     set_number = os.environ.get("SET_NUMBER", "").strip()
     condition = os.environ.get("CONDITION", "").strip().upper()
 
+    if action == "verwijderen":
+        delete_ids_str = os.environ.get("DELETE_IDS", "").strip()
+        if not delete_ids_str:
+            print("[Portfolio] FOUT: DELETE_IDS is verplicht bij verwijderen (bijv. '1,2,3')")
+            sys.exit(1)
+        try:
+            ids = [int(x.strip()) for x in delete_ids_str.split(",") if x.strip()]
+        except ValueError as e:
+            print(f"[Portfolio] FOUT: Ongeldige ID — {e}")
+            sys.exit(1)
+        count = db.delete_portfolio_positions(ids)
+        print(f"[Portfolio] ✓ {count} positie(s) verwijderd (IDs: {ids})")
+        return
+
+    if action == "splitsen":
+        position_id_str = os.environ.get("POSITION_ID", "").strip()
+        if not position_id_str:
+            print("[Portfolio] FOUT: POSITION_ID is verplicht bij splitsen")
+            sys.exit(1)
+        try:
+            position_id = int(position_id_str)
+        except ValueError as e:
+            print(f"[Portfolio] FOUT: Ongeldige ID — {e}")
+            sys.exit(1)
+        pos = db.get_portfolio_position(position_id)
+        if not pos:
+            print(f"[Portfolio] FOUT: Positie {position_id} niet gevonden")
+            sys.exit(1)
+        qty = pos["quantity"]
+        if qty < 2:
+            print(f"[Portfolio] FOUT: Positie {position_id} heeft slechts {qty} stuk(s) — splitsen niet mogelijk")
+            sys.exit(1)
+        # Verwijder originele positie en maak qty losse posities aan
+        db.delete_portfolio_positions([position_id])
+        new_ids = []
+        for _ in range(qty):
+            new_id = db.add_portfolio_position(
+                set_number=pos["set_number"],
+                condition=pos["condition"],
+                quantity=1,
+                purchase_price=pos["purchase_price"],
+                purchase_date=pos["purchase_date"],
+                notes=pos.get("notes") or "",
+            )
+            new_ids.append(new_id)
+        print(f"[Portfolio] ✓ Positie {position_id} ({qty}×) gesplitst in {qty} losse posities (IDs: {new_ids})")
+        return
+
     if not set_number:
         print("[Portfolio] FOUT: SET_NUMBER is verplicht")
         sys.exit(1)

@@ -507,11 +507,15 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
             p50_lookup[sn][cond] = round(sum(vals) / len(vals), 2) if vals else None
 
     # Verrijk posities met huidige marktwaarde
+    from datetime import timedelta
     set_names = {s["set_number"]: s["name"] for s in dashboard_data.get("sets", [])}
     enriched = []
     total_invested = 0.0
     total_market = 0.0
     realized_pnl = 0.0
+    cutoff_12m = (datetime.now() - timedelta(days=365)).date().isoformat()
+    unrealized_pnl_12m = 0.0
+    invested_12m = 0.0
 
     for pos in positions:
         sn = pos["set_number"]
@@ -537,6 +541,10 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
                 total_market += market_val
                 upnl = round(market_val - invested, 2)
                 upnl_pct = round((current_p50 / buy_price - 1) * 100, 1) if buy_price else None
+                # 12-maands ongerealiseerd: posities gekocht in de afgelopen 12 maanden
+                if pos.get("purchase_date", "") >= cutoff_12m:
+                    unrealized_pnl_12m += upnl
+                    invested_12m += invested
             else:
                 market_val = None
                 upnl = None
@@ -557,6 +565,10 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
                 (total_market / total_invested - 1) * 100, 1
             ) if total_invested else 0,
             "realized_pnl": round(realized_pnl, 2),
+            "unrealized_pnl_12m": round(unrealized_pnl_12m, 2),
+            "unrealized_pnl_12m_pct": round(
+                (unrealized_pnl_12m / invested_12m) * 100, 1
+            ) if invested_12m else 0,
         },
     }
 
