@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-10T12:30:40.951021",
+  "generated_at": "2026-04-10T12:33:10.650834",
   "scraped_at": "2026-03-25T15:07:57.047729",
   "platform_labels": {
     "vinted_nl": "Vinted NL",
@@ -3292,7 +3292,38 @@
         "pct": 6,
         "annual_return_pct": 2.1
       },
-      "deals": [],
+      "deals": [
+        {
+          "price": 60.0,
+          "url": "https://link.marktplaats.nl/m2376949188",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/a0ba9710-ff98-4096-9582-c807ccf71503?rule=ecg_mp_eps$_82.jpg",
+          "seller_name": "",
+          "price_type": "fixed",
+          "title": "Lego 10265 Ford Mustang",
+          "is_reserved": false,
+          "condition": "CIB",
+          "p50": 100.0,
+          "discount_pct": 33,
+          "is_trader": false,
+          "seller_count": 0,
+          "category": "steal"
+        },
+        {
+          "price": 65.0,
+          "url": "https://link.marktplaats.nl/m2380862473",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/6b885187-1640-4697-8b2f-10ffaa1579a0?rule=ecg_mp_eps$_82.jpg",
+          "seller_name": "",
+          "price_type": "fixed",
+          "title": "Lego Creator Expert 10265 - Ford Mustang",
+          "is_reserved": false,
+          "condition": "CIB",
+          "p50": 100.0,
+          "discount_pct": 28,
+          "is_trader": false,
+          "seller_count": 0,
+          "category": "deal"
+        }
+      ],
       "bcg_nib": "question_mark",
       "bcg_cib": "question_mark",
       "price_trend_nib": null,
@@ -24201,6 +24232,21 @@
           "is_trader": false,
           "seller_count": 0,
           "category": "deal"
+        },
+        {
+          "price": 200.0,
+          "url": "https://link.marktplaats.nl/m2380617516",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/96c69e2e-f974-48d3-b392-0551d4e386b3?rule=ecg_mp_eps$_82.jpg",
+          "seller_name": "",
+          "price_type": "fixed",
+          "title": "LEGO Technic Bugatti Chiron 42083",
+          "is_reserved": false,
+          "condition": "CIB",
+          "p50": 250.0,
+          "discount_pct": 11,
+          "is_trader": false,
+          "seller_count": 0,
+          "category": "deal"
         }
       ],
       "bcg_nib": "question_mark",
@@ -28557,7 +28603,23 @@
         "pct": 0,
         "annual_return_pct": -0.5
       },
-      "deals": [],
+      "deals": [
+        {
+          "price": 100.0,
+          "url": "https://link.marktplaats.nl/m2379625689",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/894d1f16-7331-4c10-acfb-06b7548c42b8?rule=ecg_mp_eps$_82.jpg",
+          "seller_name": "",
+          "price_type": "fixed",
+          "title": "Lego Defender 42110 - 2573 Stenen",
+          "is_reserved": false,
+          "condition": "CIB",
+          "p50": 142.0,
+          "discount_pct": 22,
+          "is_trader": false,
+          "seller_count": 0,
+          "category": "deal"
+        }
+      ],
       "bcg_nib": "dog",
       "bcg_cib": "question_mark",
       "price_trend_nib": null,
@@ -33441,6 +33503,21 @@
           "is_trader": false,
           "seller_count": 0,
           "category": "deal"
+        },
+        {
+          "price": 90.0,
+          "url": "https://link.marktplaats.nl/m2352103887",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/43/4325ad44-901a-4235-8594-0651b5d43971?rule=ecg_mp_eps$_82.jpg",
+          "seller_name": "",
+          "price_type": "fixed",
+          "title": "LEGO 42130 BMW M 1000 RR - Compleet, met instructies",
+          "is_reserved": false,
+          "condition": "CIB",
+          "p50": 125.0,
+          "discount_pct": 20,
+          "is_trader": false,
+          "seller_count": 0,
+          "category": "deal"
         }
       ],
       "bcg_nib": "question_mark",
@@ -37466,7 +37543,23 @@
         "pct": 17,
         "annual_return_pct": -17.0
       },
-      "deals": [],
+      "deals": [
+        {
+          "price": 70.0,
+          "url": "https://link.marktplaats.nl/m2363400851",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/91/910e94b7-9274-4bf5-9c8d-54e733c72be4?rule=ecg_mp_eps$_82.jpg",
+          "seller_name": "",
+          "price_type": "fixed",
+          "title": "Lego 42156 peugeot 24H Le mans",
+          "is_reserved": false,
+          "condition": "CIB",
+          "p50": 100.0,
+          "discount_pct": 22,
+          "is_trader": false,
+          "seller_count": 0,
+          "category": "deal"
+        }
+      ],
       "bcg_nib": "question_mark",
       "bcg_cib": "question_mark",
       "price_trend_nib": null,
@@ -39212,7 +39305,23 @@
       "hot_score_nib": 0,
       "hot_score_cib": 5,
       "retirement_indicator": null,
-      "deals": [],
+      "deals": [
+        {
+          "price": 125.0,
+          "url": "https://link.marktplaats.nl/m2378614633",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/e82ce438-6886-4fc1-bf05-522e72cb4ca5?rule=ecg_mp_eps$_82.jpg",
+          "seller_name": "",
+          "price_type": "fixed",
+          "title": "leuke lego motor 42159",
+          "is_reserved": false,
+          "condition": "CIB",
+          "p50": 165.0,
+          "discount_pct": 16,
+          "is_trader": false,
+          "seller_count": 0,
+          "category": "deal"
+        }
+      ],
       "bcg_nib": "question_mark",
       "bcg_cib": "question_mark",
       "price_trend_nib": null,
@@ -42592,7 +42701,23 @@
       "hot_score_nib": 25,
       "hot_score_cib": 6,
       "retirement_indicator": null,
-      "deals": [],
+      "deals": [
+        {
+          "price": 85.0,
+          "url": "https://link.marktplaats.nl/m2361129396",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/3e/3e936d9f-c64c-437c-ad6d-524435ace87f?rule=ecg_mp_eps$_82.jpg",
+          "seller_name": "",
+          "price_type": "fixed",
+          "title": "Lego Mercedes F1 42171",
+          "is_reserved": false,
+          "condition": "CIB",
+          "p50": 120.0,
+          "discount_pct": 21,
+          "is_trader": false,
+          "seller_count": 0,
+          "category": "deal"
+        }
+      ],
       "bcg_nib": "question_mark",
       "bcg_cib": "question_mark",
       "price_trend_nib": null,
@@ -50892,7 +51017,23 @@
       "hot_score_nib": 0,
       "hot_score_cib": 0,
       "retirement_indicator": null,
-      "deals": [],
+      "deals": [
+        {
+          "price": 90.0,
+          "url": "https://link.marktplaats.nl/m2378618468",
+          "image_url": "https://images.marktplaats.com/api/v1/listing-mp-p/images/e360ad96-bfff-4704-bb4b-34d047422571?rule=ecg_mp_eps$_82.jpg",
+          "seller_name": "",
+          "price_type": "fixed",
+          "title": "Lego Technic 42214 Lamborghini",
+          "is_reserved": false,
+          "condition": "CIB",
+          "p50": 125.0,
+          "discount_pct": 20,
+          "is_trader": false,
+          "seller_count": 0,
+          "category": "deal"
+        }
+      ],
       "bcg_nib": "question_mark",
       "bcg_cib": "question_mark",
       "price_trend_nib": null,
