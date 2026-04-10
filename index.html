@@ -627,12 +627,6 @@
   .portfolio-table {
     width: 100%; border-collapse: collapse; font-size: 12px;
   }
-  .pf-sortable {
-    cursor: pointer; user-select: none;
-  }
-  .pf-sortable:hover { color: var(--text); }
-  .pf-sortable[data-sort="asc"]::after  { content: ' ▲'; font-size: 9px; }
-  .pf-sortable[data-sort="desc"]::after { content: ' ▼'; font-size: 9px; }
   .portfolio-table th {
     text-align: left; padding: 6px 10px; color: var(--muted);
     border-bottom: 1px solid var(--border); font-weight: 600;
@@ -836,15 +830,10 @@
       <div class="portfolio-summary" id="pf-summary"></div>
       <table class="portfolio-table">
         <thead>
-          <tr id="pf-sort-row">
-            <th onclick="sortPortfolioBy('id')" class="pf-sortable">ID</th>
-            <th onclick="sortPortfolioBy('set_number')" class="pf-sortable">Set</th>
-            <th onclick="sortPortfolioBy('condition')" class="pf-sortable">Conditie</th>
-            <th onclick="sortPortfolioBy('purchase_price')" class="pf-sortable">Inkoopprijs</th>
-            <th onclick="sortPortfolioBy('purchase_date')" class="pf-sortable">Ingekocht op</th>
-            <th onclick="sortPortfolioBy('effective_price')" class="pf-sortable">Marktwaarde (p50 −10%)</th>
-            <th onclick="sortPortfolioBy('unrealized_pnl')" class="pf-sortable">P&amp;L €</th>
-            <th onclick="sortPortfolioBy('unrealized_pnl_pct')" class="pf-sortable">P&amp;L %</th>
+          <tr>
+            <th>ID</th><th>Set</th><th>Conditie</th><th>Stuks</th>
+            <th>Inkoopprijs</th><th>Ingekocht op</th>
+            <th>Marktwaarde (p50 −10%)</th><th>P&amp;L €</th><th>P&amp;L %</th>
             <th>Verkoop</th><th>Notities</th>
           </tr>
         </thead>
@@ -931,6 +920,11 @@
         <option value="CIB">CIB — Gebruikt compleet</option>
       </select>
     </div>
+    <div class="form-row">
+      <label>Aantal</label>
+      <input type="number" id="pf-quantity" value="1" min="1">
+    </div>
+
     <!-- Kopen-velden -->
     <div id="kopen-fields">
       <div class="form-row">
@@ -1101,50 +1095,9 @@ function renderPortfolio(pf) {
     <div class="pf-stat"><div class="pf-stat-label">Gerealiseerd</div><div class="pf-stat-value ${s.realized_pnl >= 0 ? 'positive' : 'negative'}">${realSign}€${s.realized_pnl.toFixed(0)}</div></div>
   `;
 
-  pfData = pf;
-  pfSortCol = 'id';
-  pfSortDir = 1;
-  renderPortfolioTable();
-}
-
-let pfData = null;
-let pfSortCol = 'id';
-let pfSortDir = 1;
-
-function sortPortfolioBy(col) {
-  if (pfSortCol === col) {
-    pfSortDir = -pfSortDir;
-  } else {
-    pfSortCol = col;
-    pfSortDir = 1;
-  }
-  renderPortfolioTable();
-}
-
-function renderPortfolioTable() {
-  if (!pfData) return;
-
-  // Sorteerindicatoren bijwerken
-  document.querySelectorAll('.pf-sortable').forEach(th => {
-    th.dataset.sort = '';
-  });
-  const activeHeader = [...document.querySelectorAll('.pf-sortable')]
-    .find(th => th.getAttribute('onclick') === `sortPortfolioBy('${pfSortCol}')`);
-  if (activeHeader) activeHeader.dataset.sort = pfSortDir > 0 ? 'asc' : 'desc';
-
-  const sorted = [...pfData.positions].sort((a, b) => {
-    let va = a[pfSortCol] ?? null;
-    let vb = b[pfSortCol] ?? null;
-    // Nulls altijd onderaan
-    if (va === null && vb === null) return 0;
-    if (va === null) return 1;
-    if (vb === null) return -1;
-    if (typeof va === 'string') return pfSortDir * va.localeCompare(vb, 'nl');
-    return pfSortDir * (va - vb);
-  });
-
   const tbody = document.getElementById('pf-table-body');
-  tbody.innerHTML = sorted.map(p => {
+  pf.positions.sort((a, b) => a.id - b.id);
+  tbody.innerHTML = pf.positions.map(p => {
     const isSold = p.sold_price != null;
     const rowCls = isSold ? 'pf-sold' : 'pf-open';
     const upnl = p.unrealized_pnl;
@@ -1156,6 +1109,7 @@ function renderPortfolioTable() {
       <td style="color:var(--muted);font-size:10px">#${p.id}</td>
       <td><strong>${escHtml(p.set_number)}</strong> ${escHtml(p.set_name || '')}</td>
       <td><span class="badge badge-${(p.condition||'').toLowerCase()}">${p.condition}</span></td>
+      <td>${p.quantity}×</td>
       <td>€${p.purchase_price.toFixed(2)}</td>
       <td style="color:var(--muted)">${p.purchase_date}</td>
       <td>${p.effective_price != null ? '€' + p.effective_price.toFixed(0) : '—'}</td>
@@ -1730,12 +1684,7 @@ function buildCompactStats(set) {
   // Market value: average p50 across platforms × 0.90
   let mvBlock = '';
   if (p50s.length > 0) {
-    let avgP50 = p50s.reduce((a, b) => a + b, 0) / p50s.length;
-    // Voor actieve sets (niet retired): p50 boven retailprijs is irreeel —
-    // kopers gaan gewoon naar de LEGO-winkel. Cap op retailprijs.
-    if (set.retail_price && !set.is_retired && !set.retiring_soon) {
-      avgP50 = Math.min(avgP50, set.retail_price);
-    }
+    const avgP50 = p50s.reduce((a, b) => a + b, 0) / p50s.length;
     const mv = Math.round(avgP50 * 0.90);
     mvBlock = `
     <div class="cs-block">
@@ -1958,11 +1907,12 @@ async function submitPosition() {
 
   const setNumber = document.getElementById('pf-set-number').value.trim();
   const condition = document.getElementById('pf-condition').value;
+  const quantity  = document.getElementById('pf-quantity').value || '1';
   const notes     = document.getElementById('pf-notes').value.trim();
 
   if (!setNumber) { setStatus('position-status', 'err', 'Vul een setnummer in.'); return; }
 
-  let inputs = { action: pfAction, set_number: setNumber, condition, quantity: '1', notes };
+  let inputs = { action: pfAction, set_number: setNumber, condition, quantity, notes };
 
   if (pfAction === 'kopen') {
     const price = document.getElementById('pf-purchase-price').value.trim();
