@@ -851,14 +851,6 @@
 
 <div class="filter-bar">
   <div class="filter-group">
-    <span class="filter-group-label">BCG</span>
-    <button class="filter-chip active"          data-bcg="all"           onclick="setBcgFilter('all')">Alle</button>
-    <button class="filter-chip chip-star"       data-bcg="star"          onclick="setBcgFilter('star')">⭐ Stars</button>
-    <button class="filter-chip chip-cow"        data-bcg="cash_cow"      onclick="setBcgFilter('cash_cow')" id="chip-cow">💰 Cash Cows</button>
-    <button class="filter-chip chip-qmark"      data-bcg="question_mark" onclick="setBcgFilter('question_mark')">❓ Question Marks</button>
-    <button class="filter-chip chip-dog"        data-bcg="dog"           onclick="setBcgFilter('dog')">🐕 Dogs</button>
-  </div>
-  <div class="filter-group">
     <span class="filter-group-label">Status</span>
     <button class="filter-chip active"          data-status="all"            onclick="setStatusFilter('all')">Alle</button>
     <button class="filter-chip chip-retiring"   data-status="retiring_soon"  onclick="setStatusFilter('retiring_soon')">🔔 Retiring Soon</button>
@@ -870,11 +862,11 @@
 
 <div class="main">
   <div id="summary-bar" class="summary-bar"></div>
+  <div class="sets-grid" id="sets-grid"></div>
   <div id="rejection-bar" class="rejection-bar" style="display:none">
     <h3>Afgewezen listings (afgelopen 7 dagen)</h3>
     <div class="rejection-items" id="rejection-items"></div>
   </div>
-  <div class="sets-grid" id="sets-grid"></div>
 </div>
 
 <footer id="footer">Gegenereerd op <span id="footer-time"></span></footer>
@@ -1081,11 +1073,6 @@ function renderPortfolio(pf) {
   // Scheidingslijn tonen
   const divider = document.getElementById('market-section-header');
   if (divider) divider.style.display = '';
-  // Auto-expand als er posities zijn
-  if (pf.positions && pf.positions.length > 0) {
-    document.getElementById('pf-toggle').classList.add('open');
-    document.getElementById('pf-body').classList.add('open');
-  }
 
   const gen = new Date(pf.generated_at);
   document.getElementById('pf-gen-time').textContent =
@@ -1098,7 +1085,9 @@ function renderPortfolio(pf) {
   const pnl12m = s.unrealized_pnl_12m ?? 0;
   const pnl12mSign = pnl12m >= 0 ? '+' : '';
   const pnl12mCls = pnl12m >= 0 ? 'positive' : 'negative';
+  const openPositions = pf.positions.filter(p => p.sold_price == null).length;
   document.getElementById('pf-summary').innerHTML = `
+    <div class="pf-stat"><div class="pf-stat-label">Aantal sets</div><div class="pf-stat-value">${openPositions}</div></div>
     <div class="pf-stat"><div class="pf-stat-label">Belegd</div><div class="pf-stat-value">€${s.total_invested.toFixed(0)}</div></div>
     <div class="pf-stat"><div class="pf-stat-label">Marktwaarde</div><div class="pf-stat-value">€${s.total_market_value.toFixed(0)}</div></div>
     <div class="pf-stat"><div class="pf-stat-label">Ongerealiseerd (totaal)</div><div class="pf-stat-value ${pnlCls}">${pnlSign}€${s.unrealized_pnl.toFixed(0)} (${pnlSign}${s.unrealized_pnl_pct}%)</div></div>
@@ -1107,6 +1096,7 @@ function renderPortfolio(pf) {
   `;
 
   const tbody = document.getElementById('pf-table-body');
+  pf.positions.sort((a, b) => a.id - b.id);
   tbody.innerHTML = pf.positions.map(p => {
     const isSold = p.sold_price != null;
     const rowCls = isSold ? 'pf-sold' : 'pf-open';
@@ -1322,11 +1312,6 @@ function buildSetCard(set, idx) {
       retHtml = `<span class="retirement-indicator ret-stable" title="NIB mediaan stabiel rond retailprijs">≈ retail</span>${cagrHtml}`;
   }
 
-  const bcgForCard = getSetBcg(set);
-  const bcgBadge = bcgForCard
-    ? `<span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;${BCG_BADGE_STYLE[bcgForCard]}">${BCG_BADGE_LABEL[bcgForCard]}</span>`
-    : '';
-
   card.innerHTML = `
     <div class="set-header" onclick="toggleSetCard(this)">
       <img class="set-img" src="${escHtml(set.image_url)}" alt="${escHtml(set.name)}"
@@ -1336,7 +1321,6 @@ function buildSetCard(set, idx) {
         <div class="set-sub">#${set.set_number} · ${set.theme} · ${set.piece_count || '?'} stenen · ${set.release_year || ''}</div>
         <div style="margin-top:4px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
           ${retired}
-          ${bcgBadge}
           ${buildTrendBadge(currentMode === 'NIB' ? set.price_trend_nib : set.price_trend_cib)}
           <span style="color:var(--muted);font-size:12px">Retail: ${retail}</span>
           ${retHtml}
@@ -1678,6 +1662,7 @@ function buildCompactStats(set) {
   const plats = ['vinted_nl', 'marktplaats'];
   const cond = currentMode;
   let act = 0, app = 0, sold = 0, dis = 0;
+  const p50s = [];
 
   plats.forEach(p => {
     const pd = (set.platforms[p] || {})[cond] || {};
@@ -1685,6 +1670,7 @@ function buildCompactStats(set) {
     app  += pd.appeared_7d       || 0;
     sold += pd.total_disappeared || 0;
     dis  += pd.disappeared_7d    || 0;
+    if (pd.p50 != null) p50s.push(pd.p50);
   });
 
   const delta = (n) => n > 0 ? `<span class="cs-delta">+${n}</span>` : '';
@@ -1694,6 +1680,18 @@ function buildCompactStats(set) {
       <div class="cs-block-label">${label}</div>
       <div class="cs-val">${val}${delta(d)}</div>
     </div>`;
+
+  // Market value: average p50 across platforms × 0.90
+  let mvBlock = '';
+  if (p50s.length > 0) {
+    const avgP50 = p50s.reduce((a, b) => a + b, 0) / p50s.length;
+    const mv = Math.round(avgP50 * 0.90);
+    mvBlock = `
+    <div class="cs-block">
+      <div class="cs-block-label">Marktwaarde</div>
+      <div class="cs-val">€${mv}</div>
+    </div>`;
+  }
 
   const modeDeals = (set.deals || []).filter(d => d.condition === cond);
   const stealCount = modeDeals.filter(d => d.category === 'steal').length;
@@ -1717,6 +1715,7 @@ function buildCompactStats(set) {
 
   return singleBlock('Te koop', act, app)
        + singleBlock('Verkopen', sold, dis)
+       + mvBlock
        + stealBlock
        + dealBlock;
 }
