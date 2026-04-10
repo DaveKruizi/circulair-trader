@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-09T18:48:45.153302",
+  "generated_at": "2026-04-10T07:23:34.493816",
   "positions": [
     {
       "id": 1,
@@ -13,10 +13,10 @@
       "notes": "",
       "created_at": "2026-04-07 09:56:55",
       "set_name": "Porsche 911",
-      "current_p50": 132.5,
-      "market_value": 132.5,
-      "unrealized_pnl": 45.61,
-      "unrealized_pnl_pct": 52.5,
+      "current_p50": 134.5,
+      "market_value": 134.5,
+      "unrealized_pnl": 47.61,
+      "unrealized_pnl_pct": 54.8,
       "invested": 86.89
     },
     {
@@ -31,10 +31,10 @@
       "notes": "",
       "created_at": "2026-04-07 09:57:14",
       "set_name": "Porsche 911",
-      "current_p50": 132.5,
-      "market_value": 132.5,
-      "unrealized_pnl": 28.11,
-      "unrealized_pnl_pct": 26.9,
+      "current_p50": 134.5,
+      "market_value": 134.5,
+      "unrealized_pnl": 30.11,
+      "unrealized_pnl_pct": 28.8,
       "invested": 104.39
     },
     {
@@ -67,10 +67,10 @@
       "notes": "",
       "created_at": "2026-04-07 09:59:12",
       "set_name": "Shelby Cobra 427 S/C",
-      "current_p50": 114.75,
-      "market_value": 114.75,
-      "unrealized_pnl": -5.24,
-      "unrealized_pnl_pct": -4.4,
+      "current_p50": 147.5,
+      "market_value": 147.5,
+      "unrealized_pnl": 27.51,
+      "unrealized_pnl_pct": 22.9,
       "invested": 119.99
     },
     {
@@ -85,18 +85,18 @@
       "notes": "",
       "created_at": "2026-04-07 09:59:47",
       "set_name": "Porsche 911",
-      "current_p50": 109.75,
-      "market_value": 109.75,
-      "unrealized_pnl": 63.8,
-      "unrealized_pnl_pct": 138.8,
+      "current_p50": 113.0,
+      "market_value": 113.0,
+      "unrealized_pnl": 67.05,
+      "unrealized_pnl_pct": 145.9,
       "invested": 45.95
     }
   ],
   "summary": {
     "total_invested": 627.22,
-    "total_market_value": 913.5,
-    "unrealized_pnl": 286.28,
-    "unrealized_pnl_pct": 45.6,
+    "total_market_value": 953.5,
+    "unrealized_pnl": 326.28,
+    "unrealized_pnl_pct": 52.0,
     "realized_pnl": 0.0
   }
 }
