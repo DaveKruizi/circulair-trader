@@ -63,8 +63,11 @@ NIB_CONTRADICTIONS = [
     "één keer opgebouwd", "een keer opgebouwd", "1 keer opgebouwd",
     "eénmaal gebouwd", "eenmaal gebouwd", "1x gebouwd",
     "één keer gebouwd", "een keer gebouwd", "1 keer gebouwd",
+    "1x in elkaar gezet", "eenmaal in elkaar gezet", "één keer in elkaar gezet",
     "display model", "displaymodel",
     "built once",                       # Engels
+    # Algemene assembly-termen — set is aantoonbaar geopend en gebouwd
+    "in elkaar gezet", "gemonteerd", "geassembleerd", "samengesteld",
     # Gestart met bouwen maar niet afgemaakt — duidelijk geopend
     "started building", "started assembling", "began building",
     "not fully assembled", "partly assembled", "partially assembled",

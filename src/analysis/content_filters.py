@@ -20,6 +20,8 @@ Strategie:
 
 from __future__ import annotations
 
+import re
+
 # ---------------------------------------------------------------------------
 # REPLICA / NAMAAK
 # ---------------------------------------------------------------------------
@@ -221,6 +223,37 @@ _ACCESSORY_TITLE: tuple[str, ...] = (
     "kit d'éclairage",      # Frans (met accent + apostrof)
     "éclairage led",        # Frans variant
 )
+
+
+def is_bundle(title: str, description: str) -> tuple[bool, str]:
+    """
+    Geeft (True, reden) als de listing een bundel van meerdere sets is.
+    Bundelprijzen zijn per definitie onbruikbaar voor prijsanalyse van één set.
+
+    Twee detectie-methoden:
+    1. 3+ verschillende LEGO-setnummers in titel+beschrijving samen
+    2. Bundle-trefwoorden in de titel (collectie, bundel, lot, pakket + meervoud)
+    """
+    combined = (title + " " + description).lower()
+
+    # Methode 1: tel unieke setnummers voorafgegaan door 'lego' of '#'
+    set_numbers = set(re.findall(r'(?:lego\s*|#)(\d{4,6})', combined))
+    if len(set_numbers) >= 3:
+        return True, f"{len(set_numbers)} setnummers gevonden ({', '.join(sorted(set_numbers)[:3])}...)"
+
+    # Methode 2: bundle-trefwoorden in de titel
+    title_low = title.lower()
+    bundle_keywords = (
+        "collectie", "bundel", "bundle", "lot lego", "lego lot",
+        "meerdere sets", "multiple sets", "sets te koop",
+        "2 sets", "3 sets", "4 sets", "5 sets", "6 sets",
+        "2 nieuwe sets", "3 nieuwe sets", "4 nieuwe sets", "5 nieuwe sets",
+    )
+    for kw in bundle_keywords:
+        if kw in title_low:
+            return True, f"bundle-trefwoord in titel: '{kw}'"
+
+    return False, ""
 
 
 def is_accessory(title: str) -> tuple[bool, str]:

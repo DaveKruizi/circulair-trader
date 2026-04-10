@@ -118,7 +118,7 @@ def scrape_set(
 
     from src.db import init_db, upsert_listing, mark_disappeared, log_rejection
     from src.analysis.condition_classifier import classify_condition
-    from src.analysis.content_filters import is_replica, is_accessory
+    from src.analysis.content_filters import is_replica, is_accessory, is_bundle
 
     init_db()
     today = datetime.now().date().isoformat()
@@ -199,6 +199,15 @@ def scrape_set(
                             "wrong_set", f"titel bevat ander setnummer ({other}), niet {set_number}"
                         )
                         continue
+
+                # Bundel van meerdere sets — prijs onbruikbaar voor één set
+                flagged, reason = is_bundle(title, description)
+                if flagged:
+                    log_rejection(
+                        "marktplaats", set_number, listing_id, title, price,
+                        "bundle", reason
+                    )
+                    continue
 
                 # Replica / namaak LEGO
                 flagged, kw = is_replica(title, description)
