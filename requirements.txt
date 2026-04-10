@@ -1,4 +1,5 @@
 anthropic>=0.50.0
+pytest>=8.0.0
 vinted-scraper>=3.0.0
 marktplaats>=0.4.0
 httpx>=0.27.0
