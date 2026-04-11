@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-11T19:23:26.073910",
+  "generated_at": "2026-04-11T19:31:14.675466",
   "positions": [
     {
       "id": 12,
@@ -38,6 +38,25 @@
       "unrealized_pnl": 56.73,
       "unrealized_pnl_pct": 71.5,
       "invested": 79.39
+    },
+    {
+      "id": 14,
+      "set_number": "10242",
+      "condition": "NIB",
+      "quantity": 1,
+      "purchase_price": 164.31,
+      "purchase_date": "2026-04-11",
+      "sold_price": null,
+      "sold_date": null,
+      "notes": "Vinted",
+      "created_at": "2026-04-11 19:31:09",
+      "set_name": "MINI Cooper",
+      "current_p50": 245.0,
+      "effective_price": 220.5,
+      "market_value": 220.5,
+      "unrealized_pnl": 56.19,
+      "unrealized_pnl_pct": 34.2,
+      "invested": 164.31
     },
     {
       "id": 5,
@@ -230,12 +249,12 @@
     }
   ],
   "summary": {
-    "total_invested": 1290.74,
-    "total_market_value": 1563.07,
-    "unrealized_pnl": 392.32,
-    "unrealized_pnl_pct": 33.5,
+    "total_invested": 1455.05,
+    "total_market_value": 1783.57,
+    "unrealized_pnl": 448.51,
+    "unrealized_pnl_pct": 33.6,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 392.32,
-    "unrealized_pnl_12m_pct": 33.5
+    "unrealized_pnl_12m": 448.51,
+    "unrealized_pnl_12m_pct": 33.6
   }
 }
