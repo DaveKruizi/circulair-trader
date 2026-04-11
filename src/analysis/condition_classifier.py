@@ -71,6 +71,13 @@ NIB_CONTRADICTIONS = [
     "bouwwerk",        # "schitterend bouwwerk" → duidelijk gebouwd
     # Reservestukjes = resterende onderdelen ná het bouwen → aantoonbaar geopend
     "reservestukjes", "reserve stukjes", "reserve onderdelen", "reserveonderdelen",
+    # ZACHTE contradictions — annuleren alleen NIB als er géén sterk NIB-signaal is.
+    # Als de listing ook "ongeopend" of "sealed" bevat, slaan deze op de stickers/
+    # onderdelen (als extra info over de verzegelde inhoud), niet op het setje zelf.
+    # Zie SOFT_NIB_CONTRADICTIONS hieronder voor de implementatie.
+    "ongebruikte stickers", "stickers ongebruikt", "sticker ongebruikt",
+    "stickers niet gebruikt", "sticker niet gebruikt",
+    "stickers nog niet gebruikt", "stickers niet geplakt", "stickers niet aangebracht",
     # "Zo goed als nieuw" beschrijft een gebruikte set in goede staat, niet NIB
     "zo goed als nieuw", "zgan", "als nieuw", "nieuwstaat", "nieuw staat",
     # Gestart met bouwen maar niet afgemaakt — duidelijk geopend
@@ -79,6 +86,32 @@ NIB_CONTRADICTIONS = [
     # Doos ontbreekt (Engelse varianten)
     "box not included", "no box included", "without the box",
 ]
+
+# Zachte contradictions: annuleren NIB ALLEEN als er géén sterk NIB-signaal aanwezig is.
+# Voorbeeld: "ongeopend, ongebruikte stickers" → stickers-melding is puur informatief
+# over de verzegelde inhoud; het setje is nooit geopend. De stickers-melding mag de
+# "ongeopend"-aanduiding dan niet overrulen.
+SOFT_NIB_CONTRADICTIONS = frozenset({
+    "ongebruikte stickers", "stickers ongebruikt", "sticker ongebruikt",
+    "stickers niet gebruikt", "sticker niet gebruikt",
+    "stickers nog niet gebruikt", "stickers niet geplakt", "stickers niet aangebracht",
+})
+
+# Sterke NIB-signalen: onmiskenbaar verzegeld/ongeopend.
+# Als één hiervan aanwezig is, wint NIB tenzij er ook een HARDE contradictie is
+# (bv. "eenmaal gebouwd"). Zachte contradictions (stickers) worden dan genegeerd.
+STRONG_NIB_KEYWORDS = frozenset({
+    "sealed", "ongeopend", "geseald", "gesealed", "verzegeld", "verzegelde",
+    "factory sealed", "brand new sealed", "unopened", "nooit geopend",
+    "nieuw en ongeopend", "niet geopend",
+    "noch nie geöffnet", "ungeöffnet", "originalverpackt", "neu und ungeöffnet",
+    "jamais ouvert", "neuf scellé", "non ouvert",
+    "sin abrir", "nuevo precintado", "mai aperto", "nuovo sigillato",
+    "nunca aberto", "fechado de fábrica",
+    "oöppnad", "uåbnet", "uåpnet",
+    "nieotwarty", "fabrycznie zapieczętowany",
+    "neotevřený", "bontatlan", "nedeschis",
+})
 
 INCOMPLETE_KEYWORDS = [
     "zonder doos", "geen doos", "zonder handleiding", "geen handleiding",
@@ -95,6 +128,7 @@ INCOMPLETE_KEYWORDS = [
 CIB_KEYWORDS = [
     # Compleetheid
     "compleet", "met doos", "met handleiding", "inclusief handleiding",
+    "inclusief doos", "incl. doos", "incl doos",
     "originele doos", "volledig", "met instructies", "inclusief instructies",
     "doos aanwezig", "handleiding aanwezig", "complete set",
     "met alle onderdelen", "volledig compleet",
@@ -133,16 +167,24 @@ def classify_condition(title: str, description: str) -> str:
 
     Priority: NIB > incomplete > CIB > unknown
     (incomplete beats CIB to prevent "compleet maar zonder doos" being CIB)
+
+    NIB-logica (tweelaagsmodel):
+    - Harde contradictions (gebouwd, exclusief doos, …) annuleren NIB altijd.
+    - Zachte contradictions (ongebruikte stickers) annuleren NIB ALLEEN als er
+      géén sterk NIB-signaal (ongeopend, sealed, …) aanwezig is.
     """
     text = (title + " " + description).lower()
 
     if any(kw in text for kw in NIB_KEYWORDS):
-        # Controleer of er tegenstrijdige signalen zijn die bewijzen dat de set
-        # wél geopend/gebouwd is. Als dat zo is, geen NIB — doorvallen naar
-        # CIB/incomplete. Voorbeeld: "ongebruikte onderdelen, exclusief doos"
-        # triggert NIB via "ongebruikte", maar "exclusief doos" weerlegt dat.
-        if not any(kw in text for kw in NIB_CONTRADICTIONS):
+        contradictions = [kw for kw in NIB_CONTRADICTIONS if kw in text]
+        if not contradictions:
             return "NIB"
+        # Zijn alle contradictions zacht? Dan wint NIB alleen als er ook een sterk
+        # NIB-signaal is (bv. "ongeopend" + "ongebruikte stickers" → NIB).
+        only_soft = all(kw in SOFT_NIB_CONTRADICTIONS for kw in contradictions)
+        if only_soft and any(kw in text for kw in STRONG_NIB_KEYWORDS):
+            return "NIB"
+        # Harde contradictie aanwezig, of zwak NIB-signaal zonder sterk NIB → doorvallen
 
     has_incomplete = any(kw in text for kw in INCOMPLETE_KEYWORDS)
     has_cib = any(kw in text for kw in CIB_KEYWORDS)
