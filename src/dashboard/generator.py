@@ -239,7 +239,11 @@ def _compute_price_trend(set_number: str, condition: str) -> Optional[str]:
 
 
 def _find_deals(
-    platforms_data: dict, seller_lego_counts: dict, retail_price: float | None
+    platforms_data: dict,
+    seller_lego_counts: dict,
+    retail_price: float | None,
+    is_retired: bool = False,
+    retiring_soon: bool = False,
 ) -> list[dict]:
     """
     Interessante Marktplaats-deals, gecategoriseerd als 'steal' of 'deal':
@@ -247,6 +251,9 @@ def _find_deals(
     - Deal: ≥DEAL_DISCOUNT_PCT% onder p50 (maar geen steal)
     - Vaste prijs: OK ook als verkoper LEGO-handelaar is
     - Bieding: ALLEEN als verkoper GEEN LEGO-handelaar is (>TRADER_THRESHOLD listings)
+
+    Gebruikt gecombineerde p50 (gemiddelde over alle platforms) voor marktwaarde —
+    zelfde berekening als de kaart. Zo is de deal-marktwaarde altijd hoger dan de vraagprijs.
     """
     from src import db as _db
 
@@ -254,13 +261,20 @@ def _find_deals(
     mp_data = platforms_data.get("marktplaats", {})
 
     for condition in CONDITIONS:
-        intel = mp_data.get(condition, {})
-        p50 = intel.get("p50")
-        if not p50:
+        # Gecombineerde p50 over alle platforms — identiek aan de kaartweergave
+        all_p50s = _p50s(platforms_data, condition)
+        if not all_p50s:
             continue
+        combined_p50 = sum(all_p50s) / len(all_p50s)
 
-        # Marktwaarde = p50 × 0.90
-        market_value = p50 * MARKET_VALUE_FACTOR
+        # Retailcap: voor actieve sets (niet retired of retiring) nooit boven retail
+        if retail_price and not is_retired and not retiring_soon:
+            combined_p50 = min(combined_p50, retail_price)
+
+        # Marktwaarde = gecombineerde p50 × 0.90
+        market_value = combined_p50 * MARKET_VALUE_FACTOR
+
+        intel = mp_data.get(condition, {})
 
         for listing in intel.get("listings_all", intel.get("listings", [])):
             price = listing.get("price", 0)
@@ -274,7 +288,7 @@ def _find_deals(
                 condition == "NIB"
                 and retail_price is not None
                 and price < retail_price
-                and p50 > retail_price
+                and combined_p50 > retail_price
             )
 
             # Deal/steal beoordeling per strategie:
@@ -321,7 +335,8 @@ def _find_deals(
             deals.append({
                 **listing,
                 "condition": condition,
-                "p50": round(p50, 0),
+                "p50": round(combined_p50, 0),
+                "market_value": round(market_value, 0),
                 "discount_pct": discount_pct,
                 "is_trader": is_trader,
                 "seller_count": seller_count,
@@ -424,7 +439,11 @@ def build_dashboard_data(
         hot_score_nib = _compute_hot_score_condition(platforms_data, "NIB")
         hot_score_cib = _compute_hot_score_condition(platforms_data, "CIB")
         retirement_indicator = _compute_retirement_indicator(lego_set, platforms_data, current_year)
-        deals = _find_deals(platforms_data, seller_lego_counts, lego_set.get("retail_price"))
+        deals = _find_deals(
+            platforms_data, seller_lego_counts, lego_set.get("retail_price"),
+            is_retired=lego_set.get("is_retired", False),
+            retiring_soon=lego_set.get("retiring_soon", False),
+        )
         bcg_nib = _compute_bcg_nib(lego_set, platforms_data, hot_score_nib, current_year)
         bcg_cib = _compute_bcg_cib(lego_set, platforms_data, hot_score_cib, current_year)
         price_trend_nib = _compute_price_trend(set_number, "NIB")
