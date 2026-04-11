@@ -1734,9 +1734,9 @@ function buildCompactStats(set) {
   let mvBlock = '';
   if (p50s.length > 0) {
     let avgP50 = p50s.reduce((a, b) => a + b, 0) / p50s.length;
-    // Voor actieve sets (niet retired): p50 boven retailprijs is irreeel —
-    // kopers gaan gewoon naar de LEGO-winkel. Cap op retailprijs.
-    if (set.retail_price && !set.is_retired && !set.retiring_soon) {
+    // Retailcap alleen voor NIB: actief-verkrijgbaar nieuw exemplaar kan niet meer
+    // waard zijn dan de winkelprijs. CIB heeft zijn eigen marktprijs.
+    if (cond === 'NIB' && set.retail_price && !set.is_retired && !set.retiring_soon) {
       avgP50 = Math.min(avgP50, set.retail_price);
     }
     const mv = Math.round(avgP50 * 0.90);
