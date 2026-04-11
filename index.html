@@ -1658,7 +1658,10 @@ function buildDealsSection(set, idx) {
     const traderBadge = d.is_trader
       ? `<span style="font-size:10px;color:var(--muted)" title="${d.seller_count} LEGO-listings">handelaar</span>`
       : '';
-    const subParts = [condBadge, typeBadge, traderBadge, `<span style="font-size:10px;color:var(--muted)">mediaan €${d.p50}</span>`].filter(Boolean).join(' ');
+    const mvLabel = d.market_value != null
+      ? `<span style="font-size:10px;color:var(--muted)">marktwaarde €${Number(d.market_value).toFixed(0)}</span>`
+      : `<span style="font-size:10px;color:var(--muted)">mediaan €${d.p50}</span>`;
+    const subParts = [condBadge, typeBadge, traderBadge, mvLabel].filter(Boolean).join(' ');
     return `<a class="deal-card" href="${escHtml(d.url)}" target="_blank" rel="noopener">
       ${imgHtml}
       <div class="dc-info">
