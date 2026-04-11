@@ -267,8 +267,9 @@ def _find_deals(
             continue
         combined_p50 = sum(all_p50s) / len(all_p50s)
 
-        # Retailcap: voor actieve sets (niet retired of retiring) nooit boven retail
-        if retail_price and not is_retired and not retiring_soon:
+        # Retailcap alleen voor NIB: actief-verkrijgbaar nieuw exemplaar kan niet
+        # meer waard zijn dan de winkelprijs. CIB heeft zijn eigen marktprijs.
+        if condition == "NIB" and retail_price and not is_retired and not retiring_soon:
             combined_p50 = min(combined_p50, retail_price)
 
         # Marktwaarde = gecombineerde p50 × 0.90
@@ -561,8 +562,10 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
                 p50_lookup[sn][cond] = None
                 continue
             avg = sum(vals) / len(vals)
-            # Cap op retailprijs voor actieve sets
-            if retail and not is_retired_or_retiring:
+            # Retailcap alleen voor NIB: een actief-verkrijgbaar nieuw exemplaar kan niet
+            # meer waard zijn dan de winkelprijs. CIB (gebruikt) heeft zijn eigen marktprijs
+            # en mag boven retail uitkomen (zeldzame markt).
+            if cond == "NIB" and retail and not is_retired_or_retiring:
                 avg = min(avg, retail)
             p50_lookup[sn][cond] = round(avg, 2)
 
@@ -590,8 +593,8 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
         current_p50 = p50_lookup.get(sn, {}).get(cond)
         if current_p50 is None:
             current_p50 = _db.get_latest_p50(sn, cond)
-            # Pas retail-cap ook toe op fallback p50
-            if current_p50 is not None:
+            # Retailcap alleen voor NIB-fallback (zie p50_lookup-logica hierboven)
+            if current_p50 is not None and cond == "NIB":
                 retail = retail_lookup.get(sn)
                 if retail and not retired_lookup.get(sn, False):
                     current_p50 = min(current_p50, retail)
