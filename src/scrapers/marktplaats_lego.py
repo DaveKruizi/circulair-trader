@@ -130,10 +130,12 @@ def scrape_set(
     results: list[dict] = []
     all_seen_sellers: list[tuple[str, str, str]] = []
 
-    # Query 1: op setnummer (strikt), Query 2: op naam (zonder titelvereiste)
+    # Beide queries vereisen het setnummer in de titel.
+    # De naam-query pikt anders advertenties op waarbij de verkoper in zijn beschrijving
+    # andere sets noemt die hij ook te koop heeft — dat vervuilt de data.
     queries = [
         (f"lego {set_number}", True),
-        (f"lego {name}", False),
+        (f"lego {name}", True),
     ]
 
     for query, require_number_in_title in queries:
