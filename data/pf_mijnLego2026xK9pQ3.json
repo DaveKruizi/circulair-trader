@@ -1,24 +1,24 @@
 {
-  "generated_at": "2026-04-11T19:10:55.510835",
+  "generated_at": "2026-04-11T19:11:10.044396",
   "positions": [
     {
       "id": 12,
-      "set_number": "77942",
-      "condition": "NIB",
+      "set_number": "42172",
+      "condition": "CIB",
       "quantity": 1,
-      "purchase_price": 126.89,
+      "purchase_price": 104.39,
       "purchase_date": "2026-04-11",
       "sold_price": null,
       "sold_date": null,
       "notes": "Marktplaats",
-      "created_at": "2026-04-11 19:10:50",
-      "set_name": "Fiat 500 Blue",
-      "current_p50": 180.0,
-      "effective_price": 162.0,
-      "market_value": 162.0,
-      "unrealized_pnl": 35.11,
-      "unrealized_pnl_pct": 27.7,
-      "invested": 126.89
+      "created_at": "2026-04-11 19:11:04",
+      "set_name": "McLaren P1",
+      "current_p50": 278.5,
+      "effective_price": 250.65,
+      "market_value": 250.65,
+      "unrealized_pnl": 146.26,
+      "unrealized_pnl_pct": 140.1,
+      "invested": 104.39
     },
     {
       "id": 5,
@@ -211,12 +211,12 @@
     }
   ],
   "summary": {
-    "total_invested": 1233.85,
-    "total_market_value": 1338.3,
-    "unrealized_pnl": 224.44,
-    "unrealized_pnl_pct": 20.1,
+    "total_invested": 1211.35,
+    "total_market_value": 1426.95,
+    "unrealized_pnl": 335.59,
+    "unrealized_pnl_pct": 30.7,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 224.44,
-    "unrealized_pnl_12m_pct": 20.1
+    "unrealized_pnl_12m": 335.59,
+    "unrealized_pnl_12m_pct": 30.7
   }
 }
