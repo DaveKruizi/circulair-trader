@@ -25,9 +25,14 @@ PLATFORM_LABELS = {
 }
 
 TRADER_THRESHOLD = 5       # meer dan N actieve LEGO-listings → LEGO-handelaar
-DEAL_DISCOUNT_PCT = 20     # minimaal X% onder mediaan vraagprijs → deal
-STEAL_DISCOUNT_PCT = 35    # ≥X% onder mediaan vraagprijs → steal
-MIN_FLIP_MARGIN_EUR = 31   # p50 - aankoopprijs moet ≥ €31 (€25 netto + €6 verzending)
+MARKET_VALUE_FACTOR = 0.90 # marktwaarde = p50 × dit factor (onderhandelingskorting)
+# NIB — beleggen (percentage-gebaseerd t.o.v. marktwaarde)
+NIB_DEAL_DISCOUNT_PCT = 10   # ≥10% onder marktwaarde → deal
+NIB_STEAL_DISCOUNT_PCT = 25  # ≥25% onder marktwaarde → steal
+NIB_MIN_MARGIN_EUR = 31      # absolute minimummarge (€25 netto + €6 verzending)
+# CIB — handelen (absoluut bedrag t.o.v. marktwaarde)
+CIB_DEAL_MARGIN_EUR = 20     # ≥€20 onder marktwaarde → deal
+CIB_STEAL_MARGIN_EUR = 30    # ≥€30 onder marktwaarde → steal
 BCG_VELOCITY_THRESHOLD = 50   # hot_score >= 50 = hoge snelheid
 BCG_VALUE_THRESHOLD = 1.15    # NIB p50 >= retail * 1.15 = waardestijging (NIB-modus)
 BCG_CIB_SPREAD_THRESHOLD = 1.30  # NIB p50 >= CIB p50 * 1.30 = goede handelsmarge (CIB-modus)
@@ -234,7 +239,11 @@ def _compute_price_trend(set_number: str, condition: str) -> Optional[str]:
 
 
 def _find_deals(
-    platforms_data: dict, seller_lego_counts: dict, retail_price: float | None
+    platforms_data: dict,
+    seller_lego_counts: dict,
+    retail_price: float | None,
+    is_retired: bool = False,
+    retiring_soon: bool = False,
 ) -> list[dict]:
     """
     Interessante Marktplaats-deals, gecategoriseerd als 'steal' of 'deal':
@@ -242,6 +251,9 @@ def _find_deals(
     - Deal: ≥DEAL_DISCOUNT_PCT% onder p50 (maar geen steal)
     - Vaste prijs: OK ook als verkoper LEGO-handelaar is
     - Bieding: ALLEEN als verkoper GEEN LEGO-handelaar is (>TRADER_THRESHOLD listings)
+
+    Gebruikt gecombineerde p50 (gemiddelde over alle platforms) voor marktwaarde —
+    zelfde berekening als de kaart. Zo is de deal-marktwaarde altijd hoger dan de vraagprijs.
     """
     from src import db as _db
 
@@ -249,27 +261,56 @@ def _find_deals(
     mp_data = platforms_data.get("marktplaats", {})
 
     for condition in CONDITIONS:
-        intel = mp_data.get(condition, {})
-        p50 = intel.get("p50")
-        if not p50:
+        # Gecombineerde p50 over alle platforms — identiek aan de kaartweergave
+        all_p50s = _p50s(platforms_data, condition)
+        if not all_p50s:
             continue
+        combined_p50 = sum(all_p50s) / len(all_p50s)
 
-        deal_threshold = p50 * (1 - DEAL_DISCOUNT_PCT / 100)
+        # Retailcap alleen voor NIB: actief-verkrijgbaar nieuw exemplaar kan niet
+        # meer waard zijn dan de winkelprijs. CIB heeft zijn eigen marktprijs.
+        if condition == "NIB" and retail_price and not is_retired and not retiring_soon:
+            combined_p50 = min(combined_p50, retail_price)
+
+        # Marktwaarde = gecombineerde p50 × 0.90
+        market_value = combined_p50 * MARKET_VALUE_FACTOR
+
+        intel = mp_data.get(condition, {})
 
         for listing in intel.get("listings_all", intel.get("listings", [])):
             price = listing.get("price", 0)
             if not price:
                 continue
 
+            margin = market_value - price  # positief = listing staat onder marktwaarde
+
             # NIB-prijs onder retail terwijl markt boven retail staat → steal-kandidaat
             nib_below_retail = (
                 condition == "NIB"
                 and retail_price is not None
                 and price < retail_price
-                and p50 > retail_price
+                and combined_p50 > retail_price
             )
 
-            if price > deal_threshold and not nib_below_retail:
+            # Deal/steal beoordeling per strategie:
+            # NIB (beleggen): percentage t.o.v. marktwaarde
+            # CIB (handelen): absoluut bedrag t.o.v. marktwaarde
+            if condition == "NIB":
+                is_deal_candidate = (
+                    price <= market_value * (1 - NIB_DEAL_DISCOUNT_PCT / 100)
+                    or nib_below_retail
+                )
+                is_steal = (
+                    price <= market_value * (1 - NIB_STEAL_DISCOUNT_PCT / 100)
+                    or nib_below_retail
+                )
+                min_margin = NIB_MIN_MARGIN_EUR
+            else:  # CIB
+                is_deal_candidate = margin >= CIB_DEAL_MARGIN_EUR
+                is_steal = margin >= CIB_STEAL_MARGIN_EUR
+                min_margin = CIB_DEAL_MARGIN_EUR  # al afgedwongen door drempel
+
+            if not is_deal_candidate:
                 continue
 
             seller_name = listing.get("seller_name", "")
@@ -284,19 +325,19 @@ def _find_deals(
             if price_type == "bidding" and is_trader:
                 continue
 
-            discount_pct = round((1 - price / p50) * 100)
+            discount_pct = round((1 - price / market_value) * 100)
 
-            # Absolute minimummarge: moet ≥ €31 overhouden (€25 netto + €6 verzending)
-            if p50 - price < MIN_FLIP_MARGIN_EUR:
+            # Minimummarge check
+            if margin < min_margin:
                 continue
 
-            is_steal = discount_pct >= STEAL_DISCOUNT_PCT or nib_below_retail
             category = "steal" if is_steal else "deal"
 
             deals.append({
                 **listing,
                 "condition": condition,
-                "p50": round(p50, 0),
+                "p50": round(combined_p50, 0),
+                "market_value": round(market_value, 0),
                 "discount_pct": discount_pct,
                 "is_trader": is_trader,
                 "seller_count": seller_count,
@@ -399,7 +440,11 @@ def build_dashboard_data(
         hot_score_nib = _compute_hot_score_condition(platforms_data, "NIB")
         hot_score_cib = _compute_hot_score_condition(platforms_data, "CIB")
         retirement_indicator = _compute_retirement_indicator(lego_set, platforms_data, current_year)
-        deals = _find_deals(platforms_data, seller_lego_counts, lego_set.get("retail_price"))
+        deals = _find_deals(
+            platforms_data, seller_lego_counts, lego_set.get("retail_price"),
+            is_retired=lego_set.get("is_retired", False),
+            retiring_soon=lego_set.get("retiring_soon", False),
+        )
         bcg_nib = _compute_bcg_nib(lego_set, platforms_data, hot_score_nib, current_year)
         bcg_cib = _compute_bcg_cib(lego_set, platforms_data, hot_score_cib, current_year)
         price_trend_nib = _compute_price_trend(set_number, "NIB")
@@ -517,8 +562,10 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
                 p50_lookup[sn][cond] = None
                 continue
             avg = sum(vals) / len(vals)
-            # Cap op retailprijs voor actieve sets
-            if retail and not is_retired_or_retiring:
+            # Retailcap alleen voor NIB: een actief-verkrijgbaar nieuw exemplaar kan niet
+            # meer waard zijn dan de winkelprijs. CIB (gebruikt) heeft zijn eigen marktprijs
+            # en mag boven retail uitkomen (zeldzame markt).
+            if cond == "NIB" and retail and not is_retired_or_retiring:
                 avg = min(avg, retail)
             p50_lookup[sn][cond] = round(avg, 2)
 
@@ -546,8 +593,8 @@ def _build_portfolio_json(lego_sets: list[dict], dashboard_data: dict) -> str:
         current_p50 = p50_lookup.get(sn, {}).get(cond)
         if current_p50 is None:
             current_p50 = _db.get_latest_p50(sn, cond)
-            # Pas retail-cap ook toe op fallback p50
-            if current_p50 is not None:
+            # Retailcap alleen voor NIB-fallback (zie p50_lookup-logica hierboven)
+            if current_p50 is not None and cond == "NIB":
                 retail = retail_lookup.get(sn)
                 if retail and not retired_lookup.get(sn, False):
                     current_p50 = min(current_p50, retail)

@@ -130,7 +130,11 @@ def scrape_set(
     results: list[dict] = []
     all_seen_sellers: list[tuple[str, str, str]] = []
 
-    # Query 1: op setnummer (strikt), Query 2: op naam (zonder titelvereiste)
+    # Setnummer-query: vereist het setnummer in de titel (strict).
+    # Naam-query: geen titelvereiste voor het setnummer, maar vereist dat alle
+    # significante woorden (≥4 tekens) uit de setnaam in de titel voorkomen.
+    # Dit filtert cross-contamination uit (bv. Corvette-advertenties bij Porsche-zoekopdracht)
+    # zonder de naam-query nutteloos te maken.
     queries = [
         (f"lego {set_number}", True),
         (f"lego {name}", False),
@@ -195,6 +199,9 @@ def scrape_set(
 
                 # Bij naam-query: als de titel een ander setnummer bevat, is het waarschijnlijk
                 # een ander set (bv. Speed Champions 76895 bij Technic 42099-zoekopdracht).
+                # Bovendien: alle significante woorden (≥4 tekens) uit de setnaam moeten
+                # in de titel voorkomen — zo worden cross-contaminated listings gefilterd
+                # (bv. 'Corvette' bij 'Porsche 911'-zoekopdracht).
                 if not require_number_in_title:
                     title_numbers = {
                         n for n in _SET_NUMBER_RE.findall(title)
@@ -205,6 +212,18 @@ def scrape_set(
                         log_rejection(
                             "marktplaats", set_number, listing_id, title, price,
                             "wrong_set", f"titel bevat ander setnummer ({other}), niet {set_number}"
+                        )
+                        continue
+
+                    # Alle significante woorden uit de setnaam moeten in de titel staan
+                    significant_words = [w.lower() for w in name.split() if len(w) >= 4]
+                    title_lower = title.lower()
+                    if significant_words and not all(w in title_lower for w in significant_words):
+                        missing = [w for w in significant_words if w not in title_lower]
+                        log_rejection(
+                            "marktplaats", set_number, listing_id, title, price,
+                            "low_confidence",
+                            f"naam-woorden {missing} niet gevonden in titel (set: '{name}')"
                         )
                         continue
 
