@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-11T19:31:14.675466",
+  "generated_at": "2026-04-12T07:08:13.178937",
   "positions": [
     {
       "id": 12,
@@ -13,11 +13,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-11 19:11:04",
       "set_name": "McLaren P1",
-      "current_p50": 278.5,
-      "effective_price": 250.65,
-      "market_value": 250.65,
-      "unrealized_pnl": 146.26,
-      "unrealized_pnl_pct": 140.1,
+      "current_p50": 277.5,
+      "effective_price": 249.75,
+      "market_value": 249.75,
+      "unrealized_pnl": 145.36,
+      "unrealized_pnl_pct": 139.2,
       "invested": 104.39
     },
     {
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-11 19:11:27",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 151.25,
-      "effective_price": 136.12,
-      "market_value": 136.12,
-      "unrealized_pnl": 56.73,
-      "unrealized_pnl_pct": 71.5,
+      "current_p50": 148.75,
+      "effective_price": 133.88,
+      "market_value": 133.88,
+      "unrealized_pnl": 54.49,
+      "unrealized_pnl_pct": 68.6,
       "invested": 79.39
     },
     {
@@ -70,11 +70,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 183.5,
-      "effective_price": 165.15,
-      "market_value": 165.15,
-      "unrealized_pnl": 9.16,
-      "unrealized_pnl_pct": 5.9,
+      "current_p50": 186.0,
+      "effective_price": 167.4,
+      "market_value": 167.4,
+      "unrealized_pnl": 11.41,
+      "unrealized_pnl_pct": 7.3,
       "invested": 155.99
     },
     {
@@ -89,11 +89,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:10",
       "set_name": "Ducati Panigale V4 S",
-      "current_p50": 136.0,
-      "effective_price": 122.4,
-      "market_value": 122.4,
-      "unrealized_pnl": 18.01,
-      "unrealized_pnl_pct": 17.3,
+      "current_p50": 132.25,
+      "effective_price": 119.03,
+      "market_value": 119.03,
+      "unrealized_pnl": 14.64,
+      "unrealized_pnl_pct": 14.0,
       "invested": 104.39
     },
     {
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 130.0,
-      "effective_price": 117.0,
-      "market_value": 117.0,
-      "unrealized_pnl": 17.61,
-      "unrealized_pnl_pct": 17.7,
+      "current_p50": 131.25,
+      "effective_price": 118.12,
+      "market_value": 118.12,
+      "unrealized_pnl": 18.73,
+      "unrealized_pnl_pct": 18.8,
       "invested": 99.39
     },
     {
@@ -127,11 +127,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:17:15",
       "set_name": "Porsche 911",
-      "current_p50": 137.5,
-      "effective_price": 123.75,
-      "market_value": 123.75,
-      "unrealized_pnl": 36.86,
-      "unrealized_pnl_pct": 42.4,
+      "current_p50": 142.5,
+      "effective_price": 128.25,
+      "market_value": 128.25,
+      "unrealized_pnl": 41.36,
+      "unrealized_pnl_pct": 47.6,
       "invested": 86.89
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:15:40",
       "set_name": "Porsche 911",
-      "current_p50": 137.5,
-      "effective_price": 123.75,
-      "market_value": 123.75,
-      "unrealized_pnl": 19.36,
-      "unrealized_pnl_pct": 18.5,
+      "current_p50": 142.5,
+      "effective_price": 128.25,
+      "market_value": 128.25,
+      "unrealized_pnl": 23.86,
+      "unrealized_pnl_pct": 22.9,
       "invested": 104.39
     },
     {
@@ -165,11 +165,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:19:28",
       "set_name": "Lamborghini Countach 5000 QV",
-      "current_p50": 160.0,
-      "effective_price": 144.0,
-      "market_value": 144.0,
-      "unrealized_pnl": 9.01,
-      "unrealized_pnl_pct": 6.7,
+      "current_p50": 169.0,
+      "effective_price": 152.1,
+      "market_value": 152.1,
+      "unrealized_pnl": 17.11,
+      "unrealized_pnl_pct": 12.7,
       "invested": 134.99
     },
     {
@@ -184,11 +184,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:19:51",
       "set_name": "Lamborghini Countach 5000 QV",
-      "current_p50": 160.0,
-      "effective_price": 144.0,
-      "market_value": 144.0,
-      "unrealized_pnl": 9.01,
-      "unrealized_pnl_pct": 6.7,
+      "current_p50": 169.0,
+      "effective_price": 152.1,
+      "market_value": 152.1,
+      "unrealized_pnl": 17.11,
+      "unrealized_pnl_pct": 12.7,
       "invested": 134.99
     },
     {
@@ -250,11 +250,11 @@
   ],
   "summary": {
     "total_invested": 1455.05,
-    "total_market_value": 1783.57,
-    "unrealized_pnl": 448.51,
-    "unrealized_pnl_pct": 33.6,
+    "total_market_value": 1805.63,
+    "unrealized_pnl": 470.57,
+    "unrealized_pnl_pct": 35.2,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 448.51,
-    "unrealized_pnl_12m_pct": 33.6
+    "unrealized_pnl_12m": 470.57,
+    "unrealized_pnl_12m_pct": 35.2
   }
 }
