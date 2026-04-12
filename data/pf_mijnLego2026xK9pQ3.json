@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-12T18:24:03.115928",
+  "generated_at": "2026-04-12T18:24:40.707141",
   "positions": [
     {
       "id": 14,
@@ -209,28 +209,10 @@
       "unrealized_pnl": 53.05,
       "unrealized_pnl_pct": 115.5,
       "invested": 45.95
-    },
-    {
-      "id": 9,
-      "set_number": "10357",
-      "condition": "NIB",
-      "quantity": 1,
-      "purchase_price": 119.99,
-      "purchase_date": "2026-03-28",
-      "sold_price": 119.99,
-      "sold_date": "2026-04-10",
-      "notes": "",
-      "created_at": "2026-04-10 12:18:25",
-      "set_name": "Shelby Cobra 427 S/C",
-      "current_p50": null,
-      "unrealized_pnl": null,
-      "unrealized_pnl_pct": null,
-      "invested": 119.99,
-      "realized_pnl": 0.0
     }
   ],
   "summary": {
-    "total_invested": 1350.66,
+    "total_invested": 1230.67,
     "total_market_value": 1552.5,
     "unrealized_pnl": 321.83,
     "unrealized_pnl_pct": 26.2,
