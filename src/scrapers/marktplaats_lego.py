@@ -107,14 +107,20 @@ def scrape_set(
 ) -> list[dict]:
     """
     Scrape Marktplaats for a single LEGO set.
-    Runs two queries per set (setnummer én naam) en dedupliceert op listing-ID.
+    Runs two queries per set en dedupliceert op listing-ID.
 
-    Accepteercriterium (unified):
-      1. Setnummer staat in de TITEL, OF
-      2. Setnummer staat in de BESCHRIJVING én alle significante naamwoorden
-         (≥4 tekens) staan in de titel.
-    Alles anders wordt verworpen. Dit voorkomt cross-contamination zonder
-    legitieme listings zonder setnummer in de titel volledig uit te sluiten.
+    Accepteercriterium per query-type:
+
+    Nummer-query ("lego {set_number}"):
+      - Setnummer MOET in de titel staan.
+
+    Naam-query ("lego {name}"):
+      - Als de naam ≥2 significante woorden (≥4 tekens) heeft:
+          alle significante woorden moeten in de titel voorkomen.
+          (bv. "Lamborghini Revuelto" → ["lamborghini","revuelto"] in titel)
+      - Als de naam slechts 1 significant woord heeft (bv. "Corvette",
+          "Porsche 911"): te generiek — setnummer verplicht in titel.
+          Zo worden meerdere Corvette-/Porsche-sets niet door elkaar gehaald.
     """
     if not _MARKTPLAATS_AVAILABLE:
         print("[Marktplaats] Package not installed. Run: pip install marktplaats")
@@ -130,19 +136,23 @@ def scrape_set(
     min_price = (retail_price * MIN_PRICE_RATIO) if retail_price else 0.0
     max_price = (retail_price * MAX_PRICE_RATIO) if retail_price else float("inf")
 
-    # Significante woorden uit de setnaam (≥4 tekens), eenmalig berekend
+    # Significante woorden uit de setnaam (≥4 tekens), eenmalig berekend.
+    # Bij ≤1 significant woord is de naam te generiek → naam-query eist ook setnummer in titel.
     sig_name_words = [w.lower() for w in name.split() if len(w) >= 4]
+    generic_name = len(sig_name_words) <= 1  # bv. "Corvette", "Porsche 911"
 
     seen_ids: set[str] = set()
     results: list[dict] = []
     all_seen_sellers: list[tuple[str, str, str]] = []
 
+    # require_number_in_title=True  → setnummer moet in titel staan
+    # require_number_in_title=False → alle significante naamwoorden moeten in titel staan
     queries = [
-        f"lego {set_number}",
-        f"lego {name}",
+        (f"lego {set_number}", True),
+        (f"lego {name}", True if generic_name else False),
     ]
 
-    for query in queries:
+    for query, require_number_in_title in queries:
         try:
             search = SearchQuery(query, limit=50)
             raw_listings = search.get_listings() or []
@@ -201,52 +211,39 @@ def scrape_set(
                     )
                     continue
 
-                # ── Unified accepteerfilter ──────────────────────────────────
-                # Regel 1: setnummer in titel (meest betrouwbaar)
-                number_in_title = set_number in title
+                # ── Accepteerfilter ──────────────────────────────────────────
+                # Nummer-query: setnummer verplicht in titel.
+                if require_number_in_title and set_number not in title:
+                    log_rejection(
+                        "marktplaats", set_number, listing_id, title, price,
+                        "low_confidence", f"'{set_number}' niet gevonden in titel"
+                    )
+                    continue
 
-                # Regel 2 (fallback): setnummer in beschrijving én alle
-                # significante naamwoorden in titel.
-                # Hierdoor worden listings geaccepteerd waarbij de verkoper
-                # de setnaam in de titel gebruikt maar het nummer pas in de
-                # beschrijving vermeldt (bv. "LEGO Porsche 911 compleet" +
-                # "set 10295" in beschrijving).
-                name_words_in_title = (
-                    bool(sig_name_words)
-                    and all(w in title_lower for w in sig_name_words)
-                )
-                number_in_description = set_number in description
+                # Naam-query (require_number_in_title=False):
+                # - Als de titel een ANDER setnummer bevat → verkeerde set.
+                # - Alle significante naamwoorden (≥4 tekens) moeten in de titel staan.
+                if not require_number_in_title:
+                    title_numbers = {
+                        n for n in _SET_NUMBER_RE.findall(title)
+                        if _looks_like_set_number(n)
+                    }
+                    if title_numbers and set_number not in title_numbers:
+                        other = ", ".join(sorted(title_numbers)[:3])
+                        log_rejection(
+                            "marktplaats", set_number, listing_id, title, price,
+                            "wrong_set", f"titel bevat ander setnummer ({other}), niet {set_number}"
+                        )
+                        continue
 
-                if not number_in_title and not (number_in_description and name_words_in_title):
-                    # Bepaal welke check faalde voor een informatieve log-regel
-                    if number_in_description and not name_words_in_title:
+                    if sig_name_words and not all(w in title_lower for w in sig_name_words):
                         missing = [w for w in sig_name_words if w not in title_lower]
-                        reason = (f"setnummer {set_number} gevonden in beschrijving maar "
-                                  f"naam-woorden {missing} ontbreken in titel")
-                    elif name_words_in_title and not number_in_description:
-                        reason = (f"naam-woorden gevonden in titel maar setnummer "
-                                  f"{set_number} ontbreekt in titel én beschrijving")
-                    else:
-                        reason = (f"setnummer {set_number} ontbreekt in titel én beschrijving; "
-                                  f"naam-woorden ook niet allemaal in titel")
-                    log_rejection(
-                        "marktplaats", set_number, listing_id, title, price,
-                        "low_confidence", reason
-                    )
-                    continue
-
-                # Setnummer van een ANDER set in de titel → verkeerde set
-                title_numbers = {
-                    n for n in _SET_NUMBER_RE.findall(title)
-                    if _looks_like_set_number(n)
-                }
-                if title_numbers and set_number not in title_numbers:
-                    other = ", ".join(sorted(title_numbers)[:3])
-                    log_rejection(
-                        "marktplaats", set_number, listing_id, title, price,
-                        "wrong_set", f"titel bevat ander setnummer ({other}), niet {set_number}"
-                    )
-                    continue
+                        log_rejection(
+                            "marktplaats", set_number, listing_id, title, price,
+                            "low_confidence",
+                            f"naam-woorden {missing} niet gevonden in titel (set: '{name}')"
+                        )
+                        continue
 
                 # Bundel van meerdere sets — prijs onbruikbaar voor één set
                 flagged, reason = is_bundle(title, description)
@@ -360,9 +357,13 @@ def scrape_set(
         item["current_bid"] = bid
         time.sleep(0.5)
 
-    disappeared = mark_disappeared("marktplaats", set_number, seen_ids, today)
-    if disappeared:
-        print(f"  [Lifecycle] {disappeared} Marktplaats listings disappeared → sold proxy")
+    if seen_ids:
+        disappeared = mark_disappeared("marktplaats", set_number, seen_ids, today)
+        if disappeared:
+            print(f"  [Lifecycle] {disappeared} Marktplaats listings disappeared → sold proxy")
+    else:
+        print(f"  [Lifecycle] SKIP mark_disappeared voor Marktplaats set {set_number}: "
+              f"0 geldige listings (filter te streng of Marktplaats onbereikbaar?)")
 
     return results, all_seen_sellers
 
