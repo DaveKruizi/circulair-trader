@@ -160,19 +160,18 @@ def scrape_set(
     results: dict[str, list[dict]] = {}
 
     for platform_url, platform_code in VINTED_PLATFORMS:
-        # Twee queries: op setnummer én op naam — beide vereisen het setnummer in de titel.
-        # Vinted geeft geen beschrijving terug via de search-API, dus de titel is de
-        # enige betrouwbare bron. Verkopers die andere sets vermelden in hun beschrijving
-        # of zelfs in hun titel worden zo buiten gehouden.
+        # Vinted geeft geen beschrijving terug via de search-API.
+        # Accepteercriterium: setnummer MOET in de titel staan (geen fallback mogelijk).
+        # Twee queries voor breder bereik, maar beide onderworpen aan dezelfde filter.
         queries = [
-            (f"lego {set_number}", True),
-            (f"lego {set_name}", True),
+            f"lego {set_number}",
+            f"lego {set_name}",
         ]
 
         seen_ids: set[str] = set()
         valid_listings: list[dict] = []
 
-        for query, require_number_in_title in queries:
+        for query in queries:
             try:
                 raw_items = _scrape_platform(platform_url, query, max_results=80)
             except RuntimeError as e:
@@ -188,19 +187,26 @@ def scrape_set(
                 lid = parsed["id"]
                 title = parsed["title"]
                 price = parsed["price"]
+                title_lower = title.lower()
 
                 # LEGO moet in de titel voorkomen (Vinted geeft geen beschrijving)
-                if "lego" not in title.lower():
+                if "lego" not in title_lower:
                     log_rejection(
                         platform_code, set_number, lid, title, price,
                         "no_lego_mention", "woord 'lego' ontbreekt in titel"
                     )
                     continue
 
-                # Titelcheck: bij setnummer-query vereisen we het nummer in de titel.
-                # Vinted search-API geeft geen beschrijving terug, dus alleen titel-check.
-                # Bij naamquery vertrouwen we op de Vinted-zoekmachine.
-                if require_number_in_title and set_number not in title:
+                # Speed Champions: goedkope thema-sets die premiumdata vervuilen
+                if "speed champions" in title_lower:
+                    log_rejection(
+                        platform_code, set_number, lid, title, price,
+                        "wrong_theme", "Speed Champions-set in titel"
+                    )
+                    continue
+
+                # Setnummer MOET in de titel staan (geen beschrijving beschikbaar)
+                if set_number not in title:
                     log_rejection(
                         platform_code, set_number, lid, title, price,
                         "low_confidence", f"'{set_number}' not found in title"

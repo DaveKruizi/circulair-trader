@@ -107,10 +107,14 @@ def scrape_set(
 ) -> list[dict]:
     """
     Scrape Marktplaats for a single LEGO set.
-    Runs two queries per set:
-      1. 'lego {set_number}' — vereist setnummer in titel (niet alleen beschrijving)
-      2. 'lego {name}'       — geen titelvereiste, maar verwerpt als titel ander setnummer bevat
-    Resultaten worden gededupliceerd op listing-ID.
+    Runs two queries per set (setnummer én naam) en dedupliceert op listing-ID.
+
+    Accepteercriterium (unified):
+      1. Setnummer staat in de TITEL, OF
+      2. Setnummer staat in de BESCHRIJVING én alle significante naamwoorden
+         (≥4 tekens) staan in de titel.
+    Alles anders wordt verworpen. Dit voorkomt cross-contamination zonder
+    legitieme listings zonder setnummer in de titel volledig uit te sluiten.
     """
     if not _MARKTPLAATS_AVAILABLE:
         print("[Marktplaats] Package not installed. Run: pip install marktplaats")
@@ -126,21 +130,19 @@ def scrape_set(
     min_price = (retail_price * MIN_PRICE_RATIO) if retail_price else 0.0
     max_price = (retail_price * MAX_PRICE_RATIO) if retail_price else float("inf")
 
+    # Significante woorden uit de setnaam (≥4 tekens), eenmalig berekend
+    sig_name_words = [w.lower() for w in name.split() if len(w) >= 4]
+
     seen_ids: set[str] = set()
     results: list[dict] = []
     all_seen_sellers: list[tuple[str, str, str]] = []
 
-    # Setnummer-query: vereist het setnummer in de titel (strict).
-    # Naam-query: geen titelvereiste voor het setnummer, maar vereist dat alle
-    # significante woorden (≥4 tekens) uit de setnaam in de titel voorkomen.
-    # Dit filtert cross-contamination uit (bv. Corvette-advertenties bij Porsche-zoekopdracht)
-    # zonder de naam-query nutteloos te maken.
     queries = [
-        (f"lego {set_number}", True),
-        (f"lego {name}", False),
+        f"lego {set_number}",
+        f"lego {name}",
     ]
 
-    for query, require_number_in_title in queries:
+    for query in queries:
         try:
             search = SearchQuery(query, limit=50)
             raw_listings = search.get_listings() or []
@@ -172,8 +174,11 @@ def scrape_set(
                 if listing_id in seen_ids:
                     continue
 
+                title_lower = title.lower()
+                desc_lower = description.lower()
+
                 # LEGO moet ergens in de advertentie voorkomen
-                if "lego" not in title.lower() and "lego" not in description.lower():
+                if "lego" not in title_lower and "lego" not in desc_lower:
                     log_rejection(
                         "marktplaats", set_number, listing_id, title, price,
                         "no_lego_mention", "woord 'lego' ontbreekt in titel en beschrijving"
@@ -188,44 +193,60 @@ def scrape_set(
                     )
                     continue
 
-                # Titelcheck: setnummer moet in de TITEL staan — beschrijving telt niet mee,
-                # want verkopers vermelden daar vaak andere sets die ze ook te koop hebben.
-                if require_number_in_title and set_number not in title:
+                # Speed Champions: goedkope thema-sets die premium-sets vervuilen
+                if "speed champions" in title_lower:
                     log_rejection(
                         "marktplaats", set_number, listing_id, title, price,
-                        "low_confidence", f"'{set_number}' not found in title or description"
+                        "wrong_theme", "Speed Champions-set in titel — niet het premium model"
                     )
                     continue
 
-                # Bij naam-query: als de titel een ander setnummer bevat, is het waarschijnlijk
-                # een ander set (bv. Speed Champions 76895 bij Technic 42099-zoekopdracht).
-                # Bovendien: alle significante woorden (≥4 tekens) uit de setnaam moeten
-                # in de titel voorkomen — zo worden cross-contaminated listings gefilterd
-                # (bv. 'Corvette' bij 'Porsche 911'-zoekopdracht).
-                if not require_number_in_title:
-                    title_numbers = {
-                        n for n in _SET_NUMBER_RE.findall(title)
-                        if _looks_like_set_number(n)
-                    }
-                    if title_numbers and set_number not in title_numbers:
-                        other = ", ".join(sorted(title_numbers)[:3])
-                        log_rejection(
-                            "marktplaats", set_number, listing_id, title, price,
-                            "wrong_set", f"titel bevat ander setnummer ({other}), niet {set_number}"
-                        )
-                        continue
+                # ── Unified accepteerfilter ──────────────────────────────────
+                # Regel 1: setnummer in titel (meest betrouwbaar)
+                number_in_title = set_number in title
 
-                    # Alle significante woorden uit de setnaam moeten in de titel staan
-                    significant_words = [w.lower() for w in name.split() if len(w) >= 4]
-                    title_lower = title.lower()
-                    if significant_words and not all(w in title_lower for w in significant_words):
-                        missing = [w for w in significant_words if w not in title_lower]
-                        log_rejection(
-                            "marktplaats", set_number, listing_id, title, price,
-                            "low_confidence",
-                            f"naam-woorden {missing} niet gevonden in titel (set: '{name}')"
-                        )
-                        continue
+                # Regel 2 (fallback): setnummer in beschrijving én alle
+                # significante naamwoorden in titel.
+                # Hierdoor worden listings geaccepteerd waarbij de verkoper
+                # de setnaam in de titel gebruikt maar het nummer pas in de
+                # beschrijving vermeldt (bv. "LEGO Porsche 911 compleet" +
+                # "set 10295" in beschrijving).
+                name_words_in_title = (
+                    bool(sig_name_words)
+                    and all(w in title_lower for w in sig_name_words)
+                )
+                number_in_description = set_number in description
+
+                if not number_in_title and not (number_in_description and name_words_in_title):
+                    # Bepaal welke check faalde voor een informatieve log-regel
+                    if number_in_description and not name_words_in_title:
+                        missing = [w for w in sig_name_words if w not in title_lower]
+                        reason = (f"setnummer {set_number} gevonden in beschrijving maar "
+                                  f"naam-woorden {missing} ontbreken in titel")
+                    elif name_words_in_title and not number_in_description:
+                        reason = (f"naam-woorden gevonden in titel maar setnummer "
+                                  f"{set_number} ontbreekt in titel én beschrijving")
+                    else:
+                        reason = (f"setnummer {set_number} ontbreekt in titel én beschrijving; "
+                                  f"naam-woorden ook niet allemaal in titel")
+                    log_rejection(
+                        "marktplaats", set_number, listing_id, title, price,
+                        "low_confidence", reason
+                    )
+                    continue
+
+                # Setnummer van een ANDER set in de titel → verkeerde set
+                title_numbers = {
+                    n for n in _SET_NUMBER_RE.findall(title)
+                    if _looks_like_set_number(n)
+                }
+                if title_numbers and set_number not in title_numbers:
+                    other = ", ".join(sorted(title_numbers)[:3])
+                    log_rejection(
+                        "marktplaats", set_number, listing_id, title, price,
+                        "wrong_set", f"titel bevat ander setnummer ({other}), niet {set_number}"
+                    )
+                    continue
 
                 # Bundel van meerdere sets — prijs onbruikbaar voor één set
                 flagged, reason = is_bundle(title, description)

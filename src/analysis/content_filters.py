@@ -85,6 +85,13 @@ _REPLICA_FULL: tuple[str, ...] = (
     "como lego",          # Spaans / Portugees
     "come lego",          # Italiaans
     "comme lego",         # Frans
+    # "gelijk aan lego" = kwaliteit is hetzelfde als Lego → niet origineel
+    "gelijk aan lego",
+    "zelfde als lego",
+    "net als lego",
+    "net zo goed als lego",
+    "kwaliteit van lego",
+    "kwaliteit lego blokjes",
 )
 
 # Gecheckt ALLEEN in de titel (in een omschrijving kunnen ze onschuldig zijn)
