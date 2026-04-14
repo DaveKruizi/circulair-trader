@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-13T19:14:50.271939",
+  "generated_at": "2026-04-14T07:22:26.818114",
   "positions": [
     {
       "id": 14,
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 151.25,
-      "effective_price": 136.12,
-      "market_value": 136.12,
-      "unrealized_pnl": 56.73,
-      "unrealized_pnl_pct": 71.5,
+      "current_p50": 152.5,
+      "effective_price": 137.25,
+      "market_value": 137.25,
+      "unrealized_pnl": 57.86,
+      "unrealized_pnl_pct": 72.9,
       "invested": 79.39
     },
     {
@@ -51,11 +51,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 184.5,
-      "effective_price": 166.05,
-      "market_value": 166.05,
-      "unrealized_pnl": 10.06,
-      "unrealized_pnl_pct": 6.4,
+      "current_p50": 186.0,
+      "effective_price": 167.4,
+      "market_value": 167.4,
+      "unrealized_pnl": 11.41,
+      "unrealized_pnl_pct": 7.3,
       "invested": 155.99
     },
     {
@@ -89,11 +89,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 135.0,
-      "effective_price": 121.5,
-      "market_value": 121.5,
-      "unrealized_pnl": 22.11,
-      "unrealized_pnl_pct": 22.2,
+      "current_p50": 132.5,
+      "effective_price": 119.25,
+      "market_value": 119.25,
+      "unrealized_pnl": 19.86,
+      "unrealized_pnl_pct": 20.0,
       "invested": 99.39
     },
     {
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:17:15",
       "set_name": "Porsche 911",
-      "current_p50": 139.75,
-      "effective_price": 125.78,
-      "market_value": 125.78,
-      "unrealized_pnl": 38.89,
-      "unrealized_pnl_pct": 44.8,
+      "current_p50": 142.5,
+      "effective_price": 128.25,
+      "market_value": 128.25,
+      "unrealized_pnl": 41.36,
+      "unrealized_pnl_pct": 47.6,
       "invested": 86.89
     },
     {
@@ -127,11 +127,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:15:40",
       "set_name": "Porsche 911",
-      "current_p50": 139.75,
-      "effective_price": 125.78,
-      "market_value": 125.78,
-      "unrealized_pnl": 21.39,
-      "unrealized_pnl_pct": 20.5,
+      "current_p50": 142.5,
+      "effective_price": 128.25,
+      "market_value": 128.25,
+      "unrealized_pnl": 23.86,
+      "unrealized_pnl_pct": 22.9,
       "invested": 104.39
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:19:28",
       "set_name": "Lamborghini Countach 5000 QV",
-      "current_p50": 158.25,
-      "effective_price": 142.43,
-      "market_value": 142.43,
-      "unrealized_pnl": 7.44,
-      "unrealized_pnl_pct": 5.5,
+      "current_p50": 156.0,
+      "effective_price": 140.4,
+      "market_value": 140.4,
+      "unrealized_pnl": 5.41,
+      "unrealized_pnl_pct": 4.0,
       "invested": 134.99
     },
     {
@@ -165,11 +165,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:19:51",
       "set_name": "Lamborghini Countach 5000 QV",
-      "current_p50": 158.25,
-      "effective_price": 142.43,
-      "market_value": 142.43,
-      "unrealized_pnl": 7.44,
-      "unrealized_pnl_pct": 5.5,
+      "current_p50": 156.0,
+      "effective_price": 140.4,
+      "market_value": 140.4,
+      "unrealized_pnl": 5.41,
+      "unrealized_pnl_pct": 4.0,
       "invested": 134.99
     },
     {
@@ -213,11 +213,11 @@
   ],
   "summary": {
     "total_invested": 1230.67,
-    "total_market_value": 1535.87,
-    "unrealized_pnl": 305.2,
-    "unrealized_pnl_pct": 24.8,
+    "total_market_value": 1536.98,
+    "unrealized_pnl": 306.31,
+    "unrealized_pnl_pct": 24.9,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 305.2,
-    "unrealized_pnl_12m_pct": 24.8
+    "unrealized_pnl_12m": 306.31,
+    "unrealized_pnl_12m_pct": 24.9
   }
 }
