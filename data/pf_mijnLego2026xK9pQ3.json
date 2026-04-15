@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-15T07:23:39.649362",
+  "generated_at": "2026-04-15T18:49:03.909358",
   "positions": [
     {
       "id": 14,
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:10",
       "set_name": "Ducati Panigale V4 S",
-      "current_p50": 128.5,
-      "effective_price": 115.65,
-      "market_value": 115.65,
-      "unrealized_pnl": 11.26,
-      "unrealized_pnl_pct": 10.8,
+      "current_p50": 128.0,
+      "effective_price": 115.2,
+      "market_value": 115.2,
+      "unrealized_pnl": 10.81,
+      "unrealized_pnl_pct": 10.4,
       "invested": 104.39
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:19:28",
       "set_name": "Lamborghini Countach 5000 QV",
-      "current_p50": 149.25,
-      "effective_price": 134.33,
-      "market_value": 134.33,
-      "unrealized_pnl": -0.66,
-      "unrealized_pnl_pct": -0.5,
+      "current_p50": 151.75,
+      "effective_price": 136.58,
+      "market_value": 136.58,
+      "unrealized_pnl": 1.59,
+      "unrealized_pnl_pct": 1.2,
       "invested": 134.99
     },
     {
@@ -165,11 +165,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:19:51",
       "set_name": "Lamborghini Countach 5000 QV",
-      "current_p50": 149.25,
-      "effective_price": 134.33,
-      "market_value": 134.33,
-      "unrealized_pnl": -0.66,
-      "unrealized_pnl_pct": -0.5,
+      "current_p50": 151.75,
+      "effective_price": 136.58,
+      "market_value": 136.58,
+      "unrealized_pnl": 1.59,
+      "unrealized_pnl_pct": 1.2,
       "invested": 134.99
     },
     {
@@ -213,11 +213,11 @@
   ],
   "summary": {
     "total_invested": 1230.67,
-    "total_market_value": 1522.13,
-    "unrealized_pnl": 291.46,
-    "unrealized_pnl_pct": 23.7,
+    "total_market_value": 1526.18,
+    "unrealized_pnl": 295.51,
+    "unrealized_pnl_pct": 24.0,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 291.46,
-    "unrealized_pnl_12m_pct": 23.7
+    "unrealized_pnl_12m": 295.51,
+    "unrealized_pnl_12m_pct": 24.0
   }
 }
