@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-16T12:26:39.645363",
+  "generated_at": "2026-04-16T18:50:05.827943",
   "positions": [
     {
       "id": 16,
@@ -13,11 +13,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 144.5,
-      "effective_price": 130.05,
-      "market_value": 130.05,
-      "unrealized_pnl": 30.66,
-      "unrealized_pnl_pct": 30.8,
+      "current_p50": 142.0,
+      "effective_price": 127.8,
+      "market_value": 127.8,
+      "unrealized_pnl": 28.41,
+      "unrealized_pnl_pct": 28.6,
       "invested": 99.39
     },
     {
@@ -70,11 +70,11 @@
       "notes": "Vinted",
       "created_at": "2026-04-11 19:31:09",
       "set_name": "MINI Cooper",
-      "current_p50": 242.5,
-      "effective_price": 218.25,
-      "market_value": 218.25,
-      "unrealized_pnl": 53.94,
-      "unrealized_pnl_pct": 32.8,
+      "current_p50": 240.0,
+      "effective_price": 216.0,
+      "market_value": 216.0,
+      "unrealized_pnl": 51.69,
+      "unrealized_pnl_pct": 31.5,
       "invested": 164.31
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 135.0,
-      "effective_price": 121.5,
-      "market_value": 121.5,
-      "unrealized_pnl": 22.11,
-      "unrealized_pnl_pct": 22.2,
+      "current_p50": 133.75,
+      "effective_price": 120.38,
+      "market_value": 120.38,
+      "unrealized_pnl": 20.99,
+      "unrealized_pnl_pct": 21.1,
       "invested": 99.39
     },
     {
@@ -270,11 +270,11 @@
   ],
   "summary": {
     "total_invested": 1605.84,
-    "total_market_value": 2030.18,
-    "unrealized_pnl": 424.34,
-    "unrealized_pnl_pct": 26.4,
+    "total_market_value": 2024.56,
+    "unrealized_pnl": 418.72,
+    "unrealized_pnl_pct": 26.1,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 424.34,
-    "unrealized_pnl_12m_pct": 26.4
+    "unrealized_pnl_12m": 418.72,
+    "unrealized_pnl_12m_pct": 26.1
   }
 }
