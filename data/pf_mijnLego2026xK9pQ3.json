@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-16T12:25:25.002795",
+  "generated_at": "2026-04-16T12:25:55.327424",
   "positions": [
     {
       "id": 16,
@@ -19,6 +19,25 @@
       "unrealized_pnl": 30.66,
       "unrealized_pnl_pct": 30.8,
       "invested": 99.39
+    },
+    {
+      "id": 17,
+      "set_number": "77942",
+      "condition": "NIB",
+      "quantity": 1,
+      "purchase_price": 126.89,
+      "purchase_date": "2026-04-16",
+      "sold_price": null,
+      "sold_date": null,
+      "notes": "Marktplaats",
+      "created_at": "2026-04-16 12:25:50",
+      "set_name": "Fiat 500 Blue",
+      "current_p50": 180.0,
+      "effective_price": 162.0,
+      "market_value": 162.0,
+      "unrealized_pnl": 35.11,
+      "unrealized_pnl_pct": 27.7,
+      "invested": 126.89
     },
     {
       "id": 14,
@@ -231,12 +250,12 @@
     }
   ],
   "summary": {
-    "total_invested": 1330.06,
-    "total_market_value": 1648.8,
-    "unrealized_pnl": 318.74,
-    "unrealized_pnl_pct": 24.0,
+    "total_invested": 1456.95,
+    "total_market_value": 1810.8,
+    "unrealized_pnl": 353.85,
+    "unrealized_pnl_pct": 24.3,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 318.74,
-    "unrealized_pnl_12m_pct": 24.0
+    "unrealized_pnl_12m": 353.85,
+    "unrealized_pnl_12m_pct": 24.3
   }
 }
