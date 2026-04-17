@@ -126,6 +126,9 @@ def compute_price_intelligence(
     disappeared_14d = db.count_disappeared_in_period(set_number, platform, condition, 14, 0)
     disappeared_prior_14d = db.count_disappeared_in_period(set_number, platform, condition, 28, 14)
 
+    # Active count 14 days ago (from snapshots) for "Te koop" delta
+    active_count_14d_ago = db.get_active_count_n_days_ago(set_number, platform, condition, 14)
+
     db.save_price_snapshot(
         snapshot_date=today,
         set_number=set_number,
@@ -153,6 +156,7 @@ def compute_price_intelligence(
         "total_disappeared": total_disappeared,
         "disappeared_14d": disappeared_14d,
         "disappeared_prior_14d": disappeared_prior_14d,
+        "active_count_14d_ago": active_count_14d_ago,
         "listings": active,  # included to avoid a second DB query in the generator
     }
 

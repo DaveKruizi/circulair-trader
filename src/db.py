@@ -372,6 +372,23 @@ def count_disappeared_in_period(
         return row["cnt"] if row else 0
 
 
+def get_active_count_n_days_ago(
+    set_number: str, platform: str, condition: str, days_ago: int,
+) -> Optional[int]:
+    """Most recent active_count snapshot on or before (now - days_ago).
+    Returns None if no snapshot exists that far back."""
+    with get_connection() as conn:
+        row = conn.execute(
+            """SELECT active_count FROM price_snapshots
+               WHERE set_number=? AND platform=? AND condition_category=?
+               AND snapshot_date <= date('now', ?)
+               ORDER BY snapshot_date DESC
+               LIMIT 1""",
+            (set_number, platform, condition, f"-{days_ago} days"),
+        ).fetchone()
+        return row["active_count"] if row else None
+
+
 def get_disappeared_listings(
     set_number: str, platform: str, condition: str, max_days: int = 21
 ) -> list[dict]:
