@@ -352,6 +352,26 @@ def get_total_disappeared_count(set_number: str, platform: str, condition: str) 
         return row["cnt"] if row else 0
 
 
+def count_disappeared_in_period(
+    set_number: str, platform: str, condition: str,
+    days_ago_start: int, days_ago_end: int = 0,
+) -> int:
+    """Count disappeared listings where last_seen falls within [now-start, now-end].
+    days_ago_end=0 means "up to and including today"."""
+    end_offset = f"-{days_ago_end - 1} days" if days_ago_end > 0 else "+1 day"
+    with get_connection() as conn:
+        row = conn.execute(
+            """SELECT COUNT(*) as cnt FROM listings
+               WHERE set_number=? AND platform=? AND condition_category=?
+               AND status='disappeared'
+               AND last_seen >= date('now', ?)
+               AND last_seen < date('now', ?)""",
+            (set_number, platform, condition,
+             f"-{days_ago_start} days", end_offset),
+        ).fetchone()
+        return row["cnt"] if row else 0
+
+
 def get_disappeared_listings(
     set_number: str, platform: str, condition: str, max_days: int = 21
 ) -> list[dict]:
