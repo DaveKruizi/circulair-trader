@@ -1712,25 +1712,25 @@ function expandAndScrollToDeals(badgeEl) {
 function buildCompactStats(set) {
   const plats = ['vinted_nl', 'marktplaats'];
   const cond = currentMode;
-  let act = 0, app = 0, dis14 = 0, disPrior14 = 0;
+  let act = 0, dis14 = 0, disPrior14 = 0;
+  let act14Ago = 0, hasAct14Ago = false;
   const p50s = [];
 
   plats.forEach(p => {
     const pd = (set.platforms[p] || {})[cond] || {};
-    act  += pd.active_count           || 0;
-    app  += pd.appeared_7d            || 0;
+    act         += pd.active_count          || 0;
     dis14       += pd.disappeared_14d       || 0;
     disPrior14  += pd.disappeared_prior_14d || 0;
+    if (pd.active_count_14d_ago != null) {
+      act14Ago += pd.active_count_14d_ago;
+      hasAct14Ago = true;
+    }
     if (pd.p50 != null) p50s.push(pd.p50);
   });
 
-  const delta = (n) => n > 0 ? `<span class="cs-delta">+${n}</span>` : '';
-
-  const singleBlock = (label, val, d) => `
-    <div class="cs-block">
-      <div class="cs-block-label">${label}</div>
-      <div class="cs-val">${val}${delta(d)}</div>
-    </div>`;
+  const signedDelta = (n) => n !== 0
+    ? `<span class="cs-delta ${n > 0 ? 'up' : 'down'}">${n > 0 ? '+' : ''}${n}</span>`
+    : '';
 
   // Market value: average p50 across platforms × 0.90
   let mvBlock = '';
@@ -1769,18 +1769,20 @@ function buildCompactStats(set) {
       <div class="cs-deal-icon">deals</div>
     </div>` : '';
 
-  const salesDelta = dis14 - disPrior14;
-  const salesDeltaHtml = salesDelta !== 0
-    ? `<span class="cs-delta ${salesDelta > 0 ? 'up' : 'down'}">${salesDelta > 0 ? '+' : ''}${salesDelta}</span>`
-    : '';
+  const forSaleDeltaHtml = hasAct14Ago ? signedDelta(act - act14Ago) : '';
+  const forSaleBlock = `
+    <div class="cs-block">
+      <div class="cs-block-label">Te koop</div>
+      <div class="cs-val">${act}${forSaleDeltaHtml}</div>
+    </div>`;
 
   const salesBlock = `
     <div class="cs-block">
       <div class="cs-block-label">Verkopen (14d)</div>
-      <div class="cs-val">${dis14}${salesDeltaHtml}</div>
+      <div class="cs-val">${dis14}${signedDelta(dis14 - disPrior14)}</div>
     </div>`;
 
-  return singleBlock('Te koop', act, app)
+  return forSaleBlock
        + salesBlock
        + mvBlock
        + stealBlock
