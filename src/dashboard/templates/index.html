@@ -251,6 +251,8 @@
     opacity: .7;
     vertical-align: super;
   }
+  .cs-val .cs-delta.up { color: #1a7f37; opacity: 1; }
+  .cs-val .cs-delta.down { color: #cf222e; opacity: 1; }
   .cs-cond-label {
     font-size: 9px;
     font-weight: 600;
@@ -1710,15 +1712,15 @@ function expandAndScrollToDeals(badgeEl) {
 function buildCompactStats(set) {
   const plats = ['vinted_nl', 'marktplaats'];
   const cond = currentMode;
-  let act = 0, app = 0, sold = 0, dis = 0;
+  let act = 0, app = 0, dis14 = 0, disPrior14 = 0;
   const p50s = [];
 
   plats.forEach(p => {
     const pd = (set.platforms[p] || {})[cond] || {};
-    act  += pd.active_count      || 0;
-    app  += pd.appeared_7d       || 0;
-    sold += pd.total_disappeared || 0;
-    dis  += pd.disappeared_7d    || 0;
+    act  += pd.active_count           || 0;
+    app  += pd.appeared_7d            || 0;
+    dis14       += pd.disappeared_14d       || 0;
+    disPrior14  += pd.disappeared_prior_14d || 0;
     if (pd.p50 != null) p50s.push(pd.p50);
   });
 
@@ -1767,8 +1769,19 @@ function buildCompactStats(set) {
       <div class="cs-deal-icon">deals</div>
     </div>` : '';
 
+  const salesDelta = dis14 - disPrior14;
+  const salesDeltaHtml = salesDelta !== 0
+    ? `<span class="cs-delta ${salesDelta > 0 ? 'up' : 'down'}">${salesDelta > 0 ? '+' : ''}${salesDelta}</span>`
+    : '';
+
+  const salesBlock = `
+    <div class="cs-block">
+      <div class="cs-block-label">Verkopen (14d)</div>
+      <div class="cs-val">${dis14}${salesDeltaHtml}</div>
+    </div>`;
+
   return singleBlock('Te koop', act, app)
-       + singleBlock('Verkopen', sold, dis)
+       + salesBlock
        + mvBlock
        + stealBlock
        + dealBlock;

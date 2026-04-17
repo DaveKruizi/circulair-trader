@@ -122,6 +122,10 @@ def compute_price_intelligence(
     # All-time sold proxy: total listings ever disappeared
     total_disappeared = db.get_total_disappeared_count(set_number, platform, condition)
 
+    # 14-day sales windows for compact stats
+    disappeared_14d = db.count_disappeared_in_period(set_number, platform, condition, 14, 0)
+    disappeared_prior_14d = db.count_disappeared_in_period(set_number, platform, condition, 28, 14)
+
     db.save_price_snapshot(
         snapshot_date=today,
         set_number=set_number,
@@ -147,6 +151,8 @@ def compute_price_intelligence(
         "price_buckets": buckets,
         "disappeared_7d": len(disappeared_7d),
         "total_disappeared": total_disappeared,
+        "disappeared_14d": disappeared_14d,
+        "disappeared_prior_14d": disappeared_prior_14d,
         "listings": active,  # included to avoid a second DB query in the generator
     }
 
