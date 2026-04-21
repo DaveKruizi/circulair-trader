@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-20T18:23:04.538057",
+  "generated_at": "2026-04-21T07:26:26.450846",
   "positions": [
     {
       "id": 19,
@@ -127,11 +127,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 186.0,
-      "effective_price": 167.4,
-      "market_value": 167.4,
-      "unrealized_pnl": 11.41,
-      "unrealized_pnl_pct": 7.3,
+      "current_p50": 183.5,
+      "effective_price": 165.15,
+      "market_value": 165.15,
+      "unrealized_pnl": 9.16,
+      "unrealized_pnl_pct": 5.9,
       "invested": 155.99
     },
     {
@@ -279,11 +279,11 @@
       "notes": "",
       "created_at": "2026-04-11 10:19:17",
       "set_name": "Porsche 911",
-      "current_p50": 110.0,
-      "effective_price": 99.0,
-      "market_value": 99.0,
-      "unrealized_pnl": 53.05,
-      "unrealized_pnl_pct": 115.5,
+      "current_p50": 112.5,
+      "effective_price": 101.25,
+      "market_value": 101.25,
+      "unrealized_pnl": 55.3,
+      "unrealized_pnl_pct": 120.3,
       "invested": 45.95
     }
   ],
