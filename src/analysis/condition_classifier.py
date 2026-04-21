@@ -12,6 +12,12 @@ NIB_KEYWORDS = [
     # Nederlands
     "sealed", "ongeopend", "geseald", "gesealed", "verzegeld", "verzegelde",
     "nooit geopend", "nieuw in verpakking", "nieuw in doos",
+    # Varianten met lidwoord "de" — zeer gangbaar op Marktplaats
+    "nieuw in de doos", "nieuw in de verpakking",
+    "nieuw in originele verpakking", "nieuw in originele doos",
+    "nieuw in de originele verpakking", "nieuw in de originele doos",
+    # "splinternieuw" / "gloednieuw" — ondubbelzinnig nieuw
+    "splinternieuw", "gloednieuw",
     "origineel verzegeld", "in originele verpakking",
     "nieuw en ongeopend", "ongebruikt", "ongebruikte",
     # Engels
@@ -104,6 +110,9 @@ STRONG_NIB_KEYWORDS = frozenset({
     "sealed", "ongeopend", "geseald", "gesealed", "verzegeld", "verzegelde",
     "factory sealed", "brand new sealed", "unopened", "nooit geopend",
     "nieuw en ongeopend", "niet geopend",
+    "nieuw in de doos", "nieuw in de verpakking",
+    "nieuw in originele verpakking", "nieuw in de originele verpakking",
+    "splinternieuw", "gloednieuw",
     "noch nie geöffnet", "ungeöffnet", "originalverpackt", "neu und ungeöffnet",
     "jamais ouvert", "neuf scellé", "non ouvert",
     "sin abrir", "nuevo precintado", "mai aperto", "nuovo sigillato",
