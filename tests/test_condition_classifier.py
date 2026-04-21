@@ -34,6 +34,31 @@ class TestNIB:
             "Ongeopend, factory sealed, ongebruikte stickers (set nooit gebouwd)"
         ) == "NIB"
 
+    def test_nieuw_in_de_doos(self):
+        # Gangbare Marktplaats-omschrijving met lidwoord "de" — werd gemist
+        assert classify_condition(
+            "LEGO 77942 Fiat 500 blauw",
+            "Nieuw in de doos, compleet, originele verpakking"
+        ) == "NIB"
+
+    def test_nieuw_in_de_verpakking(self):
+        assert classify_condition(
+            "LEGO 77942 Fiat 500",
+            "Nieuw in de verpakking, nooit geopend"
+        ) == "NIB"
+
+    def test_nieuw_in_originele_doos(self):
+        assert classify_condition(
+            "LEGO 77942",
+            "Nieuw in originele doos, compleet met handleiding"
+        ) == "NIB"
+
+    def test_splinternieuw(self):
+        assert classify_condition("LEGO 77942 Fiat 500, splinternieuw", "") == "NIB"
+
+    def test_gloednieuw(self):
+        assert classify_condition("LEGO 10248 Ferrari F40, gloednieuw", "") == "NIB"
+
 
 # ---------------------------------------------------------------------------
 # CIB — echte gevallen die fout als NIB werden geclassificeerd
@@ -107,3 +132,32 @@ class TestIncomplete:
 
     def test_niet_compleet(self):
         assert classify_condition("LEGO set", "Niet compleet, onderdelen ontbreken") == "incomplete"
+
+
+# ---------------------------------------------------------------------------
+# Sig-name-words drempel (≥5 tekens) — pure Python, geen scraper-import nodig
+# ---------------------------------------------------------------------------
+
+class TestSigNameWordsThreshold:
+    """Verifica dat de drempel voor 'significant woord' correct werkt (≥5 tekens)."""
+
+    def _sig_words(self, name: str) -> list[str]:
+        return [w.lower() for w in name.split() if len(w) >= 5]
+
+    def test_mini_cooper_is_generiek(self):
+        # "mini"(4) < 5 → uitgesloten; "cooper"(6) = 1 woord → generic
+        assert len(self._sig_words("Mini Cooper")) == 1
+
+    def test_lamborghini_revuelto_niet_generiek(self):
+        assert len(self._sig_words("Lamborghini Revuelto")) == 2
+
+    def test_fiat_500_is_generiek(self):
+        # "fiat"(4) < 5, "500"(3) < 5 → 0 woorden → generic
+        assert len(self._sig_words("Fiat 500")) == 0
+
+    def test_aston_martin_niet_generiek(self):
+        # "aston"(5), "martin"(6)
+        assert len(self._sig_words("Aston Martin DB5")) == 2
+
+    def test_corvette_is_generiek(self):
+        assert len(self._sig_words("Corvette ZR1")) == 1

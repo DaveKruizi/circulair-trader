@@ -136,10 +136,13 @@ def scrape_set(
     min_price = (retail_price * MIN_PRICE_RATIO) if retail_price else 0.0
     max_price = (retail_price * MAX_PRICE_RATIO) if retail_price else float("inf")
 
-    # Significante woorden uit de setnaam (≥4 tekens), eenmalig berekend.
-    # Bij ≤1 significant woord is de naam te generiek → naam-query eist ook setnummer in titel.
-    sig_name_words = [w.lower() for w in name.split() if len(w) >= 4]
-    generic_name = len(sig_name_words) <= 1  # bv. "Corvette", "Porsche 911"
+    # Significante woorden uit de setnaam (≥5 tekens), eenmalig berekend.
+    # Drempel is 5 i.p.v. 4 om korte maar ambigue woorden ("Mini", "Fiat", "Ford")
+    # niet als onderscheidend te behandelen. "Mini Cooper" heeft slechts 1
+    # significant woord ("cooper", 6) en is daarmee generiek → naam-query eist
+    # ook het setnummer in de titel.
+    sig_name_words = [w.lower() for w in name.split() if len(w) >= 5]
+    generic_name = len(sig_name_words) <= 1  # bv. "Corvette", "Porsche 911", "Mini Cooper"
 
     seen_ids: set[str] = set()
     results: list[dict] = []
