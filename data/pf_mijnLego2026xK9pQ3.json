@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-23T18:50:18.404670",
+  "generated_at": "2026-04-24T07:33:33.614028",
   "positions": [
     {
       "id": 19,
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 139.5,
-      "effective_price": 125.55,
-      "market_value": 125.55,
-      "unrealized_pnl": 26.16,
-      "unrealized_pnl_pct": 26.3,
+      "current_p50": 135.0,
+      "effective_price": 121.5,
+      "market_value": 121.5,
+      "unrealized_pnl": 22.11,
+      "unrealized_pnl_pct": 22.2,
       "invested": 99.39
     },
     {
@@ -127,11 +127,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 186.0,
-      "effective_price": 167.4,
-      "market_value": 167.4,
-      "unrealized_pnl": 11.41,
-      "unrealized_pnl_pct": 7.3,
+      "current_p50": 190.0,
+      "effective_price": 171.0,
+      "market_value": 171.0,
+      "unrealized_pnl": 15.01,
+      "unrealized_pnl_pct": 9.6,
       "invested": 155.99
     },
     {
@@ -279,21 +279,21 @@
       "notes": "",
       "created_at": "2026-04-11 10:19:17",
       "set_name": "Porsche 911",
-      "current_p50": 115.0,
-      "effective_price": 103.5,
-      "market_value": 103.5,
-      "unrealized_pnl": 57.55,
-      "unrealized_pnl_pct": 125.2,
+      "current_p50": 122.25,
+      "effective_price": 110.03,
+      "market_value": 110.03,
+      "unrealized_pnl": 64.08,
+      "unrealized_pnl_pct": 139.5,
       "invested": 45.95
     }
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2192.64,
-    "unrealized_pnl": 480.41,
-    "unrealized_pnl_pct": 28.1,
+    "total_market_value": 2198.72,
+    "unrealized_pnl": 486.49,
+    "unrealized_pnl_pct": 28.4,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 480.41,
-    "unrealized_pnl_12m_pct": 28.1
+    "unrealized_pnl_12m": 486.49,
+    "unrealized_pnl_12m_pct": 28.4
   }
 }
