@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-26T07:25:18.764959",
+  "generated_at": "2026-04-26T18:11:24.359080",
   "positions": [
     {
       "id": 19,
@@ -13,11 +13,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-20 07:32:40",
       "set_name": "Porsche 911",
-      "current_p50": 144.75,
-      "effective_price": 130.28,
-      "market_value": 130.28,
-      "unrealized_pnl": 23.89,
-      "unrealized_pnl_pct": 22.5,
+      "current_p50": 143.5,
+      "effective_price": 129.15,
+      "market_value": 129.15,
+      "unrealized_pnl": 22.76,
+      "unrealized_pnl_pct": 21.4,
       "invested": 106.39
     },
     {
@@ -127,11 +127,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 191.25,
-      "effective_price": 172.12,
-      "market_value": 172.12,
-      "unrealized_pnl": 16.13,
-      "unrealized_pnl_pct": 10.3,
+      "current_p50": 190.0,
+      "effective_price": 171.0,
+      "market_value": 171.0,
+      "unrealized_pnl": 15.01,
+      "unrealized_pnl_pct": 9.6,
       "invested": 155.99
     },
     {
@@ -184,11 +184,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:17:15",
       "set_name": "Porsche 911",
-      "current_p50": 144.75,
-      "effective_price": 130.28,
-      "market_value": 130.28,
-      "unrealized_pnl": 43.39,
-      "unrealized_pnl_pct": 49.9,
+      "current_p50": 143.5,
+      "effective_price": 129.15,
+      "market_value": 129.15,
+      "unrealized_pnl": 42.26,
+      "unrealized_pnl_pct": 48.6,
       "invested": 86.89
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:15:40",
       "set_name": "Porsche 911",
-      "current_p50": 144.75,
-      "effective_price": 130.28,
-      "market_value": 130.28,
-      "unrealized_pnl": 25.89,
-      "unrealized_pnl_pct": 24.8,
+      "current_p50": 143.5,
+      "effective_price": 129.15,
+      "market_value": 129.15,
+      "unrealized_pnl": 24.76,
+      "unrealized_pnl_pct": 23.7,
       "invested": 104.39
     },
     {
@@ -289,11 +289,11 @@
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2186.55,
-    "unrealized_pnl": 474.32,
-    "unrealized_pnl_pct": 27.7,
+    "total_market_value": 2182.04,
+    "unrealized_pnl": 469.81,
+    "unrealized_pnl_pct": 27.4,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 474.32,
-    "unrealized_pnl_12m_pct": 27.7
+    "unrealized_pnl_12m": 469.81,
+    "unrealized_pnl_12m_pct": 27.4
   }
 }
