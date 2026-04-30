@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-29T19:03:57.314394",
+  "generated_at": "2026-04-30T07:56:45.988015",
   "positions": [
     {
       "id": 19,
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 243.75,
-      "effective_price": 219.38,
-      "market_value": 219.38,
-      "unrealized_pnl": 70.49,
-      "unrealized_pnl_pct": 47.3,
+      "current_p50": 241.25,
+      "effective_price": 217.12,
+      "market_value": 217.12,
+      "unrealized_pnl": 68.23,
+      "unrealized_pnl_pct": 45.8,
       "invested": 148.89
     },
     {
@@ -127,11 +127,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 190.0,
-      "effective_price": 171.0,
-      "market_value": 171.0,
-      "unrealized_pnl": 15.01,
-      "unrealized_pnl_pct": 9.6,
+      "current_p50": 183.5,
+      "effective_price": 165.15,
+      "market_value": 165.15,
+      "unrealized_pnl": 9.16,
+      "unrealized_pnl_pct": 5.9,
       "invested": 155.99
     },
     {
@@ -165,11 +165,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 136.25,
-      "effective_price": 122.62,
-      "market_value": 122.62,
-      "unrealized_pnl": 23.23,
-      "unrealized_pnl_pct": 23.4,
+      "current_p50": 133.75,
+      "effective_price": 120.38,
+      "market_value": 120.38,
+      "unrealized_pnl": 20.99,
+      "unrealized_pnl_pct": 21.1,
       "invested": 99.39
     },
     {
@@ -260,11 +260,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 12:21:32",
       "set_name": "Shelby Cobra 427 S/C",
-      "current_p50": 140.0,
-      "effective_price": 126.0,
-      "market_value": 126.0,
-      "unrealized_pnl": 6.01,
-      "unrealized_pnl_pct": 5.0,
+      "current_p50": 142.5,
+      "effective_price": 128.25,
+      "market_value": 128.25,
+      "unrealized_pnl": 8.26,
+      "unrealized_pnl_pct": 6.9,
       "invested": 119.99
     },
     {
@@ -289,11 +289,11 @@
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2219.37,
-    "unrealized_pnl": 507.14,
-    "unrealized_pnl_pct": 29.6,
+    "total_market_value": 2211.27,
+    "unrealized_pnl": 499.04,
+    "unrealized_pnl_pct": 29.1,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 507.14,
-    "unrealized_pnl_12m_pct": 29.6
+    "unrealized_pnl_12m": 499.04,
+    "unrealized_pnl_12m_pct": 29.1
   }
 }
