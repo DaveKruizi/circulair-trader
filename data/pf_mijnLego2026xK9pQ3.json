@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-01T18:45:27.467064",
+  "generated_at": "2026-05-02T13:26:09.492685",
   "positions": [
     {
       "id": 19,
@@ -13,11 +13,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-20 07:32:40",
       "set_name": "Porsche 911",
-      "current_p50": 147.5,
-      "effective_price": 132.75,
-      "market_value": 132.75,
-      "unrealized_pnl": 26.36,
-      "unrealized_pnl_pct": 24.8,
+      "current_p50": 148.75,
+      "effective_price": 133.88,
+      "market_value": 133.88,
+      "unrealized_pnl": 27.49,
+      "unrealized_pnl_pct": 25.8,
       "invested": 106.39
     },
     {
@@ -184,11 +184,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:17:15",
       "set_name": "Porsche 911",
-      "current_p50": 147.5,
-      "effective_price": 132.75,
-      "market_value": 132.75,
-      "unrealized_pnl": 45.86,
-      "unrealized_pnl_pct": 52.8,
+      "current_p50": 148.75,
+      "effective_price": 133.88,
+      "market_value": 133.88,
+      "unrealized_pnl": 46.99,
+      "unrealized_pnl_pct": 54.1,
       "invested": 86.89
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:15:40",
       "set_name": "Porsche 911",
-      "current_p50": 147.5,
-      "effective_price": 132.75,
-      "market_value": 132.75,
-      "unrealized_pnl": 28.36,
-      "unrealized_pnl_pct": 27.2,
+      "current_p50": 148.75,
+      "effective_price": 133.88,
+      "market_value": 133.88,
+      "unrealized_pnl": 29.49,
+      "unrealized_pnl_pct": 28.2,
       "invested": 104.39
     },
     {
@@ -289,11 +289,11 @@
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2179.32,
-    "unrealized_pnl": 467.09,
-    "unrealized_pnl_pct": 27.3,
+    "total_market_value": 2182.71,
+    "unrealized_pnl": 470.48,
+    "unrealized_pnl_pct": 27.5,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 467.09,
-    "unrealized_pnl_12m_pct": 27.3
+    "unrealized_pnl_12m": 470.48,
+    "unrealized_pnl_12m_pct": 27.5
   }
 }
