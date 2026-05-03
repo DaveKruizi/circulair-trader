@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-03T07:44:29.615282",
+  "generated_at": "2026-05-03T18:16:41.879928",
   "positions": [
     {
       "id": 19,
@@ -89,11 +89,11 @@
       "notes": "Vinted",
       "created_at": "2026-04-11 19:31:09",
       "set_name": "MINI Cooper",
-      "current_p50": 233.75,
-      "effective_price": 210.38,
-      "market_value": 210.38,
-      "unrealized_pnl": 46.07,
-      "unrealized_pnl_pct": 28.0,
+      "current_p50": 232.5,
+      "effective_price": 209.25,
+      "market_value": 209.25,
+      "unrealized_pnl": 44.94,
+      "unrealized_pnl_pct": 27.4,
       "invested": 164.31
     },
     {
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 150.0,
-      "effective_price": 135.0,
-      "market_value": 135.0,
-      "unrealized_pnl": 55.61,
-      "unrealized_pnl_pct": 70.0,
+      "current_p50": 148.75,
+      "effective_price": 133.88,
+      "market_value": 133.88,
+      "unrealized_pnl": 54.49,
+      "unrealized_pnl_pct": 68.6,
       "invested": 79.39
     },
     {
@@ -127,11 +127,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 180.0,
-      "effective_price": 162.0,
-      "market_value": 162.0,
-      "unrealized_pnl": 6.01,
-      "unrealized_pnl_pct": 3.9,
+      "current_p50": 178.75,
+      "effective_price": 160.88,
+      "market_value": 160.88,
+      "unrealized_pnl": 4.89,
+      "unrealized_pnl_pct": 3.1,
       "invested": 155.99
     },
     {
@@ -165,11 +165,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 133.75,
-      "effective_price": 120.38,
-      "market_value": 120.38,
-      "unrealized_pnl": 20.99,
-      "unrealized_pnl_pct": 21.1,
+      "current_p50": 132.5,
+      "effective_price": 119.25,
+      "market_value": 119.25,
+      "unrealized_pnl": 19.86,
+      "unrealized_pnl_pct": 20.0,
       "invested": 99.39
     },
     {
@@ -260,11 +260,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 12:21:32",
       "set_name": "Shelby Cobra 427 S/C",
-      "current_p50": 142.5,
-      "effective_price": 128.25,
-      "market_value": 128.25,
-      "unrealized_pnl": 8.26,
-      "unrealized_pnl_pct": 6.9,
+      "current_p50": 145.0,
+      "effective_price": 130.5,
+      "market_value": 130.5,
+      "unrealized_pnl": 10.51,
+      "unrealized_pnl_pct": 8.8,
       "invested": 119.99
     },
     {
@@ -289,11 +289,11 @@
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2174.83,
-    "unrealized_pnl": 462.6,
-    "unrealized_pnl_pct": 27.0,
+    "total_market_value": 2172.58,
+    "unrealized_pnl": 460.35,
+    "unrealized_pnl_pct": 26.9,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 462.6,
-    "unrealized_pnl_12m_pct": 27.0
+    "unrealized_pnl_12m": 460.35,
+    "unrealized_pnl_12m_pct": 26.9
   }
 }
