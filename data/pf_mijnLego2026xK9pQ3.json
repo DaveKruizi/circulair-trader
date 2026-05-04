@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-04T08:21:22.580566",
+  "generated_at": "2026-05-04T19:11:18.590648",
   "positions": [
     {
       "id": 19,
@@ -89,11 +89,11 @@
       "notes": "Vinted",
       "created_at": "2026-04-11 19:31:09",
       "set_name": "MINI Cooper",
-      "current_p50": 221.0,
-      "effective_price": 198.9,
-      "market_value": 198.9,
-      "unrealized_pnl": 34.59,
-      "unrealized_pnl_pct": 21.1,
+      "current_p50": 219.75,
+      "effective_price": 197.78,
+      "market_value": 197.78,
+      "unrealized_pnl": 33.47,
+      "unrealized_pnl_pct": 20.4,
       "invested": 164.31
     },
     {
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 148.75,
-      "effective_price": 133.88,
-      "market_value": 133.88,
-      "unrealized_pnl": 54.49,
-      "unrealized_pnl_pct": 68.6,
+      "current_p50": 147.5,
+      "effective_price": 132.75,
+      "market_value": 132.75,
+      "unrealized_pnl": 53.36,
+      "unrealized_pnl_pct": 67.2,
       "invested": 79.39
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:10",
       "set_name": "Ducati Panigale V4 S",
-      "current_p50": 132.99,
-      "effective_price": 119.69,
-      "market_value": 119.69,
-      "unrealized_pnl": 15.3,
-      "unrealized_pnl_pct": 14.7,
+      "current_p50": 134.99,
+      "effective_price": 121.49,
+      "market_value": 121.49,
+      "unrealized_pnl": 17.1,
+      "unrealized_pnl_pct": 16.4,
       "invested": 104.39
     },
     {
@@ -289,11 +289,11 @@
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2165.4,
-    "unrealized_pnl": 453.17,
-    "unrealized_pnl_pct": 26.5,
+    "total_market_value": 2164.95,
+    "unrealized_pnl": 452.72,
+    "unrealized_pnl_pct": 26.4,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 453.17,
-    "unrealized_pnl_12m_pct": 26.5
+    "unrealized_pnl_12m": 452.72,
+    "unrealized_pnl_12m_pct": 26.4
   }
 }
