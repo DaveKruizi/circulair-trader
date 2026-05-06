@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-06T13:45:19.022585",
+  "generated_at": "2026-05-06T19:18:34.290085",
   "positions": [
     {
       "id": 19,
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 157.5,
-      "effective_price": 141.75,
-      "market_value": 141.75,
-      "unrealized_pnl": 42.36,
-      "unrealized_pnl_pct": 42.6,
+      "current_p50": 158.75,
+      "effective_price": 142.88,
+      "market_value": 142.88,
+      "unrealized_pnl": 43.49,
+      "unrealized_pnl_pct": 43.8,
       "invested": 99.39
     },
     {
@@ -279,21 +279,21 @@
       "notes": "",
       "created_at": "2026-04-11 10:19:17",
       "set_name": "Porsche 911",
-      "current_p50": 123.0,
-      "effective_price": 110.7,
-      "market_value": 110.7,
-      "unrealized_pnl": 64.75,
-      "unrealized_pnl_pct": 140.9,
+      "current_p50": 115.5,
+      "effective_price": 103.95,
+      "market_value": 103.95,
+      "unrealized_pnl": 58.0,
+      "unrealized_pnl_pct": 126.2,
       "invested": 45.95
     }
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2160.9,
-    "unrealized_pnl": 448.67,
-    "unrealized_pnl_pct": 26.2,
+    "total_market_value": 2155.28,
+    "unrealized_pnl": 443.05,
+    "unrealized_pnl_pct": 25.9,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 448.67,
-    "unrealized_pnl_12m_pct": 26.2
+    "unrealized_pnl_12m": 443.05,
+    "unrealized_pnl_12m_pct": 25.9
   }
 }
