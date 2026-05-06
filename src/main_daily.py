@@ -50,6 +50,13 @@ def run_daily(dry_run: bool = False) -> None:
     lego_sets = load_lego_sets()
     print(f"[Daily] Loaded {len(lego_sets)} LEGO sets from catalog")
 
+    # Step 1a: BrickEconomy monthly price update (skips if cache < 30 days old)
+    try:
+        from src.scrapers.brickeconomy import scrape_all_sets as be_scrape_all
+        be_scrape_all(lego_sets)
+    except Exception as e:
+        print(f"[Daily] BrickEconomy scrape mislukt (wordt overgeslagen): {e}")
+
     # Step 1: Scrape Marktplaats
     if dry_run:
         print("[Daily] DRY RUN: skipping Marktplaats scrape, loading existing data")
