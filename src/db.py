@@ -121,6 +121,14 @@ def init_db() -> None:
             CREATE INDEX IF NOT EXISTS idx_rejection_date
                 ON rejection_log(log_date, set_number);
 
+            CREATE TABLE IF NOT EXISTS brickeconomy_cache (
+                set_number   TEXT PRIMARY KEY,
+                nib_value    REAL,
+                used_value   REAL,
+                currency     TEXT NOT NULL DEFAULT 'EUR',
+                scraped_date TEXT NOT NULL
+            );
+
         """)
         # Migrate existing DBs that predate image_url/url columns
         for col, default in [("image_url", "''"), ("url", "''")] :
@@ -509,6 +517,52 @@ def get_latest_p50(set_number: str, condition: str) -> Optional[float]:
         if r["platform"] not in seen:
             seen[r["platform"]] = r["p50_price"]
     return round(sum(seen.values()) / len(seen), 2)
+
+
+# ── BrickEconomy cache ─────────────────────────────────────────────────────────
+
+def upsert_brickeconomy_cache(
+    set_number: str,
+    nib_value: Optional[float],
+    used_value: Optional[float],
+    currency: str = "EUR",
+) -> None:
+    today = datetime.now().date().isoformat()
+    with get_connection() as conn:
+        conn.execute(
+            """INSERT OR REPLACE INTO brickeconomy_cache
+               (set_number, nib_value, used_value, currency, scraped_date)
+               VALUES (?, ?, ?, ?, ?)""",
+            (set_number, nib_value, used_value, currency, today),
+        )
+
+
+def get_brickeconomy_cache(set_number: str) -> Optional[dict]:
+    """Return cached BrickEconomy values or None if not cached."""
+    with get_connection() as conn:
+        row = conn.execute(
+            "SELECT nib_value, used_value, currency, scraped_date FROM brickeconomy_cache WHERE set_number=?",
+            (set_number,),
+        ).fetchone()
+    if row is None:
+        return None
+    return {
+        "nib": row["nib_value"],
+        "used": row["used_value"],
+        "currency": row["currency"],
+        "scraped_date": row["scraped_date"],
+    }
+
+
+def is_brickeconomy_fresh(set_number: str, max_age_days: int = 30) -> bool:
+    """True if cache exists and was scraped within max_age_days."""
+    with get_connection() as conn:
+        row = conn.execute(
+            """SELECT scraped_date FROM brickeconomy_cache
+               WHERE set_number=? AND scraped_date >= date('now', ?)""",
+            (set_number, f"-{max_age_days} days"),
+        ).fetchone()
+    return row is not None
 
 
 # ── Portfolio CRUD ─────────────────────────────────────────────────────────────

@@ -253,6 +253,18 @@
   }
   .cs-val .cs-delta.up { color: #1a7f37; opacity: 1; }
   .cs-val .cs-delta.down { color: #cf222e; opacity: 1; }
+  .cs-be-badge {
+    display: inline-block;
+    font-size: 8px;
+    font-weight: 700;
+    color: #0284c7;
+    background: #e0f2fe;
+    border-radius: 3px;
+    padding: 1px 3px;
+    vertical-align: middle;
+    margin-left: 3px;
+    letter-spacing: 0;
+  }
   .cs-cond-label {
     font-size: 9px;
     font-weight: 600;
@@ -1732,7 +1744,7 @@ function buildCompactStats(set) {
     ? `<span class="cs-delta ${n > 0 ? 'up' : 'down'}">${n > 0 ? '+' : ''}${n}</span>`
     : '';
 
-  // Market value: average p50 across platforms × 0.90
+  // Market value: blend van eigen p50×0.90 en BrickEconomy waarde (indien beschikbaar)
   let mvBlock = '';
   if (p50s.length > 0) {
     let avgP50 = p50s.reduce((a, b) => a + b, 0) / p50s.length;
@@ -1741,10 +1753,13 @@ function buildCompactStats(set) {
     if (cond === 'NIB' && set.retail_price && !set.is_retired && !set.retiring_soon) {
       avgP50 = Math.min(avgP50, set.retail_price);
     }
-    const mv = Math.round(avgP50 * 0.90);
+    const ourMv = avgP50 * 0.90;
+    const beValue = cond === 'NIB' ? set.brickeconomy_nib : set.brickeconomy_used;
+    const mv = Math.round(beValue != null ? (ourMv + beValue) / 2 : ourMv);
+    const beLabel = beValue != null ? ` <span class="cs-be-badge" title="Blend van eigen data en BrickEconomy">BE</span>` : '';
     mvBlock = `
     <div class="cs-block">
-      <div class="cs-block-label">Marktwaarde</div>
+      <div class="cs-block-label">Marktwaarde${beLabel}</div>
       <div class="cs-val">€${mv}</div>
     </div>`;
   }

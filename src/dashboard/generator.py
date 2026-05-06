@@ -244,6 +244,8 @@ def _find_deals(
     retail_price: float | None,
     is_retired: bool = False,
     retiring_soon: bool = False,
+    be_nib: float | None = None,
+    be_used: float | None = None,
 ) -> list[dict]:
     """
     Interessante Marktplaats-deals, gecategoriseerd als 'steal' of 'deal':
@@ -272,8 +274,10 @@ def _find_deals(
         if condition == "NIB" and retail_price and not is_retired and not retiring_soon:
             combined_p50 = min(combined_p50, retail_price)
 
-        # Marktwaarde = gecombineerde p50 × 0.90
-        market_value = combined_p50 * MARKET_VALUE_FACTOR
+        # Marktwaarde = gecombineerde p50 × 0.90, geblend met BrickEconomy indien beschikbaar
+        our_market_value = combined_p50 * MARKET_VALUE_FACTOR
+        be_value = be_nib if condition == "NIB" else be_used
+        market_value = (our_market_value + be_value) / 2 if be_value is not None else our_market_value
 
         intel = mp_data.get(condition, {})
 
@@ -436,6 +440,11 @@ def build_dashboard_data(
         # Marktplaats active listings (all conditions, for buying opps section)
         mp_listings = marktplaats_deals.get("sets", {}).get(set_number, [])
 
+        # BrickEconomy cached market values (scraped monthly)
+        be_cache = db.get_brickeconomy_cache(set_number) or {}
+        be_nib = be_cache.get("nib")
+        be_used = be_cache.get("used")
+
         # Indicatoren
         hot_score_nib = _compute_hot_score_condition(platforms_data, "NIB")
         hot_score_cib = _compute_hot_score_condition(platforms_data, "CIB")
@@ -444,6 +453,8 @@ def build_dashboard_data(
             platforms_data, seller_lego_counts, lego_set.get("retail_price"),
             is_retired=lego_set.get("is_retired", False),
             retiring_soon=lego_set.get("retiring_soon", False),
+            be_nib=be_nib,
+            be_used=be_used,
         )
         bcg_nib = _compute_bcg_nib(lego_set, platforms_data, hot_score_nib, current_year)
         bcg_cib = _compute_bcg_cib(lego_set, platforms_data, hot_score_cib, current_year)
@@ -474,6 +485,8 @@ def build_dashboard_data(
             "bcg_cib": bcg_cib,
             "price_trend_nib": price_trend_nib,
             "price_trend_cib": price_trend_cib,
+            "brickeconomy_nib": be_nib,
+            "brickeconomy_used": be_used,
         })
 
     total_sold = db.get_total_sold_count()
