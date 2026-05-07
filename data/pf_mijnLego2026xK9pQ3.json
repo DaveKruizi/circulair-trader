@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-07T08:20:08.464398",
+  "generated_at": "2026-05-07T19:21:05.634502",
   "positions": [
     {
       "id": 19,
@@ -89,11 +89,11 @@
       "notes": "Vinted",
       "created_at": "2026-04-11 19:31:09",
       "set_name": "MINI Cooper",
-      "current_p50": 218.5,
-      "effective_price": 196.65,
-      "market_value": 196.65,
-      "unrealized_pnl": 32.34,
-      "unrealized_pnl_pct": 19.7,
+      "current_p50": 218.25,
+      "effective_price": 196.43,
+      "market_value": 196.43,
+      "unrealized_pnl": 32.12,
+      "unrealized_pnl_pct": 19.5,
       "invested": 164.31
     },
     {
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 150.0,
-      "effective_price": 135.0,
-      "market_value": 135.0,
-      "unrealized_pnl": 55.61,
-      "unrealized_pnl_pct": 70.0,
+      "current_p50": 148.75,
+      "effective_price": 133.88,
+      "market_value": 133.88,
+      "unrealized_pnl": 54.49,
+      "unrealized_pnl_pct": 68.6,
       "invested": 79.39
     },
     {
@@ -165,11 +165,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 132.5,
-      "effective_price": 119.25,
-      "market_value": 119.25,
-      "unrealized_pnl": 19.86,
-      "unrealized_pnl_pct": 20.0,
+      "current_p50": 133.75,
+      "effective_price": 120.38,
+      "market_value": 120.38,
+      "unrealized_pnl": 20.99,
+      "unrealized_pnl_pct": 21.1,
       "invested": 99.39
     },
     {
@@ -289,11 +289,11 @@
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2162.04,
-    "unrealized_pnl": 449.81,
+    "total_market_value": 2161.83,
+    "unrealized_pnl": 449.6,
     "unrealized_pnl_pct": 26.3,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 449.81,
+    "unrealized_pnl_12m": 449.6,
     "unrealized_pnl_12m_pct": 26.3
   }
 }
