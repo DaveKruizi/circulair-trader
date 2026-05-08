@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-07T19:21:42.263213",
+  "generated_at": "2026-05-08T07:23:05.022880",
   "positions": [
     {
       "id": 19,
@@ -13,11 +13,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-20 07:32:40",
       "set_name": "Porsche 911",
-      "current_p50": 144.75,
-      "effective_price": 130.28,
-      "market_value": 130.28,
-      "unrealized_pnl": 23.89,
-      "unrealized_pnl_pct": 22.5,
+      "current_p50": 145.0,
+      "effective_price": 130.5,
+      "market_value": 130.5,
+      "unrealized_pnl": 24.11,
+      "unrealized_pnl_pct": 22.7,
       "invested": 106.39
     },
     {
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 158.75,
-      "effective_price": 142.88,
-      "market_value": 142.88,
-      "unrealized_pnl": 43.49,
-      "unrealized_pnl_pct": 43.8,
+      "current_p50": 153.75,
+      "effective_price": 138.38,
+      "market_value": 138.38,
+      "unrealized_pnl": 38.99,
+      "unrealized_pnl_pct": 39.2,
       "invested": 99.39
     },
     {
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:50",
       "set_name": "Fiat 500 Blue",
-      "current_p50": 180.0,
-      "effective_price": 162.0,
-      "market_value": 162.0,
-      "unrealized_pnl": 35.11,
-      "unrealized_pnl_pct": 27.7,
+      "current_p50": 172.5,
+      "effective_price": 155.25,
+      "market_value": 155.25,
+      "unrealized_pnl": 28.36,
+      "unrealized_pnl_pct": 22.4,
       "invested": 126.89
     },
     {
@@ -127,11 +127,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 187.5,
-      "effective_price": 168.75,
-      "market_value": 168.75,
-      "unrealized_pnl": 12.76,
-      "unrealized_pnl_pct": 8.2,
+      "current_p50": 185.0,
+      "effective_price": 166.5,
+      "market_value": 166.5,
+      "unrealized_pnl": 10.51,
+      "unrealized_pnl_pct": 6.7,
       "invested": 155.99
     },
     {
@@ -184,11 +184,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:17:15",
       "set_name": "Porsche 911",
-      "current_p50": 144.75,
-      "effective_price": 130.28,
-      "market_value": 130.28,
-      "unrealized_pnl": 43.39,
-      "unrealized_pnl_pct": 49.9,
+      "current_p50": 145.0,
+      "effective_price": 130.5,
+      "market_value": 130.5,
+      "unrealized_pnl": 43.61,
+      "unrealized_pnl_pct": 50.2,
       "invested": 86.89
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:15:40",
       "set_name": "Porsche 911",
-      "current_p50": 144.75,
-      "effective_price": 130.28,
-      "market_value": 130.28,
-      "unrealized_pnl": 25.89,
-      "unrealized_pnl_pct": 24.8,
+      "current_p50": 145.0,
+      "effective_price": 130.5,
+      "market_value": 130.5,
+      "unrealized_pnl": 26.11,
+      "unrealized_pnl_pct": 25.0,
       "invested": 104.39
     },
     {
@@ -260,11 +260,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 12:21:32",
       "set_name": "Shelby Cobra 427 S/C",
-      "current_p50": 142.25,
-      "effective_price": 128.03,
-      "market_value": 128.03,
-      "unrealized_pnl": 8.04,
-      "unrealized_pnl_pct": 6.7,
+      "current_p50": 139.5,
+      "effective_price": 125.55,
+      "market_value": 125.55,
+      "unrealized_pnl": 5.56,
+      "unrealized_pnl_pct": 4.6,
       "invested": 119.99
     },
     {
@@ -289,11 +289,11 @@
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2161.83,
-    "unrealized_pnl": 449.6,
-    "unrealized_pnl_pct": 26.3,
+    "total_market_value": 2146.51,
+    "unrealized_pnl": 434.28,
+    "unrealized_pnl_pct": 25.4,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 449.6,
-    "unrealized_pnl_12m_pct": 26.3
+    "unrealized_pnl_12m": 434.28,
+    "unrealized_pnl_12m_pct": 25.4
   }
 }
