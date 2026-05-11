@@ -42,6 +42,7 @@ _REPLICA_FULL: tuple[str, ...] = (
     "nep-lego",
     "replica",
     "namaak",
+    "imitatie",
     "bootleg",
     "knockoff",
     "knock-off",
