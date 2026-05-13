@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-13T08:31:24.326990",
+  "generated_at": "2026-05-13T19:23:08.076102",
   "positions": [
     {
       "id": 19,
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 151.25,
-      "effective_price": 136.12,
-      "market_value": 136.12,
-      "unrealized_pnl": 56.73,
-      "unrealized_pnl_pct": 71.5,
+      "current_p50": 150.0,
+      "effective_price": 135.0,
+      "market_value": 135.0,
+      "unrealized_pnl": 55.61,
+      "unrealized_pnl_pct": 70.0,
       "invested": 79.39
     },
     {
@@ -289,11 +289,11 @@
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2124.44,
-    "unrealized_pnl": 412.21,
-    "unrealized_pnl_pct": 24.1,
+    "total_market_value": 2123.32,
+    "unrealized_pnl": 411.09,
+    "unrealized_pnl_pct": 24.0,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 412.21,
-    "unrealized_pnl_12m_pct": 24.1
+    "unrealized_pnl_12m": 411.09,
+    "unrealized_pnl_12m_pct": 24.0
   }
 }
