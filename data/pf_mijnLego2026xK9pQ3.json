@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-15T08:37:31.526202",
+  "generated_at": "2026-05-15T19:11:29.254955",
   "positions": [
     {
       "id": 19,
@@ -127,11 +127,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 176.25,
-      "effective_price": 158.62,
-      "market_value": 158.62,
-      "unrealized_pnl": 2.63,
-      "unrealized_pnl_pct": 1.7,
+      "current_p50": 175.0,
+      "effective_price": 157.5,
+      "market_value": 157.5,
+      "unrealized_pnl": 1.51,
+      "unrealized_pnl_pct": 1.0,
       "invested": 155.99
     },
     {
@@ -289,11 +289,11 @@
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2093.73,
-    "unrealized_pnl": 381.5,
-    "unrealized_pnl_pct": 22.3,
+    "total_market_value": 2092.61,
+    "unrealized_pnl": 380.38,
+    "unrealized_pnl_pct": 22.2,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 381.5,
-    "unrealized_pnl_12m_pct": 22.3
+    "unrealized_pnl_12m": 380.38,
+    "unrealized_pnl_12m_pct": 22.2
   }
 }
