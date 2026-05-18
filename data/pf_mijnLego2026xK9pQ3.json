@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-18T09:11:48.289783",
+  "generated_at": "2026-05-18T19:19:20.374937",
   "positions": [
     {
       "id": 19,
@@ -89,11 +89,11 @@
       "notes": "Vinted",
       "created_at": "2026-04-11 19:31:09",
       "set_name": "MINI Cooper",
-      "current_p50": 213.5,
-      "effective_price": 192.15,
-      "market_value": 192.15,
-      "unrealized_pnl": 27.84,
-      "unrealized_pnl_pct": 16.9,
+      "current_p50": 215.75,
+      "effective_price": 194.18,
+      "market_value": 194.18,
+      "unrealized_pnl": 29.87,
+      "unrealized_pnl_pct": 18.2,
       "invested": 164.31
     },
     {
@@ -289,11 +289,11 @@
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2091.81,
-    "unrealized_pnl": 379.58,
-    "unrealized_pnl_pct": 22.2,
+    "total_market_value": 2093.84,
+    "unrealized_pnl": 381.61,
+    "unrealized_pnl_pct": 22.3,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 379.58,
-    "unrealized_pnl_12m_pct": 22.2
+    "unrealized_pnl_12m": 381.61,
+    "unrealized_pnl_12m_pct": 22.3
   }
 }
