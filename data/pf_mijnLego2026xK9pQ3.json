@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T18:42:37.957207",
+  "generated_at": "2026-05-18T09:11:13.276078",
   "positions": [
     {
       "id": 19,
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 149.75,
-      "effective_price": 134.78,
-      "market_value": 134.78,
-      "unrealized_pnl": 35.39,
-      "unrealized_pnl_pct": 35.6,
+      "current_p50": 150.0,
+      "effective_price": 135.0,
+      "market_value": 135.0,
+      "unrealized_pnl": 35.61,
+      "unrealized_pnl_pct": 35.8,
       "invested": 99.39
     },
     {
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 201.0,
-      "effective_price": 180.9,
-      "market_value": 180.9,
-      "unrealized_pnl": 32.01,
-      "unrealized_pnl_pct": 21.5,
+      "current_p50": 199.75,
+      "effective_price": 179.78,
+      "market_value": 179.78,
+      "unrealized_pnl": 30.89,
+      "unrealized_pnl_pct": 20.7,
       "invested": 148.89
     },
     {
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 148.75,
-      "effective_price": 133.88,
-      "market_value": 133.88,
-      "unrealized_pnl": 54.49,
-      "unrealized_pnl_pct": 68.6,
+      "current_p50": 147.5,
+      "effective_price": 132.75,
+      "market_value": 132.75,
+      "unrealized_pnl": 53.36,
+      "unrealized_pnl_pct": 67.2,
       "invested": 79.39
     },
     {
@@ -127,11 +127,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 175.0,
-      "effective_price": 157.5,
-      "market_value": 157.5,
-      "unrealized_pnl": 1.51,
-      "unrealized_pnl_pct": 1.0,
+      "current_p50": 177.5,
+      "effective_price": 159.75,
+      "market_value": 159.75,
+      "unrealized_pnl": 3.76,
+      "unrealized_pnl_pct": 2.4,
       "invested": 155.99
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:10",
       "set_name": "Ducati Panigale V4 S",
-      "current_p50": 130.0,
-      "effective_price": 117.0,
-      "market_value": 117.0,
-      "unrealized_pnl": 12.61,
-      "unrealized_pnl_pct": 12.1,
+      "current_p50": 132.47,
+      "effective_price": 119.22,
+      "market_value": 119.22,
+      "unrealized_pnl": 14.83,
+      "unrealized_pnl_pct": 14.2,
       "invested": 104.39
     },
     {
@@ -165,11 +165,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 132.5,
-      "effective_price": 119.25,
-      "market_value": 119.25,
-      "unrealized_pnl": 19.86,
-      "unrealized_pnl_pct": 20.0,
+      "current_p50": 133.75,
+      "effective_price": 120.38,
+      "market_value": 120.38,
+      "unrealized_pnl": 20.99,
+      "unrealized_pnl_pct": 21.1,
       "invested": 99.39
     },
     {
@@ -289,11 +289,11 @@
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2088.24,
-    "unrealized_pnl": 376.01,
-    "unrealized_pnl_pct": 22.0,
+    "total_market_value": 2091.81,
+    "unrealized_pnl": 379.58,
+    "unrealized_pnl_pct": 22.2,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 376.01,
-    "unrealized_pnl_12m_pct": 22.0
+    "unrealized_pnl_12m": 379.58,
+    "unrealized_pnl_12m_pct": 22.2
   }
 }
