@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-25T09:52:08.068991",
+  "generated_at": "2026-05-25T19:06:11.160162",
   "positions": [
     {
       "id": 19,
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 241.25,
-      "effective_price": 217.12,
-      "market_value": 217.12,
-      "unrealized_pnl": 68.23,
-      "unrealized_pnl_pct": 45.8,
+      "current_p50": 238.75,
+      "effective_price": 214.88,
+      "market_value": 214.88,
+      "unrealized_pnl": 65.99,
+      "unrealized_pnl_pct": 44.3,
       "invested": 148.89
     },
     {
@@ -289,11 +289,11 @@
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2095.42,
-    "unrealized_pnl": 383.19,
-    "unrealized_pnl_pct": 22.4,
+    "total_market_value": 2093.18,
+    "unrealized_pnl": 380.95,
+    "unrealized_pnl_pct": 22.2,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 383.19,
-    "unrealized_pnl_12m_pct": 22.4
+    "unrealized_pnl_12m": 380.95,
+    "unrealized_pnl_12m_pct": 22.2
   }
 }
