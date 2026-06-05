@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-05T19:52:06.125145",
+  "generated_at": "2026-06-05T19:52:41.964606",
   "positions": [
     {
       "id": 20,
@@ -19,6 +19,25 @@
       "unrealized_pnl": 29.43,
       "unrealized_pnl_pct": 49.9,
       "invested": 58.99
+    },
+    {
+      "id": 21,
+      "set_number": "10262",
+      "condition": "CIB",
+      "quantity": 1,
+      "purchase_price": 57.89,
+      "purchase_date": "2026-06-05",
+      "sold_price": null,
+      "sold_date": null,
+      "notes": "Marktplaats",
+      "created_at": "2026-06-05 19:52:35",
+      "set_name": "James Bond Aston Martin DB5",
+      "current_p50": 125.0,
+      "effective_price": 112.5,
+      "market_value": 112.5,
+      "unrealized_pnl": 54.61,
+      "unrealized_pnl_pct": 94.3,
+      "invested": 57.89
     },
     {
       "id": 19,
@@ -307,12 +326,12 @@
     }
   ],
   "summary": {
-    "total_invested": 1771.22,
-    "total_market_value": 2176.44,
-    "unrealized_pnl": 405.22,
-    "unrealized_pnl_pct": 22.9,
+    "total_invested": 1829.11,
+    "total_market_value": 2288.94,
+    "unrealized_pnl": 459.83,
+    "unrealized_pnl_pct": 25.1,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 405.22,
-    "unrealized_pnl_12m_pct": 22.9
+    "unrealized_pnl_12m": 459.83,
+    "unrealized_pnl_12m_pct": 25.1
   }
 }
