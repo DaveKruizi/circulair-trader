@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-05T09:11:16.375136",
+  "generated_at": "2026-06-05T19:23:22.642870",
   "positions": [
     {
       "id": 19,
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 196.0,
-      "effective_price": 176.4,
-      "market_value": 176.4,
-      "unrealized_pnl": 27.51,
-      "unrealized_pnl_pct": 18.5,
+      "current_p50": 198.5,
+      "effective_price": 178.65,
+      "market_value": 178.65,
+      "unrealized_pnl": 29.76,
+      "unrealized_pnl_pct": 20.0,
       "invested": 148.89
     },
     {
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 143.0,
-      "effective_price": 128.7,
-      "market_value": 128.7,
-      "unrealized_pnl": 49.31,
-      "unrealized_pnl_pct": 62.1,
+      "current_p50": 145.5,
+      "effective_price": 130.95,
+      "market_value": 130.95,
+      "unrealized_pnl": 51.56,
+      "unrealized_pnl_pct": 64.9,
       "invested": 79.39
     },
     {
@@ -289,11 +289,11 @@
   ],
   "summary": {
     "total_invested": 1712.23,
-    "total_market_value": 2083.52,
-    "unrealized_pnl": 371.29,
-    "unrealized_pnl_pct": 21.7,
+    "total_market_value": 2088.02,
+    "unrealized_pnl": 375.79,
+    "unrealized_pnl_pct": 21.9,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 371.29,
-    "unrealized_pnl_12m_pct": 21.7
+    "unrealized_pnl_12m": 375.79,
+    "unrealized_pnl_12m_pct": 21.9
   }
 }
