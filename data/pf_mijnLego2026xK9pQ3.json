@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-05T19:52:41.964606",
+  "generated_at": "2026-06-06T08:21:41.883853",
   "positions": [
     {
       "id": 20,
@@ -13,11 +13,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 98.25,
-      "effective_price": 88.42,
-      "market_value": 88.42,
-      "unrealized_pnl": 29.43,
-      "unrealized_pnl_pct": 49.9,
+      "current_p50": 97.0,
+      "effective_price": 87.3,
+      "market_value": 87.3,
+      "unrealized_pnl": 28.31,
+      "unrealized_pnl_pct": 48.0,
       "invested": 58.99
     },
     {
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-20 07:32:40",
       "set_name": "Porsche 911",
-      "current_p50": 141.25,
-      "effective_price": 127.12,
-      "market_value": 127.12,
-      "unrealized_pnl": 20.73,
-      "unrealized_pnl_pct": 19.5,
+      "current_p50": 142.5,
+      "effective_price": 128.25,
+      "market_value": 128.25,
+      "unrealized_pnl": 21.86,
+      "unrealized_pnl_pct": 20.5,
       "invested": 106.39
     },
     {
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 147.25,
-      "effective_price": 132.53,
-      "market_value": 132.53,
-      "unrealized_pnl": 33.14,
-      "unrealized_pnl_pct": 33.3,
+      "current_p50": 149.5,
+      "effective_price": 134.55,
+      "market_value": 134.55,
+      "unrealized_pnl": 35.16,
+      "unrealized_pnl_pct": 35.4,
       "invested": 99.39
     },
     {
@@ -127,11 +127,11 @@
       "notes": "Vinted",
       "created_at": "2026-04-11 19:31:09",
       "set_name": "MINI Cooper",
-      "current_p50": 218.5,
-      "effective_price": 196.65,
-      "market_value": 196.65,
-      "unrealized_pnl": 32.34,
-      "unrealized_pnl_pct": 19.7,
+      "current_p50": 232.5,
+      "effective_price": 209.25,
+      "market_value": 209.25,
+      "unrealized_pnl": 44.94,
+      "unrealized_pnl_pct": 27.4,
       "invested": 164.31
     },
     {
@@ -184,11 +184,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:10",
       "set_name": "Ducati Panigale V4 S",
-      "current_p50": 129.78,
-      "effective_price": 116.8,
-      "market_value": 116.8,
-      "unrealized_pnl": 12.41,
-      "unrealized_pnl_pct": 11.9,
+      "current_p50": 130.0,
+      "effective_price": 117.0,
+      "market_value": 117.0,
+      "unrealized_pnl": 12.61,
+      "unrealized_pnl_pct": 12.1,
       "invested": 104.39
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 135.0,
-      "effective_price": 121.5,
-      "market_value": 121.5,
-      "unrealized_pnl": 22.11,
-      "unrealized_pnl_pct": 22.2,
+      "current_p50": 133.75,
+      "effective_price": 120.38,
+      "market_value": 120.38,
+      "unrealized_pnl": 20.99,
+      "unrealized_pnl_pct": 21.1,
       "invested": 99.39
     },
     {
@@ -222,11 +222,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:17:15",
       "set_name": "Porsche 911",
-      "current_p50": 141.25,
-      "effective_price": 127.12,
-      "market_value": 127.12,
-      "unrealized_pnl": 40.23,
-      "unrealized_pnl_pct": 46.3,
+      "current_p50": 142.5,
+      "effective_price": 128.25,
+      "market_value": 128.25,
+      "unrealized_pnl": 41.36,
+      "unrealized_pnl_pct": 47.6,
       "invested": 86.89
     },
     {
@@ -241,11 +241,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:15:40",
       "set_name": "Porsche 911",
-      "current_p50": 141.25,
-      "effective_price": 127.12,
-      "market_value": 127.12,
-      "unrealized_pnl": 22.73,
-      "unrealized_pnl_pct": 21.8,
+      "current_p50": 142.5,
+      "effective_price": 128.25,
+      "market_value": 128.25,
+      "unrealized_pnl": 23.86,
+      "unrealized_pnl_pct": 22.9,
       "invested": 104.39
     },
     {
@@ -327,11 +327,11 @@
   ],
   "summary": {
     "total_invested": 1829.11,
-    "total_market_value": 2288.94,
-    "unrealized_pnl": 459.83,
-    "unrealized_pnl_pct": 25.1,
+    "total_market_value": 2304.91,
+    "unrealized_pnl": 475.8,
+    "unrealized_pnl_pct": 26.0,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 459.83,
-    "unrealized_pnl_12m_pct": 25.1
+    "unrealized_pnl_12m": 475.8,
+    "unrealized_pnl_12m_pct": 26.0
   }
 }
