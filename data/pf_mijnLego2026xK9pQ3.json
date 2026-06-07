@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-07T09:18:59.176302",
+  "generated_at": "2026-06-07T09:41:50.231719",
   "positions": [
     {
       "id": 22,
@@ -19,6 +19,25 @@
       "unrealized_pnl": 66.78,
       "unrealized_pnl_pct": 133.6,
       "invested": 50.0
+    },
+    {
+      "id": 23,
+      "set_number": "10248",
+      "condition": "CIB",
+      "quantity": 1,
+      "purchase_price": 100.0,
+      "purchase_date": "2026-06-07",
+      "sold_price": null,
+      "sold_date": null,
+      "notes": "Marktplaats",
+      "created_at": "2026-06-07 09:41:44",
+      "set_name": "Ferrari F40",
+      "current_p50": 202.25,
+      "effective_price": 182.03,
+      "market_value": 182.03,
+      "unrealized_pnl": 82.03,
+      "unrealized_pnl_pct": 82.0,
+      "invested": 100.0
     },
     {
       "id": 20,
@@ -345,12 +364,12 @@
     }
   ],
   "summary": {
-    "total_invested": 1879.11,
-    "total_market_value": 2402.31,
-    "unrealized_pnl": 523.2,
-    "unrealized_pnl_pct": 27.8,
+    "total_invested": 1979.11,
+    "total_market_value": 2584.34,
+    "unrealized_pnl": 605.23,
+    "unrealized_pnl_pct": 30.6,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 523.2,
-    "unrealized_pnl_12m_pct": 27.8
+    "unrealized_pnl_12m": 605.23,
+    "unrealized_pnl_12m_pct": 30.6
   }
 }
