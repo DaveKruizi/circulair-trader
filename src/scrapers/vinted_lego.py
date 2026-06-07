@@ -22,6 +22,7 @@ except ImportError:
 STALE_DAYS = 21
 MIN_PRICE_RATIO = 0.20   # below 20% of retail = reject (scam / wrong product)
 MAX_PRICE_RATIO = 3.00   # above 300% of retail = reject (wrong product)
+MAX_PRICE_RATIO_RETIRED = 10.00
 
 VINTED_PLATFORMS = [
     ("https://www.vinted.nl", "vinted_nl"),
@@ -141,6 +142,7 @@ def scrape_set(
     set_number: str,
     set_name: str,
     retail_price: Optional[float] = None,
+    is_retired: bool = False,
 ) -> dict[str, list[dict]]:
     """
     Scrape Vinted for one LEGO set using 'lego {set_number}' query.
@@ -155,7 +157,8 @@ def scrape_set(
     today = datetime.now().date().isoformat()
 
     min_price = (retail_price * MIN_PRICE_RATIO) if retail_price else 0.0
-    max_price = (retail_price * MAX_PRICE_RATIO) if retail_price else float("inf")
+    ratio = MAX_PRICE_RATIO_RETIRED if is_retired else MAX_PRICE_RATIO
+    max_price = (retail_price * ratio) if retail_price else float("inf")
 
     results: dict[str, list[dict]] = {}
 
@@ -322,8 +325,9 @@ def scrape_all_sets(lego_sets: list[dict]) -> dict[str, dict[str, list[dict]]]:
         name = lego_set["name"]
         retail_price = lego_set.get("retail_price")
         print(f"[Vinted] [{i}/{len(lego_sets)}] Scraping set {set_number}: {name}")
+        is_retired = lego_set.get("is_retired", False)
         try:
-            platform_data = scrape_set(set_number, name, retail_price)
+            platform_data = scrape_set(set_number, name, retail_price, is_retired=is_retired)
             results[set_number] = platform_data
             total = sum(len(v) for v in platform_data.values())
             print(f"  → {total} valid listings found")
