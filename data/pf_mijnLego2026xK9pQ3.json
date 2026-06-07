@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-06T18:55:23.816750",
+  "generated_at": "2026-06-07T08:50:18.457250",
   "positions": [
     {
       "id": 20,
@@ -13,11 +13,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 98.25,
-      "effective_price": 88.42,
-      "market_value": 88.42,
-      "unrealized_pnl": 29.43,
-      "unrealized_pnl_pct": 49.9,
+      "current_p50": 99.5,
+      "effective_price": 89.55,
+      "market_value": 89.55,
+      "unrealized_pnl": 30.56,
+      "unrealized_pnl_pct": 51.8,
       "invested": 58.99
     },
     {
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 149.5,
-      "effective_price": 134.55,
-      "market_value": 134.55,
-      "unrealized_pnl": 35.16,
-      "unrealized_pnl_pct": 35.4,
+      "current_p50": 143.25,
+      "effective_price": 128.93,
+      "market_value": 128.93,
+      "unrealized_pnl": 29.54,
+      "unrealized_pnl_pct": 29.7,
       "invested": 99.39
     },
     {
@@ -89,11 +89,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:50",
       "set_name": "Fiat 500 Blue",
-      "current_p50": 168.75,
-      "effective_price": 151.88,
-      "market_value": 151.88,
-      "unrealized_pnl": 24.99,
-      "unrealized_pnl_pct": 19.7,
+      "current_p50": 167.5,
+      "effective_price": 150.75,
+      "market_value": 150.75,
+      "unrealized_pnl": 23.86,
+      "unrealized_pnl_pct": 18.8,
       "invested": 126.89
     },
     {
@@ -127,11 +127,11 @@
       "notes": "Vinted",
       "created_at": "2026-04-11 19:31:09",
       "set_name": "MINI Cooper",
-      "current_p50": 232.5,
-      "effective_price": 209.25,
-      "market_value": 209.25,
-      "unrealized_pnl": 44.94,
-      "unrealized_pnl_pct": 27.4,
+      "current_p50": 218.5,
+      "effective_price": 196.65,
+      "market_value": 196.65,
+      "unrealized_pnl": 32.34,
+      "unrealized_pnl_pct": 19.7,
       "invested": 164.31
     },
     {
@@ -165,11 +165,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 176.25,
-      "effective_price": 158.62,
-      "market_value": 158.62,
-      "unrealized_pnl": 2.63,
-      "unrealized_pnl_pct": 1.7,
+      "current_p50": 172.5,
+      "effective_price": 155.25,
+      "market_value": 155.25,
+      "unrealized_pnl": -0.74,
+      "unrealized_pnl_pct": -0.5,
       "invested": 155.99
     },
     {
@@ -184,11 +184,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:10",
       "set_name": "Ducati Panigale V4 S",
-      "current_p50": 130.0,
-      "effective_price": 117.0,
-      "market_value": 117.0,
-      "unrealized_pnl": 12.61,
-      "unrealized_pnl_pct": 12.1,
+      "current_p50": 132.47,
+      "effective_price": 119.22,
+      "market_value": 119.22,
+      "unrealized_pnl": 14.83,
+      "unrealized_pnl_pct": 14.2,
       "invested": 104.39
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 135.0,
-      "effective_price": 121.5,
-      "market_value": 121.5,
-      "unrealized_pnl": 22.11,
-      "unrealized_pnl_pct": 22.2,
+      "current_p50": 132.5,
+      "effective_price": 119.25,
+      "market_value": 119.25,
+      "unrealized_pnl": 19.86,
+      "unrealized_pnl_pct": 20.0,
       "invested": 99.39
     },
     {
@@ -327,11 +327,11 @@
   ],
   "summary": {
     "total_invested": 1829.11,
-    "total_market_value": 2307.15,
-    "unrealized_pnl": 478.04,
-    "unrealized_pnl_pct": 26.1,
+    "total_market_value": 2285.53,
+    "unrealized_pnl": 456.42,
+    "unrealized_pnl_pct": 25.0,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 478.04,
-    "unrealized_pnl_12m_pct": 26.1
+    "unrealized_pnl_12m": 456.42,
+    "unrealized_pnl_12m_pct": 25.0
   }
 }
