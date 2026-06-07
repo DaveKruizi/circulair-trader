@@ -29,6 +29,7 @@ DEALS_DATA_PATH = Path("data/marktplaats_deals.json")
 
 MIN_PRICE_RATIO = 0.20
 MAX_PRICE_RATIO = 3.00
+MAX_PRICE_RATIO_RETIRED = 10.00
 
 # Detecteer expliciete setnummers in titels (4–6 cijfers, geen jaarnummers zoals 2024)
 _SET_NUMBER_RE = re.compile(r'\b([0-9]{4,6})\b')
@@ -104,6 +105,7 @@ def scrape_set(
     set_number: str,
     name: str,
     retail_price: Optional[float] = None,
+    is_retired: bool = False,
 ) -> list[dict]:
     """
     Scrape Marktplaats for a single LEGO set.
@@ -134,7 +136,8 @@ def scrape_set(
     today = datetime.now().date().isoformat()
 
     min_price = (retail_price * MIN_PRICE_RATIO) if retail_price else 0.0
-    max_price = (retail_price * MAX_PRICE_RATIO) if retail_price else float("inf")
+    ratio = MAX_PRICE_RATIO_RETIRED if is_retired else MAX_PRICE_RATIO
+    max_price = (retail_price * ratio) if retail_price else float("inf")
 
     # Significante woorden uit de setnaam (≥5 tekens), eenmalig berekend.
     # Drempel is 5 i.p.v. 4 om korte maar ambigue woorden ("Mini", "Fiat", "Ford")
@@ -387,8 +390,9 @@ def scrape_all_sets(lego_sets: list[dict]) -> dict[str, list[dict]]:
         set_number = lego_set["set_number"]
         name = lego_set["name"]
         retail_price = lego_set.get("retail_price")
+        is_retired = lego_set.get("is_retired", False)
         print(f"[Marktplaats] [{i}/{len(lego_sets)}] {set_number}: {name}")
-        listings, all_seen = scrape_set(set_number, name, retail_price)
+        listings, all_seen = scrape_set(set_number, name, retail_price, is_retired=is_retired)
         results[set_number] = listings
         print(f"  → {len(listings)} valid listings found")
 
