@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-09T09:01:29.367642",
+  "generated_at": "2026-06-09T19:40:52.216859",
   "positions": [
     {
       "id": 22,
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:41:44",
       "set_name": "Ferrari F40",
-      "current_p50": 209.75,
-      "effective_price": 188.78,
-      "market_value": 188.78,
-      "unrealized_pnl": 88.78,
-      "unrealized_pnl_pct": 88.8,
+      "current_p50": 210.0,
+      "effective_price": 189.0,
+      "market_value": 189.0,
+      "unrealized_pnl": 89.0,
+      "unrealized_pnl_pct": 89.0,
       "invested": 100.0
     },
     {
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 97.25,
-      "effective_price": 87.53,
-      "market_value": 87.53,
-      "unrealized_pnl": 28.54,
-      "unrealized_pnl_pct": 48.4,
+      "current_p50": 97.5,
+      "effective_price": 87.75,
+      "market_value": 87.75,
+      "unrealized_pnl": 28.76,
+      "unrealized_pnl_pct": 48.8,
       "invested": 58.99
     },
     {
@@ -165,11 +165,11 @@
       "notes": "Vinted",
       "created_at": "2026-04-11 19:31:09",
       "set_name": "MINI Cooper",
-      "current_p50": 233.75,
-      "effective_price": 210.38,
-      "market_value": 210.38,
-      "unrealized_pnl": 46.07,
-      "unrealized_pnl_pct": 28.0,
+      "current_p50": 236.25,
+      "effective_price": 212.62,
+      "market_value": 212.62,
+      "unrealized_pnl": 48.31,
+      "unrealized_pnl_pct": 29.4,
       "invested": 164.31
     },
     {
@@ -222,11 +222,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:10",
       "set_name": "Ducati Panigale V4 S",
-      "current_p50": 132.47,
-      "effective_price": 119.22,
-      "market_value": 119.22,
-      "unrealized_pnl": 14.83,
-      "unrealized_pnl_pct": 14.2,
+      "current_p50": 133.72,
+      "effective_price": 120.35,
+      "market_value": 120.35,
+      "unrealized_pnl": 15.96,
+      "unrealized_pnl_pct": 15.3,
       "invested": 104.39
     },
     {
@@ -336,11 +336,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 12:21:32",
       "set_name": "Shelby Cobra 427 S/C",
-      "current_p50": 135.0,
-      "effective_price": 121.5,
-      "market_value": 121.5,
-      "unrealized_pnl": 1.51,
-      "unrealized_pnl_pct": 1.3,
+      "current_p50": 133.75,
+      "effective_price": 120.38,
+      "market_value": 120.38,
+      "unrealized_pnl": 0.39,
+      "unrealized_pnl_pct": 0.3,
       "invested": 119.99
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2598.29,
-    "unrealized_pnl": 619.18,
-    "unrealized_pnl_pct": 31.3,
+    "total_market_value": 2600.98,
+    "unrealized_pnl": 621.87,
+    "unrealized_pnl_pct": 31.4,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 619.18,
-    "unrealized_pnl_12m_pct": 31.3
+    "unrealized_pnl_12m": 621.87,
+    "unrealized_pnl_12m_pct": 31.4
   }
 }
