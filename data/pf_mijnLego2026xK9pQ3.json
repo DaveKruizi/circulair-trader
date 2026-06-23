@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T08:59:44.190256",
+  "generated_at": "2026-06-23T19:31:44.465507",
   "positions": [
     {
       "id": 22,
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 149.5,
-      "effective_price": 134.55,
-      "market_value": 134.55,
-      "unrealized_pnl": 35.16,
-      "unrealized_pnl_pct": 35.4,
+      "current_p50": 150.0,
+      "effective_price": 135.0,
+      "market_value": 135.0,
+      "unrealized_pnl": 35.61,
+      "unrealized_pnl_pct": 35.8,
       "invested": 99.39
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 198.0,
-      "effective_price": 178.2,
-      "market_value": 178.2,
-      "unrealized_pnl": 29.31,
-      "unrealized_pnl_pct": 19.7,
+      "current_p50": 198.25,
+      "effective_price": 178.43,
+      "market_value": 178.43,
+      "unrealized_pnl": 29.54,
+      "unrealized_pnl_pct": 19.8,
       "invested": 148.89
     },
     {
@@ -336,11 +336,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 12:21:32",
       "set_name": "Shelby Cobra 427 S/C",
-      "current_p50": 135.0,
-      "effective_price": 121.5,
-      "market_value": 121.5,
-      "unrealized_pnl": 1.51,
-      "unrealized_pnl_pct": 1.3,
+      "current_p50": 140.0,
+      "effective_price": 126.0,
+      "market_value": 126.0,
+      "unrealized_pnl": 6.01,
+      "unrealized_pnl_pct": 5.0,
       "invested": 119.99
     },
     {
@@ -355,21 +355,21 @@
       "notes": "",
       "created_at": "2026-04-11 10:19:17",
       "set_name": "Porsche 911",
-      "current_p50": 111.5,
-      "effective_price": 100.35,
-      "market_value": 100.35,
-      "unrealized_pnl": 54.4,
-      "unrealized_pnl_pct": 118.4,
+      "current_p50": 109.0,
+      "effective_price": 98.1,
+      "market_value": 98.1,
+      "unrealized_pnl": 52.15,
+      "unrealized_pnl_pct": 113.5,
       "invested": 45.95
     }
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2556.82,
-    "unrealized_pnl": 577.71,
-    "unrealized_pnl_pct": 29.2,
+    "total_market_value": 2559.75,
+    "unrealized_pnl": 580.64,
+    "unrealized_pnl_pct": 29.3,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 577.71,
-    "unrealized_pnl_12m_pct": 29.2
+    "unrealized_pnl_12m": 580.64,
+    "unrealized_pnl_12m_pct": 29.3
   }
 }
