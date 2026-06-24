@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-24T08:54:21.104027",
+  "generated_at": "2026-06-24T19:17:08.126197",
   "positions": [
     {
       "id": 22,
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 98.25,
-      "effective_price": 88.42,
-      "market_value": 88.42,
-      "unrealized_pnl": 29.43,
-      "unrealized_pnl_pct": 49.9,
+      "current_p50": 97.25,
+      "effective_price": 87.53,
+      "market_value": 87.53,
+      "unrealized_pnl": 28.54,
+      "unrealized_pnl_pct": 48.4,
       "invested": 58.99
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 198.25,
-      "effective_price": 178.43,
-      "market_value": 178.43,
-      "unrealized_pnl": 29.54,
-      "unrealized_pnl_pct": 19.8,
+      "current_p50": 198.0,
+      "effective_price": 178.2,
+      "market_value": 178.2,
+      "unrealized_pnl": 29.31,
+      "unrealized_pnl_pct": 19.7,
       "invested": 148.89
     },
     {
@@ -165,11 +165,11 @@
       "notes": "Vinted",
       "created_at": "2026-04-11 19:31:09",
       "set_name": "MINI Cooper",
-      "current_p50": 218.5,
-      "effective_price": 196.65,
-      "market_value": 196.65,
-      "unrealized_pnl": 32.34,
-      "unrealized_pnl_pct": 19.7,
+      "current_p50": 216.0,
+      "effective_price": 194.4,
+      "market_value": 194.4,
+      "unrealized_pnl": 30.09,
+      "unrealized_pnl_pct": 18.3,
       "invested": 164.31
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2550.51,
-    "unrealized_pnl": 571.4,
-    "unrealized_pnl_pct": 28.9,
+    "total_market_value": 2547.14,
+    "unrealized_pnl": 568.03,
+    "unrealized_pnl_pct": 28.7,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 571.4,
-    "unrealized_pnl_12m_pct": 28.9
+    "unrealized_pnl_12m": 568.03,
+    "unrealized_pnl_12m_pct": 28.7
   }
 }
