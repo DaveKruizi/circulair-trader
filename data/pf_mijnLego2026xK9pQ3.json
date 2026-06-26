@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T08:54:57.417637",
+  "generated_at": "2026-06-26T19:24:02.288208",
   "positions": [
     {
       "id": 22,
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 97.5,
-      "effective_price": 87.75,
-      "market_value": 87.75,
-      "unrealized_pnl": 28.76,
-      "unrealized_pnl_pct": 48.8,
+      "current_p50": 95.0,
+      "effective_price": 85.5,
+      "market_value": 85.5,
+      "unrealized_pnl": 26.51,
+      "unrealized_pnl_pct": 44.9,
       "invested": 58.99
     },
     {
@@ -298,11 +298,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:19:28",
       "set_name": "Lamborghini Countach 5000 QV",
-      "current_p50": 150.0,
-      "effective_price": 135.0,
-      "market_value": 135.0,
-      "unrealized_pnl": 0.01,
-      "unrealized_pnl_pct": 0.0,
+      "current_p50": 155.0,
+      "effective_price": 139.5,
+      "market_value": 139.5,
+      "unrealized_pnl": 4.51,
+      "unrealized_pnl_pct": 3.3,
       "invested": 134.99
     },
     {
@@ -317,11 +317,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:19:51",
       "set_name": "Lamborghini Countach 5000 QV",
-      "current_p50": 150.0,
-      "effective_price": 135.0,
-      "market_value": 135.0,
-      "unrealized_pnl": 0.01,
-      "unrealized_pnl_pct": 0.0,
+      "current_p50": 155.0,
+      "effective_price": 139.5,
+      "market_value": 139.5,
+      "unrealized_pnl": 4.51,
+      "unrealized_pnl_pct": 3.3,
       "invested": 134.99
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2544.73,
-    "unrealized_pnl": 565.62,
-    "unrealized_pnl_pct": 28.6,
+    "total_market_value": 2551.48,
+    "unrealized_pnl": 572.37,
+    "unrealized_pnl_pct": 28.9,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 565.62,
-    "unrealized_pnl_12m_pct": 28.6
+    "unrealized_pnl_12m": 572.37,
+    "unrealized_pnl_12m_pct": 28.9
   }
 }
