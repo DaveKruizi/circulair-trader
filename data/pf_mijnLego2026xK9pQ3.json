@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T19:24:39.431376",
+  "generated_at": "2026-06-27T08:18:11.552227",
   "positions": [
     {
       "id": 22,
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:41:44",
       "set_name": "Ferrari F40",
-      "current_p50": 190.0,
-      "effective_price": 171.0,
-      "market_value": 171.0,
-      "unrealized_pnl": 71.0,
-      "unrealized_pnl_pct": 71.0,
+      "current_p50": 191.25,
+      "effective_price": 172.12,
+      "market_value": 172.12,
+      "unrealized_pnl": 72.12,
+      "unrealized_pnl_pct": 72.1,
       "invested": 100.0
     },
     {
@@ -184,11 +184,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 137.5,
-      "effective_price": 123.75,
-      "market_value": 123.75,
-      "unrealized_pnl": 44.36,
-      "unrealized_pnl_pct": 55.9,
+      "current_p50": 136.25,
+      "effective_price": 122.62,
+      "market_value": 122.62,
+      "unrealized_pnl": 43.23,
+      "unrealized_pnl_pct": 54.5,
       "invested": 79.39
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 177.0,
-      "effective_price": 159.3,
-      "market_value": 159.3,
-      "unrealized_pnl": 3.31,
-      "unrealized_pnl_pct": 2.1,
+      "current_p50": 177.45,
+      "effective_price": 159.7,
+      "market_value": 159.7,
+      "unrealized_pnl": 3.71,
+      "unrealized_pnl_pct": 2.4,
       "invested": 155.99
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2551.48,
-    "unrealized_pnl": 572.37,
+    "total_market_value": 2551.87,
+    "unrealized_pnl": 572.76,
     "unrealized_pnl_pct": 28.9,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 572.37,
+    "unrealized_pnl_12m": 572.76,
     "unrealized_pnl_12m_pct": 28.9
   }
 }
