@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-27T08:18:42.435213",
+  "generated_at": "2026-06-27T18:51:05.113120",
   "positions": [
     {
       "id": 22,
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:41:44",
       "set_name": "Ferrari F40",
-      "current_p50": 191.25,
-      "effective_price": 172.12,
-      "market_value": 172.12,
-      "unrealized_pnl": 72.12,
-      "unrealized_pnl_pct": 72.1,
+      "current_p50": 192.25,
+      "effective_price": 173.03,
+      "market_value": 173.03,
+      "unrealized_pnl": 73.03,
+      "unrealized_pnl_pct": 73.0,
       "invested": 100.0
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 198.25,
-      "effective_price": 178.43,
-      "market_value": 178.43,
-      "unrealized_pnl": 29.54,
-      "unrealized_pnl_pct": 19.8,
+      "current_p50": 198.5,
+      "effective_price": 178.65,
+      "market_value": 178.65,
+      "unrealized_pnl": 29.76,
+      "unrealized_pnl_pct": 20.0,
       "invested": 148.89
     },
     {
@@ -355,21 +355,21 @@
       "notes": "",
       "created_at": "2026-04-11 10:19:17",
       "set_name": "Porsche 911",
-      "current_p50": 110.0,
-      "effective_price": 99.0,
-      "market_value": 99.0,
-      "unrealized_pnl": 53.05,
-      "unrealized_pnl_pct": 115.5,
+      "current_p50": 115.0,
+      "effective_price": 103.5,
+      "market_value": 103.5,
+      "unrealized_pnl": 57.55,
+      "unrealized_pnl_pct": 125.2,
       "invested": 45.95
     }
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2551.87,
-    "unrealized_pnl": 572.76,
-    "unrealized_pnl_pct": 28.9,
+    "total_market_value": 2557.5,
+    "unrealized_pnl": 578.39,
+    "unrealized_pnl_pct": 29.2,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 572.76,
-    "unrealized_pnl_12m_pct": 28.9
+    "unrealized_pnl_12m": 578.39,
+    "unrealized_pnl_12m_pct": 29.2
   }
 }
