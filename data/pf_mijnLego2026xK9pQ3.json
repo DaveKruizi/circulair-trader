@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T08:49:05.039792",
+  "generated_at": "2026-06-28T18:50:47.674233",
   "positions": [
     {
       "id": 22,
@@ -13,11 +13,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:18:53",
       "set_name": "MINI Cooper",
-      "current_p50": 129.75,
-      "effective_price": 116.78,
-      "market_value": 116.78,
-      "unrealized_pnl": 66.78,
-      "unrealized_pnl_pct": 133.6,
+      "current_p50": 132.25,
+      "effective_price": 119.03,
+      "market_value": 119.03,
+      "unrealized_pnl": 69.03,
+      "unrealized_pnl_pct": 138.1,
       "invested": 50.0
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 201.0,
-      "effective_price": 180.9,
-      "market_value": 180.9,
-      "unrealized_pnl": 32.01,
-      "unrealized_pnl_pct": 21.5,
+      "current_p50": 198.5,
+      "effective_price": 178.65,
+      "market_value": 178.65,
+      "unrealized_pnl": 29.76,
+      "unrealized_pnl_pct": 20.0,
       "invested": 148.89
     },
     {
