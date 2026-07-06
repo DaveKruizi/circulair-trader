@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-05T18:43:30.516270",
+  "generated_at": "2026-07-06T09:51:36.555085",
   "positions": [
     {
       "id": 22,
@@ -13,11 +13,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:18:53",
       "set_name": "MINI Cooper",
-      "current_p50": 137.0,
-      "effective_price": 123.3,
-      "market_value": 123.3,
-      "unrealized_pnl": 73.3,
-      "unrealized_pnl_pct": 146.6,
+      "current_p50": 134.75,
+      "effective_price": 121.28,
+      "market_value": 121.28,
+      "unrealized_pnl": 71.28,
+      "unrealized_pnl_pct": 142.6,
       "invested": 50.0
     },
     {
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:41:44",
       "set_name": "Ferrari F40",
-      "current_p50": 195.0,
-      "effective_price": 175.5,
-      "market_value": 175.5,
-      "unrealized_pnl": 75.5,
-      "unrealized_pnl_pct": 75.5,
+      "current_p50": 187.5,
+      "effective_price": 168.75,
+      "market_value": 168.75,
+      "unrealized_pnl": 68.75,
+      "unrealized_pnl_pct": 68.8,
       "invested": 100.0
     },
     {
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 99.0,
-      "effective_price": 89.1,
-      "market_value": 89.1,
-      "unrealized_pnl": 30.11,
-      "unrealized_pnl_pct": 51.0,
+      "current_p50": 97.25,
+      "effective_price": 87.53,
+      "market_value": 87.53,
+      "unrealized_pnl": 28.54,
+      "unrealized_pnl_pct": 48.4,
       "invested": 58.99
     },
     {
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 161.25,
-      "effective_price": 145.12,
-      "market_value": 145.12,
-      "unrealized_pnl": 45.73,
-      "unrealized_pnl_pct": 46.0,
+      "current_p50": 167.5,
+      "effective_price": 150.75,
+      "market_value": 150.75,
+      "unrealized_pnl": 51.36,
+      "unrealized_pnl_pct": 51.7,
       "invested": 99.39
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 198.25,
-      "effective_price": 178.43,
-      "market_value": 178.43,
-      "unrealized_pnl": 29.54,
-      "unrealized_pnl_pct": 19.8,
+      "current_p50": 184.25,
+      "effective_price": 165.83,
+      "market_value": 165.83,
+      "unrealized_pnl": 16.94,
+      "unrealized_pnl_pct": 11.4,
       "invested": 148.89
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2561.35,
-    "unrealized_pnl": 582.24,
-    "unrealized_pnl_pct": 29.4,
+    "total_market_value": 2544.04,
+    "unrealized_pnl": 564.93,
+    "unrealized_pnl_pct": 28.5,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 582.24,
-    "unrealized_pnl_12m_pct": 29.4
+    "unrealized_pnl_12m": 564.93,
+    "unrealized_pnl_12m_pct": 28.5
   }
 }
