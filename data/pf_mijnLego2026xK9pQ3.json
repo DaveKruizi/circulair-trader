@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-19T07:55:32.322092",
+  "generated_at": "2026-07-19T18:22:47.714898",
   "positions": [
     {
       "id": 22,
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 98.25,
-      "effective_price": 88.42,
-      "market_value": 88.42,
-      "unrealized_pnl": 29.43,
-      "unrealized_pnl_pct": 49.9,
+      "current_p50": 97.0,
+      "effective_price": 87.3,
+      "market_value": 87.3,
+      "unrealized_pnl": 28.31,
+      "unrealized_pnl_pct": 48.0,
       "invested": 58.99
     },
     {
@@ -89,11 +89,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-20 07:32:40",
       "set_name": "Porsche 911",
-      "current_p50": 134.5,
-      "effective_price": 121.05,
-      "market_value": 121.05,
-      "unrealized_pnl": 14.66,
-      "unrealized_pnl_pct": 13.8,
+      "current_p50": 135.0,
+      "effective_price": 121.5,
+      "market_value": 121.5,
+      "unrealized_pnl": 15.11,
+      "unrealized_pnl_pct": 14.2,
       "invested": 106.39
     },
     {
@@ -127,11 +127,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:50",
       "set_name": "Fiat 500 Blue",
-      "current_p50": 166.25,
-      "effective_price": 149.62,
-      "market_value": 149.62,
-      "unrealized_pnl": 22.73,
-      "unrealized_pnl_pct": 17.9,
+      "current_p50": 170.0,
+      "effective_price": 153.0,
+      "market_value": 153.0,
+      "unrealized_pnl": 26.11,
+      "unrealized_pnl_pct": 20.6,
       "invested": 126.89
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 212.0,
-      "effective_price": 190.8,
-      "market_value": 190.8,
-      "unrealized_pnl": 41.91,
-      "unrealized_pnl_pct": 28.1,
+      "current_p50": 212.25,
+      "effective_price": 191.03,
+      "market_value": 191.03,
+      "unrealized_pnl": 42.14,
+      "unrealized_pnl_pct": 28.3,
       "invested": 148.89
     },
     {
@@ -184,11 +184,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 137.5,
-      "effective_price": 123.75,
-      "market_value": 123.75,
-      "unrealized_pnl": 44.36,
-      "unrealized_pnl_pct": 55.9,
+      "current_p50": 132.5,
+      "effective_price": 119.25,
+      "market_value": 119.25,
+      "unrealized_pnl": 39.86,
+      "unrealized_pnl_pct": 50.2,
       "invested": 79.39
     },
     {
@@ -260,11 +260,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:17:15",
       "set_name": "Porsche 911",
-      "current_p50": 134.5,
-      "effective_price": 121.05,
-      "market_value": 121.05,
-      "unrealized_pnl": 34.16,
-      "unrealized_pnl_pct": 39.3,
+      "current_p50": 135.0,
+      "effective_price": 121.5,
+      "market_value": 121.5,
+      "unrealized_pnl": 34.61,
+      "unrealized_pnl_pct": 39.8,
       "invested": 86.89
     },
     {
@@ -279,11 +279,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:15:40",
       "set_name": "Porsche 911",
-      "current_p50": 134.5,
-      "effective_price": 121.05,
-      "market_value": 121.05,
-      "unrealized_pnl": 16.66,
-      "unrealized_pnl_pct": 16.0,
+      "current_p50": 135.0,
+      "effective_price": 121.5,
+      "market_value": 121.5,
+      "unrealized_pnl": 17.11,
+      "unrealized_pnl_pct": 16.4,
       "invested": 104.39
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2579.83,
-    "unrealized_pnl": 600.72,
-    "unrealized_pnl_pct": 30.4,
+    "total_market_value": 2579.17,
+    "unrealized_pnl": 600.06,
+    "unrealized_pnl_pct": 30.3,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 600.72,
-    "unrealized_pnl_12m_pct": 30.4
+    "unrealized_pnl_12m": 600.06,
+    "unrealized_pnl_12m_pct": 30.3
   }
 }
