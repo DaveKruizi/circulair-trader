@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T08:21:47.150999",
+  "generated_at": "2026-07-29T18:38:27.418912",
   "positions": [
     {
       "id": 22,
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 123.75,
-      "effective_price": 111.38,
-      "market_value": 111.38,
-      "unrealized_pnl": 53.49,
-      "unrealized_pnl_pct": 92.4,
+      "current_p50": 126.25,
+      "effective_price": 113.62,
+      "market_value": 113.62,
+      "unrealized_pnl": 55.73,
+      "unrealized_pnl_pct": 96.3,
       "invested": 57.89
     },
     {
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 150.0,
-      "effective_price": 135.0,
-      "market_value": 135.0,
-      "unrealized_pnl": 35.61,
-      "unrealized_pnl_pct": 35.8,
+      "current_p50": 155.0,
+      "effective_price": 139.5,
+      "market_value": 139.5,
+      "unrealized_pnl": 40.11,
+      "unrealized_pnl_pct": 40.4,
       "invested": 99.39
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 193.5,
-      "effective_price": 174.15,
-      "market_value": 174.15,
-      "unrealized_pnl": 25.26,
-      "unrealized_pnl_pct": 17.0,
+      "current_p50": 205.5,
+      "effective_price": 184.95,
+      "market_value": 184.95,
+      "unrealized_pnl": 36.06,
+      "unrealized_pnl_pct": 24.2,
       "invested": 148.89
     },
     {
@@ -184,11 +184,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 133.75,
-      "effective_price": 120.38,
-      "market_value": 120.38,
-      "unrealized_pnl": 40.99,
-      "unrealized_pnl_pct": 51.6,
+      "current_p50": 137.5,
+      "effective_price": 123.75,
+      "market_value": 123.75,
+      "unrealized_pnl": 44.36,
+      "unrealized_pnl_pct": 55.9,
       "invested": 79.39
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2585.68,
-    "unrealized_pnl": 606.57,
-    "unrealized_pnl_pct": 30.6,
+    "total_market_value": 2606.59,
+    "unrealized_pnl": 627.48,
+    "unrealized_pnl_pct": 31.7,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 606.57,
-    "unrealized_pnl_12m_pct": 30.6
+    "unrealized_pnl_12m": 627.48,
+    "unrealized_pnl_12m_pct": 31.7
   }
 }
