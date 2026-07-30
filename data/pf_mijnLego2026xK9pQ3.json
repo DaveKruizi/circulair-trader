@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T18:38:57.721418",
+  "generated_at": "2026-07-30T08:09:26.498156",
   "positions": [
     {
       "id": 22,
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:41:44",
       "set_name": "Ferrari F40",
-      "current_p50": 206.5,
-      "effective_price": 185.85,
-      "market_value": 185.85,
-      "unrealized_pnl": 85.85,
-      "unrealized_pnl_pct": 85.9,
+      "current_p50": 200.0,
+      "effective_price": 180.0,
+      "market_value": 180.0,
+      "unrealized_pnl": 80.0,
+      "unrealized_pnl_pct": 80.0,
       "invested": 100.0
     },
     {
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 112.5,
-      "effective_price": 101.25,
-      "market_value": 101.25,
-      "unrealized_pnl": 42.26,
-      "unrealized_pnl_pct": 71.6,
+      "current_p50": 111.25,
+      "effective_price": 100.12,
+      "market_value": 100.12,
+      "unrealized_pnl": 41.13,
+      "unrealized_pnl_pct": 69.7,
       "invested": 58.99
     },
     {
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 126.25,
-      "effective_price": 113.62,
-      "market_value": 113.62,
-      "unrealized_pnl": 55.73,
-      "unrealized_pnl_pct": 96.3,
+      "current_p50": 127.5,
+      "effective_price": 114.75,
+      "market_value": 114.75,
+      "unrealized_pnl": 56.86,
+      "unrealized_pnl_pct": 98.2,
       "invested": 57.89
     },
     {
@@ -89,11 +89,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-20 07:32:40",
       "set_name": "Porsche 911",
-      "current_p50": 132.5,
-      "effective_price": 119.25,
-      "market_value": 119.25,
-      "unrealized_pnl": 12.86,
-      "unrealized_pnl_pct": 12.1,
+      "current_p50": 131.25,
+      "effective_price": 118.12,
+      "market_value": 118.12,
+      "unrealized_pnl": 11.73,
+      "unrealized_pnl_pct": 11.0,
       "invested": 106.39
     },
     {
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 155.0,
-      "effective_price": 139.5,
-      "market_value": 139.5,
-      "unrealized_pnl": 40.11,
-      "unrealized_pnl_pct": 40.4,
+      "current_p50": 150.0,
+      "effective_price": 135.0,
+      "market_value": 135.0,
+      "unrealized_pnl": 35.61,
+      "unrealized_pnl_pct": 35.8,
       "invested": 99.39
     },
     {
@@ -127,11 +127,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:50",
       "set_name": "Fiat 500 Blue",
-      "current_p50": 170.0,
-      "effective_price": 153.0,
-      "market_value": 153.0,
-      "unrealized_pnl": 26.11,
-      "unrealized_pnl_pct": 20.6,
+      "current_p50": 167.25,
+      "effective_price": 150.53,
+      "market_value": 150.53,
+      "unrealized_pnl": 23.64,
+      "unrealized_pnl_pct": 18.6,
       "invested": 126.89
     },
     {
@@ -165,11 +165,11 @@
       "notes": "Vinted",
       "created_at": "2026-04-11 19:31:09",
       "set_name": "MINI Cooper",
-      "current_p50": 214.75,
-      "effective_price": 193.28,
-      "market_value": 193.28,
-      "unrealized_pnl": 28.97,
-      "unrealized_pnl_pct": 17.6,
+      "current_p50": 222.25,
+      "effective_price": 200.03,
+      "market_value": 200.03,
+      "unrealized_pnl": 35.72,
+      "unrealized_pnl_pct": 21.7,
       "invested": 164.31
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 171.22,
-      "effective_price": 154.1,
-      "market_value": 154.1,
-      "unrealized_pnl": -1.89,
-      "unrealized_pnl_pct": -1.2,
+      "current_p50": 173.47,
+      "effective_price": 156.12,
+      "market_value": 156.12,
+      "unrealized_pnl": 0.13,
+      "unrealized_pnl_pct": 0.1,
       "invested": 155.99
     },
     {
@@ -241,10 +241,10 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 142.49,
-      "effective_price": 128.24,
-      "market_value": 128.24,
-      "unrealized_pnl": 28.85,
+      "current_p50": 142.5,
+      "effective_price": 128.25,
+      "market_value": 128.25,
+      "unrealized_pnl": 28.86,
       "unrealized_pnl_pct": 29.0,
       "invested": 99.39
     },
@@ -260,11 +260,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:17:15",
       "set_name": "Porsche 911",
-      "current_p50": 132.5,
-      "effective_price": 119.25,
-      "market_value": 119.25,
-      "unrealized_pnl": 32.36,
-      "unrealized_pnl_pct": 37.2,
+      "current_p50": 131.25,
+      "effective_price": 118.12,
+      "market_value": 118.12,
+      "unrealized_pnl": 31.23,
+      "unrealized_pnl_pct": 35.9,
       "invested": 86.89
     },
     {
@@ -279,11 +279,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:15:40",
       "set_name": "Porsche 911",
-      "current_p50": 132.5,
-      "effective_price": 119.25,
-      "market_value": 119.25,
-      "unrealized_pnl": 14.86,
-      "unrealized_pnl_pct": 14.2,
+      "current_p50": 131.25,
+      "effective_price": 118.12,
+      "market_value": 118.12,
+      "unrealized_pnl": 13.73,
+      "unrealized_pnl_pct": 13.2,
       "invested": 104.39
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2606.59,
-    "unrealized_pnl": 627.48,
-    "unrealized_pnl_pct": 31.7,
+    "total_market_value": 2599.16,
+    "unrealized_pnl": 620.05,
+    "unrealized_pnl_pct": 31.3,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 627.48,
-    "unrealized_pnl_12m_pct": 31.7
+    "unrealized_pnl_12m": 620.05,
+    "unrealized_pnl_12m_pct": 31.3
   }
 }
