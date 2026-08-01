@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T18:59:43.761371",
+  "generated_at": "2026-08-01T07:58:45.875937",
   "positions": [
     {
       "id": 22,
@@ -127,11 +127,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:50",
       "set_name": "Fiat 500 Blue",
-      "current_p50": 170.0,
-      "effective_price": 153.0,
-      "market_value": 153.0,
-      "unrealized_pnl": 26.11,
-      "unrealized_pnl_pct": 20.6,
+      "current_p50": 171.25,
+      "effective_price": 154.12,
+      "market_value": 154.12,
+      "unrealized_pnl": 27.23,
+      "unrealized_pnl_pct": 21.5,
       "invested": 126.89
     },
     {
@@ -241,11 +241,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 137.5,
-      "effective_price": 123.75,
-      "market_value": 123.75,
-      "unrealized_pnl": 24.36,
-      "unrealized_pnl_pct": 24.5,
+      "current_p50": 142.5,
+      "effective_price": 128.25,
+      "market_value": 128.25,
+      "unrealized_pnl": 28.86,
+      "unrealized_pnl_pct": 29.0,
       "invested": 99.39
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2608.87,
-    "unrealized_pnl": 629.76,
-    "unrealized_pnl_pct": 31.8,
+    "total_market_value": 2614.49,
+    "unrealized_pnl": 635.38,
+    "unrealized_pnl_pct": 32.1,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 629.76,
-    "unrealized_pnl_12m_pct": 31.8
+    "unrealized_pnl_12m": 635.38,
+    "unrealized_pnl_12m_pct": 32.1
   }
 }
