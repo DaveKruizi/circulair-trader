@@ -85,7 +85,26 @@ jobs:
             echo "output/index.html bestaat — placeholder overgeslagen"
           fi
 
-      - name: Dashboard online zetten (GitHub Pages)
+      # Tweede poging bij een transient HTTP 503 op de git push (GitHub-infra),
+      # zodat een verder geslaagde run niet alsnog rood wordt.
+      - name: Dashboard online zetten (GitHub Pages, poging 1)
+        id: publish1
+        continue-on-error: true
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
+          keep_files: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Dashboard herdeployment ${{ github.run_id }}'
+
+      - name: Wachten voor herpoging
+        if: steps.publish1.outcome == 'failure'
+        run: sleep 15
+
+      - name: Dashboard online zetten (GitHub Pages, poging 2)
+        if: steps.publish1.outcome == 'failure'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

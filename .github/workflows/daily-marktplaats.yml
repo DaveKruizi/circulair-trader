@@ -98,7 +98,27 @@ jobs:
           path: data/
           key: lego-data-v2-${{ github.run_id }}
 
-      - name: Dashboard online zetten (GitHub Pages)
+      # Publiceren naar GitHub Pages kan sporadisch falen op een transient
+      # HTTP 503 bij de git push (GitHub-infra), waardoor een verder geslaagde
+      # run alsnog rood wordt. Daarom een tweede poging bij een mislukte eerste.
+      - name: Dashboard online zetten (GitHub Pages, poging 1)
+        id: publish1
+        continue-on-error: true
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
+          keep_files: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'LEGO Dashboard update ${{ github.run_id }}'
+
+      - name: Wachten voor herpoging
+        if: steps.publish1.outcome == 'failure'
+        run: sleep 15
+
+      - name: Dashboard online zetten (GitHub Pages, poging 2)
+        if: steps.publish1.outcome == 'failure'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
