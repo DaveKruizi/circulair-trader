@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04T09:08:13.785184",
+  "generated_at": "2026-08-04T09:08:35.515640",
   "positions": [
     {
       "id": 22,
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 155.0,
-      "effective_price": 139.5,
-      "market_value": 139.5,
-      "unrealized_pnl": 40.11,
-      "unrealized_pnl_pct": 40.4,
+      "current_p50": 150.0,
+      "effective_price": 135.0,
+      "market_value": 135.0,
+      "unrealized_pnl": 35.61,
+      "unrealized_pnl_pct": 35.8,
       "invested": 99.39
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2583.66,
-    "unrealized_pnl": 604.55,
-    "unrealized_pnl_pct": 30.5,
+    "total_market_value": 2579.16,
+    "unrealized_pnl": 600.05,
+    "unrealized_pnl_pct": 30.3,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 604.55,
-    "unrealized_pnl_12m_pct": 30.5
+    "unrealized_pnl_12m": 600.05,
+    "unrealized_pnl_12m_pct": 30.3
   }
 }
