@@ -15,7 +15,7 @@ Also computes:
 - disappeared_7d: sell velocity signal
 """
 
-from datetime import datetime
+from datetime import date, datetime
 from typing import Optional
 
 BUCKET_SIZE = 10  # €10 buckets
@@ -185,12 +185,62 @@ def compute_all_sets(
     return result
 
 
+# Hoeveel dagelijkse snapshots we ophalen voor de historische grafiek.
+# ~53 weken × 7 dagen, ruim genoeg om een volledig jaar (seizoenspatroon) te tonen.
+# Verder terug mag: snapshots worden nooit opgeschoond, dus zodra er meer data is
+# groeit de grafiek vanzelf mee. Weekaggregatie houdt de payload begrensd.
+HISTORY_DAYS = 53 * 7  # 371
+
+
+def _aggregate_weekly(snapshots: list[dict]) -> list[dict]:
+    """
+    Dicht dagelijkse snapshots samen tot één punt per ISO-week.
+
+    Dagelijkse data is ruizig; door per week de mediaan te nemen wordt de
+    langetermijnontwikkeling en seizoenspatroon veel beter zichtbaar. Elk
+    weekpunt krijgt als datum de maandag van die ISO-week, zodat de x-as
+    netjes oploopt.
+    """
+    buckets: dict[tuple[int, int], dict] = {}
+    for snap in snapshots:
+        try:
+            d = datetime.strptime(snap["snapshot_date"], "%Y-%m-%d").date()
+        except (ValueError, KeyError):
+            continue
+        iso_year, iso_week, _ = d.isocalendar()
+        buckets.setdefault((iso_year, iso_week), {"fast": [], "real": [], "active": []})
+        if snap.get("sell_price_fast") is not None:
+            buckets[(iso_year, iso_week)]["fast"].append(snap["sell_price_fast"])
+        if snap.get("sell_price_realistic") is not None:
+            buckets[(iso_year, iso_week)]["real"].append(snap["sell_price_realistic"])
+        if snap.get("active_count") is not None:
+            buckets[(iso_year, iso_week)]["active"].append(snap["active_count"])
+
+    weekly = []
+    for (iso_year, iso_week), vals in buckets.items():
+        week_monday = date.fromisocalendar(iso_year, iso_week, 1)
+        weekly.append({
+            "date": week_monday.isoformat(),
+            "sell_price_fast": _percentile(vals["fast"], 50),
+            "sell_price_realistic": _percentile(vals["real"], 50),
+            "active_count": round(sum(vals["active"]) / len(vals["active"]))
+                            if vals["active"] else 0,
+        })
+    weekly.sort(key=lambda r: r["date"])
+    return weekly
+
+
 def get_price_history_for_dashboard(
     set_number: str,
     platforms: list[str],
 ) -> list[dict]:
     """
     Return time-series data for chart rendering.
+
+    Haalt tot ~53 weken aan dagelijkse snapshots op en aggregeert die per
+    ISO-week, zodat de dashboardgrafiek de volledige historische ontwikkeling
+    (incl. seizoenspatroon) toont in plaats van alleen de laatste dagen.
+
     Format: [{date, platform, condition, sell_price_fast, sell_price_realistic, active_count}]
     """
     from src import db
@@ -198,18 +248,17 @@ def get_price_history_for_dashboard(
     rows = []
     for platform in platforms:
         for condition in ["NIB", "CIB"]:
-            history = db.get_price_history(set_number, platform, condition, limit=90)
-            for h in history:
+            history = db.get_price_history(
+                set_number, platform, condition, limit=HISTORY_DAYS
+            )
+            for week in _aggregate_weekly(history):
                 rows.append({
-                    "date": h["snapshot_date"],
+                    "date": week["date"],
                     "platform": platform,
                     "condition": condition,
-                    "sell_price_fast": h["sell_price_fast"],
-                    "sell_price_realistic": h["sell_price_realistic"],
-                    "active_count": h["active_count"],
+                    "sell_price_fast": week["sell_price_fast"],
+                    "sell_price_realistic": week["sell_price_realistic"],
+                    "active_count": week["active_count"],
                 })
-    # get_price_history returns DESC; after appending all platforms the rows are
-    # interleaved but each platform's rows are already oldest→newest after reversal
-    # inside db.get_price_history. A final sort by date gives a clean timeline.
     rows.sort(key=lambda r: r["date"])
     return rows
