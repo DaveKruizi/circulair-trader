@@ -1385,7 +1385,7 @@ function buildSetCard(set, idx) {
       ${buildConditionPanel(set, 'CIB', idx)}
       <div class="charts-row">
         <div class="chart-box">
-          <h4>Prijsontwikkeling</h4>
+          <h4>Prijsontwikkeling (per week, tot ±12 maanden)</h4>
           <div id="chart-hist-${idx}" style="height:180px"></div>
         </div>
         <div class="chart-box">
@@ -1827,7 +1827,14 @@ function renderHistoryChart(set, idx) {
     paper_bgcolor: 'transparent',
     plot_bgcolor: 'transparent',
     font: { color: '#656d76', size: 10 },
-    xaxis: { gridcolor: '#d0d7de', tickfont: { size: 9 }, showgrid: true },
+    xaxis: {
+      type: 'date',
+      gridcolor: '#d0d7de',
+      tickfont: { size: 9 },
+      showgrid: true,
+      tickformat: '%b %y',
+      hoverformat: 'week van %d %b %Y',
+    },
     yaxis: { gridcolor: '#d0d7de', tickprefix: '€', tickfont: { size: 9 }, showgrid: true },
     legend: { font: { size: 9 }, bgcolor: 'transparent' },
     margin: { l: 44, r: 8, t: 8, b: 28 },
