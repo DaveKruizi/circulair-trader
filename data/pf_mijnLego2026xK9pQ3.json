@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T19:08:45.904341",
+  "generated_at": "2026-08-06T08:16:48.231790",
   "positions": [
     {
       "id": 22,
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 113.5,
-      "effective_price": 102.15,
-      "market_value": 102.15,
-      "unrealized_pnl": 43.16,
-      "unrealized_pnl_pct": 73.2,
+      "current_p50": 112.25,
+      "effective_price": 101.03,
+      "market_value": 101.03,
+      "unrealized_pnl": 42.04,
+      "unrealized_pnl_pct": 71.3,
       "invested": 58.99
     },
     {
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 155.0,
-      "effective_price": 139.5,
-      "market_value": 139.5,
-      "unrealized_pnl": 40.11,
-      "unrealized_pnl_pct": 40.4,
+      "current_p50": 160.0,
+      "effective_price": 144.0,
+      "market_value": 144.0,
+      "unrealized_pnl": 44.61,
+      "unrealized_pnl_pct": 44.9,
       "invested": 99.39
     },
     {
@@ -241,10 +241,10 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 137.5,
-      "effective_price": 123.75,
-      "market_value": 123.75,
-      "unrealized_pnl": 24.36,
+      "current_p50": 137.49,
+      "effective_price": 123.74,
+      "market_value": 123.74,
+      "unrealized_pnl": 24.35,
       "unrealized_pnl_pct": 24.5,
       "invested": 99.39
     },
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2557.57,
-    "unrealized_pnl": 578.46,
-    "unrealized_pnl_pct": 29.2,
+    "total_market_value": 2560.94,
+    "unrealized_pnl": 581.83,
+    "unrealized_pnl_pct": 29.4,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 578.46,
-    "unrealized_pnl_12m_pct": 29.2
+    "unrealized_pnl_12m": 581.83,
+    "unrealized_pnl_12m_pct": 29.4
   }
 }
