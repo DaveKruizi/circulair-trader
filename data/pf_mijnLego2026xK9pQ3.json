@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T07:08:24.463599",
+  "generated_at": "2026-08-10T18:20:29.187067",
   "positions": [
     {
       "id": 22,
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 112.25,
-      "effective_price": 101.03,
-      "market_value": 101.03,
-      "unrealized_pnl": 42.04,
-      "unrealized_pnl_pct": 71.3,
+      "current_p50": 111.0,
+      "effective_price": 99.9,
+      "market_value": 99.9,
+      "unrealized_pnl": 40.91,
+      "unrealized_pnl_pct": 69.4,
       "invested": 58.99
     },
     {
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 124.98,
-      "effective_price": 112.48,
-      "market_value": 112.48,
-      "unrealized_pnl": 54.59,
-      "unrealized_pnl_pct": 94.3,
+      "current_p50": 127.25,
+      "effective_price": 114.53,
+      "market_value": 114.53,
+      "unrealized_pnl": 56.64,
+      "unrealized_pnl_pct": 97.8,
       "invested": 57.89
     },
     {
@@ -184,11 +184,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 138.75,
-      "effective_price": 124.88,
-      "market_value": 124.88,
-      "unrealized_pnl": 45.49,
-      "unrealized_pnl_pct": 57.3,
+      "current_p50": 140.0,
+      "effective_price": 126.0,
+      "market_value": 126.0,
+      "unrealized_pnl": 46.61,
+      "unrealized_pnl_pct": 58.7,
       "invested": 79.39
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2602.35,
-    "unrealized_pnl": 623.24,
-    "unrealized_pnl_pct": 31.5,
+    "total_market_value": 2604.39,
+    "unrealized_pnl": 625.28,
+    "unrealized_pnl_pct": 31.6,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 623.24,
-    "unrealized_pnl_12m_pct": 31.5
+    "unrealized_pnl_12m": 625.28,
+    "unrealized_pnl_12m_pct": 31.6
   }
 }
