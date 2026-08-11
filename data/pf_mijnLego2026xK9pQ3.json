@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T18:21:01.798472",
+  "generated_at": "2026-08-11T06:44:24.688670",
   "positions": [
     {
       "id": 22,
@@ -13,11 +13,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:18:53",
       "set_name": "MINI Cooper",
-      "current_p50": 132.25,
-      "effective_price": 119.03,
-      "market_value": 119.03,
-      "unrealized_pnl": 69.03,
-      "unrealized_pnl_pct": 138.1,
+      "current_p50": 132.0,
+      "effective_price": 118.8,
+      "market_value": 118.8,
+      "unrealized_pnl": 68.8,
+      "unrealized_pnl_pct": 137.6,
       "invested": 50.0
     },
     {
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 111.0,
-      "effective_price": 99.9,
-      "market_value": 99.9,
-      "unrealized_pnl": 40.91,
-      "unrealized_pnl_pct": 69.4,
+      "current_p50": 113.5,
+      "effective_price": 102.15,
+      "market_value": 102.15,
+      "unrealized_pnl": 43.16,
+      "unrealized_pnl_pct": 73.2,
       "invested": 58.99
     },
     {
@@ -89,11 +89,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-20 07:32:40",
       "set_name": "Porsche 911",
-      "current_p50": 130.0,
-      "effective_price": 117.0,
-      "market_value": 117.0,
-      "unrealized_pnl": 10.61,
-      "unrealized_pnl_pct": 10.0,
+      "current_p50": 140.0,
+      "effective_price": 126.0,
+      "market_value": 126.0,
+      "unrealized_pnl": 19.61,
+      "unrealized_pnl_pct": 18.4,
       "invested": 106.39
     },
     {
@@ -184,11 +184,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 140.0,
-      "effective_price": 126.0,
-      "market_value": 126.0,
-      "unrealized_pnl": 46.61,
-      "unrealized_pnl_pct": 58.7,
+      "current_p50": 141.25,
+      "effective_price": 127.12,
+      "market_value": 127.12,
+      "unrealized_pnl": 47.73,
+      "unrealized_pnl_pct": 60.1,
       "invested": 79.39
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 165.0,
-      "effective_price": 148.5,
-      "market_value": 148.5,
-      "unrealized_pnl": -7.49,
-      "unrealized_pnl_pct": -4.8,
+      "current_p50": 167.5,
+      "effective_price": 150.75,
+      "market_value": 150.75,
+      "unrealized_pnl": -5.24,
+      "unrealized_pnl_pct": -3.4,
       "invested": 155.99
     },
     {
@@ -241,11 +241,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 145.0,
-      "effective_price": 130.5,
-      "market_value": 130.5,
-      "unrealized_pnl": 31.11,
-      "unrealized_pnl_pct": 31.3,
+      "current_p50": 142.5,
+      "effective_price": 128.25,
+      "market_value": 128.25,
+      "unrealized_pnl": 28.86,
+      "unrealized_pnl_pct": 29.0,
       "invested": 99.39
     },
     {
@@ -260,11 +260,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:17:15",
       "set_name": "Porsche 911",
-      "current_p50": 130.0,
-      "effective_price": 117.0,
-      "market_value": 117.0,
-      "unrealized_pnl": 30.11,
-      "unrealized_pnl_pct": 34.7,
+      "current_p50": 140.0,
+      "effective_price": 126.0,
+      "market_value": 126.0,
+      "unrealized_pnl": 39.11,
+      "unrealized_pnl_pct": 45.0,
       "invested": 86.89
     },
     {
@@ -279,11 +279,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:15:40",
       "set_name": "Porsche 911",
-      "current_p50": 130.0,
-      "effective_price": 117.0,
-      "market_value": 117.0,
-      "unrealized_pnl": 12.61,
-      "unrealized_pnl_pct": 12.1,
+      "current_p50": 140.0,
+      "effective_price": 126.0,
+      "market_value": 126.0,
+      "unrealized_pnl": 21.61,
+      "unrealized_pnl_pct": 20.7,
       "invested": 104.39
     },
     {
@@ -355,21 +355,21 @@
       "notes": "",
       "created_at": "2026-04-11 10:19:17",
       "set_name": "Porsche 911",
-      "current_p50": 115.0,
-      "effective_price": 103.5,
-      "market_value": 103.5,
-      "unrealized_pnl": 57.55,
-      "unrealized_pnl_pct": 125.2,
+      "current_p50": 110.0,
+      "effective_price": 99.0,
+      "market_value": 99.0,
+      "unrealized_pnl": 53.05,
+      "unrealized_pnl_pct": 115.5,
       "invested": 45.95
     }
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2604.39,
-    "unrealized_pnl": 625.28,
-    "unrealized_pnl_pct": 31.6,
+    "total_market_value": 2630.03,
+    "unrealized_pnl": 650.92,
+    "unrealized_pnl_pct": 32.9,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 625.28,
-    "unrealized_pnl_12m_pct": 31.6
+    "unrealized_pnl_12m": 650.92,
+    "unrealized_pnl_12m_pct": 32.9
   }
 }
