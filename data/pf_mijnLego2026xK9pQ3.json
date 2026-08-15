@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-14T18:22:18.649169",
+  "generated_at": "2026-08-15T06:08:24.304301",
   "positions": [
     {
       "id": 22,
@@ -13,11 +13,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:18:53",
       "set_name": "MINI Cooper",
-      "current_p50": 132.5,
-      "effective_price": 119.25,
-      "market_value": 119.25,
-      "unrealized_pnl": 69.25,
-      "unrealized_pnl_pct": 138.5,
+      "current_p50": 163.75,
+      "effective_price": 147.38,
+      "market_value": 147.38,
+      "unrealized_pnl": 97.38,
+      "unrealized_pnl_pct": 194.8,
       "invested": 50.0
     },
     {
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 107.5,
-      "effective_price": 96.75,
-      "market_value": 96.75,
-      "unrealized_pnl": 37.76,
-      "unrealized_pnl_pct": 64.0,
+      "current_p50": 107.0,
+      "effective_price": 96.3,
+      "market_value": 96.3,
+      "unrealized_pnl": 37.31,
+      "unrealized_pnl_pct": 63.2,
       "invested": 58.99
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 168.75,
-      "effective_price": 151.88,
-      "market_value": 151.88,
-      "unrealized_pnl": -4.11,
-      "unrealized_pnl_pct": -2.6,
+      "current_p50": 171.25,
+      "effective_price": 154.12,
+      "market_value": 154.12,
+      "unrealized_pnl": -1.87,
+      "unrealized_pnl_pct": -1.2,
       "invested": 155.99
     },
     {
@@ -222,11 +222,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:10",
       "set_name": "Ducati Panigale V4 S",
-      "current_p50": 135.0,
-      "effective_price": 121.5,
-      "market_value": 121.5,
-      "unrealized_pnl": 17.11,
-      "unrealized_pnl_pct": 16.4,
+      "current_p50": 129.75,
+      "effective_price": 116.78,
+      "market_value": 116.78,
+      "unrealized_pnl": 12.39,
+      "unrealized_pnl_pct": 11.9,
       "invested": 104.39
     },
     {
@@ -241,11 +241,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 142.5,
-      "effective_price": 128.25,
-      "market_value": 128.25,
-      "unrealized_pnl": 28.86,
-      "unrealized_pnl_pct": 29.0,
+      "current_p50": 145.0,
+      "effective_price": 130.5,
+      "market_value": 130.5,
+      "unrealized_pnl": 31.11,
+      "unrealized_pnl_pct": 31.3,
       "invested": 99.39
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2628.01,
-    "unrealized_pnl": 648.9,
-    "unrealized_pnl_pct": 32.8,
+    "total_market_value": 2655.46,
+    "unrealized_pnl": 676.35,
+    "unrealized_pnl_pct": 34.2,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 648.9,
-    "unrealized_pnl_12m_pct": 32.8
+    "unrealized_pnl_12m": 676.35,
+    "unrealized_pnl_12m_pct": 34.2
   }
 }
