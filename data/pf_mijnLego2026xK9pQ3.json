@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-21T06:14:48.144673",
+  "generated_at": "2026-08-21T18:02:30.647102",
   "positions": [
     {
       "id": 22,
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:41:44",
       "set_name": "Ferrari F40",
-      "current_p50": 202.5,
-      "effective_price": 182.25,
-      "market_value": 182.25,
-      "unrealized_pnl": 82.25,
-      "unrealized_pnl_pct": 82.2,
+      "current_p50": 210.0,
+      "effective_price": 189.0,
+      "market_value": 189.0,
+      "unrealized_pnl": 89.0,
+      "unrealized_pnl_pct": 89.0,
       "invested": 100.0
     },
     {
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 102.5,
-      "effective_price": 92.25,
-      "market_value": 92.25,
-      "unrealized_pnl": 33.26,
-      "unrealized_pnl_pct": 56.4,
+      "current_p50": 100.0,
+      "effective_price": 90.0,
+      "market_value": 90.0,
+      "unrealized_pnl": 31.01,
+      "unrealized_pnl_pct": 52.6,
       "invested": 58.99
     },
     {
@@ -70,10 +70,10 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 126.23,
-      "effective_price": 113.61,
-      "market_value": 113.61,
-      "unrealized_pnl": 55.72,
+      "current_p50": 126.25,
+      "effective_price": 113.62,
+      "market_value": 113.62,
+      "unrealized_pnl": 55.73,
       "unrealized_pnl_pct": 96.3,
       "invested": 57.89
     },
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2621.47,
-    "unrealized_pnl": 642.36,
-    "unrealized_pnl_pct": 32.5,
+    "total_market_value": 2625.98,
+    "unrealized_pnl": 646.87,
+    "unrealized_pnl_pct": 32.7,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 642.36,
-    "unrealized_pnl_12m_pct": 32.5
+    "unrealized_pnl_12m": 646.87,
+    "unrealized_pnl_12m_pct": 32.7
   }
 }
