@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T06:15:47.922726",
+  "generated_at": "2026-08-26T19:29:27.476339",
   "positions": [
     {
       "id": 22,
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 127.47,
-      "effective_price": 114.72,
-      "market_value": 114.72,
-      "unrealized_pnl": 56.83,
-      "unrealized_pnl_pct": 98.2,
+      "current_p50": 126.23,
+      "effective_price": 113.61,
+      "market_value": 113.61,
+      "unrealized_pnl": 55.72,
+      "unrealized_pnl_pct": 96.3,
       "invested": 57.89
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 226.0,
-      "effective_price": 203.4,
-      "market_value": 203.4,
-      "unrealized_pnl": 54.51,
-      "unrealized_pnl_pct": 36.6,
+      "current_p50": 223.5,
+      "effective_price": 201.15,
+      "market_value": 201.15,
+      "unrealized_pnl": 52.26,
+      "unrealized_pnl_pct": 35.1,
       "invested": 148.89
     },
     {
@@ -355,21 +355,21 @@
       "notes": "",
       "created_at": "2026-04-11 10:19:17",
       "set_name": "Porsche 911",
-      "current_p50": 117.5,
-      "effective_price": 105.75,
-      "market_value": 105.75,
-      "unrealized_pnl": 59.8,
-      "unrealized_pnl_pct": 130.1,
+      "current_p50": 115.0,
+      "effective_price": 103.5,
+      "market_value": 103.5,
+      "unrealized_pnl": 57.55,
+      "unrealized_pnl_pct": 125.2,
       "invested": 45.95
     }
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2645.52,
-    "unrealized_pnl": 666.41,
-    "unrealized_pnl_pct": 33.7,
+    "total_market_value": 2639.91,
+    "unrealized_pnl": 660.8,
+    "unrealized_pnl_pct": 33.4,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 666.41,
-    "unrealized_pnl_12m_pct": 33.7
+    "unrealized_pnl_12m": 660.8,
+    "unrealized_pnl_12m_pct": 33.4
   }
 }
