@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T16:55:56.641791",
+  "generated_at": "2026-08-28T01:43:25.515898",
   "positions": [
     {
       "id": 22,
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 106.25,
-      "effective_price": 95.62,
-      "market_value": 95.62,
-      "unrealized_pnl": 36.63,
-      "unrealized_pnl_pct": 62.1,
+      "current_p50": 102.5,
+      "effective_price": 92.25,
+      "market_value": 92.25,
+      "unrealized_pnl": 33.26,
+      "unrealized_pnl_pct": 56.4,
       "invested": 58.99
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 223.5,
-      "effective_price": 201.15,
-      "market_value": 201.15,
-      "unrealized_pnl": 52.26,
-      "unrealized_pnl_pct": 35.1,
+      "current_p50": 228.5,
+      "effective_price": 205.65,
+      "market_value": 205.65,
+      "unrealized_pnl": 56.76,
+      "unrealized_pnl_pct": 38.1,
       "invested": 148.89
     },
     {
@@ -336,11 +336,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 12:21:32",
       "set_name": "Shelby Cobra 427 S/C",
-      "current_p50": 135.0,
-      "effective_price": 121.5,
-      "market_value": 121.5,
-      "unrealized_pnl": 1.51,
-      "unrealized_pnl_pct": 1.3,
+      "current_p50": 141.0,
+      "effective_price": 126.9,
+      "market_value": 126.9,
+      "unrealized_pnl": 6.91,
+      "unrealized_pnl_pct": 5.8,
       "invested": 119.99
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2621.02,
-    "unrealized_pnl": 641.91,
-    "unrealized_pnl_pct": 32.4,
+    "total_market_value": 2627.55,
+    "unrealized_pnl": 648.44,
+    "unrealized_pnl_pct": 32.8,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 641.91,
-    "unrealized_pnl_12m_pct": 32.4
+    "unrealized_pnl_12m": 648.44,
+    "unrealized_pnl_12m_pct": 32.8
   }
 }
