@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T17:56:32.392755",
+  "generated_at": "2026-08-29T01:12:05.915585",
   "positions": [
     {
       "id": 22,
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:41:44",
       "set_name": "Ferrari F40",
-      "current_p50": 213.5,
-      "effective_price": 192.15,
-      "market_value": 192.15,
-      "unrealized_pnl": 92.15,
-      "unrealized_pnl_pct": 92.2,
+      "current_p50": 211.25,
+      "effective_price": 190.12,
+      "market_value": 190.12,
+      "unrealized_pnl": 90.12,
+      "unrealized_pnl_pct": 90.1,
       "invested": 100.0
     },
     {
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 102.5,
-      "effective_price": 92.25,
-      "market_value": 92.25,
-      "unrealized_pnl": 33.26,
-      "unrealized_pnl_pct": 56.4,
+      "current_p50": 106.25,
+      "effective_price": 95.62,
+      "market_value": 95.62,
+      "unrealized_pnl": 36.63,
+      "unrealized_pnl_pct": 62.1,
       "invested": 58.99
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2633.19,
-    "unrealized_pnl": 654.08,
-    "unrealized_pnl_pct": 33.0,
+    "total_market_value": 2634.53,
+    "unrealized_pnl": 655.42,
+    "unrealized_pnl_pct": 33.1,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 654.08,
-    "unrealized_pnl_12m_pct": 33.0
+    "unrealized_pnl_12m": 655.42,
+    "unrealized_pnl_12m_pct": 33.1
   }
 }
