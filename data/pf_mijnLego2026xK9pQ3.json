@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-02T10:06:58.751046",
+  "generated_at": "2026-09-02T20:05:27.540514",
   "positions": [
     {
       "id": 22,
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:41:44",
       "set_name": "Ferrari F40",
-      "current_p50": 205.0,
-      "effective_price": 184.5,
-      "market_value": 184.5,
-      "unrealized_pnl": 84.5,
-      "unrealized_pnl_pct": 84.5,
+      "current_p50": 207.25,
+      "effective_price": 186.53,
+      "market_value": 186.53,
+      "unrealized_pnl": 86.53,
+      "unrealized_pnl_pct": 86.5,
       "invested": 100.0
     },
     {
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 100.0,
-      "effective_price": 90.0,
-      "market_value": 90.0,
-      "unrealized_pnl": 31.01,
-      "unrealized_pnl_pct": 52.6,
+      "current_p50": 97.5,
+      "effective_price": 87.75,
+      "market_value": 87.75,
+      "unrealized_pnl": 28.76,
+      "unrealized_pnl_pct": 48.8,
       "invested": 58.99
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 228.5,
-      "effective_price": 205.65,
-      "market_value": 205.65,
-      "unrealized_pnl": 56.76,
-      "unrealized_pnl_pct": 38.1,
+      "current_p50": 223.5,
+      "effective_price": 201.15,
+      "market_value": 201.15,
+      "unrealized_pnl": 52.26,
+      "unrealized_pnl_pct": 35.1,
       "invested": 148.89
     },
     {
@@ -241,11 +241,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 147.5,
-      "effective_price": 132.75,
-      "market_value": 132.75,
-      "unrealized_pnl": 33.36,
-      "unrealized_pnl_pct": 33.6,
+      "current_p50": 146.25,
+      "effective_price": 131.62,
+      "market_value": 131.62,
+      "unrealized_pnl": 32.23,
+      "unrealized_pnl_pct": 32.4,
       "invested": 99.39
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2610.79,
-    "unrealized_pnl": 631.68,
-    "unrealized_pnl_pct": 31.9,
+    "total_market_value": 2604.94,
+    "unrealized_pnl": 625.83,
+    "unrealized_pnl_pct": 31.6,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 631.68,
-    "unrealized_pnl_12m_pct": 31.9
+    "unrealized_pnl_12m": 625.83,
+    "unrealized_pnl_12m_pct": 31.6
   }
 }
