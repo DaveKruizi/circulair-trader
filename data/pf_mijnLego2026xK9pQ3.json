@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T10:16:48.356244",
+  "generated_at": "2026-09-08T20:08:42.412413",
   "positions": [
     {
       "id": 22,
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 118.73,
-      "effective_price": 106.86,
-      "market_value": 106.86,
-      "unrealized_pnl": 48.97,
-      "unrealized_pnl_pct": 84.6,
+      "current_p50": 115.0,
+      "effective_price": 103.5,
+      "market_value": 103.5,
+      "unrealized_pnl": 45.61,
+      "unrealized_pnl_pct": 78.8,
       "invested": 57.89
     },
     {
@@ -184,11 +184,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 141.25,
-      "effective_price": 127.12,
-      "market_value": 127.12,
-      "unrealized_pnl": 47.73,
-      "unrealized_pnl_pct": 60.1,
+      "current_p50": 142.5,
+      "effective_price": 128.25,
+      "market_value": 128.25,
+      "unrealized_pnl": 48.86,
+      "unrealized_pnl_pct": 61.5,
       "invested": 79.39
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 178.7,
-      "effective_price": 160.83,
-      "market_value": 160.83,
-      "unrealized_pnl": 4.84,
-      "unrealized_pnl_pct": 3.1,
+      "current_p50": 179.95,
+      "effective_price": 161.95,
+      "market_value": 161.95,
+      "unrealized_pnl": 5.96,
+      "unrealized_pnl_pct": 3.8,
       "invested": 155.99
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2589.02,
-    "unrealized_pnl": 609.91,
+    "total_market_value": 2587.91,
+    "unrealized_pnl": 608.8,
     "unrealized_pnl_pct": 30.8,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 609.91,
+    "unrealized_pnl_12m": 608.8,
     "unrealized_pnl_12m_pct": 30.8
   }
 }
