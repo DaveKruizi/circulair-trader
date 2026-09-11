@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-11T10:13:07.743993",
+  "generated_at": "2026-09-11T20:02:19.925158",
   "positions": [
     {
       "id": 22,
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 117.5,
-      "effective_price": 105.75,
-      "market_value": 105.75,
-      "unrealized_pnl": 47.86,
-      "unrealized_pnl_pct": 82.7,
+      "current_p50": 119.98,
+      "effective_price": 107.98,
+      "market_value": 107.98,
+      "unrealized_pnl": 50.09,
+      "unrealized_pnl_pct": 86.5,
       "invested": 57.89
     },
     {
@@ -241,11 +241,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 149.75,
-      "effective_price": 134.78,
-      "market_value": 134.78,
-      "unrealized_pnl": 35.39,
-      "unrealized_pnl_pct": 35.6,
+      "current_p50": 148.5,
+      "effective_price": 133.65,
+      "market_value": 133.65,
+      "unrealized_pnl": 34.26,
+      "unrealized_pnl_pct": 34.5,
       "invested": 99.39
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2637.87,
-    "unrealized_pnl": 658.76,
+    "total_market_value": 2638.97,
+    "unrealized_pnl": 659.86,
     "unrealized_pnl_pct": 33.3,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 658.76,
+    "unrealized_pnl_12m": 659.86,
     "unrealized_pnl_12m_pct": 33.3
   }
 }
