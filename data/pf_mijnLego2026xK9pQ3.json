@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T10:26:16.097294",
+  "generated_at": "2026-09-16T20:26:20.923409",
   "positions": [
     {
       "id": 22,
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 119.98,
-      "effective_price": 107.98,
-      "market_value": 107.98,
-      "unrealized_pnl": 50.09,
-      "unrealized_pnl_pct": 86.5,
+      "current_p50": 123.73,
+      "effective_price": 111.36,
+      "market_value": 111.36,
+      "unrealized_pnl": 53.47,
+      "unrealized_pnl_pct": 92.4,
       "invested": 57.89
     },
     {
@@ -108,10 +108,10 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 149.99,
-      "effective_price": 134.99,
-      "market_value": 134.99,
-      "unrealized_pnl": 35.6,
+      "current_p50": 150.0,
+      "effective_price": 135.0,
+      "market_value": 135.0,
+      "unrealized_pnl": 35.61,
       "unrealized_pnl_pct": 35.8,
       "invested": 99.39
     },
@@ -203,11 +203,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 174.72,
-      "effective_price": 157.25,
-      "market_value": 157.25,
-      "unrealized_pnl": 1.26,
-      "unrealized_pnl_pct": 0.8,
+      "current_p50": 174.97,
+      "effective_price": 157.47,
+      "market_value": 157.47,
+      "unrealized_pnl": 1.48,
+      "unrealized_pnl_pct": 0.9,
       "invested": 155.99
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2632.23,
-    "unrealized_pnl": 653.12,
-    "unrealized_pnl_pct": 33.0,
+    "total_market_value": 2635.84,
+    "unrealized_pnl": 656.73,
+    "unrealized_pnl_pct": 33.2,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 653.12,
-    "unrealized_pnl_12m_pct": 33.0
+    "unrealized_pnl_12m": 656.73,
+    "unrealized_pnl_12m_pct": 33.2
   }
 }
