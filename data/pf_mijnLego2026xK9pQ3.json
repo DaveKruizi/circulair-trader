@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T19:59:04.566176",
+  "generated_at": "2026-09-19T09:52:42.918450",
   "positions": [
     {
       "id": 22,
@@ -184,11 +184,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 140.0,
-      "effective_price": 126.0,
-      "market_value": 126.0,
-      "unrealized_pnl": 46.61,
-      "unrealized_pnl_pct": 58.7,
+      "current_p50": 145.0,
+      "effective_price": 130.5,
+      "market_value": 130.5,
+      "unrealized_pnl": 51.11,
+      "unrealized_pnl_pct": 64.4,
       "invested": 79.39
     },
     {
@@ -298,11 +298,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:19:28",
       "set_name": "Lamborghini Countach 5000 QV",
-      "current_p50": 164.0,
-      "effective_price": 147.6,
-      "market_value": 147.6,
-      "unrealized_pnl": 12.61,
-      "unrealized_pnl_pct": 9.3,
+      "current_p50": 151.5,
+      "effective_price": 136.35,
+      "market_value": 136.35,
+      "unrealized_pnl": 1.36,
+      "unrealized_pnl_pct": 1.0,
       "invested": 134.99
     },
     {
@@ -317,11 +317,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:19:51",
       "set_name": "Lamborghini Countach 5000 QV",
-      "current_p50": 164.0,
-      "effective_price": 147.6,
-      "market_value": 147.6,
-      "unrealized_pnl": 12.61,
-      "unrealized_pnl_pct": 9.3,
+      "current_p50": 151.5,
+      "effective_price": 136.35,
+      "market_value": 136.35,
+      "unrealized_pnl": 1.36,
+      "unrealized_pnl_pct": 1.0,
       "invested": 134.99
     },
     {
@@ -355,21 +355,21 @@
       "notes": "",
       "created_at": "2026-04-11 10:19:17",
       "set_name": "Porsche 911",
-      "current_p50": 102.5,
-      "effective_price": 92.25,
-      "market_value": 92.25,
-      "unrealized_pnl": 46.3,
-      "unrealized_pnl_pct": 100.8,
+      "current_p50": 105.0,
+      "effective_price": 94.5,
+      "market_value": 94.5,
+      "unrealized_pnl": 48.55,
+      "unrealized_pnl_pct": 105.7,
       "invested": 45.95
     }
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2624.59,
-    "unrealized_pnl": 645.48,
-    "unrealized_pnl_pct": 32.6,
+    "total_market_value": 2608.84,
+    "unrealized_pnl": 629.73,
+    "unrealized_pnl_pct": 31.8,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 645.48,
-    "unrealized_pnl_12m_pct": 32.6
+    "unrealized_pnl_12m": 629.73,
+    "unrealized_pnl_12m_pct": 31.8
   }
 }
