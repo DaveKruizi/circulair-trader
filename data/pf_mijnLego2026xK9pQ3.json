@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T21:18:18.180574",
+  "generated_at": "2026-09-22T10:25:55.916933",
   "positions": [
     {
       "id": 22,
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 125.0,
-      "effective_price": 112.5,
-      "market_value": 112.5,
-      "unrealized_pnl": 54.61,
-      "unrealized_pnl_pct": 94.3,
+      "current_p50": 126.0,
+      "effective_price": 113.4,
+      "market_value": 113.4,
+      "unrealized_pnl": 55.51,
+      "unrealized_pnl_pct": 95.9,
       "invested": 57.89
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2624.82,
-    "unrealized_pnl": 645.71,
-    "unrealized_pnl_pct": 32.6,
+    "total_market_value": 2625.72,
+    "unrealized_pnl": 646.61,
+    "unrealized_pnl_pct": 32.7,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 645.71,
-    "unrealized_pnl_12m_pct": 32.6
+    "unrealized_pnl_12m": 646.61,
+    "unrealized_pnl_12m_pct": 32.7
   }
 }
