@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T20:43:01.437746",
+  "generated_at": "2026-09-24T10:36:23.938366",
   "positions": [
     {
       "id": 22,
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 126.25,
-      "effective_price": 113.62,
-      "market_value": 113.62,
-      "unrealized_pnl": 55.73,
-      "unrealized_pnl_pct": 96.3,
+      "current_p50": 125.0,
+      "effective_price": 112.5,
+      "market_value": 112.5,
+      "unrealized_pnl": 54.61,
+      "unrealized_pnl_pct": 94.3,
       "invested": 57.89
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 219.75,
-      "effective_price": 197.78,
-      "market_value": 197.78,
-      "unrealized_pnl": 48.89,
-      "unrealized_pnl_pct": 32.8,
+      "current_p50": 222.0,
+      "effective_price": 199.8,
+      "market_value": 199.8,
+      "unrealized_pnl": 50.91,
+      "unrealized_pnl_pct": 34.2,
       "invested": 148.89
     },
     {
@@ -165,11 +165,11 @@
       "notes": "Vinted",
       "created_at": "2026-04-11 19:31:09",
       "set_name": "MINI Cooper",
-      "current_p50": 200.75,
-      "effective_price": 180.68,
-      "market_value": 180.68,
-      "unrealized_pnl": 16.37,
-      "unrealized_pnl_pct": 10.0,
+      "current_p50": 199.5,
+      "effective_price": 179.55,
+      "market_value": 179.55,
+      "unrealized_pnl": 15.24,
+      "unrealized_pnl_pct": 9.3,
       "invested": 164.31
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 174.97,
-      "effective_price": 157.47,
-      "market_value": 157.47,
-      "unrealized_pnl": 1.48,
-      "unrealized_pnl_pct": 0.9,
+      "current_p50": 174.72,
+      "effective_price": 157.25,
+      "market_value": 157.25,
+      "unrealized_pnl": 1.26,
+      "unrealized_pnl_pct": 0.8,
       "invested": 155.99
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2627.97,
-    "unrealized_pnl": 648.86,
+    "total_market_value": 2627.52,
+    "unrealized_pnl": 648.41,
     "unrealized_pnl_pct": 32.8,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 648.86,
+    "unrealized_pnl_12m": 648.41,
     "unrealized_pnl_12m_pct": 32.8
   }
 }
