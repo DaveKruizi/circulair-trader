@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T11:30:40.990072",
+  "generated_at": "2026-09-30T21:37:13.203289",
   "positions": [
     {
       "id": 22,
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 102.5,
-      "effective_price": 92.25,
-      "market_value": 92.25,
-      "unrealized_pnl": 33.26,
-      "unrealized_pnl_pct": 56.4,
+      "current_p50": 98.75,
+      "effective_price": 88.88,
+      "market_value": 88.88,
+      "unrealized_pnl": 29.89,
+      "unrealized_pnl_pct": 50.7,
       "invested": 58.99
     },
     {
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 125.0,
-      "effective_price": 112.5,
-      "market_value": 112.5,
-      "unrealized_pnl": 54.61,
-      "unrealized_pnl_pct": 94.3,
+      "current_p50": 126.25,
+      "effective_price": 113.62,
+      "market_value": 113.62,
+      "unrealized_pnl": 55.73,
+      "unrealized_pnl_pct": 96.3,
       "invested": 57.89
     },
     {
@@ -108,10 +108,10 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 149.97,
-      "effective_price": 134.97,
-      "market_value": 134.97,
-      "unrealized_pnl": 35.58,
+      "current_p50": 150.0,
+      "effective_price": 135.0,
+      "market_value": 135.0,
+      "unrealized_pnl": 35.61,
       "unrealized_pnl_pct": 35.8,
       "invested": 99.39
     },
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 222.5,
-      "effective_price": 200.25,
-      "market_value": 200.25,
-      "unrealized_pnl": 51.36,
-      "unrealized_pnl_pct": 34.5,
+      "current_p50": 212.5,
+      "effective_price": 191.25,
+      "market_value": 191.25,
+      "unrealized_pnl": 42.36,
+      "unrealized_pnl_pct": 28.5,
       "invested": 148.89
     },
     {
@@ -241,10 +241,10 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 164.74,
-      "effective_price": 148.27,
-      "market_value": 148.27,
-      "unrealized_pnl": 48.88,
+      "current_p50": 164.75,
+      "effective_price": 148.28,
+      "market_value": 148.28,
+      "unrealized_pnl": 48.89,
       "unrealized_pnl_pct": 49.2,
       "invested": 99.39
     },
@@ -336,11 +336,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 12:21:32",
       "set_name": "Shelby Cobra 427 S/C",
-      "current_p50": 139.75,
-      "effective_price": 125.78,
-      "market_value": 125.78,
-      "unrealized_pnl": 5.79,
-      "unrealized_pnl_pct": 4.8,
+      "current_p50": 137.25,
+      "effective_price": 123.53,
+      "market_value": 123.53,
+      "unrealized_pnl": 3.54,
+      "unrealized_pnl_pct": 3.0,
       "invested": 119.99
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2618.95,
-    "unrealized_pnl": 639.84,
-    "unrealized_pnl_pct": 32.3,
+    "total_market_value": 2605.49,
+    "unrealized_pnl": 626.38,
+    "unrealized_pnl_pct": 31.6,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 639.84,
-    "unrealized_pnl_12m_pct": 32.3
+    "unrealized_pnl_12m": 626.38,
+    "unrealized_pnl_12m_pct": 31.6
   }
 }
