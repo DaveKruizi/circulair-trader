@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T22:23:47.404798",
+  "generated_at": "2026-10-09T12:14:37.769233",
   "positions": [
     {
       "id": 22,
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 100.0,
-      "effective_price": 90.0,
-      "market_value": 90.0,
-      "unrealized_pnl": 31.01,
-      "unrealized_pnl_pct": 52.6,
+      "current_p50": 98.75,
+      "effective_price": 88.88,
+      "market_value": 88.88,
+      "unrealized_pnl": 29.89,
+      "unrealized_pnl_pct": 50.7,
       "invested": 58.99
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2609.08,
-    "unrealized_pnl": 629.97,
+    "total_market_value": 2607.96,
+    "unrealized_pnl": 628.85,
     "unrealized_pnl_pct": 31.8,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 629.97,
+    "unrealized_pnl_12m": 628.85,
     "unrealized_pnl_12m_pct": 31.8
   }
 }
