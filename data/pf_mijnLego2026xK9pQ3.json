@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-10T20:46:38.834797",
+  "generated_at": "2026-10-11T11:44:19.164644",
   "positions": [
     {
       "id": 22,
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 101.25,
-      "effective_price": 91.12,
-      "market_value": 91.12,
-      "unrealized_pnl": 32.13,
-      "unrealized_pnl_pct": 54.5,
+      "current_p50": 102.5,
+      "effective_price": 92.25,
+      "market_value": 92.25,
+      "unrealized_pnl": 33.26,
+      "unrealized_pnl_pct": 56.4,
       "invested": 58.99
     },
     {
@@ -127,11 +127,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:50",
       "set_name": "Fiat 500 Blue",
-      "current_p50": 160.75,
-      "effective_price": 144.68,
-      "market_value": 144.68,
-      "unrealized_pnl": 17.79,
-      "unrealized_pnl_pct": 14.0,
+      "current_p50": 159.5,
+      "effective_price": 143.55,
+      "market_value": 143.55,
+      "unrealized_pnl": 16.66,
+      "unrealized_pnl_pct": 13.1,
       "invested": 126.89
     },
     {
