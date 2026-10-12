@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T13:41:28.503799",
+  "generated_at": "2026-10-12T23:50:06.818765",
   "positions": [
     {
       "id": 22,
@@ -241,10 +241,10 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 164.74,
-      "effective_price": 148.27,
-      "market_value": 148.27,
-      "unrealized_pnl": 48.88,
+      "current_p50": 164.72,
+      "effective_price": 148.25,
+      "market_value": 148.25,
+      "unrealized_pnl": 48.86,
       "unrealized_pnl_pct": 49.2,
       "invested": 99.39
     },
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2596.02,
-    "unrealized_pnl": 616.91,
+    "total_market_value": 2596.0,
+    "unrealized_pnl": 616.89,
     "unrealized_pnl_pct": 31.2,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 616.91,
+    "unrealized_pnl_12m": 616.89,
     "unrealized_pnl_12m_pct": 31.2
   }
 }
