@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T21:09:47.165159",
+  "generated_at": "2026-10-12T13:40:47.868904",
   "positions": [
     {
       "id": 22,
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:41:44",
       "set_name": "Ferrari F40",
-      "current_p50": 205.0,
-      "effective_price": 184.5,
-      "market_value": 184.5,
-      "unrealized_pnl": 84.5,
-      "unrealized_pnl_pct": 84.5,
+      "current_p50": 190.5,
+      "effective_price": 171.45,
+      "market_value": 171.45,
+      "unrealized_pnl": 71.45,
+      "unrealized_pnl_pct": 71.4,
       "invested": 100.0
     },
     {
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 101.25,
-      "effective_price": 91.12,
-      "market_value": 91.12,
-      "unrealized_pnl": 32.13,
-      "unrealized_pnl_pct": 54.5,
+      "current_p50": 100.0,
+      "effective_price": 90.0,
+      "market_value": 90.0,
+      "unrealized_pnl": 31.01,
+      "unrealized_pnl_pct": 52.6,
       "invested": 58.99
     },
     {
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 131.25,
-      "effective_price": 118.12,
-      "market_value": 118.12,
-      "unrealized_pnl": 60.23,
-      "unrealized_pnl_pct": 104.0,
+      "current_p50": 127.5,
+      "effective_price": 114.75,
+      "market_value": 114.75,
+      "unrealized_pnl": 56.86,
+      "unrealized_pnl_pct": 98.2,
       "invested": 57.89
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 212.5,
-      "effective_price": 191.25,
-      "market_value": 191.25,
-      "unrealized_pnl": 42.36,
-      "unrealized_pnl_pct": 28.5,
+      "current_p50": 213.75,
+      "effective_price": 192.38,
+      "market_value": 192.38,
+      "unrealized_pnl": 43.49,
+      "unrealized_pnl_pct": 29.2,
       "invested": 148.89
     },
     {
@@ -184,11 +184,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-12 18:23:59",
       "set_name": "Volkswagen T2 Camper Van",
-      "current_p50": 140.0,
-      "effective_price": 126.0,
-      "market_value": 126.0,
-      "unrealized_pnl": 46.61,
-      "unrealized_pnl_pct": 58.7,
+      "current_p50": 137.5,
+      "effective_price": 123.75,
+      "market_value": 123.75,
+      "unrealized_pnl": 44.36,
+      "unrealized_pnl_pct": 55.9,
       "invested": 79.39
     },
     {
@@ -241,10 +241,10 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-10 10:21:42",
       "set_name": "Volkswagen Beetle",
-      "current_p50": 164.75,
-      "effective_price": 148.28,
-      "market_value": 148.28,
-      "unrealized_pnl": 48.89,
+      "current_p50": 164.74,
+      "effective_price": 148.27,
+      "market_value": 148.27,
+      "unrealized_pnl": 48.88,
       "unrealized_pnl_pct": 49.2,
       "invested": 99.39
     },
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2614.69,
-    "unrealized_pnl": 635.58,
-    "unrealized_pnl_pct": 32.1,
+    "total_market_value": 2596.02,
+    "unrealized_pnl": 616.91,
+    "unrealized_pnl_pct": 31.2,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 635.58,
-    "unrealized_pnl_12m_pct": 32.1
+    "unrealized_pnl_12m": 616.91,
+    "unrealized_pnl_12m_pct": 31.2
   }
 }
