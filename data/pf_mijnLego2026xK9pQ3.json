@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T10:31:58.557501",
+  "generated_at": "2026-10-20T20:53:52.310792",
   "positions": [
     {
       "id": 22,
@@ -13,11 +13,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:18:53",
       "set_name": "MINI Cooper",
-      "current_p50": 122.25,
-      "effective_price": 110.03,
-      "market_value": 110.03,
-      "unrealized_pnl": 60.03,
-      "unrealized_pnl_pct": 120.1,
+      "current_p50": 117.25,
+      "effective_price": 105.53,
+      "market_value": 105.53,
+      "unrealized_pnl": 55.53,
+      "unrealized_pnl_pct": 111.1,
       "invested": 50.0
     },
     {
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 147.97,
-      "effective_price": 133.17,
-      "market_value": 133.17,
-      "unrealized_pnl": 33.78,
-      "unrealized_pnl_pct": 34.0,
+      "current_p50": 147.74,
+      "effective_price": 132.97,
+      "market_value": 132.97,
+      "unrealized_pnl": 33.58,
+      "unrealized_pnl_pct": 33.8,
       "invested": 99.39
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2612.86,
-    "unrealized_pnl": 633.75,
-    "unrealized_pnl_pct": 32.0,
+    "total_market_value": 2608.16,
+    "unrealized_pnl": 629.05,
+    "unrealized_pnl_pct": 31.8,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 633.75,
-    "unrealized_pnl_12m_pct": 32.0
+    "unrealized_pnl_12m": 629.05,
+    "unrealized_pnl_12m_pct": 31.8
   }
 }
