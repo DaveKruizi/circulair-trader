@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T20:42:23.199243",
+  "generated_at": "2026-10-24T09:55:10.823807",
   "positions": [
     {
       "id": 22,
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 102.5,
-      "effective_price": 92.25,
-      "market_value": 92.25,
-      "unrealized_pnl": 33.26,
-      "unrealized_pnl_pct": 56.4,
+      "current_p50": 100.0,
+      "effective_price": 90.0,
+      "market_value": 90.0,
+      "unrealized_pnl": 31.01,
+      "unrealized_pnl_pct": 52.6,
       "invested": 58.99
     },
     {
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 146.25,
-      "effective_price": 131.62,
-      "market_value": 131.62,
-      "unrealized_pnl": 32.23,
-      "unrealized_pnl_pct": 32.4,
+      "current_p50": 147.5,
+      "effective_price": 132.75,
+      "market_value": 132.75,
+      "unrealized_pnl": 33.36,
+      "unrealized_pnl_pct": 33.6,
       "invested": 99.39
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 216.25,
-      "effective_price": 194.62,
-      "market_value": 194.62,
-      "unrealized_pnl": 45.73,
-      "unrealized_pnl_pct": 30.7,
+      "current_p50": 217.5,
+      "effective_price": 195.75,
+      "market_value": 195.75,
+      "unrealized_pnl": 46.86,
+      "unrealized_pnl_pct": 31.5,
       "invested": 148.89
     },
     {
@@ -298,11 +298,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:19:28",
       "set_name": "Lamborghini Countach 5000 QV",
-      "current_p50": 169.0,
-      "effective_price": 152.1,
-      "market_value": 152.1,
-      "unrealized_pnl": 17.11,
-      "unrealized_pnl_pct": 12.7,
+      "current_p50": 166.5,
+      "effective_price": 149.85,
+      "market_value": 149.85,
+      "unrealized_pnl": 14.86,
+      "unrealized_pnl_pct": 11.0,
       "invested": 134.99
     },
     {
@@ -317,11 +317,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:19:51",
       "set_name": "Lamborghini Countach 5000 QV",
-      "current_p50": 169.0,
-      "effective_price": 152.1,
-      "market_value": 152.1,
-      "unrealized_pnl": 17.11,
-      "unrealized_pnl_pct": 12.7,
+      "current_p50": 166.5,
+      "effective_price": 149.85,
+      "market_value": 149.85,
+      "unrealized_pnl": 14.86,
+      "unrealized_pnl_pct": 11.0,
       "invested": 134.99
     },
     {
@@ -336,11 +336,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 12:21:32",
       "set_name": "Shelby Cobra 427 S/C",
-      "current_p50": 135.0,
-      "effective_price": 121.5,
-      "market_value": 121.5,
-      "unrealized_pnl": 1.51,
-      "unrealized_pnl_pct": 1.3,
+      "current_p50": 131.25,
+      "effective_price": 118.12,
+      "market_value": 118.12,
+      "unrealized_pnl": -1.87,
+      "unrealized_pnl_pct": -1.6,
       "invested": 119.99
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2608.84,
-    "unrealized_pnl": 629.73,
-    "unrealized_pnl_pct": 31.8,
+    "total_market_value": 2600.97,
+    "unrealized_pnl": 621.86,
+    "unrealized_pnl_pct": 31.4,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 629.73,
-    "unrealized_pnl_12m_pct": 31.8
+    "unrealized_pnl_12m": 621.86,
+    "unrealized_pnl_12m_pct": 31.4
   }
 }
