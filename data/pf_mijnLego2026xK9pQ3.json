@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T11:44:05.007280",
+  "generated_at": "2026-10-30T21:46:23.095203",
   "positions": [
     {
       "id": 22,
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 100.0,
-      "effective_price": 90.0,
-      "market_value": 90.0,
-      "unrealized_pnl": 31.01,
-      "unrealized_pnl_pct": 52.6,
+      "current_p50": 97.5,
+      "effective_price": 87.75,
+      "market_value": 87.75,
+      "unrealized_pnl": 28.76,
+      "unrealized_pnl_pct": 48.8,
       "invested": 58.99
     },
     {
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 135.0,
-      "effective_price": 121.5,
-      "market_value": 121.5,
-      "unrealized_pnl": 63.61,
-      "unrealized_pnl_pct": 109.9,
+      "current_p50": 131.25,
+      "effective_price": 118.12,
+      "market_value": 118.12,
+      "unrealized_pnl": 60.23,
+      "unrealized_pnl_pct": 104.0,
       "invested": 57.89
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2608.85,
-    "unrealized_pnl": 629.74,
-    "unrealized_pnl_pct": 31.8,
+    "total_market_value": 2603.22,
+    "unrealized_pnl": 624.11,
+    "unrealized_pnl_pct": 31.5,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 629.74,
-    "unrealized_pnl_12m_pct": 31.8
+    "unrealized_pnl_12m": 624.11,
+    "unrealized_pnl_12m_pct": 31.5
   }
 }
