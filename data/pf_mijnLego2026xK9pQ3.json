@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T12:11:03.493490",
+  "generated_at": "2026-11-01T21:26:09.178785",
   "positions": [
     {
       "id": 22,
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 127.5,
-      "effective_price": 114.75,
-      "market_value": 114.75,
-      "unrealized_pnl": 56.86,
-      "unrealized_pnl_pct": 98.2,
+      "current_p50": 131.25,
+      "effective_price": 118.12,
+      "market_value": 118.12,
+      "unrealized_pnl": 60.23,
+      "unrealized_pnl_pct": 104.0,
       "invested": 57.89
     },
     {
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 212.5,
-      "effective_price": 191.25,
-      "market_value": 191.25,
-      "unrealized_pnl": 42.36,
-      "unrealized_pnl_pct": 28.5,
+      "current_p50": 215.0,
+      "effective_price": 193.5,
+      "market_value": 193.5,
+      "unrealized_pnl": 44.61,
+      "unrealized_pnl_pct": 30.0,
       "invested": 148.89
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2596.91,
-    "unrealized_pnl": 617.8,
-    "unrealized_pnl_pct": 31.2,
+    "total_market_value": 2602.53,
+    "unrealized_pnl": 623.42,
+    "unrealized_pnl_pct": 31.5,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 617.8,
-    "unrealized_pnl_12m_pct": 31.2
+    "unrealized_pnl_12m": 623.42,
+    "unrealized_pnl_12m_pct": 31.5
   }
 }
