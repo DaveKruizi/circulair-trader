@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T13:38:11.672951",
+  "generated_at": "2026-11-05T22:52:32.131704",
   "positions": [
     {
       "id": 22,
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 131.25,
-      "effective_price": 118.12,
-      "market_value": 118.12,
-      "unrealized_pnl": 60.23,
-      "unrealized_pnl_pct": 104.0,
+      "current_p50": 135.0,
+      "effective_price": 121.5,
+      "market_value": 121.5,
+      "unrealized_pnl": 63.61,
+      "unrealized_pnl_pct": 109.9,
       "invested": 57.89
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 173.72,
-      "effective_price": 156.35,
-      "market_value": 156.35,
-      "unrealized_pnl": 0.36,
-      "unrealized_pnl_pct": 0.2,
+      "current_p50": 174.97,
+      "effective_price": 157.47,
+      "market_value": 157.47,
+      "unrealized_pnl": 1.48,
+      "unrealized_pnl_pct": 0.9,
       "invested": 155.99
     },
     {
@@ -355,21 +355,21 @@
       "notes": "",
       "created_at": "2026-04-11 10:19:17",
       "set_name": "Porsche 911",
-      "current_p50": 104.75,
-      "effective_price": 94.28,
-      "market_value": 94.28,
-      "unrealized_pnl": 48.33,
-      "unrealized_pnl_pct": 105.2,
+      "current_p50": 107.5,
+      "effective_price": 96.75,
+      "market_value": 96.75,
+      "unrealized_pnl": 50.8,
+      "unrealized_pnl_pct": 110.6,
       "invested": 45.95
     }
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2600.3,
-    "unrealized_pnl": 621.19,
-    "unrealized_pnl_pct": 31.4,
+    "total_market_value": 2607.27,
+    "unrealized_pnl": 628.16,
+    "unrealized_pnl_pct": 31.7,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 621.19,
-    "unrealized_pnl_12m_pct": 31.4
+    "unrealized_pnl_12m": 628.16,
+    "unrealized_pnl_12m_pct": 31.7
   }
 }
