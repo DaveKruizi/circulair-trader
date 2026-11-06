@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T22:53:08.360040",
+  "generated_at": "2026-11-06T13:21:15.540455",
   "positions": [
     {
       "id": 22,
@@ -146,11 +146,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:26:28",
       "set_name": "Heavy-Duty Tow Truck",
-      "current_p50": 215.0,
-      "effective_price": 193.5,
-      "market_value": 193.5,
-      "unrealized_pnl": 44.61,
-      "unrealized_pnl_pct": 30.0,
+      "current_p50": 212.5,
+      "effective_price": 191.25,
+      "market_value": 191.25,
+      "unrealized_pnl": 42.36,
+      "unrealized_pnl_pct": 28.5,
       "invested": 148.89
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 174.97,
-      "effective_price": 157.47,
-      "market_value": 157.47,
-      "unrealized_pnl": 1.48,
-      "unrealized_pnl_pct": 0.9,
+      "current_p50": 173.72,
+      "effective_price": 156.35,
+      "market_value": 156.35,
+      "unrealized_pnl": 0.36,
+      "unrealized_pnl_pct": 0.2,
       "invested": 155.99
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2607.27,
-    "unrealized_pnl": 628.16,
-    "unrealized_pnl_pct": 31.7,
+    "total_market_value": 2603.9,
+    "unrealized_pnl": 624.79,
+    "unrealized_pnl_pct": 31.6,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 628.16,
-    "unrealized_pnl_12m_pct": 31.7
+    "unrealized_pnl_12m": 624.79,
+    "unrealized_pnl_12m_pct": 31.6
   }
 }
