@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T12:05:14.675449",
+  "generated_at": "2026-11-07T21:08:32.392425",
   "positions": [
     {
       "id": 22,
@@ -51,11 +51,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:00",
       "set_name": "Volkswagen T1 Camper Van",
-      "current_p50": 105.0,
-      "effective_price": 94.5,
-      "market_value": 94.5,
-      "unrealized_pnl": 35.51,
-      "unrealized_pnl_pct": 60.2,
+      "current_p50": 102.5,
+      "effective_price": 92.25,
+      "market_value": 92.25,
+      "unrealized_pnl": 33.26,
+      "unrealized_pnl_pct": 56.4,
       "invested": 58.99
     },
     {
@@ -108,11 +108,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:20",
       "set_name": "Dom's Dodge Charger",
-      "current_p50": 140.0,
-      "effective_price": 126.0,
-      "market_value": 126.0,
-      "unrealized_pnl": 26.61,
-      "unrealized_pnl_pct": 26.8,
+      "current_p50": 141.25,
+      "effective_price": 127.12,
+      "market_value": 127.12,
+      "unrealized_pnl": 27.73,
+      "unrealized_pnl_pct": 27.9,
       "invested": 99.39
     },
     {
@@ -127,11 +127,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-04-16 12:25:50",
       "set_name": "Fiat 500 Blue",
-      "current_p50": 159.5,
-      "effective_price": 143.55,
-      "market_value": 143.55,
-      "unrealized_pnl": 16.66,
-      "unrealized_pnl_pct": 13.1,
+      "current_p50": 162.0,
+      "effective_price": 145.8,
+      "market_value": 145.8,
+      "unrealized_pnl": 18.91,
+      "unrealized_pnl_pct": 14.9,
       "invested": 126.89
     },
     {
@@ -165,11 +165,11 @@
       "notes": "Vinted",
       "created_at": "2026-04-11 19:31:09",
       "set_name": "MINI Cooper",
-      "current_p50": 205.5,
-      "effective_price": 184.95,
-      "market_value": 184.95,
-      "unrealized_pnl": 20.64,
-      "unrealized_pnl_pct": 12.6,
+      "current_p50": 204.5,
+      "effective_price": 184.05,
+      "market_value": 184.05,
+      "unrealized_pnl": 19.74,
+      "unrealized_pnl_pct": 12.0,
       "invested": 164.31
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 174.97,
-      "effective_price": 157.47,
-      "market_value": 157.47,
-      "unrealized_pnl": 1.48,
-      "unrealized_pnl_pct": 0.9,
+      "current_p50": 173.72,
+      "effective_price": 156.35,
+      "market_value": 156.35,
+      "unrealized_pnl": 0.36,
+      "unrealized_pnl_pct": 0.2,
       "invested": 155.99
     },
     {
@@ -365,11 +365,11 @@
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2597.79,
-    "unrealized_pnl": 618.68,
-    "unrealized_pnl_pct": 31.3,
+    "total_market_value": 2596.89,
+    "unrealized_pnl": 617.78,
+    "unrealized_pnl_pct": 31.2,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 618.68,
-    "unrealized_pnl_12m_pct": 31.3
+    "unrealized_pnl_12m": 617.78,
+    "unrealized_pnl_12m_pct": 31.2
   }
 }
