@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-10T00:55:45.301328",
+  "generated_at": "2026-11-10T13:53:35.764296",
   "positions": [
     {
       "id": 22,
@@ -32,11 +32,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-07 09:41:44",
       "set_name": "Ferrari F40",
-      "current_p50": 201.5,
-      "effective_price": 181.35,
-      "market_value": 181.35,
-      "unrealized_pnl": 81.35,
-      "unrealized_pnl_pct": 81.3,
+      "current_p50": 198.0,
+      "effective_price": 178.2,
+      "market_value": 178.2,
+      "unrealized_pnl": 78.2,
+      "unrealized_pnl_pct": 78.2,
       "invested": 100.0
     },
     {
@@ -203,11 +203,11 @@
       "notes": "Winkel",
       "created_at": "2026-04-10 10:20:17",
       "set_name": "Back to the Future Time Machine",
-      "current_p50": 173.72,
-      "effective_price": 156.35,
-      "market_value": 156.35,
-      "unrealized_pnl": 0.36,
-      "unrealized_pnl_pct": 0.2,
+      "current_p50": 172.47,
+      "effective_price": 155.22,
+      "market_value": 155.22,
+      "unrealized_pnl": -0.77,
+      "unrealized_pnl_pct": -0.5,
       "invested": 155.99
     },
     {
@@ -355,21 +355,21 @@
       "notes": "",
       "created_at": "2026-04-11 10:19:17",
       "set_name": "Porsche 911",
-      "current_p50": 102.5,
-      "effective_price": 92.25,
-      "market_value": 92.25,
-      "unrealized_pnl": 46.3,
-      "unrealized_pnl_pct": 100.8,
+      "current_p50": 105.0,
+      "effective_price": 94.5,
+      "market_value": 94.5,
+      "unrealized_pnl": 48.55,
+      "unrealized_pnl_pct": 105.7,
       "invested": 45.95
     }
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2592.39,
-    "unrealized_pnl": 613.28,
-    "unrealized_pnl_pct": 31.0,
+    "total_market_value": 2590.36,
+    "unrealized_pnl": 611.25,
+    "unrealized_pnl_pct": 30.9,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 613.28,
-    "unrealized_pnl_12m_pct": 31.0
+    "unrealized_pnl_12m": 611.25,
+    "unrealized_pnl_12m_pct": 30.9
   }
 }
