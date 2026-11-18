@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T15:00:52.969425",
+  "generated_at": "2026-11-18T00:01:58.341592",
   "positions": [
     {
       "id": 22,
@@ -70,11 +70,11 @@
       "notes": "Marktplaats",
       "created_at": "2026-06-05 19:52:35",
       "set_name": "James Bond Aston Martin DB5",
-      "current_p50": 127.5,
-      "effective_price": 114.75,
-      "market_value": 114.75,
-      "unrealized_pnl": 56.86,
-      "unrealized_pnl_pct": 98.2,
+      "current_p50": 128.75,
+      "effective_price": 115.88,
+      "market_value": 115.88,
+      "unrealized_pnl": 57.99,
+      "unrealized_pnl_pct": 100.2,
       "invested": 57.89
     },
     {
@@ -355,21 +355,21 @@
       "notes": "",
       "created_at": "2026-04-11 10:19:17",
       "set_name": "Porsche 911",
-      "current_p50": 108.75,
-      "effective_price": 97.88,
-      "market_value": 97.88,
-      "unrealized_pnl": 51.93,
-      "unrealized_pnl_pct": 113.0,
+      "current_p50": 106.25,
+      "effective_price": 95.62,
+      "market_value": 95.62,
+      "unrealized_pnl": 49.67,
+      "unrealized_pnl_pct": 108.1,
       "invested": 45.95
     }
   ],
   "summary": {
     "total_invested": 1979.11,
-    "total_market_value": 2605.0,
-    "unrealized_pnl": 625.89,
+    "total_market_value": 2603.87,
+    "unrealized_pnl": 624.76,
     "unrealized_pnl_pct": 31.6,
     "realized_pnl": 0.0,
-    "unrealized_pnl_12m": 625.89,
+    "unrealized_pnl_12m": 624.76,
     "unrealized_pnl_12m_pct": 31.6
   }
 }
